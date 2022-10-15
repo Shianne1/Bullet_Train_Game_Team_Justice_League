@@ -14,4 +14,8 @@ public class GameConsole {
     If you feel like there is something you need to change when implementing the game.
     Put within discord under Questions channel, and don't do it before you get everyone approval or at least my approval.
      */
+
+    public static void main(String[] args) {
+
+    }
 }

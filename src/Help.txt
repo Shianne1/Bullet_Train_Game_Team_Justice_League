@@ -1,0 +1,50 @@
+
+THIS SHOULD BE ALL OF THE COMMANDS WITHIN THE GAME
+
+Game:
+Start game
+Save game
+Load game
+End game
+
+Player:
+Help
+Check inventory
+Check stats
+Check map
+
+Room:
+Inspect room
+
+Puzzle:
+Solve puzzle
+Get hint
+Inspect puzzle
+Exit puzzle
+Retry puzzle
+
+Monster:
+Inspect monster
+Attack Monster
+Parry monster
+Heal
+Run
+Flee
+
+Item:
+Examine crate
+Inspect item
+Store item
+Use item
+Equip item
+Discard item
+View code
+Use code
+
+Direction:
+North
+East
+South
+West
+
+

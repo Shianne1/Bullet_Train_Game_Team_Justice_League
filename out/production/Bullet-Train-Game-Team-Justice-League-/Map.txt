@@ -1,0 +1,29 @@
+BULLET TRAIN MAP:
+
+                  [Station 1 Mystery]
+[Train Wagon 1]---[Station 1 Puzzle]---[Station 1 Loot]
+       |          [Station 1 Monster]
+       |
+       |
+       |          [Station 2 Monster]
+[Train Wagon 2]---[Station 2 Puzzle]---[Station Mystery]
+       |          [Station 2 Loot]
+       |
+       |
+       |          [Station 3 Loot]
+[Train Wagon 3]---[Station 3 Puzzle]---[Station 3 Mystery]
+       |          [Station 3 Monster]
+       |
+       |
+       |          [Station 4 Monster
+[Train Wagon 4]---[Station 4 Puzzle]---[Station 4 Loot & Puzzle]
+       |          [Station Mystery]
+       |
+       |
+       |          [Station 5 Loot & Monster]
+[Train Wagon 5]---[Station 5 Puzzle]---[Station 5 Monster]
+       |
+       |
+       |
+       |
+[Final Locomotive]

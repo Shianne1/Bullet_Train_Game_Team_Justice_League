@@ -2,27 +2,66 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
+/*
+     @Object: Player()
+     @Function: this class is in charge of the variables and methods used in reference to the player
+     @author(s) Carlton Napier
+     @added 10/16/2022
+  */
 interface playerInterface {
 
-    void move(String dir);
+    int maxHealth = 100;
 
+    /*
+     @Object: move()
+     @Function: this class moves the player into the room of the direction sent
+     by the controller
+     @author(s) Carlton Napier
+     @added 10/16/2022
+  */
+    void move(Room nextRoom);
+
+    /*
+ @Object: pickUp()
+ @Function: this class picked up the called item and adds it to the inventory
+ by the controller
+ @author(s) Carlton Napier
+ @added 10/16/2022
+*/
     void pickUp(Item item);
 
+    /*
+@Object: dropItem()
+@Function: this method removes the selected item while adding it to the current room
+@author(s) Carlton Napier
+@added 10/16/2022
+*/
     void dropItem(Item item);
 
+    /*
+@Object: checkInventory()
+@Function: this method returns a string that relays the inventory of the player
+@author(s) Carlton Napier
+@added 10/16/2022
+*/
     String checkInventory();
 
 }
 
 public class Player implements playerInterface, EntityInterface, Serializable {
 
-    int health;
+
+    int numOfMonstersKilled;
+    int maxHealth;
+    int currentHealth;
     String name;
     Room location;
-    Item equippedWeapon;
-    Item equippedArmor;
+    Weapon equippedWeapon;
+    Armor equippedArmor;
     ArrayList<Item> inventory;
-    GameData checkpoint;
+    GameState checkpoint;
+
+
 
 
     boolean hasCheckPoint;
@@ -42,15 +81,21 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
     // empty constructor of player with default values
     public Player() {
-        this.name = "Player Name";
-        this.health = 100;
-        this.equippedWeapon = new Weapon("Fist", -1, 5); // durability/uses set to -1 since a fist will never break
+        this.name = "PlayerName";
+        this.numOfMonstersKilled = 0;
+        this.maxHealth = 100;
+        this.currentHealth = maxHealth;
+        this.equippedWeapon = new Weapon("Fist",0,"Your fists", "lets you punch enemies", -1,5); // durability/uses set to -1 since a fist will never break
+        this.equippedArmor = new Armor("Clothes",0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
+
     }
 
     // constructor for preexisting data
-    public Player(int health, String name, Room location, Item equippedWeapon, Item equippedArmor, ArrayList<Item> inventory, GameData checkpoint) {
-        this.health = health;
+    public Player(int maxHealth, int currentHealth, int numOfMonstersKilled, String name, Room location, Weapon equippedWeapon, Armor equippedArmor, ArrayList<Item> inventory, GameState checkpoint) {
+        this.maxHealth = maxHealth;
+        this.currentHealth = currentHealth;
+        this.numOfMonstersKilled = numOfMonstersKilled;
         this.name = name;
         this.location = location;
         this.equippedWeapon = equippedWeapon;
@@ -61,16 +106,20 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     }
 
     // constructor of player with starting stats, user inserted name, and a checkpoint of the start of the game, if they die before reaching one
-    public Player(String name) {
+    public Player(String name, GameState defaultCheckpoint) {
         this.name = name;
-        this.health = 100;
-        this.equippedWeapon = new Weapon("Fist", -1, 5); // durability/uses set to -1 since a fist will never break
+        this.numOfMonstersKilled = 0;
+        this.maxHealth = 100;
+        this.currentHealth = this.maxHealth;
+        this.equippedWeapon = new Weapon("Fist",0,"Your fists", "lets you punch enemies", -1,5); // durability/uses set to -1 since a fist will never break
+        this.equippedArmor = new Armor("Clothes",0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
+        this.checkpoint = defaultCheckpoint;
     }
 
     @Override
-    public void move(String dir) {
-
+    public void move(Room nextRoom) {
+        this.location = nextRoom;
     }
 
     @Override
@@ -108,20 +157,16 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
     @Override
     public void healHealth(int healthModifier) {
-        setHealth(health + healthModifier);
-
-        if(health > 100)
-            health = 100;
-
+        setCurrentHealth(currentHealth + healthModifier);
+        if(currentHealth > maxHealth)
+            currentHealth = maxHealth;
     }
 
     @Override
     public void takeDamage(int healthModifier) {
-        setHealth(health - healthModifier);
-
-
-        if(health < 0)
-            health = 0;
+        setCurrentHealth(currentHealth - healthModifier);
+        if(currentHealth < 0)
+            currentHealth = 0;
     }
 
     public String getName() {
@@ -140,49 +185,52 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.location = location;
     }
 
-    public Item getEquippedWeapon() {
+    public Weapon getEquippedWeapon() {
         return equippedWeapon;
     }
 
-    public void setEquippedWeapon(Item equippedWeapon) {
+    public void setEquippedWeapon(Weapon equippedWeapon) {
         this.equippedWeapon = equippedWeapon;
     }
 
-    public Item getEquippedArmor() {
+    public Armor getEquippedArmor() {
         return equippedArmor;
     }
 
-    public void setEquippedArmor(Item equippedItem) {
-        this.equippedArmor = equippedItem;
+    public void setEquippedArmor(Armor equippedArmor) {
+        this.equippedArmor = equippedArmor;
+        this.maxHealth = playerInterface.maxHealth + this.equippedArmor.armorMod;
     }
 
-    public GameData getCheckpoint() {
-        if (hasCheckPoint)
+    public void removeEquippedArmor() {
+        this.equippedArmor = null;
+        // this.maxHealth = playerInterface.maxHealth + equippedArmor.armorRating;
+    }
+
+    public GameState getCheckpoint() {
             return checkpoint;
-
-        else
-            return null;
     }
 
-    public void setCheckpoint(GameData checkpoint) {
+    public void setCheckpoint(GameState checkpoint) {
         this.checkpoint = checkpoint;
-        setHasCheckPoint(true);
-    }
-
-    public boolean HasCheckPoint() {
-        return hasCheckPoint;
-    }
-
-    public void setHasCheckPoint(boolean hasCheckPoint) {
-        this.hasCheckPoint = hasCheckPoint;
     }
 
 
-    public int getHealth() {
-        return health;
+    public int getCurrentHealth() {
+        return currentHealth;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+
+    public String checkStats()
+    {
+        return   "Name: " + this.name + "\n" +
+        "Health (current/max): " +  this.currentHealth +"/"+ this.maxHealth + "\n" +
+        "Location: " +  this.location + "\n" +
+        "Equipped Weapon: " +  this.equippedWeapon + "\n" +
+        "Equipped Armor: " +  this.equippedArmor;
     }
 }

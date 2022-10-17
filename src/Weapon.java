@@ -1,25 +1,12 @@
-
-interface weaponInterface extends itemInterface {
-
-    void durabilityChange(int durModifier);
-
-}
-
-
-public class Weapon extends Item implements weaponInterface {
-
+public class Weapon extends Item implements equipItemInterface {
     private int durability; // the amount of uses the item has
     private final int strength; // the amount of damage the weapon deals
-
-    public Weapon(String name, int durability, int strength) {
+    public Weapon(String name, int id, String itemDesc, String itemText, int durability, int strength) {
         this.name = name;
+        this.id = id;
+        this.itemDesc = itemDesc;
+        this.itemText = itemText;
         this.durability = durability;
         this.strength = strength;
     }
-
-    @Override
-    public void durabilityChange(int durModifier) {
-        this.durability += durModifier;
-    }
-
 }

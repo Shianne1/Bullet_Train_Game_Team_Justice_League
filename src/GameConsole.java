@@ -1,7 +1,7 @@
+
+
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class GameConsole {
@@ -22,305 +22,288 @@ public class GameConsole {
      */
 
     public static void main(String[] args) {
+
+
+        // view handles the system outputs
         View view = new View();
-        GameData gameData = new GameData();
+        // player data is a model that handles general data for the game being played
+        GameState gameState = new GameState();
 
+        // loop to start the game | while the gameState isn't running
+        while (!gameState.isRunning)
+            startGame(gameState, view);
 
-        while(!gameData.isRunning)
-        startGame(gameData, view);
-
-        while (gameData.isRunning()) //game loop
-        {
-            if (gameData.player.health <= 0) {
-                playerDeath(gameData, view);
+        // loop for playing the game | while the gameState is running
+        while (gameState.isRunning()) {
+            // at the start of the loop, if the player's health is zero or less, the playerDeath() method is run
+            if (gameState.player.currentHealth <= 0) {
+                playerDeath(gameState, view);
             }
 
-            System.out.println("Testing game, input command");
-            parseCommand(gameData, view);
+            // NEEDS A PROPER CODE FOR LOOPING THE GAME
+            // - WHAT GOES ON IN THE ROOM
+            // - ANY STORY DETAILS
+            // - ETC
+            // THIS IS A TEMP LOOP FOR TESTING
+
+            view.printGameLoop(gameState);
+            parseCommand(gameState, view);
 
         }
     }
 
-    private static void parseCommand(GameData gameData, View view) {
+
+    /*
+    @Method: parseCommand()
+    @Function: this code is to parse commands, and run methods based on the command received by the view
+    @author(s) Carlton Napier
+    @added 10/16/2022
+ */
+    private static void parseCommand(GameState gameState, View view) {
         String inputCommand = view.inputCommand();
 
         if (inputCommand.equals("save game")) {
-            saveGame(gameData);
+            saveGame(gameState, view);
         }
 
         if (inputCommand.equals("load game")) {
-            gameData.setGameData(loadGame(view.loadingGame()));
-        }
-
-        if (inputCommand.equals("set checkpoint")) {
-            gameData.getPlayer().setCheckpoint(gameData);
-        }
-
-        if (inputCommand.equals("get checkpoint")) {
-            gameData.setGameData(gameData.getPlayer().getCheckpoint());
+            loadGame(gameState, view.loadingGameText());
         }
 
         if (inputCommand.equals("exit")) {
-            endGame(gameData,  view);
+            endGame(gameState, view);
         }
 
-        if (inputCommand.equals("stats")) {
-            view.printStats(gameData.getPlayer());
+        if (inputCommand.equals("check stats")) {
+            view.printStatText(gameState.getPlayer());
         }
+
         if (inputCommand.equals("help")) {
-            view.printBasicText(gameData.getHelpText());
+            view.printBasicText(parseTextFile("Help.txt"));
         }
 
-        if (inputCommand.equals("map")) {
-            view.printBasicText(gameData.getMap());
+        //Player will be able to see the map of the train wagon and the stations linked to each wagon including the spot
+        //they are currently at.
+        if (inputCommand.equals("check map")) {
+            view.printBasicText(parseTextFile("Map.txt"));
+            view.printBasicText(gameState.getPlayer().getLocation().toString());
         }
 
-        if (inputCommand.equals("damage")) {
-            Random rand = new Random();
 
-            int randomDamage = rand.nextInt(2, 50);
-            gameData.getPlayer().takeDamage(randomDamage);
-        }
-
-        if (inputCommand.equals("heal")) {
-            Random rand = new Random();
-
-            int randomDamage = rand.nextInt(2, 50);
-            gameData.getPlayer().healHealth(randomDamage);
-        }
-
-        if (inputCommand.equals("inventory")) {
-            view.printItems(gameData.getPlayer());
-        }
-
-        if (inputCommand.equals("tostring")) {
-            view.printBasicText(gameData.toString());
-        }
-
-        if (inputCommand.equals("death")) {
-            gameData.getPlayer().health = 0;
+        if (inputCommand.equals("check inventory")) {
+            view.printInventory(gameState.getPlayer());
         }
 
     }
 
-    public static void startGame(GameData gameData, View view) { // code to run at the start of the game to determine starting a new file or loading
-        String inputCommand = view.startGame();
+    /*
+        @Method: startGame()
+        @Function: this code is meant to run at the start of the game
+        @author(s) Carlton Napier
+        @added 10/16/2022
+     */
+    public static void startGame(GameState gameState, View view) { // code to run at the start of the game to determine starting a new file or loading
+        /*
+        the view - presents the title of the game and asks the player for their input to start a new game, load an old game,
+        or exit out of the game entirely (using the view)sends the user input until one of three options is selected
+         */
+        String inputCommand = view.startOfGameText();
 
-        if (inputCommand.equals("start game")) // if the player wants to start a new game
-        {
-            String playerName = view.setSaveName();
-            gameData.setGameData(newGame(playerName));
-            gameData.setRunning(true);
-        } else if (inputCommand.equals("load game")) {
-            gameData.setGameData(loadGame(view.loadingGame()));
-            gameData.setRunning(true);
-
-        } else if (inputCommand.equals("exit")) {
-            endGame(gameData,  view);
-
+        // saying ["start game"] or just pressing enter gets the view to ask the player for a name (this name will be used for a new save file)
+        if (inputCommand.equals("start game") || inputCommand.isBlank()) {
+            /*
+            newGame() method is called, the view sending the name the player will have ---
+             - upon getting the name, the newGame() function  is called using the given name, and data from the files are used
+               to make a new instance of the game
+            */
+            newGame(gameState, view.setSaveNameText());
+        }
+        /*
+        saying ["load game"] gets the view to ask the player for a name (this name is used to load an existing save file, if it exists)
+        - upon getting the name, the loadGame() function  is called using the given name, and the file with that name is loaded
+        if it exists
+        */
+        else if (inputCommand.equals("load game")) {
+            // loadGame() method is called, the view sending the name of the data being looked for
+            loadGame(gameState, view.loadingGameText());
+        }
+        //saying ["exit"] or even ["exit game"] will run the ["end game"] function, ending the game
+        else if (inputCommand.startsWith("exit")) {
+            // endGame() method is called, with the view sending confirmation that the game is being closed down,
+            endGame(gameState, view);
         }
     }
 
+    /*
+         @Method: newGame()
+         @Function: this code is meant to run when a new game is created
+         @author Carlton Napier
+         @added 10/16/2022
+      */
+    public static void newGame(GameState gameState, String playerName) {
+        // temp way to create new game for testing purposes (all the parameters are empty except for the instance of new player)
 
-    public static GameData newGame(String playerName) {
-
-        GameData newGame = new GameData();
-
-        newGame.setPlayer(new Player(playerName));
-
-           /* gameData.setItemsInGame(parseItemData());
-            gameData.setRoomsInGame(parseRoomData());
-            gameData.setPuzzlesInGame(parsePuzzleData());
-            gameData.setMonstersInGame(parseMonsterData());
-            gameData.setHelpText(parseTextFile(new File("Help.txt")));
-            gameData.setMap(parseTextFile(new File("Map.txt"))); */
-
-
+        //   -- objects from other methods used to parse the data files (currently empty but proper implementation in comments)
         ArrayList<Item> emptyItemList = new ArrayList<>();
         ArrayList<Room> emptyRoomList = new ArrayList<>();
         ArrayList<Puzzle> emptyPuzzleList = new ArrayList<>();
         ArrayList<Monster> emptyMonsterList = new ArrayList<>();
 
-        newGame.setItemsInGame(emptyItemList);
-        newGame.setRoomsInGame(emptyRoomList);
-        newGame.setPuzzlesInGame(emptyPuzzleList);
-        newGame.setMonstersInGame(emptyMonsterList);
-        newGame.setHelpText(parseTextFile(new File("src/Help.txt")));
-        newGame.setMap(parseTextFile(new File("src/Map.txt")));
+        gameState.setItemsInGame(emptyItemList);
+        gameState.setRoomsInGame(emptyRoomList);
+        gameState.setPuzzlesInGame(emptyPuzzleList);
+        gameState.setMonstersInGame(emptyMonsterList);
 
-        newGame.setRunning(true);
+        //     -- after objects are added to [gameState] a new instance of player is created using the name the player inputted and
+        //     an instance of newGame (now filled with data) as a default checkpoint for the player to return to on death
+        gameState.setPlayer(new Player(playerName, gameState));
+
+        /*
+        When the functions that can parse the files used to add the items/rooms/puzzle/monster data for the game are properly implemented:
+
+        //   -- objects from other methods used to parse the data files (currently empty but proper implementation in comments)
+        gameState.setItemsInGame(parseItemData(),);
+        gameState.setRoomsInGame(parseRoomData());
+        gameState.setPuzzlesInGame(parsePuzzleData());
+        gameState.setMonstersInGame(parseMonsterData(););
+
+        //     -- after objects are added to [gameState] a new instance of player is created using the name the player inputted and
+        //     an instance of newGame (now filled with data) as a default checkpoint for the player to return to on death
+        gameState.setPlayer(new Player(playerName, gameState));
+
+        //  Player starts in train wagon 1 (assumed to be the first room in the arrayList)
+        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(0));
+        */
+
+        //    -- after newGame is properly filled with data, game is set to running to allow for a game loop to be maintained
+        gameState.setRunning(true);
 
 
-        return newGame;
     }
 
-    public static GameData loadGame(String playerName) {
-        try {
-            File gameStateData = new File("src/saveData/" + playerName + "data.bin");
+    /*
+       @Method: loadGame()
+       @Function: this code is meant to run when pre-existing save data is being asked to be loaded in
+       @author Carlton Napier
+       @added 10/16/2022
+    */
+    public static void loadGame(GameState gameState, String playerName) {
 
-            System.out.println(playerName);
+        try {
+            //  the file that references the gameState object saved under the name of the player is used to create a File variable
+            File gameStateData = new File("src/savedata/" + playerName + "_data.bin");
 
             FileInputStream dataFile = new FileInputStream(gameStateData);
             ObjectInputStream dataInput = new ObjectInputStream(dataFile);
 
-            GameData loadedGame = (GameData) dataInput.readObject();
-            return loadedGame;
-
-
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no file");
-            return null;
-        } catch (IOException e) {
-            System.out.println("Object not found");
-            return null;
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class not found");
-            return null;
+            // the current gameState is set to the loaded gameState, and set to run
+            gameState.setGameState((GameState) dataInput.readObject());
+            gameState.setRunning(true);
+        }
+        //   -- if this file  doesn't exist, or the file searched for doesn't have the proper format, an exception is thrown
+        catch (FileNotFoundException e) {
+            System.out.println("No File under that name was found, please try again");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("The data in this file is invalid, please try again");
         }
 
 
     }
 
-    public static void saveGame(GameData gameState) {
-        try {
-            File gameStateData = new File("src/saveData/" + gameState.player.getName() + "data.bin");
+    /*
+       @Method: saveGame()
+       @Function: this code is meant to run when pre-existing game is being saved
+       @author Carlton Napier
+       @added 10/16/2022
+    */
+    public static void saveGame(GameState gameState, View view) {
+        // Player is asked to confirm that they want to save the game
+        String savingGame = view.savingGameText();
+        if (savingGame.equalsIgnoreCase("yes")) {
+            try {
+                // a new file is created, based on the player's name as a bin file, in the savedata folder
+                //if the file exists, it is overwritten
+                File gameStateData = new File("src/savedata/" + gameState.player.getName() + "_data.bin");
 
-            FileOutputStream dataFile = new FileOutputStream(gameStateData);
-            ObjectOutputStream dataOutput = new ObjectOutputStream(dataFile);
+                FileOutputStream dataFile = new FileOutputStream(gameStateData);
+                ObjectOutputStream dataOutput = new ObjectOutputStream(dataFile);
 
-            dataOutput.writeObject(gameState);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+                //writes the gameState object to the file
+                dataOutput.writeObject(gameState);
+            } catch (FileNotFoundException e) {
+                System.out.println("File failed to be created");
+            } catch (IOException e) {
+                System.out.println("Data failed to be written");
+            }
         }
     }
 
-    public static void endGame(GameData gameState, View view) {
+    /*
+        @Method: endGame()
+        @Function: this code is meant to run when the player wants to exit the game
+        @author Carlton Napier
+        @added 10/16/2022
+    */
+    public static void endGame(GameState gameState, View view) {
+        // prints an exit message
         view.printExitMessage();
-        gameState.setRunning(false);
+
+        //if the game is ending while the game is running
+        if(gameState.isRunning) { //prompts the player to save
+            saveGame(gameState, view);
+        }
+
+        //exits out of the program
         System.exit(0);
     }
 
-    public static void playerDeath(GameData gameState, View view) {
+
+    /*
+        @Method: playerDeath()
+        @Function: this code is meant to run when the player's death is noticed by the controller
+        @author Carlton Napier
+        @added 10/16/2022
+    */
+    public static void playerDeath(GameState gameState, View view) {
+        // a message alerting that the player has died is sent by the view
         view.printDeathMessage();
+        // if the player has a valid checkpoint, their game is set back to that point
         if (gameState.getPlayer().hasCheckPoint) {
-            gameState.setGameData(newGame(gameState.getPlayer().getName()));
-        } else {
-            gameState.setGameData(gameState.getPlayer().getCheckpoint());
+            gameState.setGameState(gameState.getPlayer().getCheckpoint());
+        }
+        // if the player somehow doesn't have a checkpoint, they're put into a new game using the same player name
+        else {
+            newGame(gameState, gameState.player.getName());
         }
     }
 
-    public static String parseTextFile(File textFile) { //generic text file method for flexibility (used for Help, can be used for Map)
+    /*
+        @Method: parseTextFile()
+        @Function: this is a backend method that reads in a text file and returns it as a string
+        - is only really useful for Map.txt and Help.txt, as they are not transferred into objects
+        @author Carlton Napier
+        @added 10/16/2022
+    */
+    public static String parseTextFile(String textFile) {
         try {
-            Scanner textFileIn = new Scanner(textFile);
+            // a scanner that reads the given text file being searched for
+            Scanner textFileIn = new Scanner(new File(textFile));
+            //blank string created so scanned text can be added
             String textData = "";
 
 
-            //creates a string with the map data
+            //adds to the string with the text from the file
             while (textFileIn.hasNext()) {
                 textData = textData.concat(textFileIn.nextLine() + "\n");
             }
 
+
+            //returns the read text
             return textData;
         } catch (FileNotFoundException e) {
             System.out.println("Incorrect File");
             return "Data not Found";
         }
-    }
-
-    public static ArrayList<Item> parseItemData() {
-        try {
-            File itemData = new File("src/Item.txt");
-            ArrayList<Item> itemListData = new ArrayList<>();
-
-            Scanner itemDataIn = new Scanner(itemData); //scans the file for the item data
-
-
-            //creates item objects based off the data file
-            while (itemDataIn.hasNext()) {
-                itemListData.add(
-                        new Item(Integer.parseInt(itemDataIn.nextLine()),
-                                itemDataIn.nextLine(),
-                                itemDataIn.nextLine(),
-                                itemDataIn.nextLine()
-                        ));
-            }
-
-            return itemListData;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
-
-    public static ArrayList<Room> parseRoomData() {
-        try {
-            File roomData = new File("src/Room.txt");
-            ArrayList<Room> roomListData = new ArrayList<>();
-
-            Scanner roomDataIn = new Scanner(roomData); //scans the file for the item data
-
-
-            //creates item objects based off the data file
-            while (roomDataIn.hasNext()) {
-                roomListData.add(
-                        new Room(
-                        ));
-            }
-
-            return roomListData;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
-
-    public static ArrayList<Puzzle> parsePuzzleData() {
-        try {
-            File puzzleData = new File("src/Room.txt");
-            ArrayList<Puzzle> puzzleListData = new ArrayList<>();
-
-            Scanner puzzleDataIn = new Scanner(puzzleData); //scans the file for the item data
-
-
-            //creates item objects based off the data file
-            while (puzzleDataIn.hasNext()) {
-                puzzleListData.add(
-                        new Puzzle(
-                        ));
-            }
-
-            return puzzleListData;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
-
-    public static ArrayList<Monster> parseMonsterData() {
-        try {
-            File monsterData = new File("src/Monster.txt");
-            ArrayList<Monster> monsterListData = new ArrayList<>();
-
-            Scanner monsterDataIn = new Scanner(monsterData); //scans the file for the item data
-
-            //creates item objects based off the data file
-            while (monsterDataIn.hasNext()) {
-                monsterListData.add(
-                        new Monster(
-                        ));
-            }
-
-            return monsterListData;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
     }
 
 }

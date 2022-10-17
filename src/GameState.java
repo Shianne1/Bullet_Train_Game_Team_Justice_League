@@ -2,17 +2,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-// Model that tracks Game Data
-public  class  GameData implements Serializable {
+/*
+     @Object: GameState()
+     @Function: this class is used as a backend for the program to keep track of all objects in a game, made serializable
+     to allow for saving/loading as an object to a file
+     @author(s) Carlton Napier
+     @added 10/16/2022
+  */
+public  class GameState implements Serializable {
     Player player;
     ArrayList<Item> itemsInGame;
     ArrayList<Room> roomsInGame;
     ArrayList<Puzzle> puzzlesInGame;
     ArrayList<Monster> monstersInGame;
-    String helpText;
-    String map;
-
-
 
     public boolean isRunning() {
         return isRunning;
@@ -24,18 +26,18 @@ public  class  GameData implements Serializable {
 
     boolean isRunning;
 
-    public GameData(Player player, ArrayList<Item> itemsInGame, ArrayList<Room> roomsInGame, ArrayList<Puzzle> puzzlesInGame, ArrayList<Monster> monstersInGame, String helpText, String map) {
+    public GameState(Player player, ArrayList<Item> itemsInGame, ArrayList<Room> roomsInGame, ArrayList<Puzzle> puzzlesInGame, ArrayList<Monster> monstersInGame) {
         this.player = player;
         this.itemsInGame = itemsInGame;
         this.roomsInGame = roomsInGame;
         this.puzzlesInGame = puzzlesInGame;
         this.monstersInGame = monstersInGame;
-        this.helpText = helpText;
-        this.map = map;
+
+        this.isRunning = false;
     }
 
-    public GameData() {
-
+    public GameState() {
+        this.isRunning = false;
     }
 
     public Player getPlayer() {
@@ -78,30 +80,14 @@ public  class  GameData implements Serializable {
         this.monstersInGame = monstersInGame;
     }
 
-    public String getHelpText() {
-        return helpText;
-    }
-
-    public void setHelpText(String helpText) {
-        this.helpText = helpText;
-    }
-
-    public String getMap() {
-        return map;
-    }
-
-    public void setMap(String map) {
-        this.map = map;
-    }
-
-    public void setGameData(GameData loadedGame) {
+    // allows for loading data from a different GameState into another, used for loading the game
+    public void setGameState(GameState loadedGame) {
         this.player = loadedGame.player;
         this.itemsInGame =  loadedGame.itemsInGame;
         this.roomsInGame = loadedGame.roomsInGame ;
         this.puzzlesInGame = loadedGame.puzzlesInGame ;
         this.monstersInGame = loadedGame.monstersInGame ;
-        this.helpText =  loadedGame.helpText;
-        this.map = loadedGame.map ;
+        this.isRunning = loadedGame.isRunning;
     }
 
 

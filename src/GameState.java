@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-/*
+/**
      @Object: GameState()
      @Function: this class is used as a backend for the program to keep track of all objects in a game, made serializable
      to allow for saving/loading as an object to a file

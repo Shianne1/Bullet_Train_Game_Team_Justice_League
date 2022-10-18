@@ -52,13 +52,14 @@ public class GameConsole {
         }
     }
 
+    //------------------GameConsole methods---------------------//
 
-    /*
-    @Method: parseCommand()
-    @Function: this code is to parse commands, and run methods based on the command received by the view
-    @author(s) Carlton Napier
-    @added 10/16/2022
- */
+    /**
+     * @Method: parseCommand()
+     * @Function: this code is to parse commands, and run methods based on the command received by the view
+     * @author(s) Carlton Napier
+     * @added 10/16/2022
+     */
     private static void parseCommand(GameState gameState, View view) {
         String inputCommand = view.inputCommand();
 
@@ -79,13 +80,14 @@ public class GameConsole {
         }
 
         if (inputCommand.equals("help")) {
-            view.printBasicText(parseTextFile("Help.txt"));
+            view.printBasicText(parseHelpText());
         }
 
         //Player will be able to see the map of the train wagon and the stations linked to each wagon including the spot
         //they are currently at.
         if (inputCommand.equals("check map")) {
-            view.printBasicText(parseTextFile("Map.txt"));
+
+            //view.printBasicText(parseMapTxt());
             view.printBasicText(gameState.getPlayer().getLocation().toString());
         }
 
@@ -96,11 +98,11 @@ public class GameConsole {
 
     }
 
-    /*
-        @Method: startGame()
-        @Function: this code is meant to run at the start of the game
-        @author(s) Carlton Napier
-        @added 10/16/2022
+    /**
+     * @Method: startGame()
+     * @Function: this code is meant to run at the start of the game
+     * @author(s) Carlton Napier
+     * @added 10/16/2022
      */
     public static void startGame(GameState gameState, View view) { // code to run at the start of the game to determine starting a new file or loading
         /*
@@ -134,12 +136,12 @@ public class GameConsole {
         }
     }
 
-    /*
-         @Method: newGame()
-         @Function: this code is meant to run when a new game is created
-         @author Carlton Napier
-         @added 10/16/2022
-      */
+    /**
+     * @Method: newGame()
+     * @Function: this code is meant to run when a new game is created
+     * @author(s)  Carlton Napier
+     * @added 10/16/2022
+     */
     public static void newGame(GameState gameState, String playerName) {
         // temp way to create new game for testing purposes (all the parameters are empty except for the instance of new player)
 
@@ -181,12 +183,12 @@ public class GameConsole {
 
     }
 
-    /*
-       @Method: loadGame()
-       @Function: this code is meant to run when pre-existing save data is being asked to be loaded in
-       @author Carlton Napier
-       @added 10/16/2022
-    */
+    /**
+     * @Method: loadGame()
+     * @Function: this code is meant to run when pre-existing save data is being asked to be loaded in
+     * @author(s)  Carlton Napier
+     * @added 10/16/2022
+     */
     public static void loadGame(GameState gameState, String playerName) {
 
         try {
@@ -210,12 +212,12 @@ public class GameConsole {
 
     }
 
-    /*
-       @Method: saveGame()
-       @Function: this code is meant to run when pre-existing game is being saved
-       @author Carlton Napier
-       @added 10/16/2022
-    */
+    /**
+     * @Method: saveGame()
+     * @Function: this code is meant to run when pre-existing game is being saved
+     * @author(s)  Carlton Napier
+     * @added 10/16/2022
+     */
     public static void saveGame(GameState gameState, View view) {
         // Player is asked to confirm that they want to save the game
         String savingGame = view.savingGameText();
@@ -238,18 +240,18 @@ public class GameConsole {
         }
     }
 
-    /*
-        @Method: endGame()
-        @Function: this code is meant to run when the player wants to exit the game
-        @author Carlton Napier
-        @added 10/16/2022
-    */
+    /**
+     * @Method: endGame()
+     * @Function: this code is meant to run when the player wants to exit the game
+     * @author(s)  Carlton Napier
+     * @added 10/16/2022
+     */
     public static void endGame(GameState gameState, View view) {
         // prints an exit message
         view.printExitMessage();
 
         //if the game is ending while the game is running
-        if(gameState.isRunning) { //prompts the player to save
+        if (gameState.isRunning) { //prompts the player to save
             saveGame(gameState, view);
         }
 
@@ -257,13 +259,15 @@ public class GameConsole {
         System.exit(0);
     }
 
+    //------------------Player Controller methods---------------------//
 
-    /*
-        @Method: playerDeath()
-        @Function: this code is meant to run when the player's death is noticed by the controller
-        @author Carlton Napier
-        @added 10/16/2022
-    */
+
+    /**
+     * @Method: playerDeath()
+     * @Function: this code is meant to run when the player's death is noticed by the controller
+     * @author(s) Carlton Napier
+     * @added 10/16/2022
+     */
     public static void playerDeath(GameState gameState, View view) {
         // a message alerting that the player has died is sent by the view
         view.printDeathMessage();
@@ -277,17 +281,21 @@ public class GameConsole {
         }
     }
 
-    /*
-        @Method: parseTextFile()
-        @Function: this is a backend method that reads in a text file and returns it as a string
-        - is only really useful for Map.txt and Help.txt, as they are not transferred into objects
-        @author Carlton Napier
-        @added 10/16/2022
-    */
-    public static String parseTextFile(String textFile) {
+
+    //------------------Data Controller methods---------------------//
+
+
+    /**
+     * @Method: parseTextFile()
+     * @Function: this is a backend method that reads in a text file and returns it as a string
+     * - is only really useful for Map.txt and Help.txt, as they are not transferred into objects
+     * @author(s) Carlton Napier
+     * @added 10/16/2022
+     */
+    public static String parseHelpText() {
         try {
             // a scanner that reads the given text file being searched for
-            Scanner textFileIn = new Scanner(new File(textFile));
+            Scanner textFileIn = new Scanner(new File("Help.txt"));
             //blank string created so scanned text can be added
             String textData = "";
 

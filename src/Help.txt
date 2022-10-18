@@ -2,46 +2,60 @@
 THIS SHOULD BE ALL OF THE COMMANDS WITHIN THE GAME
 
 Game:
-Start game
-Save game
-Load game
-End game
+[Start game]
+[Save game]
+[Load game]
+[End game]
 
 Player:
-Help
-Check inventory
-Check stats
-Check map
+[Help]
+[Check inventory]
+[Check stats]
+[Check map]
 
 Room:
-Inspect room
+[Inspect room]
 
 Puzzle:
-Solve puzzle
-Get hint
-Inspect puzzle
-Exit puzzle
-Retry puzzle
+[Solve "puzzle name"]
+Lets the player solve the puzzle name of
+[Get hint]
+While in a puzzle, the player can ask for a hint to solve it
+[Inspect puzzle]
+Provides the player with the name and question of the puzzle
+[Exit puzzle]
+While the player is trying to solve the puzzle, this allows the player to exit the puzzle
+[Retry "puzzle name"]
+Lets the player retry the puzzle
+[Claim Prize]
+Allows the player to add the award from the puzzle into their inventory
+
 
 Monster:
-Inspect monster
-Attack Monster
-Parry monster
-Heal
-Run
-Flee
+[Inspect monster]
+[Attack Monster]
+[Parry monster]
+[Heal]
+[Run]
+[Flee]
 
 Item:
-Examine crate
-Inspect item
-Store item
-Use item
-Equip item
-Discard item
-View code
-Use code
+[Examine crate]
+[Inspect "item name"]
+Inspects the item of the given name, giving a description of the item and how it's used
+[Store "item name"]
+Puts the item of the given name into the player's inventory
+[Use "item name"]
+Uses the item of the given name, with the effects being based on the item's usage (healing items will heal the player)
+[Equip "item name"]
+Equips an equippable item of the given name, increasing the damage stat or max health depending on if it's armor or a weapon
+[Discard "item name"]
+Removes the item of the given name from their inventory
+[View code]
+[Use code]
 
 Direction:
+Move
 North
 East
 South

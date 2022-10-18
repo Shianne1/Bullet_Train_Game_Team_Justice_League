@@ -12,38 +12,21 @@ interface playerInterface {
 
     int maxHealth = 100;
 
-    /*
-     @Object: move()
-     @Function: this class moves the player into the room of the direction sent
-     by the controller
-     @author(s) Carlton Napier
-     @added 10/16/2022
-  */
+    /**
+     * @Object: move()
+     * @Function: this class moves the player into the room of the direction sent
+     * by the controller
+     * @author(s) Carlton Napier
+     * @added 10/16/2022
+     */
     void move(Room nextRoom);
 
-    /*
- @Object: pickUp()
- @Function: this class picked up the called item and adds it to the inventory
- by the controller
- @author(s) Carlton Napier
- @added 10/16/2022
-*/
-    void pickUp(Item item);
-
-    /*
-@Object: dropItem()
-@Function: this method removes the selected item while adding it to the current room
-@author(s) Carlton Napier
-@added 10/16/2022
-*/
-    void dropItem(Item item);
-
-    /*
-@Object: checkInventory()
-@Function: this method returns a string that relays the inventory of the player
-@author(s) Carlton Napier
-@added 10/16/2022
-*/
+    /**
+     * @Object: checkInventory()
+     * @Function: this method returns a string that relays the inventory of the player
+     * @author(s) Carlton Napier
+     * @added 10/16/2022
+     */
     String checkInventory();
 
 }
@@ -60,8 +43,6 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     Armor equippedArmor;
     ArrayList<Item> inventory;
     GameState checkpoint;
-
-
 
 
     boolean hasCheckPoint;
@@ -85,8 +66,8 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.numOfMonstersKilled = 0;
         this.maxHealth = 100;
         this.currentHealth = maxHealth;
-        this.equippedWeapon = new Weapon("Fist",0,"Your fists", "lets you punch enemies", -1,5); // durability/uses set to -1 since a fist will never break
-        this.equippedArmor = new Armor("Clothes",0, "Your clothes", "basic clothes that provide no protection", 0);
+        this.equippedWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5); // durability/uses set to -1 since a fist will never break
+        this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
 
     }
@@ -111,8 +92,8 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.numOfMonstersKilled = 0;
         this.maxHealth = 100;
         this.currentHealth = this.maxHealth;
-        this.equippedWeapon = new Weapon("Fist",0,"Your fists", "lets you punch enemies", -1,5); // durability/uses set to -1 since a fist will never break
-        this.equippedArmor = new Armor("Clothes",0, "Your clothes", "basic clothes that provide no protection", 0);
+        this.equippedWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5); // durability/uses set to -1 since a fist will never break
+        this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
         this.checkpoint = defaultCheckpoint;
     }
@@ -123,31 +104,11 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     }
 
     @Override
-    public void pickUp(Item item) {
-        try {
-            this.getLocation().getItemsInRoom().remove(item);
-            inventory.add(item);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void dropItem(Item item) {
-        try {
-            inventory.remove(item);
-            this.getLocation().getItemsInRoom().add(item);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
     public String checkInventory() {
         if (!inventory.isEmpty()) {
             String inventoryList = "The current items in your inventory are: ";
             for (Item item : inventory) {
-                inventoryList.concat("[" + item.name + "] ");
+                inventoryList.concat("[" + item.getName() + "] ");
             }
             return inventoryList;
         } else {
@@ -158,14 +119,14 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     @Override
     public void healHealth(int healthModifier) {
         setCurrentHealth(currentHealth + healthModifier);
-        if(currentHealth > maxHealth)
+        if (currentHealth > maxHealth)
             currentHealth = maxHealth;
     }
 
     @Override
     public void takeDamage(int healthModifier) {
         setCurrentHealth(currentHealth - healthModifier);
-        if(currentHealth < 0)
+        if (currentHealth < 0)
             currentHealth = 0;
     }
 
@@ -208,7 +169,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     }
 
     public GameState getCheckpoint() {
-            return checkpoint;
+        return checkpoint;
     }
 
     public void setCheckpoint(GameState checkpoint) {
@@ -225,12 +186,11 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     }
 
 
-    public String checkStats()
-    {
-        return   "Name: " + this.name + "\n" +
-        "Health (current/max): " +  this.currentHealth +"/"+ this.maxHealth + "\n" +
-        "Location: " +  this.location + "\n" +
-        "Equipped Weapon: " +  this.equippedWeapon + "\n" +
-        "Equipped Armor: " +  this.equippedArmor;
+    public String checkStats() {
+        return "Name: " + this.name + "\n" +
+                "Health (current/max): " + this.currentHealth + "/" + this.maxHealth + "\n" +
+                "Location: " + this.location + "\n" +
+                "Equipped Weapon: " + this.equippedWeapon + "\n" +
+                "Equipped Armor: " + this.equippedArmor;
     }
 }

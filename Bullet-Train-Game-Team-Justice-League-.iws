@@ -2,31 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/equipItemInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/itemInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Armor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Armor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameConsole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/View.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Weapon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Weapon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/itemInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/itemInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/playerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/playerInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/saveData/markdata.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/weaponInterface.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Armor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EntityInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntityInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameConsole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Help.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Help.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Puzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Puzzle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Weapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/saveData/markdata.bin" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

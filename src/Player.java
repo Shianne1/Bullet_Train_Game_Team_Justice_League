@@ -34,15 +34,15 @@ interface playerInterface {
 public class Player implements playerInterface, EntityInterface, Serializable {
 
 
-    int numOfMonstersKilled;
-    int maxHealth;
-    int currentHealth;
-    String name;
-    Room location;
-    Weapon equippedWeapon;
-    Armor equippedArmor;
-    ArrayList<Item> inventory;
-    GameState checkpoint;
+    private int numOfMonstersKilled;
+    private int maxHealth;
+    private int currentHealth;
+    private String name;
+    private Room location;
+    private Weapon equippedWeapon;
+    private Armor equippedArmor;
+    private ArrayList<Item> inventory;
+    private GameState checkpoint;
 
 
     boolean hasCheckPoint;
@@ -71,6 +71,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.inventory = new ArrayList<>();
 
     }
+
 
     // constructor for preexisting data
     public Player(int maxHealth, int currentHealth, int numOfMonstersKilled, String name, Room location, Weapon equippedWeapon, Armor equippedArmor, ArrayList<Item> inventory, GameState checkpoint) {
@@ -103,17 +104,48 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.location = nextRoom;
     }
 
+
+    /**
+     * @Method: checkInventory()
+     * @Function: this code returns a formatted string of the player's inventory that will be printed by the view
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
     @Override
     public String checkInventory() {
         if (!inventory.isEmpty()) {
             String inventoryList = "The current items in your inventory are: ";
             for (Item item : inventory) {
-                inventoryList.concat("[" + item.getName() + "] ");
+                inventoryList.concat("[" + item.toString() + "] ");
             }
             return inventoryList;
         } else {
             return "There are no items in your inventory";
         }
+    }
+
+    //------------------Player Methods---------------------//
+
+    /**
+     * @Method: healHealth()
+     * @Function: this code increases the player by the specified amount, capping at the player's max health
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
+
+    /**
+     * @Method: checkStats()
+     * @Function: this code returns a formated string of the player's current stats
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
+    public String checkStats() {
+        return "Name: " + this.name + "\n" +
+                "Health (current/max): " + this.currentHealth + "/" + this.maxHealth + "\n" +
+                "Location: " + this.location + "\n" +
+                "Equipped Weapon: " + this.equippedWeapon + "\n" +
+                "Equipped Armor: " + this.equippedArmor +
+                "Monsters Killed: " + this.numOfMonstersKilled + "\n";
     }
 
     @Override
@@ -123,12 +155,20 @@ public class Player implements playerInterface, EntityInterface, Serializable {
             currentHealth = maxHealth;
     }
 
+    /**
+     * @Method: takeDamage()
+     * @Function: this code decreases the player by the specified amount, flooring at zero
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
     @Override
     public void takeDamage(int healthModifier) {
         setCurrentHealth(currentHealth - healthModifier);
         if (currentHealth < 0)
             currentHealth = 0;
     }
+
+    //------------------Getters and Setters---------------------//
 
     public String getName() {
         return name;
@@ -150,22 +190,55 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         return equippedWeapon;
     }
 
+
+    /**
+     * @Method: setEquippedArmor()
+     * @Function: this code removes the equipped weapon from the player's inventory and puts it into the player's weapon slot
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
     public void setEquippedWeapon(Weapon equippedWeapon) {
+        this.inventory.remove(equippedWeapon);
         this.equippedWeapon = equippedWeapon;
+    }
+
+    /**
+     * @Method: removeEquippedWeapon()
+     * @Function: this code removes the equipped weapon from the player's weapon slot  and puts it into the player's inventory
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
+    public void removeEquippedWeapon() {
+        this.inventory.add(this.equippedWeapon);
+        this.equippedWeapon = null;
     }
 
     public Armor getEquippedArmor() {
         return equippedArmor;
     }
 
+    /**
+     * @Method: setEquippedArmor()
+     * @Function: this code removes the equipped armor from the player's inventory and puts it into the player's armor slot
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
     public void setEquippedArmor(Armor equippedArmor) {
+        this.inventory.remove(equippedArmor);
         this.equippedArmor = equippedArmor;
         this.maxHealth = playerInterface.maxHealth + this.equippedArmor.armorMod;
     }
 
+    /**
+     * @Method: removeEquippedArmor()
+     * @Function: this code removes the equipped armor from the player's armor slot  and puts it into the player's inventory
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
     public void removeEquippedArmor() {
+        this.inventory.add(this.equippedArmor);
         this.equippedArmor = null;
-        // this.maxHealth = playerInterface.maxHealth + equippedArmor.armorRating;
+        this.maxHealth = playerInterface.maxHealth - equippedArmor.armorMod;
     }
 
     public GameState getCheckpoint() {
@@ -186,11 +259,5 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     }
 
 
-    public String checkStats() {
-        return "Name: " + this.name + "\n" +
-                "Health (current/max): " + this.currentHealth + "/" + this.maxHealth + "\n" +
-                "Location: " + this.location + "\n" +
-                "Equipped Weapon: " + this.equippedWeapon + "\n" +
-                "Equipped Armor: " + this.equippedArmor;
-    }
+
 }

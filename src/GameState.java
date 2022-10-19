@@ -10,11 +10,11 @@ import java.util.ArrayList;
      @added 10/16/2022
   */
 public  class GameState implements Serializable {
-    Player player;
-    ArrayList<Item> itemsInGame;
-    ArrayList<Room> roomsInGame;
-    ArrayList<Puzzle> puzzlesInGame;
-    ArrayList<Monster> monstersInGame;
+    private Player player;
+    private ArrayList<Item> itemsInGame;
+    private ArrayList<Room> roomsInGame;
+    private  ArrayList<Puzzle> puzzlesInGame;
+    private ArrayList<Monster> monstersInGame;
 
     public boolean isRunning() {
         return isRunning;

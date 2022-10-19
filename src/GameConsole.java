@@ -36,7 +36,7 @@ public class GameConsole {
         // loop for playing the game | while the gameState is running
         while (gameState.isRunning()) {
             // at the start of the loop, if the player's health is zero or less, the playerDeath() method is run
-            if (gameState.player.currentHealth <= 0) {
+            if (gameState.getPlayer().getCurrentHealth() <= 0) {
                 playerDeath(gameState, view);
             }
 
@@ -225,7 +225,7 @@ public class GameConsole {
             try {
                 // a new file is created, based on the player's name as a bin file, in the savedata folder
                 //if the file exists, it is overwritten
-                File gameStateData = new File("src/savedata/" + gameState.player.getName() + "_data.bin");
+                File gameStateData = new File("src/savedata/" + gameState.getPlayer().getName() + "_data.bin");
 
                 FileOutputStream dataFile = new FileOutputStream(gameStateData);
                 ObjectOutputStream dataOutput = new ObjectOutputStream(dataFile);
@@ -277,7 +277,7 @@ public class GameConsole {
         }
         // if the player somehow doesn't have a checkpoint, they're put into a new game using the same player name
         else {
-            newGame(gameState, gameState.player.getName());
+            newGame(gameState, gameState.getPlayer().getName());
         }
     }
 

@@ -17,11 +17,11 @@
 import java.io.Serializable;
 public class Item implements itemInterface, Serializable {
 
-    private String name;
+    String name;
 
-    int id;
-    private String itemDesc;
-    private String itemText;
+    protected int id;
+    protected String itemDesc;
+    protected String itemText;
 
     @Override
     public String inspect() {
@@ -38,28 +38,4 @@ public class Item implements itemInterface, Serializable {
 
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getItemDesc() {
-        return itemDesc;
-    }
-
-    public void setItemDesc(String itemDesc) {
-        this.itemDesc = itemDesc;
-    }
-
-    public String getItemText() {
-        return itemText;
-    }
-
-    public void setItemText(String itemText) {
-        this.itemText = itemText;
-    }
 }

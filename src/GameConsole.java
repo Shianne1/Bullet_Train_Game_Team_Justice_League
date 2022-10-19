@@ -47,14 +47,10 @@ public class GameConsole {
             String roomDesc = reader.nextLine();
             String connect = reader.nextLine();
             boolean lock = Boolean.parseBoolean(reader.nextLine());
-            boolean hasItem = Boolean.parseBoolean(reader.nextLine());
-            boolean hasPuzzle = Boolean.parseBoolean(reader.nextLine());
-            boolean hasMonster = Boolean.parseBoolean(reader.nextLine());
             int roomItem = Integer.parseInt(reader.nextLine());
             int roomPuzz = Integer.parseInt(reader.nextLine());
             int roomMon = Integer.parseInt(reader.nextLine());
-            Room temp = new Room(roomId, roomName, roomDesc, connect, lock, hasItem, hasPuzzle,
-                    hasMonster, roomItem, roomPuzz, roomMon);
+            Room temp = new Room(roomId, roomName, roomDesc, connect, lock, roomItem, roomPuzz, roomMon);
             rooms.add(temp);
         }
         reader.close();

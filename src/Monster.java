@@ -13,7 +13,7 @@ public class Monster
 
     public Monster(int id, String name, String desc, int HP, int dam)
     {
-        this.monsterId = id;
+        this.monsterId = id-1;
         this.monsterName = name;
         this.monsterDesc = desc;
         this.health = HP;

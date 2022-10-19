@@ -6,7 +6,7 @@ public class Room extends Player
      * item and puzzle ids to operate.
      *
      * New approach doesn't read in boolean of if room has puzzle/item/monster, but
-     * uses the value of the Id to see if one is present or not. 
+     * uses the value of the Id to see if one is present or not.
      */
 
     private int roomId;
@@ -27,8 +27,7 @@ public class Room extends Player
     private int south;
     private int west;
 
-    public Room(int id, String name, String desc, String connection, boolean lock, boolean hasIt,
-                boolean hasPuz, boolean hasMon, int item, int puzzle, int monster)
+    public Room(int id, String name, String desc, String connection, boolean lock, int item, int puzzle, int monster)
     {
         this.roomId = id;
         this.roomName = name;

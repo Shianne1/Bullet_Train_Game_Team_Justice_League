@@ -72,7 +72,7 @@ Removes the item of the given name from their inventory
 [View code]
 Saves codes obtained from solving puzzles
 [Use code]
-Uses obtained codes to open folders
+Uses the inputted code to open specific folders
 
 Movement:
 [Move "direction"]]

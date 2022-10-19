@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Armor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameConsole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Help.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Help.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/README.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

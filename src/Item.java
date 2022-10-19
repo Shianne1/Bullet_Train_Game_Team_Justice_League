@@ -1,4 +1,4 @@
-public class Item extends Room{
+public class Item{
     /*
         Light armor found in Station 1 loot room
         Medium armor found in Station 2 monster room

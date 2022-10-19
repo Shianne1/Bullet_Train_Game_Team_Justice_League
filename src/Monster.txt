@@ -1,0 +1,35 @@
+1
+Dog
+Low Rank Mafia Pet
+30
+20
+2
+Tiger
+High Rank Mafia Pet
+50
+30
+3
+GoodFella
+Low Rank Mafia Member
+75
+40
+4
+Goombah
+Senior Rank Mafia Member
+100
+60
+5
+Scrap
+Robot Mafia Member
+40
+10
+6
+Spark
+Robotic Mafia Pet
+60
+20
+7
+Mr.Big
+The Big Boss
+150
+80

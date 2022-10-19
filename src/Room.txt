@@ -1,29 +1,199 @@
-
-
-THE NAMES I HAVE WITHIN THE MAP ARE THE NAMES OF THE ROOM WITH TRAIN WAGON 1 BEING THE FIRST ROOM,
-THESE ARE THE ROOM DESCRIPTION FOR THE ROOM.
-
-Station room:
-The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be
-a puzzle.
-
-Monster room:
-The dark and desolate room is haunting with a enemy standing in front of you.
-
-Station Wagon:
+1
+Train Wagon 1
 The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
-
-Loot room:
+0,2,6,0
+false
+0
+0
+0
+2
+Station 1 Puzzle Room
+The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to bea puzzle.
+3,4,5,1
+false
+0
+1
+0
+3
+Station 1 Mystery Room
+The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
+0,0,2,0
+true
+9
+0
+0
+4
+Station 1 Loot Room
 The room has many crates that can possibly be looted.
-
-Mystery Item Room:
-The room has many tables with computers and maps. one of the table seems to have a folder of papers.
-
-Final Locomotive room:
-This last train wagon is dimly lit. There is a suitcase that is being guarded by a enemy.
-
-Loot & Monster:
-The room has many crates that can possibly be looted, but they are all block by a enemy.
-
-Loot & Puzzle:
-The room has many crates that can possibly be looted along a with a puzzle.
+0,0,0,2
+false
+6
+0
+0
+5
+Station 1 Monster Room
+The dark and desolate room is haunting with an enemy standing in front of you.
+2,0,0,0
+false
+0
+0
+1
+6
+Train Wagon 2
+The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
+1,7,11,0
+true
+0
+0
+0
+7
+station 2 Puzzle Room
+The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be a puzzle.
+8,9,10,6
+false
+0
+3
+0
+8
+Station 2 Monster Room
+The dark and desolate room is haunting with an enemy standing in front of you.
+0,0,7,0
+false
+0
+0
+5
+9
+Station 2 Mystery Room
+The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
+0,0,0,7
+true
+12
+0
+0
+10
+Station 2 Loot Room
+The room has many crates that can possibly be looted.
+7,0,0,0
+false
+6
+0
+0
+Train Wagon 3
+The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
+6,12,16,0
+true
+0
+0
+0
+12
+Station 3 Puzzle Room
+The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be a puzzle.
+13,14,15,11
+false
+0
+2
+0
+13
+Station 3 Loot And Puzzle Room
+The room has many crates that can possibly be looted along with a puzzle.
+0,0,12,0
+false
+9
+6
+0
+14
+Station 3 Mystery Room
+The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
+0,0,0,12
+true
+13
+0
+0
+15
+Station 3 Monster Room
+The dark and desolate room is haunting with an enemy standing in front of you.
+12,0,0,0
+false
+0
+0
+2
+16
+Train Wagon 4
+The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
+11,17,21,0
+true
+0
+0
+0
+17
+Station 4 Puzzle Room
+The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be a puzzle.
+18,19,20,16
+false
+0
+5
+0
+18
+Station 4 Monster Room
+The dark and desolate room is haunting with an enemy standing in front of you.
+0,0,17,0
+false
+0
+0
+6
+19
+Station 4 Loot and Puzzle Room
+The room has many crates that can possibly be looted along with a puzzle.
+0,0,0,17
+false
+10
+7
+0
+20
+Station 4 Mystery Room
+The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
+17,0,0,0
+true
+14
+0
+0
+21
+Train Wagon 5
+The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
+16,22,25,0
+true
+0
+0
+0
+22
+Station 5 Puzzle Room
+The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be  puzzle.
+23,24,0,21
+false
+0
+4
+0
+23
+Station 5 Loot and Monster Room
+The room has many crates that can possibly be looted, but they are all blocked by an enemy.
+0,0,22,0
+false
+4
+0
+3
+24
+Station 5 Monster Room
+The dark and desolate room is haunting with an enemy standing in front of you.
+0,0,0,22
+false
+0
+0
+4
+25
+Final Room Locomotive
+This last train wagon is dimly lit. There is a suitcase that is being guarded by an enemy.
+21,0,0,0
+true
+0
+0
+7

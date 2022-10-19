@@ -1,0 +1,29 @@
+
+
+THE NAMES I HAVE WITHIN THE MAP ARE THE NAMES OF THE ROOM WITH TRAIN WAGON 1 BEING THE FIRST ROOM,
+THESE ARE THE ROOM DESCRIPTION FOR THE ROOM.
+
+Station room:
+The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be
+a puzzle.
+
+Monster room:
+The dark and desolate room is haunting with a enemy standing in front of you.
+
+Station Wagon:
+The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
+
+Loot room:
+The room has many crates that can possibly be looted.
+
+Mystery Item Room:
+The room has many tables with computers and maps. one of the table seems to have a folder of papers.
+
+Final Locomotive room:
+This last train wagon is dimly lit. There is a suitcase that is being guarded by a enemy.
+
+Loot & Monster:
+The room has many crates that can possibly be looted, but they are all block by a enemy.
+
+Loot & Puzzle:
+The room has many crates that can possibly be looted along a with a puzzle.

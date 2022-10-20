@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.Scanner;
 
 /**
  * @Object: Puzzle()
@@ -28,6 +29,11 @@ public class Puzzle implements Serializable{
     GameConsole game = new GameConsole();
 
     private ArrayList<Puzzle> puzzles;
+    // NEED TO ACCESS THE ITEMS ARRAYLIST
+    // NEED TO ACCESS THE PLAYER'S INVENTORY MAYBE ?
+    // NEED TO ACCESS THE PLAYER'S LOCATION
+    // NEED TO ACCESS ROOMS ARRAYLIST
+
 
     /*-----------------------------------------------Puzzle Constructors----------------------------------------------*/
     /**
@@ -137,20 +143,78 @@ public class Puzzle implements Serializable{
         }
     }
 
-    public void inspectPuzzle(){
+    public void itemInventoryForPuzzles() {
+        // HAVE A FOR LOOP OF ITEMS INVENTORY FROM ITEMS CLASS
+        /*
+        if(items){
+
+        }
+
+         */
+
+    }
+    public void inspectPuzzle(Scanner input){
+        for(int i = 0; i < puzzles.size(); i++){
+            //IF PLAYERS LOCATION MATCHES WITH THE PUZZLES LOCATION
+            System.out.println(puzzles.get(i).getPuzzleName());
+            System.out.println(puzzles.get(i).getPuzzleQuestion());
+            System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
+            String playerAnswer = input.nextLine();
+            if(playerAnswer.equalsIgnoreCase("solve puzzle")){
+                solvePuzzle(input);
+            }
+        }
 
     }
 
-    public void solvePuzzle(){
+    public void solvePuzzle(Scanner input){
+        for(int i = 0; i < puzzles.size(); i++){
+            //IF PLAYERS LOCATION MATCHES WITH THE PUZZLES LOCATION
+            String playerAnswer = input.nextLine();
+            int count = 1;
+            while (puzzles.get(i).getAttempts() != 0){
+                if(playerAnswer.equalsIgnoreCase("Get hint")){
+                    hint();
+                }
+                if(playerAnswer.equalsIgnoreCase(puzzles.get(i).getAnswer())){
+                    System.out.println("You solve the puzzle correctly! You can now pick up your rewards " + puzzles.get(i).getRewards());
+                    puzzles.get(i).setRewards("No rewards to receive");
+                    // SET LOCATION TO 0
+
+                    //puzzle will have its own inventory of items that will need to be drop if puzzle is solve correctly.
+                    break;
+                }
+                else if(!playerAnswer.equalsIgnoreCase(puzzles.get(i).getAnswer())){
+                    puzzles.get(i).setAttempts(puzzles.get(i).getAttempts() - 1);
+                    if(puzzles.get(i).getAttempts() == 0){
+                        System.out.println("Failed tp solve this puzzle. If you would like to try the puzzle again type: (retry puzzle)");
+                        playerAnswer = input.nextLine();
+                        if(playerAnswer.equalsIgnoreCase("retry puzzle")){
+                            retryPuzzle();
+                        }
+
+                        break;
+                    }
+                    System.out.println("The answer you provided is wrong. You still have " + puzzles.get(i).getAttempts() + " attempts left.");
+                    playerAnswer = input.nextLine();
+                    count ++;
+                }
+            }
+            puzzles.get(i).setAttempts(count);
+        }
 
     }
 
     public void hint(){
-
+        for(int i = 0; i < puzzles.size(); i++){
+            //IF PLAYERS LOCATION MATCHES WITH THE PUZZLES LOCATIONS
+            puzzles.get(i).getHint();
+        }
     }
 
     public void retryPuzzle(){
 
+        // stay after class for help with the retry puzzle
     }
 
     public void exitPuzzle(){

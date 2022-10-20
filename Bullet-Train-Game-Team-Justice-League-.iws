@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="missed a small line break when checking stats" />
+    <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="missed a small line break">
+      <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,7 +69,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666301266816</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="missed a small line break">
+      <created>1666301462350</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666301462350</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -83,6 +92,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="missed a small line break when checking stats" />
-    <option name="LAST_COMMIT_MESSAGE" value="missed a small line break when checking stats" />
+    <MESSAGE value="missed a small line break" />
+    <option name="LAST_COMMIT_MESSAGE" value="missed a small line break" />
   </component>
 </project>

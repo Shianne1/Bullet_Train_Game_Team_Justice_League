@@ -11,34 +11,59 @@ This document will explain everything within the Bullet Train Game Project inclu
 
 ------------------------------------------------------------------------------------------------------------------------
 
-MODEL VIEW CONTROLLER SECTIONS:
+[[MODEL VIEW CONTROLLER SECTIONS:]]
 
-MODEL:
+[MODEL:]
+GameState.java
+
+-- This model carries the data of the game which is referenced by the controller --
+
+[CONTROLLER:]
+GameConsole.java
+
+-- takes in commands to view to run methods based on the data provided by the model
+
+[VIEW:]
+View.java
+
+-- receives commands and prints outputs to the player
+
+------------------------------------------------------------------------------------------------------------------------
+
+[CLASSES:]
+
+Item.java
+Armor.java
+Weapon.java
+Folder.java
+Player.java
+Puzzle.java
+GameState.java
+GameConsole.java
+View.java
+
+------------------------------------------------------------------------------------------------------------------------
+
+[TEXT FILES:]
+
+Help.txt
+README.txt
+Room.txt
+Puzzle.txt
+Monster.txt
 
 
-CONTROLLER:
+[BINARY FILES:]
 
-
-VIEW:
+(playername)_data.bin
+-- created when players save the game, holding aan object of GameState.java]
 
 
 ------------------------------------------------------------------------------------------------------------------------
 
-CLASSES:
+[[[WHAT THE GAME IS AND HOW TO PLAY:]]]
 
-
-
-------------------------------------------------------------------------------------------------------------------------
-
-TEXT FILES:
-
-
-
-------------------------------------------------------------------------------------------------------------------------
-
-WHAT THE GAME IS AND HOW TO PLAY:
-
-GAME INTRO:
+[[GAME INTRO:]]
 “Welcome to the Bullet Train! You, as an assassin have been assigned a task to
 swindle a briefcase and any other intel from the world’s most lethal mafia gang leader.
 This train will stop at every station and present a mystery or puzzle that you need
@@ -52,12 +77,12 @@ easy to battle and their leader is not going to be happy to see you trying to ge
 hands on the briefcase. Good Luck!”
 
 
-HOW TO PLAY:
+[[HOW TO PLAY:]]
 This will take the user to a page that describes how the player can navigate
 through the text-based game and play using the different keyboard commands.
 
 
-ABOUT THE GAME:
+[[ABOUT THE GAME:]]
 The game is a mystery solving/puzzle game that involves the player going through
 multiple rooms to clear monsters, get stronger by collecting various gear to make the
 player stronger, solving a mystery at all the stations, and eventually killing the final
@@ -70,14 +95,14 @@ them to progress into the next room. The files include information that pertains
 mafia gang leader and their evil plans.
 
 
-GAMEPLAY WISE:
-Death:
+[[GAMEPLAY WISE:]]
+[Death:]
 The checkpoints will be the train wagons, every time a new train wagon is
 reach the player will unlock that checkpoint. If a player dies, they will return to the
 latest train wagon they unlocked and will lose their progress and will have to redo the
 fights and obtain their items again.
 
-Fights:
+[Fights:]
 The fights will be turned based and the player can choose to initiate the fight
 or run away from the fight. The player can use their weapon of their choice when
 fighting (Fists, knife, katana, pistol, rifle). Upon encountering a monster, the player
@@ -85,7 +110,7 @@ will have a choice to fight the monster or running. Fighting will put you into c
 and the player can choose to run whenever they want. Running will send you back to
 the previous room.
 
-Inventory:
+[Inventory:]
 The player will have a general inventory with all the items they have,
 weapons, armor, and healing items. The player can have as many healing items as
 possible they want with no limit. When using a healing item, it will -1 from their
@@ -94,22 +119,33 @@ replace the knife in their inventory, pistol and rifle are their own object and 
 exist. For armor, the armor will be equipped and change the player’s stats, once
 equipped will disappear from the player’s inventory.
 
-Goal:
+[Goal:]
 The player will need to complete all mysteries throughout the stations to be
 able to access the final boss and then defeat the boss and win.
 
 
-SOFTWARE SYSTEM ATTRIBUTES
+[[SOFTWARE SYSTEM ATTRIBUTES]]
 
-Usability:
+[Usability:]
+The system should be accessible and reusable by users on devices that support java. Players
+should be able to save their progress through the game and revisit later without losing their
+information and place in the game.
 
-Reliability:
+[Reliability:]
+This text-based adventure game’s probability of failure on demand (POFOD) shall be 1 out of
+1000 (i.e., .0001)
 
-Availability:
+[Availability:]
+The game should be available to users in Fall 2022 and should achieve 99.5% uptime, as it's an entirely offline game.
 
-Readability:
+[Readability:]
+The game is legible by anyone with a standard reading ability, and all information and commands are laid out in simple terms
 
-Logical Database Requirement:
+[Logical Database Requirement:]
+The database will store every players’ progress in the game that they can save by using the “save game” command at any time during the game.
+The database will store a .bin file with the player’s information, based on the player's given name. This save data can then be
+loaded in through the "load game" command
+
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -117,47 +153,96 @@ MAP:
 
 BULLET TRAIN MAP:
 
-                  [Station 1 Mystery]
-[Train Wagon 1]---[Station 1 Puzzle]---[Station 1 Loot]
-       |          [Station 1 Monster]
+
+                  [Station 1 Mystery (FOLDER 1)]
+[Train Wagon 1]---[Station 1 Puzzle (P1 = HIT POINTS)  (KNIFE, BANDAGE)]---[Station 1 Loot(MED KIT)]
+       |          [Station 1 Monster (DOG)  (BANDAGE, SYRINGE)]
        |
        |
-       |          [Station 2 Monster]
-[Train Wagon 2]---[Station 2 Puzzle]---[Station Mystery]
-       |          [Station 2 Loot]
+       |          [Station 2 Monster (SCRAP)  (BANDAGE, SYRINGE)]
+[Train Wagon 2]---[Station 2 Puzzle (P3 = TRAINS)  (LIGHT ARMOR, BANDAGE)]---[Station 2 Mystery (FOLDER 2)]
+       |          [Station 2 Loot (MED KIT)]
        |
        |
-       |          [Station 3 Loot]
-[Train Wagon 3]---[Station 3 Puzzle]---[Station 3 Mystery]
-       |          [Station 3 Monster]
+       |          [Station 3 Loot & Puzzle (P6 = FILL IN THE BLANK)  (PISTOL, BANDAGE)]
+[Train Wagon 3]---[Station 3 Puzzle (P2 = WHAT DOES IT SAY)  (KATANA, BANDAGE)]---[Station 3 Mystery (FOLDER 3)]
+       |          [Station 3 Monster (TIGER)  (BANDAGE, SYRINGE)]
        |
        |
-       |          [Station 4 Monster
-[Train Wagon 4]---[Station 4 Puzzle]---[Station 4 Loot & Puzzle]
-       |          [Station Mystery]
+       |          [Station 4 Monster (SPARK)  (BANDAGE, SYRINGE)]
+[Train Wagon 4]---[Station 4 Puzzle (P5 = IT'S SHARP)  (MEDIUM ARMOR, BANDAGE)]---[Station 4 Loot & Puzzle (P7 = WHEELS)  (RIFLE, BANDAGE)]
+       |          [Station 4 Mystery (FOLDER 4)]
        |
        |
-       |          [Station 5 Loot & Monster]
-[Train Wagon 5]---[Station 5 Puzzle]---[Station 5 Monster]
+       |          [Station 5 Loot & Monster (GOODFELLA)  (BANDAGE, SYRINGE)]
+[Train Wagon 5]---[Station 5 Puzzle (P4 = MILES PER HOURS)  (HEAVY ARMOR, BANDAGE)]---[Station 5 Monster (GOOMBAH)  (BANDAGE, MED KIT)]
        |
        |
        |
        |
-[Final Locomotive]
+[Final Locomotive (MAFIA BOSS)  (SUITCASE)]
 ------------------------------------------------------------------------------------------------------------------------
 
-COMMANDS:
+[[[COMMANDS]]]
 
+
+[[GAME FUNCTION COMMANDS]]
+[Start game] - starts the game
+[Save game] - saves the game
+[Load game] - loads the game
+[End game] - ends the game
+
+[[PLAYER COMMANDS:]]
+[Help] - prints Help.txt
+[Check inventory] - prints the players' inventory
+[Check stats] - prints the player's stats
+[Check map] - prints Map.txt
+
+[[Room COMMANDS:]]
+[Inspect room] - gives a description of the room and the items in it
+
+[[Puzzle COMMANDS:]]
+[Solve "puzzle name"] - lets the users solve the puzzle
+[Get hint] - gives the user a hint
+[Inspect puzzle] - gives a description of the puzzle
+[Exit puzzle] - exits trying to attempt the puzzle
+[Retry "puzzle name"] - allows the player to retry the puzzle
+[Claim Prize] - lets the player claim the prize from the puzzle
+
+
+
+[[MONSTER/BATTLE COMMANDS:]]
+[Inspect "monster name"] - uses a turn to print the monster's description
+[Fight Monster] - lets the player take an initiative attack on a monster in the room
+[Attack Monster] - lets the player attack the monster in battle
+[Parry monster] - gives the player a chance for a double or nothing attack
+[Heal] - lets the player look in their inventory and use a healing item to recover health
+[Run] - allows the player to run away from a fight, is done automatically if health gets below 10
+
+
+[[ITEM COMMANDS]]
+[Examine crate] - looks inside crates for items
+[Inspect "item name"] -  gives the description of an item and how it is used
+[Store "item name"] - puts the item in the inventory
+[Use "item name"] - uses the item
+[Equip "item name"] - equips the item to the appropriate slot
+[Discard "item name"] - removes the item from the inventory
+[View code] - reads out the codes the player has
+[Use code] - allows the player to
+
+[Move "direction"]]
 
 ------------------------------------------------------------------------------------------------------------------------
 
-GLOSSARY:
+[[[GLOSSARY:]]]
 
 Loot = means treasure/ item
 
 Mystery = Is a room to find the mystery folders which are items
 
+Health = how much damage a player can take before they die and their gamestate is restarted
+
+Checkpoint = a saved point in the game that the player is sent back to upon death
 
 ------------------------------------------------------------------------------------------------------------------------
 
-                                       THIS IS THE END OF THE DOCUMENT

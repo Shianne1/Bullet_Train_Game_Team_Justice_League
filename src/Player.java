@@ -42,6 +42,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     private Weapon equippedWeapon;
     private Armor equippedArmor;
     private ArrayList<Item> inventory;
+
     private GameState checkpoint;
 
 
@@ -144,7 +145,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
                 "Health (current/max): " + this.currentHealth + "/" + this.maxHealth + "\n" +
                 "Location: " + this.location + "\n" +
                 "Equipped Weapon: " + this.equippedWeapon + "\n" +
-                "Equipped Armor: " + this.equippedArmor +
+                "Equipped Armor: " + this.equippedArmor + "\n" +
                 "Monsters Killed: " + this.numOfMonstersKilled + "\n";
     }
 

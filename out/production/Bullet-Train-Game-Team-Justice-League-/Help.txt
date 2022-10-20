@@ -1,47 +1,83 @@
 
-THIS SHOULD BE ALL OF THE COMMANDS WITHIN THE GAME
+BULLET TRAIN HELP
 
 Game:
-Start game
-Save game
-Load game
-End game
+[Start game]
+Starts a new game, only works at the start of the session
+[Save game]
+Prompts the player if they want to play a game, which can then be answered with "Yes" or "No"
+[Load game]
+Prompts the player if they want to play a game, which can then be answered with "Yes" or "No"
+If Yes, the player can then input the name they gave the player of the game they want to load, to load that game
+[End game]
+Prompts the player if they want to save the game, and then ends the game session
 
 Player:
-Help
-Check inventory
-Check stats
-Check map
+[Help]
+Shows the help menu to the player
+[Check inventory]
+Lists out the items within the player's inventory
+[Check stats]
+Lists out the player's currents stats (health, ammo, number of monsters killed, etc)
+[Check map]
 
 Room:
-Inspect room
+[Inspect room]
+Gives the description of the room the player is currently in: also lists any puzzle, monsters, or items in the room
 
 Puzzle:
-Solve puzzle
-Get hint
-Inspect puzzle
-Exit puzzle
-Retry puzzle
+[Solve "puzzle name"]
+Lets the player solve the puzzle of the name given
+[Get hint]
+While in a puzzle, the player can ask for a hint to solve it
+[Inspect puzzle]
+Provides the player with the name and question of the puzzle
+[Exit puzzle]
+While the player is trying to solve the puzzle, this allows the player to exit the puzzle
+[Retry "puzzle name"]
+Lets the player retry the puzzle
+[Claim Prize]
+Allows the player to add the award from the puzzle into their inventory
+
 
 Monster:
-Inspect monster
-Attack Monster
-Parry monster
-Heal
-Run
-Flee
+[Inspect "monster name"]
+Gets the description of monster with the inputted name, however the monster will get to attack first
+[Fight Monster]
+Starts a fight with the monster with the inputted name, giving the player first move to attack or use an item
+[Attack Monster]
+Attacks the monster with damage being based on the player's current weapon
+[Parry monster]
+Player makes an attempt to parry the monster:
+(has a 50% chance of succeeding which deals double damage)
+(If the player fails, no damage is dealt)
+[Heal]
+The player can open their inventory and use a healing item
+[Run]
+Allows the player to leave the fight into the previous room
+(the player will automatically attempt to run when health is less than 10)
 
 Item:
-Examine crate
-Inspect item
-Store item
-Use item
-Equip item
-Discard item
-View code
-Use code
+[Examine crate]
+[Inspect "item name"]
+Inspects the item of the given name, giving a description of the item and how it's used
+[Store "item name"]
+Puts the item of the given name into the player's inventory
+[Use "item name"]
+Uses the item of the given name, with the effects being based on the item's usage (healing items will heal the player)
+[Equip "item name"]
+Equips an equippable item of the given name, increasing the damage stat or max health depending on if it's armor or a weapon
+[Discard "item name"]
+Removes the item of the given name from their inventory
+[View code]
+Saves codes obtained from solving puzzles
+[Use code]
+Uses the inputted code to open specific folders
 
-Direction:
+Movement:
+[Move "direction"]]
+Moves the player into the inputted direction, if there is a room to move into
+[Recognized Directions:]
 North
 East
 South

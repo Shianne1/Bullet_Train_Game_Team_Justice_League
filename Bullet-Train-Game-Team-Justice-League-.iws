@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/savedata/real_data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/src/savedata/real_data.bin" afterDir="false" />
-    </list>
+    <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="missed a small line break when checking stats" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +53,21 @@
       <option name="presentableId" value="Default" />
       <updated>1665861970387</updated>
     </task>
+    <task id="LOCAL-00001" summary="missed a small line break when checking stats">
+      <created>1666301039024</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666301039024</updated>
+    </task>
+    <task id="LOCAL-00002" summary="missed a small line break when checking stats">
+      <created>1666301266816</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666301266816</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -69,5 +80,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="missed a small line break when checking stats" />
+    <option name="LAST_COMMIT_MESSAGE" value="missed a small line break when checking stats" />
   </component>
 </project>

@@ -73,7 +73,11 @@ public class GameConsole {
             String monDesc = reader.nextLine();
             int monHP = Integer.parseInt(reader.nextLine());
             int monDam = Integer.parseInt(reader.nextLine());
-            Monster temp = new Monster(monId, monName, monDesc, monHP, monDam);
+            String item1 = reader.nextLine();
+            String item2 = reader.nextLine();
+            int prob1 = Integer.parseInt(reader.nextLine());
+            int prob2 = Integer.parseInt(reader.nextLine());
+            Monster temp = new Monster(monId, monName, monDesc, monHP, monDam, item1, item2, prob1, prob2);
             monsters.add(temp);
         }
         reader.close();

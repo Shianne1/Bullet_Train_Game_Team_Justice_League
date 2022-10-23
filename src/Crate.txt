@@ -1,0 +1,9 @@
+Crate 1
+No item
+4
+Crate 2
+No item
+4
+Crate 3
+Med Kit
+4

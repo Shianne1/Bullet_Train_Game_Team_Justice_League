@@ -1,12 +1,18 @@
+import java.util.ArrayList;
 import java.util.Random;
 
+
+/**
+ * @Object: Monster()
+ * @Function: This OOP class will help set up the Monster objects that is needed from the monster.txt
+ * when parsing information.
+ * This class will interact and solve the puzzles to receive items. The puzzle will track variables such as puzzle names,
+ * puzzle ID, question, answer, hint, attempts, rewards, and the command methods for the puzzles as the player interact with them.
+ * @author(s) Dakota Smith
+ * @added 10/17/2022
+ */
 public class Monster
 {
-    /*
-    while you are implementing the game, just ask us if you need any help
-    Look at pg. 4, 6, 7, 18, 19, 20, 21
-     */
-
     private int monsterId;
     private String monsterName;
     private String monsterDesc;
@@ -17,10 +23,25 @@ public class Monster
     private double dropRate1;
     private double dropRate2;
 
+
+    /**
+     * @param id
+     * @param name
+     * @param desc
+     * @param HP
+     * @param dam
+     * @param item1
+     * @param item2
+     * @param prob1
+     * @param prob2
+     * @Function: constructor for pre existing data from the Monster text file
+     * @author(s) Dakota Smith
+     * 10/17/2022
+     */
     public Monster(int id, String name, String desc, int HP, int dam, String item1, String item2,
                    int prob1, int prob2)
     {
-        this.monsterId = id-1;
+        this.monsterId = id;
         this.monsterName = name;
         this.monsterDesc = desc;
         this.health = HP;
@@ -31,41 +52,28 @@ public class Monster
         dropRate2 = prob2/100;
     }
 
-    public void inspectMonster()
-    {
-        System.out.println(monsterName + " " + monsterDesc);
-        System.out.println("Damage: " + damage + " Health: " + health);
+    /**
+     * GetterSetters
+     */
+    public int getMonsterId() {
+        return monsterId;
     }
 
-    public void attackMonster(Player player)
-    {
-        int dHealth = player.getCurrentHealth();
-        dHealth = dHealth - damage;
-        player.setCurrentHealth(dHealth);
-        System.out.println("Monster Dealt: " + damage + " Damage.");
-        System.out.println("Current HP: " + player.getCurrentHealth());
+    public String getMonsterName() {
+        return monsterName;
     }
 
-    public void parryMonster()
-    {
-        Random r = new Random();
-        int randomInt = r.nextInt(100) + 1;
+    public String getMonsterDesc() {
+        return monsterDesc;
     }
 
-    public void heal()
-    {}
-
-
-    public void run(Room currentRoom, Player player)
-    {
-
+    public int getHealth() {
+        return health;
     }
 
-    public void flee(Room currentRoom, Player player)
-    {
-
+    public int getDamage() {
+        return damage;
     }
-
 
     public double getDropRate1() {
         return dropRate1;
@@ -81,5 +89,41 @@ public class Monster
 
     public String getItemDrop2() {
         return itemDrop2;
+    }
+
+    /**
+     * @Method: attackMonster()
+     * @param player
+     * @Function: when called on, deals damage to player, updates player health and
+     * displays damage dealt and current player health
+     * @author: Dakota Smith
+     * 10/19/2022
+     */
+    public void attackMonster(Player player)
+    {
+        int dHealth = player.getCurrentHealth();
+        dHealth = dHealth - damage;
+        player.setCurrentHealth(dHealth);
+        System.out.println("Monster Dealt: " + damage + " Damage.");
+        System.out.println("Current HP: " + player.getCurrentHealth());
+    }
+
+    /**
+     * @Method: parryMonster()
+     * @Function: when called on, deals damage to player, updates player health and
+     * displays damage dealt and current player health
+     * @author: Dakota Smith
+     * 10/19/2022
+     */
+    public boolean parryMonster()
+    {
+        boolean parry = false;
+        Random r = new Random();
+        int randomInt = r.nextInt(100) + 1;
+        if(randomInt > 50)
+        {
+            parry = true;
+        }
+        return parry;
     }
 }

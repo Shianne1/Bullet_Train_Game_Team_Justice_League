@@ -20,18 +20,18 @@ public class GameConsole {
     Put within discord under Questions channel, and don't do it before you get everyone approval or at least my approval.
      */
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         GameConsole game = new GameConsole();
         ArrayList<Room> roomList = new ArrayList<>();
         ArrayList<Monster> bestiary = new ArrayList<>();
+        ArrayList<Crate> crateList = new ArrayList<>();
         game.readRooms(roomList);
         game.readMonsters(bestiary);
-
+        game.readCrates(crateList);
     }
 
-    public void readRooms(ArrayList<Room> rooms)
-    {
+    //Dakota
+    public void readRooms(ArrayList<Room> rooms) {
         File fileIn = new File("src/RoomIn.txt");
         Scanner reader = null;
         try {
@@ -41,23 +41,23 @@ public class GameConsole {
             e.printStackTrace();
         }
 
-        while(reader.hasNext()) {
+        while (reader.hasNext()) {
             int roomId = Integer.parseInt(reader.nextLine());
             String roomName = reader.nextLine();
             String roomDesc = reader.nextLine();
             String connect = reader.nextLine();
             boolean lock = Boolean.parseBoolean(reader.nextLine());
-            int roomItem = Integer.parseInt(reader.nextLine());
+            String crates = reader.nextLine();
             int roomPuzz = Integer.parseInt(reader.nextLine());
             int roomMon = Integer.parseInt(reader.nextLine());
-            Room temp = new Room(roomId, roomName, roomDesc, connect, lock, roomItem, roomPuzz, roomMon);
+            Room temp = new Room(roomId, roomName, roomDesc, connect, lock, crates, roomPuzz, roomMon);
             rooms.add(temp);
         }
         reader.close();
     }
 
-    public void readMonsters(ArrayList<Monster> monsters)
-    {
+    //Dakota
+    public void readMonsters(ArrayList<Monster> monsters) {
         File monsterIn = new File("src/MonsterIn.txt");
         Scanner reader = null;
         try {
@@ -66,8 +66,7 @@ public class GameConsole {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        while(reader.hasNext())
-        {
+        while (reader.hasNext()) {
             int monId = Integer.parseInt(reader.nextLine());
             String monName = reader.nextLine();
             String monDesc = reader.nextLine();
@@ -81,5 +80,39 @@ public class GameConsole {
             monsters.add(temp);
         }
         reader.close();
+    }
+
+    //Dakota
+    public void readCrates(ArrayList<Crate> crates) {
+        File monsterIn = new File("src/Crate.txt");
+        Scanner reader = null;
+        try {
+            reader = new Scanner(monsterIn);
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        while (reader.hasNext())
+        {
+            String crateName = reader.nextLine();
+            String crateItem = reader.nextLine();
+            int roomID = Integer.parseInt(reader.nextLine());
+            Crate temp = new Crate(crateName, crateItem, roomID);
+            crates.add(temp);
+        }
+        reader.close();
+    }
+
+    //Dakota and Shianne
+    public void examineCrate(String item, ArrayList<Crate> crates)
+    {
+
+        for(int i = 0; i < crates.size(); i++)
+        {
+            if(item.contains(crates.get(i).getItemName()))
+            {
+                System.out.println(crates.get(i).getItemDescription());
+            }
+        }
     }
 }

@@ -26,7 +26,45 @@ VIEW:
 
 CLASSES:
 
+ROOM CLASS: 
+This class will set up the room objects that is needed for navigating and calling other elements of game.
+This Class contains: 
+	private int roomId
+	private String roomName
+	private String roomDesc
+	private boolean isVisited
+	private boolean isLocked
+	private String crates
+	private int roomPuzzle
+	private int roomMonster
+	private String[] connections
+	private int north
+	private int east
+	private int south
+	private int west
+	private ArrayList<Item> roomItems
+	
+	Constructor for Rooms with parameters being private variables
+	Getter/Setters for private variables
+	inspectRoom method which constructs String output that details all notable features of room.
+	
 
+MONSTER CLASS:
+This class will set up the Monster objects that are needed for combat
+This Class contains:
+	private int monsterId
+	private String monsterName
+	private String monsterDesc
+	private int health
+	private int damage
+	private String itemDrop1
+	private String itemDrop2
+	private double dropRate1
+	private double dropRate2
+	Constructor for Monsters with parameters being private variables
+	Getter/Setters for private Variables
+	attackMonster which when called deals damage to player, updates player health, displays damage dealt and remaining player health
+	parryMonster which generates random integer 1-100, if variable is greater than 50 the parry boolean returns true and the monster's attack should then miss.
 
 ------------------------------------------------------------------------------------------------------------------------
 

@@ -22,6 +22,8 @@ public class Puzzle implements Serializable{
     private String answer;
     private int attempts;
 
+    Scanner input;
+
     // The rewards are the items within the game
     private String rewards;
 
@@ -29,6 +31,8 @@ public class Puzzle implements Serializable{
     GameConsole game = new GameConsole();
 
     private ArrayList<Puzzle> puzzles;
+    private ArrayList<String> puzzleRewards;
+
     // NEED TO ACCESS THE ITEMS ARRAYLIST
     // NEED TO ACCESS THE PLAYER'S INVENTORY MAYBE ?
     // NEED TO ACCESS THE PLAYER'S LOCATION
@@ -43,11 +47,17 @@ public class Puzzle implements Serializable{
      * @added 10/18/2022
      */
     public Puzzle(){
+        input = new Scanner(System.in);
+
         // an arraylist that will hold the puzzle's data
         puzzles = new ArrayList<>();
 
         // putting the puzzle data into the puzzles arraylist
         game.readPuzzleTxt(puzzles);
+
+        // an arraylist that will hold the items the puzzle will drop if player solve them.
+        puzzleRewards = new ArrayList<>();
+        itemInventoryForPuzzles(puzzleRewards);
     }
 
     /**
@@ -138,51 +148,118 @@ public class Puzzle implements Serializable{
     /*-------------------------------Puzzle Methods for implementing the game-----------------------------------------*/
     // THIS IS JUST A PRACTICE RUN TO TEST IF MY ARRAYLIST IS BEING READ
     public void practiceRun (){
+        /*
         for(int i = 0; i < puzzles.size(); i++){
             System.out.println(puzzles.get(i));
         }
+
+         */
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println(puzzleRewards);
     }
 
-    public void itemInventoryForPuzzles() {
+    public void itemInventoryForPuzzles(ArrayList<String> puzzleRewards){
         // HAVE A FOR LOOP OF ITEMS INVENTORY FROM ITEMS CLASS
         /*
-        if(items){
+        if(items arraylist contains the words ){
 
         }
 
          */
 
+        //WILL PROBABLY NEED ANOTHER ARRAY LIST
+        for(int i = 0; i < puzzles.size(); i++){
+            String rewardItem = puzzles.get(i).rewards;
+            puzzleRewards.add(rewardItem);
+            /*
+            switch (rewardItem){
+                case "knife":
+                    break;
+                case "katana":
+                    System.out.println();
+                    break;
+                case "light armor":
+                    System.out.println();
+                    break;
+                case "heavy armor":
+                    System.out.println();
+                    break;
+                case "medium armor":
+                    System.out.println();
+                    break;
+                case "pistol":
+                    System.out.println();
+                    break;
+                case "rifle":
+                    System.out.println();
+                    break;
+                default:
+                    puzzleRewards.add("bandage");
+                    break;
+
+             */
+        }
+        puzzleRewards.add("bandage");
     }
-    public void inspectPuzzle(Scanner input){
+
+    public void dropRewardsItem(String rewardItems){
+        for(int p = 0; p < puzzleRewards.size(); p++){
+            if(puzzleRewards.get(p).contains(rewardItems)){
+                puzzleRewards.remove(p);
+                String reward = puzzleRewards.get(p) + " | " + puzzleRewards.get(7);
+                //DROP ITEMS OR ITEM WITHIN THE PLAYER'S ROOM
+                // try to find a way to remove 1 bandage without taking all of them out .
+            }
+            else {
+                puzzleRewards.remove(7);
+                //DROP ITEMS OR ITEM WITHIN THE PLAYER'S ROOM
+                puzzleRewards.add("bandage");
+            }
+        }
+    }
+
+    public void inspectPuzzle(){
         for(int i = 0; i < puzzles.size(); i++){
             //IF PLAYERS LOCATION MATCHES WITH THE PUZZLES LOCATION
-            System.out.println(puzzles.get(i).getPuzzleName());
+            //System.out.println(puzzles.get(i).getPuzzleName());
             System.out.println(puzzles.get(i).getPuzzleQuestion());
             System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
-            String playerAnswer = input.nextLine();
-            if(playerAnswer.equalsIgnoreCase("solve puzzle")){
-                solvePuzzle(input);
+            String answer = input.nextLine();
+            if(answer.equalsIgnoreCase("solve puzzle")){
+                solvePuzzle();
             }
         }
 
     }
 
-    public void solvePuzzle(Scanner input){
+    public void solvePuzzle(){
         for(int i = 0; i < puzzles.size(); i++){
             //IF PLAYERS LOCATION MATCHES WITH THE PUZZLES LOCATION
-            String playerAnswer = input.nextLine();
+           String playerAnswer = input.nextLine();
             int count = 1;
             while (puzzles.get(i).getAttempts() != 0){
                 if(playerAnswer.equalsIgnoreCase("Get hint")){
                     hint();
                 }
-                if(playerAnswer.equalsIgnoreCase(puzzles.get(i).getAnswer())){
-                    System.out.println("You solve the puzzle correctly! You can now pick up your rewards " + puzzles.get(i).getRewards());
+                if(playerAnswer.equalsIgnoreCase(puzzles.get(i).getAnswer()) && puzzles.get(i).getAttempts() == 3){
+                    System.out.println("You solve the puzzle correctly! You can now pick up your rewards " + puzzles.get(i).getRewards() + " bandages");
+                    /*
                     puzzles.get(i).setRewards("No rewards to receive");
-                    // SET LOCATION TO 0
-
+                    dropRewardsItem(puzzles.get(i).getRewards());
+                    dropRewardsItem("bandage");
+                    puzzleRewards.add("bandage");
                     //puzzle will have its own inventory of items that will need to be drop if puzzle is solve correctly.
+
+
+                     */
+                    dropRewardsItem(puzzles.get(i).getRewards());
+                    dropRewardsItem("bandage");
                     break;
+                }
+                else if(playerAnswer.equalsIgnoreCase(puzzles.get(i).getAnswer()) && puzzles.get(i).getAttempts() < 3){
+                    System.out.println("You solve the puzzle correctly! You can pick up the bandages!");
+                    dropRewardsItem("bandage");
+                    //puzzleRewards.add("bandage");
                 }
                 else if(!playerAnswer.equalsIgnoreCase(puzzles.get(i).getAnswer())){
                     puzzles.get(i).setAttempts(puzzles.get(i).getAttempts() - 1);
@@ -192,7 +269,6 @@ public class Puzzle implements Serializable{
                         if(playerAnswer.equalsIgnoreCase("retry puzzle")){
                             retryPuzzle();
                         }
-
                         break;
                     }
                     System.out.println("The answer you provided is wrong. You still have " + puzzles.get(i).getAttempts() + " attempts left.");
@@ -213,11 +289,13 @@ public class Puzzle implements Serializable{
     }
 
     public void retryPuzzle(){
-
+        inspectPuzzle();
         // stay after class for help with the retry puzzle
     }
 
-    public void exitPuzzle(){
-
+    public void exitPuzzle(String answer){
+        if(answer.equalsIgnoreCase("exit puzzle")){
+            System.exit(0);
+        }
     }
 }

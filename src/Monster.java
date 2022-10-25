@@ -110,8 +110,7 @@ public class Monster
 
     /**
      * @Method: parryMonster()
-     * @Function: when called on, deals damage to player, updates player health and
-     * displays damage dealt and current player health
+     * @Function: when called on, determines whether player parries monster or not
      * @author: Dakota Smith
      * 10/19/2022
      */
@@ -125,5 +124,44 @@ public class Monster
             parry = true;
         }
         return parry;
+    }
+
+    /**
+     * @Method: monsterDrop()
+     * @param currentRoom
+     * @param items
+     * @Function: when called on, determines what item, if any, a monster drops into the room
+     * @author: Dakota Smith
+     * 10/25/2022
+     */
+    public void monsterDrop(Room currentRoom, ArrayList<Item> items)
+    {
+        Item temp;
+        Random r = new Random();
+        double probability = r.nextDouble();
+        if(probability <= this.dropRate1)
+        {
+            for(Item a : items)
+            {
+                temp = a;
+                String itemName = a.getItemName();
+                if(itemName.equals(this.itemDrop1))
+                {
+                    currentRoom.roomItemAdd(temp);
+                }
+            }
+        }
+        else if(probability > this.dropRate1 && probability <= this.dropRate2)
+        {
+            for(Item a : items)
+            {
+                temp = a;
+                String itemName = a.getItemName();
+                if(itemName.equals(this.itemDrop2))
+                {
+                    currentRoom.roomItemAdd(temp);
+                }
+            }
+        }
     }
 }

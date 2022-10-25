@@ -108,7 +108,16 @@ public class Room
         this.west = Integer.parseInt(dir[3]);
     }
 
-    //will need to pass in item arraylist and room arraylist
+    /**
+     * @Method: inspectRoom()
+     * @param monsters
+     * @param puzzles
+     * @return fullDesc
+     * @Function: when called on, prints out all relevant information about room
+     * and what it contains
+     * @author: Dakota Smith
+     * 10/19/2022
+     */
     public String inspectRoom(ArrayList<Monster> monsters, ArrayList<Puzzle> puzzles)
     {
         String fullDesc;
@@ -140,5 +149,17 @@ public class Room
             fullDesc += temp;
         }
         return fullDesc;
+    }
+
+    /**
+     * @Method: roomItemAdd()
+     * @param item
+     * @Function: when called on, adds passed item to room item arraylist
+     * @author: Dakota Smith
+     * 10/25/2022
+     */
+    public void roomItemAdd(Item item)
+    {
+        roomItems.add(item);
     }
 }

@@ -20,13 +20,13 @@ Crate 7
 No Item
 12
 Crate 8
-Pistol
+Med Kit
 12
 Crate 9
 No Item
 12
 Crate 10
-Rifle
+Med Kit
 18
 Crate 11
 No Item

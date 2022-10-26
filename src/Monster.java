@@ -6,8 +6,9 @@ import java.util.Random;
  * @Object: Monster()
  * @Function: This OOP class will help set up the Monster objects that is needed from the monster.txt
  * when parsing information.
- * This class will interact and solve the puzzles to receive items. The puzzle will track variables such as puzzle names,
- * puzzle ID, question, answer, hint, attempts, rewards, and the command methods for the puzzles as the player interact with them.
+ * This class will interact with the player to do combat and gain items. The objects will track variables
+ * monster ID, names, descriptions, health, damage, items and drop rates, and the
+ * command methods for the monsters as the player interact with them.
  * @author(s) Dakota Smith
  * @added 10/17/2022
  */

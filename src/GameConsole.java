@@ -25,14 +25,71 @@ public class GameConsole {
         ArrayList<Room> roomList = new ArrayList<>();
         ArrayList<Monster> bestiary = new ArrayList<>();
         ArrayList<Crate> crateList = new ArrayList<>();
+        ArrayList<Item> itemList = new ArrayList<>();
         game.readRooms(roomList);
         game.readMonsters(bestiary);
         game.readCrates(crateList);
+        game.readItems(itemList, roomList);
+    }
+
+
+    public void readItems(ArrayList<Item> items, ArrayList<Room> rooms)
+    {
+        File fileIn = new File("src/Item.txt");
+        Scanner reader = null;
+        try {
+            reader = new Scanner(fileIn);
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        while(reader.hasNext())
+        {
+            int itemId = Integer.parseInt(reader.nextLine());
+            String itemName = reader.nextLine();
+            String itemDesc = reader.nextLine();
+            String textDesc = reader.nextLine();
+            if(itemName.contains("Armor"))
+            {
+                int AC = Integer.parseInt(reader.nextLine());
+                Armor temp = new Armor(itemId, itemName, itemDesc, textDesc, AC);
+                items.add(temp);
+            }
+            else if(itemName.contains("Bandage") || itemName.contains("Syringe") ||
+                    itemName.contains("Med"))
+            {
+                int healAmount = Integer.parseInt(reader.nextLine());
+                int stack = Integer.parseInt(reader.nextLine());
+                Healing temp = new Healing(itemId, itemName, itemDesc, textDesc, healAmount, stack);
+                items.add(temp);
+            }
+            else if(itemName.contains("Folder"))
+            {
+                Folder temp = new Folder(itemId, itemName, itemDesc, textDesc);
+                items.add(temp);
+                for(Room a: rooms)
+                {
+                    String checkFold = a.getCrates();
+                    if(checkFold.equals(itemName))
+                    {
+                        a.roomItemAdd(temp);
+                    }
+                }
+            }
+            else
+            {
+                int damage = Integer.parseInt(reader.nextLine());
+                int uses = Integer.parseInt(reader.nextLine());
+                Weapon temp = new Weapon(itemId, itemName, itemDesc, textDesc, damage, uses);
+                items.add(temp);
+            }
+        }
     }
 
     //Dakota
     public void readRooms(ArrayList<Room> rooms) {
-        File fileIn = new File("src/RoomIn.txt");
+        File fileIn = new File("src/Room.txt");
         Scanner reader = null;
         try {
             reader = new Scanner(fileIn);
@@ -58,7 +115,7 @@ public class GameConsole {
 
     //Dakota
     public void readMonsters(ArrayList<Monster> monsters) {
-        File monsterIn = new File("src/MonsterIn.txt");
+        File monsterIn = new File("src/Monster.txt");
         Scanner reader = null;
         try {
             reader = new Scanner(monsterIn);
@@ -103,15 +160,15 @@ public class GameConsole {
         reader.close();
     }
 
-    //Dakota and Shianne
+    //Dakota
     public void examineCrate(String item, ArrayList<Crate> crates)
     {
-
         for(int i = 0; i < crates.size(); i++)
         {
-            if(item.contains(crates.get(i).getItemName()))
+            Crate temp = crates.get(i);
+            if(item.contains(temp.getItemName()))
             {
-                System.out.println(crates.get(i).getItemDescription());
+                System.out.println(temp.getItemName());
             }
         }
     }

@@ -2,10 +2,12 @@ import java.util.ArrayList;
 
 /**
  * @Object: Room()
- * @Function: This OOP class will help set up the Monster objects that is needed from the monster.txt
+ * @Function: This OOP class will help set up the Room objects that is needed from the room.txt
  * when parsing information.
- * This class will interact and solve the puzzles to receive items. The puzzle will track variables such as puzzle names,
- * puzzle ID, question, answer, hint, attempts, rewards, and the command methods for the puzzles as the player interact with them.
+ * This class will store other objects . The room will track variables such as room names,
+ * room ID, description, if it's visited or locked, what crates, puzzles, items or monsters are in the room,
+ * what direction the player can move and the command methods for inspecting the room and adding items
+ * to the room item arraylist.
  * @author(s) Dakota Smith
  * @added 10/17/2022
  */
@@ -57,6 +59,9 @@ public class Room
         this.directions(connections);
     }
 
+    /**
+     * GetterSetters
+     */
     public int getRoomId() {
         return roomId;
     }

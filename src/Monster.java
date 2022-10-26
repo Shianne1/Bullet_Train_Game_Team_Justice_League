@@ -152,7 +152,7 @@ public class Monster
                 }
             }
         }
-        else if(probability > this.dropRate1 && probability <= this.dropRate2)
+        else if(probability > this.dropRate1 && probability <= (this.dropRate1 + this.dropRate2))
         {
             for(Item a : items)
             {

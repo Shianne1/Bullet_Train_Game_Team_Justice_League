@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * @Object: Crate()
  * @Function: This OOP class will help set up the crate objects that is needed from the crate.txt
@@ -13,6 +15,15 @@ public class Crate
     private String crateName;
     private String itemName;
     private int crateLocation;
+
+    /**
+     * @param name
+     * @param item
+     * @param location
+     * @Function: constructor for pre existing data from the Crate text file
+     * @author(s) Dakota Smith
+     * 10/17/2022
+     */
     public Crate(String name, String item, int location)
     {
         this.crateName = name;
@@ -33,5 +44,28 @@ public class Crate
 
     public int getCrateLocation() {
         return crateLocation;
+    }
+
+    /**
+     * @param item
+     * @param crates
+     * @Function: returns the item that is within the crate being examined
+     * @author(s) Dakota Smith
+     * 10/17/2022
+     */
+    public String examineCrate(String item, ArrayList<Crate> crates)
+    {
+        //creates null string
+        String check = null;
+        //goes through crate arraylist, finds relevant crate, outputs contents of crate
+        for(int i = 0; i < crates.size(); i++)
+        {
+            Crate temp = crates.get(i);
+            if(item.contains(temp.getItemName()))
+            {
+                check = this.getItemName();
+            }
+        }
+        return check;
     }
 }

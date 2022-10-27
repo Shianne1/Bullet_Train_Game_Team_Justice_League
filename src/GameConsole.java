@@ -32,7 +32,14 @@ public class GameConsole {
         game.readItems(itemList, roomList);
     }
 
-
+    /**
+     * @param items
+     * @param rooms
+     * @Function: reads in data from file, creates item/armor/weapon/folder/healing objects,
+     * puts them into general arraylist
+     * @author(s) Dakota Smith
+     * 10/26/2022
+     */
     public void readItems(ArrayList<Item> items, ArrayList<Room> rooms)
     {
         File fileIn = new File("src/Item.txt");
@@ -46,16 +53,20 @@ public class GameConsole {
 
         while(reader.hasNext())
         {
+            //takes in all variables that are shared by all items
             int itemId = Integer.parseInt(reader.nextLine());
             String itemName = reader.nextLine();
             String itemDesc = reader.nextLine();
             String textDesc = reader.nextLine();
+            //checks if item is a type of armor, if so, takes in relevant armor variables
+            //creates armor item, adds to item arraylist
             if(itemName.contains("Armor"))
             {
                 int AC = Integer.parseInt(reader.nextLine());
                 Armor temp = new Armor(itemId, itemName, itemDesc, textDesc, AC);
                 items.add(temp);
             }
+            //checks if healing item, if so takes in relevant variable, creates healing item, adds to arraylist
             else if(itemName.contains("Bandage") || itemName.contains("Syringe") ||
                     itemName.contains("Med"))
             {
@@ -64,10 +75,12 @@ public class GameConsole {
                 Healing temp = new Healing(itemId, itemName, itemDesc, textDesc, healAmount, stack);
                 items.add(temp);
             }
+            //checks if folder item, creates folder item, adds to item arraylist
             else if(itemName.contains("Folder"))
             {
                 Folder temp = new Folder(itemId, itemName, itemDesc, textDesc);
                 items.add(temp);
+                //adds folder item to relevant room item arraylist
                 for(Room a: rooms)
                 {
                     String checkFold = a.getCrates();
@@ -77,6 +90,7 @@ public class GameConsole {
                     }
                 }
             }
+            //creates weapon type objects
             else
             {
                 int damage = Integer.parseInt(reader.nextLine());
@@ -87,7 +101,12 @@ public class GameConsole {
         }
     }
 
-    //Dakota
+    /**
+     * @param rooms
+     * @Function: reads in data from file, creates room objects, puts them into general arraylist
+     * @author(s) Dakota Smith
+     * 10/17/2022
+     */
     public void readRooms(ArrayList<Room> rooms) {
         File fileIn = new File("src/Room.txt");
         Scanner reader = null;
@@ -113,7 +132,12 @@ public class GameConsole {
         reader.close();
     }
 
-    //Dakota
+    /**
+     * @param monsters
+     * @Function: reads in data from file, creates monster objects, puts them into general arraylist
+     * @author(s) Dakota Smith
+     * 10/17/2022
+     */
     public void readMonsters(ArrayList<Monster> monsters) {
         File monsterIn = new File("src/Monster.txt");
         Scanner reader = null;
@@ -139,7 +163,12 @@ public class GameConsole {
         reader.close();
     }
 
-    //Dakota
+    /**
+     * @param crates
+     * @Function: reads in data from file, creates crate objects, puts them into general arraylist
+     * @author(s) Dakota Smith
+     * 10/17/2022
+     */
     public void readCrates(ArrayList<Crate> crates) {
         File monsterIn = new File("src/Crate.txt");
         Scanner reader = null;
@@ -158,18 +187,5 @@ public class GameConsole {
             crates.add(temp);
         }
         reader.close();
-    }
-
-    //Dakota
-    public void examineCrate(String item, ArrayList<Crate> crates)
-    {
-        for(int i = 0; i < crates.size(); i++)
-        {
-            Crate temp = crates.get(i);
-            if(item.contains(temp.getItemName()))
-            {
-                System.out.println(temp.getItemName());
-            }
-        }
     }
 }

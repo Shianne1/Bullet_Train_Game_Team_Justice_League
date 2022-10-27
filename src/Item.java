@@ -1,4 +1,3 @@
-
 /**
  * @Object: item()
  * @Function: This OOP class will help set up the item objects that is needed from the item.txt

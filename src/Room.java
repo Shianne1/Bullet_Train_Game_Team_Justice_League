@@ -129,17 +129,21 @@ public class Room
         Puzzle tempPuzz;
         Monster tempMon;
         fullDesc = roomDesc;
+        //Checks if the room has a puzzle, if so adds puzzle name to the room inspect variable
         if(this.roomPuzzle > -1)
         {
             tempPuzz = puzzles.get(roomPuzzle);
             fullDesc += "\nThere is Puzzle: " + tempPuzz.getPuzzleName() + ".\n ";
         }
+        //checks if the room has a monster, if so adds monster name to room inspect string
         if(this.roomMonster > -1)
         {
             tempMon = monsters.get(roomMonster);
             fullDesc += "\nThere is Monster: " + tempMon.getMonsterName() + ".\n ";
         }
+        //adds if there are any item crates in room
         fullDesc += this.crates;
+        //checks if there are No items
         if(roomItems.isEmpty())
         {
             fullDesc += "\nThere are no items visible in this room.";

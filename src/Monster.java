@@ -102,6 +102,8 @@ public class Monster
      */
     public void attackMonster(Player player)
     {
+        //creates delta health variable, sets to current player health, decreases variable by
+        //monster damage, then sets player health to the difference
         int dHealth = player.getCurrentHealth();
         dHealth = dHealth - damage;
         player.setCurrentHealth(dHealth);
@@ -117,6 +119,8 @@ public class Monster
      */
     public boolean parryMonster()
     {
+        //generate random number 1-100
+        //if number is greater than 50, the monster is parried
         boolean parry = false;
         Random r = new Random();
         int randomInt = r.nextInt(100) + 1;
@@ -137,9 +141,11 @@ public class Monster
      */
     public void monsterDrop(Room currentRoom, ArrayList<Item> items)
     {
+        //creates empty temporary item, and generates random double 0.0 - 1.0
         Item temp;
         Random r = new Random();
         double probability = r.nextDouble();
+        //if probability variable falls within 0 to the first drop rate of item, monster drops first possible item
         if(probability <= this.dropRate1)
         {
             for(Item a : items)
@@ -152,6 +158,8 @@ public class Monster
                 }
             }
         }
+        //if probability falls within bounds defined by the first drop rate number, and the sum of both drop rate
+        //variables, second item is dropped, otherwise no item is dropped
         else if(probability > this.dropRate1 && probability <= (this.dropRate1 + this.dropRate2))
         {
             for(Item a : items)

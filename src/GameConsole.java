@@ -42,34 +42,23 @@ public class GameConsole {
     public void readPuzzleTxt(ArrayList<Puzzle> puzzleInfo){
         try{
             File readPuzzleData = new File("src/Puzzle.txt");
-
-            // scans Puzzle file
-            Scanner inputPuzzle = new Scanner(readPuzzleData);
-
+            Scanner inputPuzzle = new Scanner(readPuzzleData); // scans Puzzle file
             while (inputPuzzle.hasNext()){
-
-                // converts the puzzleID into a integer
-                int puzzleIDTxt = Integer.parseInt(inputPuzzle.nextLine());
-
+                int puzzleIDTxt = Integer.parseInt(inputPuzzle.nextLine());// converts the puzzleID into a integer
                 String puzzleNameTxt = inputPuzzle.nextLine();
                 String puzzleQuestionTxt = inputPuzzle.nextLine();
                 String hintTxt = inputPuzzle.nextLine();
                 String answerTxt = inputPuzzle.nextLine();
-
-                // converts the puzzle attempts into an integer
-                int attemptsTxt = Integer.parseInt(inputPuzzle.nextLine());
-
-                String rewardsTxt = inputPuzzle.nextLine();
-
-                // reading the empty string
-                inputPuzzle.nextLine();
+                int attemptsTxt = Integer.parseInt(inputPuzzle.nextLine()); // converts the puzzle attempts into an integer
+                String reward1Txt = inputPuzzle.nextLine();
+                String reward2Txt = inputPuzzle.nextLine();
+                int puzzleLocationTxt = Integer.parseInt(inputPuzzle.nextLine());
+                inputPuzzle.nextLine(); // reading the empty string
 
                 // add inputs into puzzle objects which is added into the puzzleInfo arraylist
-                puzzleInfo.add(new Puzzle(puzzleIDTxt,puzzleNameTxt,puzzleQuestionTxt,hintTxt,answerTxt,attemptsTxt,rewardsTxt));
+                puzzleInfo.add(new Puzzle(puzzleIDTxt,puzzleNameTxt,puzzleQuestionTxt,hintTxt,answerTxt,attemptsTxt,reward1Txt,reward2Txt,puzzleLocationTxt));
             }
-
-            // close file
-            inputPuzzle.close();
+            inputPuzzle.close(); // close file
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -85,18 +74,11 @@ public class GameConsole {
     public static void readMapTxt(){
         try{
             File readMapData = new File("src/Map.txt");
-
-            // scans Map file
-            Scanner inputMap = new Scanner(readMapData);
-
+            Scanner inputMap = new Scanner(readMapData); // scans Map file
             while(inputMap.hasNext()){
-
-                // will print out the map
-                System.out.println(inputMap.nextLine());
+                System.out.println(inputMap.nextLine()); // will print out the map
             }
-
-            // close file
-            inputMap.close();
+            inputMap.close();  // close file
         }
         catch (Exception e) {
             e.printStackTrace();

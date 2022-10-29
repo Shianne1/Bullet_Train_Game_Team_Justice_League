@@ -205,16 +205,16 @@ public class Puzzle implements Serializable{
      */
     public void dropRewardsItem(String rewardItems){
         for(int p = 0; p < puzzleReward1.size(); p++){
-            if(puzzleReward1.contains(rewardItems)){
-                puzzleReward1.remove(rewardItems); // remove the reward 1 item from the arraylist
-                //currentRoom.roomItemAdd(rewardItems); // add the reward 1 item to the current room arraylist
+            if(puzzleReward1.contains(puzzleReward1.get(p))){
+                puzzleReward1.remove(puzzleReward1.get(p)); // remove the reward 1 item from the arraylist
+                //currentRoom.roomItemAdd(puzzleReward1.get(p)); // add the reward 1 item to the current room arraylist
                 break;
             }
         }
         for(int i = 0; i < puzzleReward2.size(); i++){
-            if(puzzleReward2.contains(rewardItems)){
-                puzzleReward2.remove(rewardItems); // remove the reward 2 item from the arraylist
-                //currentRoom.roomItemAdd(rewardItems); // add the reward 2 item to the current room arraylist
+            if(puzzleReward2.contains(puzzleReward2.get(i))){
+                puzzleReward2.remove(puzzleReward2.get(i)); // remove the reward 2 item from the arraylist
+                //currentRoom.roomItemAdd(puzzleReward2.get(i)); // add the reward 2 item to the current room arraylist
                 break;
             }
         }

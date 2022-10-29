@@ -7,9 +7,10 @@
  * @added 10/17/2022
  */
 
-public class Folder extends Item
-{
+public class Folder extends Item {
 
+
+    /*---------------------------------------------Folder Constructors------------------------------------------------*/
     /**
      * @param id
      * @param name
@@ -19,8 +20,7 @@ public class Folder extends Item
      * @author(s) Dakota Smith
      * 10/17/2022
      */
-    public Folder(int id, String name, String desc, String text)
-    {
+    public Folder(int id, String name, String desc, String text) {
         super(id, name, desc, text);
     }
 }

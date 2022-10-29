@@ -1,4 +1,4 @@
-/*
+/**
      @Interface: EntityInterface()
      @Function: basic interface used as a template for any similarities between actions that affect entities
      @implementedBy: Player, Monster
@@ -6,10 +6,6 @@
      @added 10/16/2022
   */
 public interface EntityInterface {
-
-    void healHealth(int healthModifier);
-
-    void takeDamage(int healthModifier);
-
-
+    void healHealth(int healthModifier); // will show the health
+    void takeDamage(int healthModifier); // will show damage
 }

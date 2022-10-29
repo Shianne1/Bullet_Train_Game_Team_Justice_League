@@ -1,6 +1,7 @@
 public class Armor extends Item implements equipItemInterface{
     public  int armorMod;
-    
+
+    /*---------------------------------------------Armor Constructor--------------------------------------------------*/
     public Armor(String name, int id, String itemDesc, String itemText, int armorMod) {
         this.name = name;
         this.id = id;
@@ -9,6 +10,8 @@ public class Armor extends Item implements equipItemInterface{
         this.armorMod = armorMod;
     }
 
+
+    /*-----------------------------------Armor Methods for implementing the game--------------------------------------*/
     @Override
     public void equip() {
 

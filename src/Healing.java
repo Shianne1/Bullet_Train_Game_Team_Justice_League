@@ -6,12 +6,11 @@
  * @author(s) Dakota Smith
  * @added 10/17/2022
  */
-
-public class Healing extends Item
-{
+public class Healing extends Item {
     private int healAmount;
     private int stackAmount;
 
+    /**/
     /**
      * @param id
      * @param name
@@ -23,8 +22,7 @@ public class Healing extends Item
      * @author(s) Dakota Smith
      * 10/17/2022
      */
-    public Healing(int id, String name, String desc, String text, int heal, int stack)
-    {
+    public Healing(int id, String name, String desc, String text, int heal, int stack) {
         super(id, name, desc, text);
         this.healAmount = heal;
         this.stackAmount = stack;

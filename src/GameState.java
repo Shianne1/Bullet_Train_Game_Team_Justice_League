@@ -1,7 +1,5 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-
-
 /**
      @Object: GameState()
      @Function: this class is used as a backend for the program to keep track of all objects in a game, made serializable
@@ -16,6 +14,7 @@ public  class GameState implements Serializable {
     private  ArrayList<Puzzle> puzzlesInGame;
     private ArrayList<Monster> monstersInGame;
 
+    /*
     public boolean isRunning() {
         return isRunning;
     }
@@ -24,8 +23,12 @@ public  class GameState implements Serializable {
         isRunning = running;
     }
 
+     */
+
     boolean isRunning;
 
+
+    /*----------------------------------------------GameState Constructors--------------------------------------------*/
     public GameState(Player player, ArrayList<Item> itemsInGame, ArrayList<Room> roomsInGame, ArrayList<Puzzle> puzzlesInGame, ArrayList<Monster> monstersInGame) {
         this.player = player;
         this.itemsInGame = itemsInGame;
@@ -36,51 +39,42 @@ public  class GameState implements Serializable {
         this.isRunning = false;
     }
 
-    public GameState() {
-        this.isRunning = false;
-    }
 
-    public Player getPlayer() {
-        return player;
-    }
+    /*----------------------------------Getters & Setters for GameState variables-------------------------------------*/
+    public GameState() { this.isRunning = false; }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+    public Player getPlayer() { return player; }
 
-    public ArrayList<Item> getItemsInGame() {
-        return itemsInGame;
-    }
+    public void setPlayer(Player player) { this.player = player; }
 
-    public void setItemsInGame(ArrayList<Item> itemsInGame) {
-        this.itemsInGame = itemsInGame;
-    }
+    public ArrayList<Item> getItemsInGame() { return itemsInGame; }
 
-    public ArrayList<Room> getRoomsInGame() {
-        return roomsInGame;
-    }
+    public void setItemsInGame(ArrayList<Item> itemsInGame) { this.itemsInGame = itemsInGame; }
 
-    public void setRoomsInGame(ArrayList<Room> roomsInGame) {
-        this.roomsInGame = roomsInGame;
-    }
+    public ArrayList<Room> getRoomsInGame() { return roomsInGame; }
 
-    public ArrayList<Puzzle> getPuzzlesInGame() {
-        return puzzlesInGame;
-    }
+    public void setRoomsInGame(ArrayList<Room> roomsInGame) { this.roomsInGame = roomsInGame; }
 
-    public void setPuzzlesInGame(ArrayList<Puzzle> puzzlesInGame) {
-        this.puzzlesInGame = puzzlesInGame;
-    }
+    public ArrayList<Puzzle> getPuzzlesInGame() { return puzzlesInGame; }
 
-    public ArrayList<Monster> getMonstersInGame() {
-        return monstersInGame;
-    }
+    public void setPuzzlesInGame(ArrayList<Puzzle> puzzlesInGame) { this.puzzlesInGame = puzzlesInGame; }
 
-    public void setMonstersInGame(ArrayList<Monster> monstersInGame) {
-        this.monstersInGame = monstersInGame;
-    }
+    public ArrayList<Monster> getMonstersInGame() { return monstersInGame; }
 
-    // allows for loading data from a different GameState into another, used for loading the game
+    public void setMonstersInGame(ArrayList<Monster> monstersInGame) { this.monstersInGame = monstersInGame; }
+    public boolean isRunning() { return isRunning; }
+
+    public void setRunning(boolean running) { isRunning = running; }
+
+
+    /*--------------------------------GameState Methods for implementing the game-------------------------------------*/
+    /**
+     * @Method: setGameState()
+     * @param loadedGame
+     * @Function: allows for loading data from a different GameState into another, used for loading the game
+     * @author(s): Carlton Napier
+     * @added: ?
+     */
     public void setGameState(GameState loadedGame) {
         this.player = loadedGame.player;
         this.itemsInGame =  loadedGame.itemsInGame;
@@ -89,6 +83,5 @@ public  class GameState implements Serializable {
         this.monstersInGame = loadedGame.monstersInGame ;
         this.isRunning = loadedGame.isRunning;
     }
-
 
 }

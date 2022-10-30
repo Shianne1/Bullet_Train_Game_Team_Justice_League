@@ -62,6 +62,7 @@ public  class GameState implements Serializable {
     public ArrayList<Monster> getMonstersInGame() { return monstersInGame; }
 
     public void setMonstersInGame(ArrayList<Monster> monstersInGame) { this.monstersInGame = monstersInGame; }
+
     public boolean isRunning() { return isRunning; }
 
     public void setRunning(boolean running) { isRunning = running; }

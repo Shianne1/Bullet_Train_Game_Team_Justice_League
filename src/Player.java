@@ -9,7 +9,6 @@ import java.util.ArrayList;
      @added 10/16/2022
   */
 interface playerInterface {
-
     int maxHealth = 100;
 
     /**
@@ -28,12 +27,9 @@ interface playerInterface {
      * @added 10/16/2022
      */
     String checkInventory();
-
 }
 
 public class Player implements playerInterface, EntityInterface, Serializable {
-
-
     private int numOfMonstersKilled;
     private int maxHealth;
     private int currentHealth;
@@ -44,7 +40,6 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     private ArrayList<Item> inventory;
 
     private GameState checkpoint;
-
 
     boolean hasCheckPoint;
 

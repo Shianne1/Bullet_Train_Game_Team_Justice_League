@@ -2,7 +2,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 /**
  * @Object: Monster()
  * @Function: This OOP class will help set up the Monster objects that is needed from the monster.txt
@@ -13,8 +12,7 @@ import java.util.Random;
  * @author(s) Dakota Smith
  * @added 10/17/2022
  */
-public class Monster implements EntityInterface, Serializable
-{
+public class Monster implements EntityInterface, Serializable {
     private int monsterId;
     private String monsterName;
     private String monsterDesc;
@@ -25,6 +23,26 @@ public class Monster implements EntityInterface, Serializable
     private double dropRate1;
     private double dropRate2;
 
+    // accessing the game console class
+    GameConsole game = new GameConsole();
+
+    private ArrayList<Monster> enemy;
+
+
+    /*---------------------------------------------Monster Constructors-----------------------------------------------*/
+    /**
+     * @Function: This is a no - arg constructor that will access the monster's parse method and add the data into
+     * their object arraylist
+     * @author(s): Shianne Lesure
+     * @added: 10/29/2022
+     */
+    public Monster(){
+        // an arraylist that will hold the monster's data
+        enemy = new ArrayList();
+
+        // putting the monster data into the monster arraylist
+        game.readMonsters(enemy);
+    }
 
     /**
      * @param id
@@ -54,12 +72,9 @@ public class Monster implements EntityInterface, Serializable
         dropRate2 = prob2/100;
     }
 
-    /**
-     * GetterSetters
-     */
-    public int getMonsterId() {
-        return monsterId;
-    }
+
+    /*-----------------------------------Getters & Setters for Monster variables--------------------------------------*/
+    public int getMonsterId() { return monsterId; }
 
     public String getMonsterName() {
         return monsterName;
@@ -73,17 +88,11 @@ public class Monster implements EntityInterface, Serializable
         return health;
     }
 
-    public int getDamage() {
-        return damage;
-    }
+    public int getDamage() { return damage; }
 
-    public double getDropRate1() {
-        return dropRate1;
-    }
+    public double getDropRate1() { return dropRate1; }
 
-    public double getDropRate2() {
-        return dropRate2;
-    }
+    public double getDropRate2() { return dropRate2; }
 
     public String getItemDrop1() {
         return itemDrop1;
@@ -93,6 +102,8 @@ public class Monster implements EntityInterface, Serializable
         return itemDrop2;
     }
 
+
+    /*----------------------------------Monster Methods for implementing the game-------------------------------------*/
     /**
      * @Method: attackMonster()
      * @param player
@@ -184,4 +195,25 @@ public class Monster implements EntityInterface, Serializable
     public void takeDamage(int healthModifier) {
 
     }
+
+    /**
+     * @Method: inspect()
+     * @param monster
+     * @return monsterDescription
+     * @Function: This method will allow for the player to see the descriptions of the monster
+     * @author(s): Shianne Lesure
+     * @added: 10/29/2022
+     */
+    public String inspectMonster(String monster){
+        String monsterDescription = "";
+        for(int i = 0; i < enemy.size(); i++){
+            if(monster.contains(enemy.get(i).getMonsterName())){ // if player's input contains monster's name
+                //System.out.println(enemy.get(i).getMonsterDesc());
+                monsterDescription = enemy.get(i).getMonsterDesc(); // add the monster's description to the string
+                break;
+            }
+        }
+        return monsterDescription; // return the string
+    }
 }
+

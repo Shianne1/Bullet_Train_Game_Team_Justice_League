@@ -11,82 +11,27 @@ This document will explain everything within the Bullet Train Game Project inclu
 
 ------------------------------------------------------------------------------------------------------------------------
 
-[[MODEL VIEW CONTROLLER SECTIONS:]]
+MODEL VIEW CONTROLLER SECTIONS:
 
-[MODEL:]
-GameState.java
+MODEL:
 
--- This model carries the data of the game which is referenced by the controller --
 
-[CONTROLLER:]
-GameConsole.java
+CONTROLLER:
 
--- takes in commands to view to run methods based on the data provided by the model
 
-[VIEW:]
-View.java
+VIEW:
 
--- receives commands and prints outputs to the player
 
 ------------------------------------------------------------------------------------------------------------------------
 
-[CLASSES:]
-
-ROOM CLASS:
-This class will set up the room objects that is needed for navigating and calling other elements of game.
-This Class contains:
-	private int roomId
-	private String roomName
-	private String roomDesc
-	private boolean isVisited
-	private boolean isLocked
-	private String crates
-	private int roomPuzzle
-	private int roomMonster
-	private String[] connections
-	private int north
-	private int east
-	private int south
-	private int west
-	private ArrayList<Item> roomItems
-
-	Constructor for Rooms with parameters being private variables
-	Getter/Setters for private variables
-	inspectRoom method which constructs String output that details all notable features of room.
+CLASSES:
 
 
-MONSTER CLASS:
-This class will set up the Monster objects that are needed for combat
-This Class contains:
-	private int monsterId
-	private String monsterName
-	private String monsterDesc
-	private int health
-	private int damage
-	private String itemDrop1
-	private String itemDrop2
-	private double dropRate1
-	private double dropRate2
-	Constructor for Monsters with parameters being private variables
-	Getter/Setters for private Variables
-	attackMonster which when called deals damage to player, updates player health, displays damage dealt and remaining player health
-	parryMonster which generates random integer 1-100, if variable is greater than 50 the parry boolean returns true and the monster's attack should then miss.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-[TEXT FILES:]
+TEXT FILES:
 
-Help.txt
-README.txt
-Room.txt
-Puzzle.txt
-Monster.txt
-
-
-[BINARY FILES:]
-
-(playername)_data.bin
--- created when players save the game, holding aan object of GameState.java]
 
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -94,7 +39,6 @@ Monster.txt
 WHAT THE GAME IS AND HOW TO PLAY:
 
 GAME INTRO:
->>>>>>> DakotaFeature
 “Welcome to the Bullet Train! You, as an assassin have been assigned a task to
 swindle a briefcase and any other intel from the world’s most lethal mafia gang leader.
 This train will stop at every station and present a mystery or puzzle that you need
@@ -108,12 +52,12 @@ easy to battle and their leader is not going to be happy to see you trying to ge
 hands on the briefcase. Good Luck!”
 
 
-[[HOW TO PLAY:]]
+HOW TO PLAY:
 This will take the user to a page that describes how the player can navigate
 through the text-based game and play using the different keyboard commands.
 
 
-[[ABOUT THE GAME:]]
+ABOUT THE GAME:
 The game is a mystery solving/puzzle game that involves the player going through
 multiple rooms to clear monsters, get stronger by collecting various gear to make the
 player stronger, solving a mystery at all the stations, and eventually killing the final
@@ -126,14 +70,14 @@ them to progress into the next room. The files include information that pertains
 mafia gang leader and their evil plans.
 
 
-[[GAMEPLAY WISE:]]
-[Death:]
+GAMEPLAY WISE:
+Death:
 The checkpoints will be the train wagons, every time a new train wagon is
 reach the player will unlock that checkpoint. If a player dies, they will return to the
 latest train wagon they unlocked and will lose their progress and will have to redo the
 fights and obtain their items again.
 
-[Fights:]
+Fights:
 The fights will be turned based and the player can choose to initiate the fight
 or run away from the fight. The player can use their weapon of their choice when
 fighting (Fists, knife, katana, pistol, rifle). Upon encountering a monster, the player
@@ -141,7 +85,7 @@ will have a choice to fight the monster or running. Fighting will put you into c
 and the player can choose to run whenever they want. Running will send you back to
 the previous room.
 
-[Inventory:]
+Inventory:
 The player will have a general inventory with all the items they have,
 weapons, armor, and healing items. The player can have as many healing items as
 possible they want with no limit. When using a healing item, it will -1 from their
@@ -150,33 +94,22 @@ replace the knife in their inventory, pistol and rifle are their own object and 
 exist. For armor, the armor will be equipped and change the player’s stats, once
 equipped will disappear from the player’s inventory.
 
-[Goal:]
+Goal:
 The player will need to complete all mysteries throughout the stations to be
 able to access the final boss and then defeat the boss and win.
 
 
-[[SOFTWARE SYSTEM ATTRIBUTES]]
+SOFTWARE SYSTEM ATTRIBUTES
 
-[Usability:]
-The system should be accessible and reusable by users on devices that support java. Players
-should be able to save their progress through the game and revisit later without losing their
-information and place in the game.
+Usability:
 
-[Reliability:]
-This text-based adventure game’s probability of failure on demand (POFOD) shall be 1 out of
-1000 (i.e., .0001)
+Reliability:
 
-[Availability:]
-The game should be available to users in Fall 2022 and should achieve 99.5% uptime, as it's an entirely offline game.
+Availability:
 
-[Readability:]
-The game is legible by anyone with a standard reading ability, and all information and commands are laid out in simple terms
+Readability:
 
-[Logical Database Requirement:]
-The database will store every players’ progress in the game that they can save by using the “save game” command at any time during the game.
-The database will store a .bin file with the player’s information, based on the player's given name. This save data can then be
-loaded in through the "load game" command
-
+Logical Database Requirement:
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -213,66 +146,17 @@ BULLET TRAIN MAP:
 [Final Locomotive (MAFIA BOSS)  (SUITCASE)]
 ------------------------------------------------------------------------------------------------------------------------
 
-[[[COMMANDS]]]
+COMMANDS:
 
-
-[[GAME FUNCTION COMMANDS]]
-[Start game] - starts the game
-[Save game] - saves the game
-[Load game] - loads the game
-[End game] - ends the game
-
-[[PLAYER COMMANDS:]]
-[Help] - prints Help.txt
-[Check inventory] - prints the players' inventory
-[Check stats] - prints the player's stats
-[Check map] - prints Map.txt
-
-[[Room COMMANDS:]]
-[Inspect room] - gives a description of the room and the items in it
-
-[[Puzzle COMMANDS:]]
-[Solve "puzzle name"] - lets the users solve the puzzle
-[Get hint] - gives the user a hint
-[Inspect puzzle] - gives a description of the puzzle
-[Exit puzzle] - exits trying to attempt the puzzle
-[Retry "puzzle name"] - allows the player to retry the puzzle
-[Claim Prize] - lets the player claim the prize from the puzzle
-
-
-
-[[MONSTER/BATTLE COMMANDS:]]
-[Inspect "monster name"] - uses a turn to print the monster's description
-[Fight Monster] - lets the player take an initiative attack on a monster in the room
-[Attack Monster] - lets the player attack the monster in battle
-[Parry monster] - gives the player a chance for a double or nothing attack
-[Heal] - lets the player look in their inventory and use a healing item to recover health
-[Run] - allows the player to run away from a fight, is done automatically if health gets below 10
-
-
-[[ITEM COMMANDS]]
-[Examine crate] - looks inside crates for items
-[Inspect "item name"] -  gives the description of an item and how it is used
-[Store "item name"] - puts the item in the inventory
-[Use "item name"] - uses the item
-[Equip "item name"] - equips the item to the appropriate slot
-[Discard "item name"] - removes the item from the inventory
-[View code] - reads out the codes the player has
-[Use code] - allows the player to
-
-[Move "direction"]]
 
 ------------------------------------------------------------------------------------------------------------------------
 
-[[[GLOSSARY:]]]
+GLOSSARY:
 
 Loot = means treasure/ item
 
 Mystery = Is a room to find the mystery folders which are items
 
-Health = how much damage a player can take before they die and their gamestate is restarted
-
-Checkpoint = a saved point in the game that the player is sent back to upon death
 
 ------------------------------------------------------------------------------------------------------------------------
 

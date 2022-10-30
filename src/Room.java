@@ -43,7 +43,6 @@ public class Room implements Serializable
      * @Function: constructor for pre existing data from the Room text file
      * @author(s) Dakota Smith
      * 10/17/2022
->>>>>>> DakotaFeature
      */
     public Room(int id, String name, String desc, String connection, boolean lock, String crates,
                 int puzzle, int monster)
@@ -173,4 +172,13 @@ public class Room implements Serializable
     {
         roomItems.add(item);
     }
+
+    /**
+     * @Method: roomItemRemove()
+     * @param item
+     * @Function: will remove item from roomitem arraylist
+     * @author: Shianne Lesure
+     * 10/29/2022
+     */
+    public void roomItemRemove(Item item) { roomItems.remove(item); }
 }

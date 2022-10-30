@@ -66,7 +66,7 @@ Puts the item of the given name into the player's inventory
 [Use "item name"]
 Uses the item of the given name, with the effects being based on the item's usage (healing items will heal the player)
 [Equip "item name"]
-Equips an equippable item of the given name, increasing the damage stat or max health depending on if it's armor or a weapon
+Equips an equitable item of the given name, increasing the damage stat or max health depending on if it's armor or a weapon
 [Discard "item name"]
 Removes the item of the given name from their inventory
 [View code]

@@ -15,8 +15,17 @@ public class Crate {
     private String itemName;
     private int crateLocation;
 
+    GameConsole game = new GameConsole();
+    private ArrayList<Crate> crates;
+
 
     /*----------------------------------------------Crate Constructors------------------------------------------------*/
+    public Crate(){
+        crates = new ArrayList<>();
+        game.readCrates(crates);
+
+    }
+
     /**
      * @param name
      * @param item
@@ -55,7 +64,7 @@ public class Crate {
      * @author(s) Dakota Smith
      * 10/17/2022
      */
-    public String examineCrate(String item, ArrayList<Crate> crates) {
+    public String examineCrate(String item) {
         //creates null string
         String check = null;
 

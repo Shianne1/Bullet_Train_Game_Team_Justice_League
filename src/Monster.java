@@ -27,6 +27,7 @@ public class Monster implements EntityInterface, Serializable {
     GameConsole game = new GameConsole();
 
     private ArrayList<Monster> enemy;
+    private ArrayList<Item> items;
 
 
     /*---------------------------------------------Monster Constructors-----------------------------------------------*/
@@ -42,6 +43,8 @@ public class Monster implements EntityInterface, Serializable {
 
         // putting the monster data into the monster arraylist
         game.readMonsters(enemy);
+
+        items = new ArrayList<>();
     }
 
     /**
@@ -151,7 +154,7 @@ public class Monster implements EntityInterface, Serializable {
      * @author: Dakota Smith
      * 10/25/2022
      */
-    public void monsterDrop(Room currentRoom, ArrayList<Item> items)
+    public void monsterDrop(Room currentRoom)
     {
         //creates empty temporary item, and generates random double 0.0 - 1.0
         Item temp;

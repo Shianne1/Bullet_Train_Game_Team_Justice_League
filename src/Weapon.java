@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Weapon extends Item implements equipItemInterface, itemInterface {
     private int durability; // the amount of uses the item has
-    private final int strength; // the amount of damage the weapon deals
+    private int strength; // the amount of damage the weapon deals
 
     // accessing the game console class
     GameConsole game = new GameConsole();
@@ -23,10 +23,8 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
      * their object arraylist
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
-     * @param strength
      */
-    public Weapon(int strength){
-        this.strength = strength;
+    public Weapon(){
         // an arraylist that will hold the item's data
         roomItems = new ArrayList();
         items = new ArrayList();

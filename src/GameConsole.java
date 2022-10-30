@@ -3,11 +3,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameConsole {
-
-    static GameConsole game;
-
-
-
     // Our controller class can be in here or the player class
     // We will be parsing all of our text files within this class
 
@@ -26,7 +21,22 @@ public class GameConsole {
 
     /*----------------------------------------Where the main game is played-------------------------------------------*/
     public static void main(String[] args) {
-        //GameConsole game = new GameConsole();
+        GameConsole game = new GameConsole();
+        // view handles the system outputs
+        View view = new View();
+        // player data is a model that handles general data for the game being played
+        GameState gameState = new GameState();
+        Item item = new Item();
+        Healing healing = new Healing();
+        Weapon weapon = new Weapon();
+        Armor armor = new Armor();
+        Folder folder = new Folder();
+        Crate crate = new Crate();
+        Puzzle puzzle = new Puzzle();
+        Monster monster = new Monster();
+        Room room = new Room();
+        Player player = new Player();
+
         ArrayList<Room> roomList = new ArrayList<>();
         ArrayList<Monster> bestiary = new ArrayList<>();
         ArrayList<Crate> crateList = new ArrayList<>();
@@ -35,15 +45,7 @@ public class GameConsole {
         game.readMonsters(bestiary);
         game.readCrates(crateList);
         game.readItems(itemList, roomList);
-
-        System.out.println();
-        Puzzle puzzle = new Puzzle();
         puzzle.practiceRun(); // test run
-
-        // view handles the system outputs
-        View view = new View();
-        // player data is a model that handles general data for the game being played
-        GameState gameState = new GameState();
 
         // loop to start the game | while the gameState isn't running
         while (!gameState.isRunning)
@@ -63,7 +65,7 @@ public class GameConsole {
             // THIS IS A TEMP LOOP FOR TESTING
 
             view.printGameLoop(gameState);
-            parseCommand(gameState, view);
+            parseCommand(game, gameState, view, puzzle, item, healing, weapon, armor, folder, crate, monster, room, player);
 
         }
     }
@@ -72,42 +74,100 @@ public class GameConsole {
     /**
      * @Method: parseCommand()
      * @Function: this code is to parse commands, and run methods based on the command received by the view
-     * @author(s) Carlton Napier
+     * @author(s) Carlton Napier, Shianne Lesure 
      * @added 10/16/2022
      */
-    private static void parseCommand(GameState gameState, View view) {
-        String inputCommand = view.inputCommand();
 
-        if (inputCommand.equals("save game")) {
+    private static void parseCommand(GameConsole game, GameState gameState, View view, Puzzle puzzle, Item item, Healing healing,
+                                     Weapon weapon, Armor armor, Folder folder, Crate crate, Monster monster, Room room, Player player) {
+        String inputCommand = view.inputCommand();
+        if(inputCommand.equals("save game")) {
             saveGame(gameState, view);
         }
-        if (inputCommand.equals("load game")) {
+        if(inputCommand.equals("load game")) {
             loadGame(gameState, view.loadingGameText());
         }
-        if (inputCommand.equals("exit")) {
+        if(inputCommand.equals("exit")) {
             endGame(gameState, view);
         }
-        if (inputCommand.equals("check stats")) {
+        if(inputCommand.equals("check stats")) {
             view.printStatText(gameState.getPlayer());
         }
-        if (inputCommand.equals("help")) {
+        if(inputCommand.equals("help")) {
             view.printBasicText(parseHelpText());
         }
 
         //Player will be able to see the map of the train wagon and the stations linked to each wagon including the spot
         //they are currently at.
-        if (inputCommand.equals("check map")) {
+        if(inputCommand.equals("check map")) {
             game.readMapTxt();
-            view.printBasicText(gameState.getPlayer().getLocation().toString());
+            //view.printBasicText(gameState.getPlayer().getLocation().toString());
         }
-        if (inputCommand.equals("check inventory")) {
+        if(inputCommand.equals("check inventory")) {
             view.printInventory(gameState.getPlayer());
         }
-        if(inputCommand.contains("")){
+        if(inputCommand.equals("north") || inputCommand.equals("east") || inputCommand.equals("south") || inputCommand.equals("west")){
+            // How are they moving ?
+            //room.directions();
+        }
+        if(inputCommand.contains("inspect")){
+            item.inspect();
+        }
+        if(inputCommand.contains("store")){
+            item.storeItem(inputCommand);
+        }
+        if(inputCommand.contains("discard")){
+            item.discard();
+        }
+        if(inputCommand.contains("use")){
+            //I DON'T KNOW WHAT TO DO THE SET
+        }
+        if(inputCommand.contains("examine")){
+            crate.examineCrate(inputCommand);
+        }
+        if(inputCommand.contains("equip")){
+            // I DON'T KNOW WHAT TO DO WITH THE SET
+        }
+        if(inputCommand.equals("view code")){
+            folder.viewMysteryItem(inputCommand);
+        }
+        if(inputCommand.equals("use code")){
 
         }
+        if(inputCommand.contains("inspect puzzle")){
+            puzzle.inspectPuzzle(inputCommand);
+        }
+        if(inputCommand.contains("solve")){
+            puzzle.solvePuzzle(inputCommand);
+        }
+        if(inputCommand.contains("get hint")){
+            puzzle.hint(inputCommand);
+        }
+        if(inputCommand.contains("claim prize")){
+            puzzle.dropRewardsItem(inputCommand);
+        }
+        if(inputCommand.contains("retry")){
+            puzzle.retryPuzzle(inputCommand);
+        }
+        if(inputCommand.contains("exit puzzle")){
+            puzzle.exitPuzzle(inputCommand);
+        }
+        if(inputCommand.contains("inspect monster")){
+            monster.inspectMonster(inputCommand);
+        }
+        if(inputCommand.contains("attack monster")){
+            monster.attackMonster(player);
+            monster.monsterDrop(room);
+        }
+        if(inputCommand.contains("parry monster")){
+            monster.parryMonster();
+        }
+        if(inputCommand.equals("heal")){
 
+        }
+        if(inputCommand.equals("run")){
 
+        }
 
     }
 
@@ -353,7 +413,7 @@ public class GameConsole {
     public static String parseHelpText() {
         try {
             // a scanner that reads the given text file being searched for
-            Scanner textFileIn = new Scanner(new File("Help.txt"));
+            Scanner textFileIn = new Scanner(new File("src/Help.txt"));
             //blank string created so scanned text can be added
             String textData = "";
 

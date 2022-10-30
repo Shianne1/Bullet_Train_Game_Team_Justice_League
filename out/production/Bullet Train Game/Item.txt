@@ -1,0 +1,73 @@
+0
+Light Armor
+You find light armor and it looks weak, but it is better than nothing.
+Placeholder
+25
+1
+Medium Armor
+You find medium armor and it looks like the armor that the mafia members are wearing.
+Placeholder
+50
+2
+Heavy Armor
+You find heavy armor and it is heavily reinforced with nano technology
+Placeholder
+125
+3
+Bandage
+You find some bandages that will patch up your wounds.
+Placeholder
+30
+1
+4
+Syringe
+You find a syringe that will make the pain go away.
+placeholder
+50
+1
+5
+Med Kit
+You find a medic kit that will fix all your injuries.
+placeholder
+200
+1
+6
+Knife
+You find a knife that is allows you to defend yourself
+placeholder
+10
+100000
+7
+Katana
+You find a katana that can dish out some damage
+Placeholder
+30
+100000
+8
+Pistol
+You find a pistol that has 2 bullets. Use it wisely.
+placeholder
+20
+2
+9
+Rifle
+You find a rifle that looks like it can be used 5 times. It looks like it can deal a lot of damage.
+placeholder
+50
+5
+10
+Folder 1
+You Inspect the folder and conclude that the mafia boss needs MONEY
+placeholder
+11
+Folder 2
+You inspect the folder and conclude that the mafia boss needs WEAPONS
+placeholder
+12
+Folder 3
+You inspect the folder and conclude that the mafia boss needs BOMBS
+placeholder
+13
+Folder 4
+You inspect the folder and conclude that the mafia boss needs CHEMICALS
+placeholder

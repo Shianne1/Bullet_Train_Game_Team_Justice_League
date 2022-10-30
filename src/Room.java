@@ -30,6 +30,10 @@ public class Room implements Serializable {
 
 
     /*----------------------------------------------Room Constructors-------------------------------------------------*/
+    public Room(){
+
+    }
+
     /**
      * @param id
      * @param name

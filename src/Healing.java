@@ -24,7 +24,9 @@ public class Healing extends Item implements itemInterface {
     Player inventory;
 
     // will access the player's current health
-    private Player currentHealth;
+    Player currentHealth;
+    Item itemObjectHeal;
+    Healing healingItem;
 
 
     /*---------------------------------------------Healing Constructors-----------------------------------------------*/
@@ -80,6 +82,7 @@ public class Healing extends Item implements itemInterface {
 
 
 
+
     /*--------------------------------Healing Methods for implementing the game---------------------------------------*/
     /**
      * @Method: useItem()
@@ -109,8 +112,10 @@ public class Healing extends Item implements itemInterface {
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
+
     @Override
     public void use() {
+        /*
         String item = input.nextLine();
         for (int i = 0; i < items.size(); i++) {
             if (item.contains(items.get(i).getItemName())) { // if input contains the item name
@@ -122,5 +127,23 @@ public class Healing extends Item implements itemInterface {
                 break;
             }
         }
+
+         */
+        String item = input.nextLine();
+        for(Item item1: items){
+            itemObjectHeal = item1;
+            if(item.contains(super.getItemName())){ // if input contains the item name
+                healingItem.setStackAmount(getStackAmount() - 1); // subtract 1 from the healing item stack
+
+                // add the healing points to the player's current health
+                currentHealth.setCurrentHealth(healingItem.getHealAmount() + currentHealth.getCurrentHealth());
+
+                // print out to the player how much their current health has went up
+                System.out.println("You health has jumped up by " + healingItem.getHealAmount());
+                break;
+            }
+        }
     }
+
+
 }

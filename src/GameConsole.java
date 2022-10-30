@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class GameConsole {
 
+    static GameConsole game;
+
+
+
     // Our controller class can be in here or the player class
     // We will be parsing all of our text files within this class
 
@@ -22,7 +26,7 @@ public class GameConsole {
 
     /*----------------------------------------Where the main game is played-------------------------------------------*/
     public static void main(String[] args) {
-        GameConsole game = new GameConsole();
+        //GameConsole game = new GameConsole();
         ArrayList<Room> roomList = new ArrayList<>();
         ArrayList<Monster> bestiary = new ArrayList<>();
         ArrayList<Crate> crateList = new ArrayList<>();
@@ -32,7 +36,6 @@ public class GameConsole {
         game.readCrates(crateList);
         game.readItems(itemList, roomList);
 
-        game.readMapTxt();
         System.out.println();
         Puzzle puzzle = new Puzzle();
         puzzle.practiceRun(); // test run
@@ -65,8 +68,7 @@ public class GameConsole {
         }
     }
 
-    //------------------GameConsole methods---------------------//
-
+    /*--------------------------------GameConsole methods for implementing the game-----------------------------------*/
     /**
      * @Method: parseCommand()
      * @Function: this code is to parse commands, and run methods based on the command received by the view
@@ -79,19 +81,15 @@ public class GameConsole {
         if (inputCommand.equals("save game")) {
             saveGame(gameState, view);
         }
-
         if (inputCommand.equals("load game")) {
             loadGame(gameState, view.loadingGameText());
         }
-
         if (inputCommand.equals("exit")) {
             endGame(gameState, view);
         }
-
         if (inputCommand.equals("check stats")) {
             view.printStatText(gameState.getPlayer());
         }
-
         if (inputCommand.equals("help")) {
             view.printBasicText(parseHelpText());
         }
@@ -99,15 +97,17 @@ public class GameConsole {
         //Player will be able to see the map of the train wagon and the stations linked to each wagon including the spot
         //they are currently at.
         if (inputCommand.equals("check map")) {
-
-            //view.printBasicText(parseMapTxt());
+            game.readMapTxt();
             view.printBasicText(gameState.getPlayer().getLocation().toString());
         }
-
-
         if (inputCommand.equals("check inventory")) {
             view.printInventory(gameState.getPlayer());
         }
+        if(inputCommand.contains("")){
+
+        }
+
+
 
     }
 
@@ -201,7 +201,6 @@ public class GameConsole {
      * @added 10/16/2022
      */
     public static void loadGame(GameState gameState, String playerName) {
-
         try {
             //  the file that references the gameState object saved under the name of the player is used to create a File variable
             File gameStateData = new File("src/savedata/" + playerName + "_data.bin");
@@ -268,9 +267,8 @@ public class GameConsole {
         System.exit(0);
     }
 
-    //------------------Player Controller methods---------------------//
 
-
+    /*----------------------------Player Controller methods for implementing the game---------------------------------*/
     /**
      * @Method: playerDeath()
      * @Function: this code is meant to run when the player's death is noticed by the controller
@@ -289,6 +287,7 @@ public class GameConsole {
             newGame(gameState, gameState.getPlayer().getName());
         }
     }
+
 
     /*-------------------------Read the text files and add them to arraylist or to string-----------------------------*/
     /**
@@ -358,12 +357,10 @@ public class GameConsole {
             //blank string created so scanned text can be added
             String textData = "";
 
-
             //adds to the string with the text from the file
             while (textFileIn.hasNext()) {
                 textData = textData.concat(textFileIn.nextLine() + "\n");
             }
-
 
             //returns the read text
             return textData;
@@ -381,8 +378,7 @@ public class GameConsole {
      * @author(s) Dakota Smith
      * 10/26/2022
      */
-    public void readItems(ArrayList<Item> items, ArrayList<Room> rooms)
-    {
+    public void readItems(ArrayList<Item> items, ArrayList<Room> rooms) {
         File fileIn = new File("src/Item.txt");
         Scanner reader = null;
         try {
@@ -392,8 +388,7 @@ public class GameConsole {
             e.printStackTrace();
         }
 
-        while(reader.hasNext())
-        {
+        while(reader.hasNext()) {
             //takes in all variables that are shared by all items
             int itemId = Integer.parseInt(reader.nextLine());
             String itemName = reader.nextLine();
@@ -401,39 +396,33 @@ public class GameConsole {
             String textDesc = reader.nextLine();
             //checks if item is a type of armor, if so, takes in relevant armor variables
             //creates armor item, adds to item arraylist
-            if(itemName.contains("Armor"))
-            {
+            if(itemName.contains("Armor")) {
                 int AC = Integer.parseInt(reader.nextLine());
                 Armor temp = new Armor(itemName, itemId, itemDesc, textDesc, AC);
                 items.add(temp);
             }
             //checks if healing item, if so takes in relevant variable, creates healing item, adds to arraylist
             else if(itemName.contains("Bandage") || itemName.contains("Syringe") ||
-                    itemName.contains("Med"))
-            {
+                    itemName.contains("Med")) {
                 int healAmount = Integer.parseInt(reader.nextLine());
                 int stack = Integer.parseInt(reader.nextLine());
                 Healing temp = new Healing(itemId, itemName, itemDesc, textDesc, healAmount, stack);
                 items.add(temp);
             }
             //checks if folder item, creates folder item, adds to item arraylist
-            else if(itemName.contains("Folder"))
-            {
+            else if(itemName.contains("Folder")) {
                 Folder temp = new Folder(itemId, itemName, itemDesc, textDesc);
                 items.add(temp);
                 //adds folder item to relevant room item arraylist
-                for(Room a: rooms)
-                {
+                for(Room a: rooms) {
                     String checkFold = a.getCrates();
-                    if(checkFold.equals(itemName))
-                    {
+                    if(checkFold.equals(itemName)) {
                         a.roomItemAdd(temp);
                     }
                 }
             }
             //creates weapon type objects
-            else
-            {
+            else {
                 int damage = Integer.parseInt(reader.nextLine());
                 int uses = Integer.parseInt(reader.nextLine());
                 Weapon temp = new Weapon(itemName, itemId, itemDesc, textDesc, damage, uses);
@@ -519,8 +508,7 @@ public class GameConsole {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        while (reader.hasNext())
-        {
+        while (reader.hasNext()) {
             String crateName = reader.nextLine();
             String crateItem = reader.nextLine();
             int roomID = Integer.parseInt(reader.nextLine());

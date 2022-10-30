@@ -1,9 +1,6 @@
 import java.util.Scanner;
 
-
-   /*
-        Note: Any additions by Carlton Napier (me) are subject to change for better fits and changes to code
-     */
+//Note: Any additions by Carlton Napier (me) are subject to change for better fits and changes to code
 
 public class View {
 
@@ -11,9 +8,7 @@ public class View {
     Scanner userInput = new Scanner(System.in);
 
 
-    //------------------Player view methods---------------------//
-
-
+    /*-----------------------------------------Player view methods----------------------------------------------------*/
     /**
      * @Method: printItemsText()
      * @Function: this code is for printing out the checkInventory method from the player model
@@ -34,8 +29,8 @@ public class View {
         System.out.println(player.checkStats());
     }
 
-    //------------------GameConsole view methods---------------------//
 
+    /*---------------------------------------GameConsole view methods-------------------------------------------------*/
     /**
      * @Method: inputCommand()
      * @Function: basic call for the view to ask to input command
@@ -46,7 +41,6 @@ public class View {
         System.out.print("Input a command: ");
         return userInput.nextLine().toLowerCase().trim();
     }
-
 
     /**
      * @Method: printGameLoop()
@@ -62,7 +56,6 @@ public class View {
         // - ETC
         // THIS IS A TEMP LOOP FOR TESTING
         // example: System.out.println(gameSate.player.location.getDescription(); inputCommand();
-
     }
 
 
@@ -116,7 +109,6 @@ public class View {
         return inputCommand();
     }
 
-
     /**
      * @Method: printBasicText()
      * @Function: this code is just a basic printer, just to keep things tied to the view
@@ -147,6 +139,4 @@ public class View {
         System.out.println("It seems you have died, you will now be returned to your last check point");
 
     }
-
-
 }

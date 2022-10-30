@@ -12,9 +12,7 @@ import java.util.ArrayList;
  * @author(s) Dakota Smith
  * @added 10/17/2022
  */
-public class Room implements Serializable
-{
-
+public class Room implements Serializable {
     private int roomId;
     private String roomName;
     private String roomDesc;
@@ -31,6 +29,7 @@ public class Room implements Serializable
     private ArrayList<Item> roomItems;
 
 
+    /*----------------------------------------------Room Constructors-------------------------------------------------*/
     /**
      * @param id
      * @param name
@@ -45,8 +44,7 @@ public class Room implements Serializable
      * 10/17/2022
      */
     public Room(int id, String name, String desc, String connection, boolean lock, String crates,
-                int puzzle, int monster)
-    {
+                int puzzle, int monster) {
         this.roomId = id;
         this.roomName = name;
         this.roomDesc = desc;
@@ -60,53 +58,31 @@ public class Room implements Serializable
         this.directions(connections);
     }
 
-    /**
-     * GetterSetters
-     */
-    public int getRoomId() {
-        return roomId;
-    }
+    /*-------------------------------------Getters & Setters for Room variables---------------------------------------*/
+    public int getRoomId() { return roomId; }
 
-    public String getRoomName() {
-        return roomName;
-    }
+    public String getRoomName() { return roomName; }
 
-    public int getRoomMonster() {
-        return roomMonster;
-    }
+    public int getRoomMonster() { return roomMonster; }
 
-    public int getRoomPuzzle() {
-        return roomPuzzle;
-    }
+    public int getRoomPuzzle() { return roomPuzzle; }
 
-    public int getNorth() {
-        return north;
-    }
+    public int getNorth() { return north; }
 
-    public int getEast() {
-        return east;
-    }
+    public int getEast() { return east; }
 
-    public int getSouth() {
-        return south;
-    }
+    public int getSouth() { return south; }
 
-    public int getWest() {
-        return west;
-    }
+    public int getWest() { return west; }
 
-    public String getCrates() {
-        return crates;
-    }
+    public String getCrates() { return crates; }
 
-    public boolean isLocked() {
-        return isLocked;
-    }
+    public boolean isLocked() { return isLocked; }
 
-    public boolean isVisited() {
-        return isVisited;
-    }
+    public boolean isVisited() { return isVisited; }
 
+
+    /*-----------------------------------Room Methods for implementing the game---------------------------------------*/
     public void directions(String[] dir) {
         this.north = Integer.parseInt(dir[0]);
         this.east = Integer.parseInt(dir[1]);
@@ -124,36 +100,30 @@ public class Room implements Serializable
      * @author: Dakota Smith
      * 10/19/2022
      */
-    public String inspectRoom(ArrayList<Monster> monsters, ArrayList<Puzzle> puzzles)
-    {
+    public String inspectRoom(ArrayList<Monster> monsters, ArrayList<Puzzle> puzzles) {
         String fullDesc;
         Puzzle tempPuzz;
         Monster tempMon;
         fullDesc = roomDesc;
         //Checks if the room has a puzzle, if so adds puzzle name to the room inspect variable
-        if(this.roomPuzzle > -1)
-        {
+        if(this.roomPuzzle > -1) {
             tempPuzz = puzzles.get(roomPuzzle);
             fullDesc += "\nThere is Puzzle: " + tempPuzz.getPuzzleName() + ".\n ";
         }
         //checks if the room has a monster, if so adds monster name to room inspect string
-        if(this.roomMonster > -1)
-        {
+        if(this.roomMonster > -1) {
             tempMon = monsters.get(roomMonster);
             fullDesc += "\nThere is Monster: " + tempMon.getMonsterName() + ".\n ";
         }
         //adds if there are any item crates in room
         fullDesc += this.crates;
         //checks if there are No items
-        if(roomItems.isEmpty())
-        {
+        if(roomItems.isEmpty()) {
             fullDesc += "\nThere are no items visible in this room.";
         }
-        else
-        {
+        else {
             String temp = "\nThe Items in this room are: ";
-            for(Item a : roomItems)
-            {
+            for(Item a : roomItems) {
                 temp = temp + a.getItemName() + " ";
             }
             fullDesc += temp;

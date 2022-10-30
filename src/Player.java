@@ -1,8 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-/*
+/**
      @Object: Player()
      @Function: this class is in charge of the variables and methods used in reference to the player
      @author(s) Carlton Napier
@@ -56,6 +55,8 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
      */
 
+
+    /*---------------------------------------------Player Constructors------------------------------------------------*/
     // empty constructor of player with default values
     public Player() {
         this.name = "PlayerName";
@@ -67,7 +68,6 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.inventory = new ArrayList<>();
 
     }
-
 
     // constructor for preexisting data
     public Player(int maxHealth, int currentHealth, int numOfMonstersKilled, String name, Room location, Weapon equippedWeapon, Armor equippedArmor, ArrayList<Item> inventory, GameState checkpoint) {
@@ -95,97 +95,17 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.checkpoint = defaultCheckpoint;
     }
 
-    @Override
-    public void move(Room nextRoom) {
-        this.location = nextRoom;
-    }
 
+    /*-----------------------------------Getters & Setters for Player variables---------------------------------------*/
+    public String getName() { return name; }
 
-    /**
-     * @Method: checkInventory()
-     * @Function: this code returns a formatted string of the player's inventory that will be printed by the view
-     * @author(s) Carlton Napier
-     * @added 10/18/2022
-     */
-    @Override
-    public String checkInventory() {
-        if (!inventory.isEmpty()) {
-            String inventoryList = "The current items in your inventory are: ";
-            for (Item item : inventory) {
-                inventoryList.concat("[" + item.toString() + "] ");
-            }
-            return inventoryList;
-        } else {
-            return "There are no items in your inventory";
-        }
-    }
+    public void setName(String name) { this.name = name; }
 
-    //------------------Player Methods---------------------//
+    public Room getLocation() { return location; }
 
-    /**
-     * @Method: healHealth()
-     * @Function: this code increases the player by the specified amount, capping at the player's max health
-     * @author(s) Carlton Napier
-     * @added 10/18/2022
-     */
+    public void setLocation(Room location) { this.location = location; }
 
-    /**
-     * @Method: checkStats()
-     * @Function: this code returns a formated string of the player's current stats
-     * @author(s) Carlton Napier
-     * @added 10/18/2022
-     */
-    public String checkStats() {
-        return "Name: " + this.name + "\n" +
-                "Health (current/max): " + this.currentHealth + "/" + this.maxHealth + "\n" +
-                "Location: " + this.location + "\n" +
-                "Equipped Weapon: " + this.equippedWeapon + "\n" +
-                "Equipped Armor: " + this.equippedArmor + "\n" +
-                "Monsters Killed: " + this.numOfMonstersKilled + "\n";
-    }
-
-    @Override
-    public void healHealth(int healthModifier) {
-        setCurrentHealth(currentHealth + healthModifier);
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
-    }
-
-    /**
-     * @Method: takeDamage()
-     * @Function: this code decreases the player by the specified amount, flooring at zero
-     * @author(s) Carlton Napier
-     * @added 10/18/2022
-     */
-    @Override
-    public void takeDamage(int healthModifier) {
-        setCurrentHealth(currentHealth - healthModifier);
-        if (currentHealth < 0)
-            currentHealth = 0;
-    }
-
-    //------------------Getters and Setters---------------------//
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Room getLocation() {
-        return location;
-    }
-
-    public void setLocation(Room location) {
-        this.location = location;
-    }
-
-    public Weapon getEquippedWeapon() {
-        return equippedWeapon;
-    }
-
+    public Weapon getEquippedWeapon() { return equippedWeapon; }
 
     /**
      * @Method: setEquippedArmor()
@@ -245,7 +165,6 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.checkpoint = checkpoint;
     }
 
-
     public int getCurrentHealth() {
         return currentHealth;
     }
@@ -255,5 +174,70 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     }
 
 
+    /*--------------------------------Interface Methods for implementing the game-------------------------------------*/
+    @Override
+    public void move(Room nextRoom) { this.location = nextRoom; }
+
+    /**
+     * @Method: checkInventory()
+     * @Function: this code returns a formatted string of the player's inventory that will be printed by the view
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
+    @Override
+    public String checkInventory() {
+        if (!inventory.isEmpty()) {
+            String inventoryList = "The current items in your inventory are: ";
+            for (Item item : inventory) {
+                inventoryList.concat("[" + item.toString() + "] ");
+            }
+            return inventoryList;
+        } else {
+            return "There are no items in your inventory";
+        }
+    }
+
+
+    /*----------------------------------Player Methods for implementing the game--------------------------------------*/
+    /**
+     * @Method: healHealth()
+     * @Function: this code increases the player by the specified amount, capping at the player's max health
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
+    @Override
+    public void healHealth(int healthModifier) {
+        setCurrentHealth(currentHealth + healthModifier);
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+    }
+
+    /**
+     * @Method: checkStats()
+     * @Function: this code returns a formated string of the player's current stats
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
+    public String checkStats() {
+        return "Name: " + this.name + "\n" +
+                "Health (current/max): " + this.currentHealth + "/" + this.maxHealth + "\n" +
+                "Location: " + this.location + "\n" +
+                "Equipped Weapon: " + this.equippedWeapon + "\n" +
+                "Equipped Armor: " + this.equippedArmor + "\n" +
+                "Monsters Killed: " + this.numOfMonstersKilled + "\n";
+    }
+
+    /**
+     * @Method: takeDamage()
+     * @Function: this code decreases the player by the specified amount, flooring at zero
+     * @author(s) Carlton Napier
+     * @added 10/18/2022
+     */
+    @Override
+    public void takeDamage(int healthModifier) {
+        setCurrentHealth(currentHealth - healthModifier);
+        if (currentHealth < 0)
+            currentHealth = 0;
+    }
 
 }

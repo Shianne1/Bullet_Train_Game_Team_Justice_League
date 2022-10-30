@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Weapon extends Item implements equipItemInterface {
+public class Weapon extends Item implements equipItemInterface, itemInterface {
     private int durability; // the amount of uses the item has
     private final int strength; // the amount of damage the weapon deals
 
@@ -9,10 +10,12 @@ public class Weapon extends Item implements equipItemInterface {
 
     private ArrayList<Item> items;
     private ArrayList<Room> roomItems;
-
+    Scanner input;
     // will access the player's inventory arraylist
-    Player inventory;
+    private ArrayList<Item> inventory;
 
+    Item itemObjectWeapon;
+    Weapon weaponItem;
 
     /*--------------------------------------------Weapon Constructors-------------------------------------------------*/
     /**
@@ -30,6 +33,8 @@ public class Weapon extends Item implements equipItemInterface {
 
         // putting the items data into the item & room arraylist
         game.readItems(items, roomItems);
+
+        inventory = new ArrayList<>();
     }
 
     public Weapon(String name, int id, String itemDesc, String itemText, int durability, int strength) {
@@ -54,13 +59,7 @@ public class Weapon extends Item implements equipItemInterface {
 
 
     /*---------------------------------Weapon Methods for implementing the game---------------------------------------*/
-    /**
-     * @Method: useItem()
-     * @param item
-     * @Function: This method will allow the player to use an item to fight a monster
-     * @author(s): Shianne Lesure
-     * @added: 10/29/2022
-     */
+  /*
     public void useItem(String item){ // For weapons
         for(int i = 0; i < items.size(); i++){
             if(item.contains(items.get(i).getItemName())){ // if input contains the item name
@@ -82,6 +81,36 @@ public class Weapon extends Item implements equipItemInterface {
             }
         }
 
+
+    }
+
+   */
+
+
+    /**
+     * @Method: useItem()
+     * @param //item
+     * @Function: This method will allow the player to use an item to fight a monster
+     * @author(s): Shianne Lesure
+     * @added: 10/29/2022
+     */
+    @Override
+    public void use() {
+        String item = input.nextLine();
+        for(Item item1: items){
+            itemObjectWeapon = item1;
+            if(item.contains(super.getItemName())){
+                weaponItem.setDurability(getDurability() - 1);
+                System.out.println("You inflicted " + weaponItem.getStrength() + " damage onto the enemy.");
+                System.out.println("You have " + weaponItem.getDurability() + " uses left.");
+                if(weaponItem.getDurability() == 0){ // if the weapons uses get to 0
+                    System.out.println("You can no longer use this weapon");
+                    inventory.remove(itemObjectWeapon); // remove item from player's inventory
+                    break;
+                }
+                break;
+            }
+        }
     }
 
     @Override

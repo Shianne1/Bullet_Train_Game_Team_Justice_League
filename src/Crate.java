@@ -59,7 +59,6 @@ public class Crate {
     /**
      * @Method: examineCrate()
      * @param item
-     * @param crates
      * @Function: returns the item that is within the crate being examined
      * @author(s) Dakota Smith
      * 10/17/2022

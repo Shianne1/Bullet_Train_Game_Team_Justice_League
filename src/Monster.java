@@ -62,8 +62,7 @@ public class Monster implements EntityInterface, Serializable {
      * 10/17/2022
      */
     public Monster(int id, String name, String desc, int HP, int dam, String item1, String item2,
-                   int prob1, int prob2)
-    {
+                   int prob1, int prob2) {
         this.monsterId = id;
         this.monsterName = name;
         this.monsterDesc = desc;
@@ -115,8 +114,7 @@ public class Monster implements EntityInterface, Serializable {
      * @author: Dakota Smith
      * 10/19/2022
      */
-    public void attackMonster(Player player)
-    {
+    public void attackMonster(Player player) {
         //creates delta health variable, sets to current player health, decreases variable by
         //monster damage, then sets player health to the difference
         int dHealth = player.getCurrentHealth();
@@ -132,15 +130,13 @@ public class Monster implements EntityInterface, Serializable {
      * @author: Dakota Smith
      * 10/19/2022
      */
-    public boolean parryMonster()
-    {
+    public boolean parryMonster() {
         //generate random number 1-100
         //if number is greater than 50, the monster is parried
         boolean parry = false;
         Random r = new Random();
         int randomInt = r.nextInt(100) + 1;
-        if(randomInt > 50)
-        {
+        if(randomInt > 50) {
             parry = true;
         }
         return parry;
@@ -149,40 +145,32 @@ public class Monster implements EntityInterface, Serializable {
     /**
      * @Method: monsterDrop()
      * @param currentRoom
-     * @param items
      * @Function: when called on, determines what item, if any, a monster drops into the room
      * @author: Dakota Smith
      * 10/25/2022
      */
-    public void monsterDrop(Room currentRoom)
-    {
+    public void monsterDrop(Room currentRoom) {
         //creates empty temporary item, and generates random double 0.0 - 1.0
         Item temp;
         Random r = new Random();
         double probability = r.nextDouble();
         //if probability variable falls within 0 to the first drop rate of item, monster drops first possible item
-        if(probability <= this.dropRate1)
-        {
-            for(Item a : items)
-            {
+        if(probability <= this.dropRate1) {
+            for(Item a : items) {
                 temp = a;
                 String itemName = a.getItemName();
-                if(itemName.equals(this.itemDrop1))
-                {
+                if(itemName.equals(this.itemDrop1)) {
                     currentRoom.roomItemAdd(temp);
                 }
             }
         }
         //if probability falls within bounds defined by the first drop rate number, and the sum of both drop rate
         //variables, second item is dropped, otherwise no item is dropped
-        else if(probability > this.dropRate1 && probability <= (this.dropRate1 + this.dropRate2))
-        {
-            for(Item a : items)
-            {
+        else if(probability > this.dropRate1 && probability <= (this.dropRate1 + this.dropRate2)) {
+            for(Item a : items) {
                 temp = a;
                 String itemName = a.getItemName();
-                if(itemName.equals(this.itemDrop2))
-                {
+                if(itemName.equals(this.itemDrop2)) {
                     currentRoom.roomItemAdd(temp);
                 }
             }

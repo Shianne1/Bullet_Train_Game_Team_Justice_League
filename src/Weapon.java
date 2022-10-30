@@ -57,34 +57,6 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
 
 
     /*---------------------------------Weapon Methods for implementing the game---------------------------------------*/
-  /*
-    public void useItem(String item){ // For weapons
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if input contains the item name
-
-                // subtract the amount of uses the player can use the weapon
-                items.get(i).setDurability(items.get(i).getDurability() - 1);
-
-                // print out to the player how many damage points they did to the enemy
-                System.out.println("You inflicted " + items.get(i).getStrength() + " damage onto the enemy.");
-
-                // print out how many uses left the player can use with that item
-                System.out.println("You have " + items.get(i).getDurability() + " uses left.");
-                if(items.get(i).getDurability() == 0){ // if the weapons uses get to 0
-                    System.out.println("You can no longer use this weapon");
-                    inventory.remove(items.get(i).getItemName()); // remove item from player's inventory
-                    break;
-                }
-                break;
-            }
-        }
-
-
-    }
-
-   */
-
-
     /**
      * @Method: useItem()
      * @param //item

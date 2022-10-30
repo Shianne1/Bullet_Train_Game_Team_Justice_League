@@ -3,7 +3,6 @@ public class Armor extends Item implements equipItemInterface {
 
 
     /*---------------------------------------------Armor Constructor--------------------------------------------------*/
-
     public Armor(){
 
     }

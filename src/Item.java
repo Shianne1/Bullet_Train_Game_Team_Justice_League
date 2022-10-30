@@ -126,16 +126,6 @@ public class Item implements itemInterface, Serializable {
     @Override
     public void discard() {
         String item = input.nextLine();
-        /*
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
-                inventory.remove(items.get(i).getItemName()); // remove item from player's inventory
-
-                break;
-            }
-        }
-
-         */
         for(Item item1: items){
             itemObject = item1;
             if(item.contains(this.itemName)){
@@ -153,25 +143,6 @@ public class Item implements itemInterface, Serializable {
      * @added: 10/29/2022
      */
     public void storeItem(String item){ // store item is the same as pick up item
-        /*
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if player's input contains the item's name
-                if(item.contains("Katana")){ // if player adds katana to their inventory
-                    discard(); // remove knife from inventory
-                }
-                else if(item.contains("medium armor")){ // if player adds medium armor to their inventory
-                    discard(); // remove light armor from inventory
-                }
-                else if(item.contains("heavy armor")){ // if player add heavy armor to their inventory
-                    discard(); // remove medium armor from inventory
-                }
-                inventory.add(items.get(i).getItemName()); // add item to player's inventory
-                roomItems.remove(items.get(i).getItemName()); // remove item from current room
-                break;
-            }
-        }
-
-         */
         for(Item item1: items){
             itemObject = item1;
             if(item.contains(this.itemName)){
@@ -189,34 +160,4 @@ public class Item implements itemInterface, Serializable {
             }
         }
     }
-
-    /*
-    @Override
-    public String inspect(String item){
-        String item = input.nextLine();
-        String itemDescription = "";
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
-                System.out.println(items.get(i).getItemText()); // print out the textual description of the item
-                itemDescription = items.get(i).itemDesc; // add the description of the item to the string
-                break;
-            }
-        }
-        return itemDescription; // return the string
-    }
-
-    public void discardItem(String item){
-        String item = input.nextLine();
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
-                inventory.remove(items.get(i).getItemName()); // remove item from player's inventory
-                currentRoom.roomItemAdd(items.get(i).getItemName()); // add item  to current room
-
-                break;
-            }
-        }
-
-    }
-
-     */
 }

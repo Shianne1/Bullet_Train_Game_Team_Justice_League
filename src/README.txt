@@ -94,7 +94,6 @@ Monster.txt
 WHAT THE GAME IS AND HOW TO PLAY:
 
 GAME INTRO:
->>>>>>> DakotaFeature
 “Welcome to the Bullet Train! You, as an assassin have been assigned a task to
 swindle a briefcase and any other intel from the world’s most lethal mafia gang leader.
 This train will stop at every station and present a mystery or puzzle that you need

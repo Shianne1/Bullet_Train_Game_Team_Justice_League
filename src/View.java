@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 //Note: Any additions by Carlton Napier (me) are subject to change for better fits and changes to code
@@ -6,7 +7,7 @@ public class View {
 
     // scanner that lets the user input through the view
     Scanner userInput = new Scanner(System.in);
-
+    GameConsole game = new GameConsole();
 
     /*-----------------------------------------Player view methods----------------------------------------------------*/
     /**
@@ -38,7 +39,7 @@ public class View {
      * @added 10/16/2022
      */
     public String inputCommand() {
-        System.out.print("Input a command: ");
+        System.out.print(">> ");
         return userInput.nextLine().toLowerCase().trim();
     }
 
@@ -49,7 +50,7 @@ public class View {
      * @added 10/16/2022
      */
     public void printGameLoop(GameState gameState) {
-        System.out.println("Testing game, input command");
+        System.out.println("");
         // NEEDS A PROPER CODE FOR LOOPING THE GAME
         // - WHAT GOES ON IN THE ROOM/room description
         // - ANY STORY DETAILS
@@ -99,13 +100,13 @@ public class View {
      * @Method: startOfGameText()
      * @Function: this code prints at the very start of the game, before heading into the loop, and asks the player to choose
      * how they want to start the game
-     * @author(s) Carlton Napier
+     * @author(s) Carlton Napier, Shianne Lesure
      * @added 10/16/2022
      */
     public String startOfGameText() {
-        System.out.println("Welcome to Bullet Train!");
+        game.readGameIntro();
+        System.out.println("\nWhat would you like to do?");
         System.out.println("[Start Game] - [Load Game] - [Exit]");
-
         return inputCommand();
     }
 
@@ -137,6 +138,22 @@ public class View {
      */
     public void printDeathMessage() {
         System.out.println("It seems you have died, you will now be returned to your last check point");
+    }
 
+
+
+    public void inspectPuzzle(Puzzle puzzle)
+    {
+        puzzle.inspectPuzzle(inputCommand());
+        System.out.println(puzzle.getPuzzleQuestion());
+        System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
+        String puzzleCommand = inputCommand();
+
+        if(puzzleCommand.toLowerCase().equals("Solve Puzzle"))
+        {
+            System.out.println("What is your answer?");
+            String puzzleAnswer = inputCommand();
+            puzzle.solvePuzzle(puzzleAnswer );
+        }
     }
 }

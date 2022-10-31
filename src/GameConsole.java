@@ -19,6 +19,7 @@ public class GameConsole {
     Put within discord under Questions channel, and don't do it before you get everyone approval or at least my approval.
      */
 
+
     /*----------------------------------------Where the main game is played-------------------------------------------*/
     public static void main(String[] args) {
         GameConsole game = new GameConsole();
@@ -37,15 +38,20 @@ public class GameConsole {
         Room room = new Room();
         Player player = new Player();
 
+        /*
         ArrayList<Room> roomList = new ArrayList<>();
         ArrayList<Monster> bestiary = new ArrayList<>();
         ArrayList<Crate> crateList = new ArrayList<>();
         ArrayList<Item> itemList = new ArrayList<>();
+
+
         game.readRooms(roomList);
         game.readMonsters(bestiary);
         game.readCrates(crateList);
         game.readItems(itemList, roomList);
-        puzzle.practiceRun(); // test run
+
+         */
+        //puzzle.practiceRun(); // test run
 
         // loop to start the game | while the gameState isn't running
         while (!gameState.isRunning)
@@ -77,96 +83,178 @@ public class GameConsole {
      * @author(s) Carlton Napier, Shianne Lesure 
      * @added 10/16/2022
      */
+    /*
+       10/30/22 MEETING: CARLTON, SHIANNE
+       CARLTON, I WILL LET YOU FIX THIS THIS METHOD
+     */
 
+    /*
+       10/30/22 MEETING:
+            IF THE METHOD IS RETURNING A STRING, PUT THE METHOD INSIDE VIEW.PRINT BASIC TEXT()
+            EX. view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame()));
+    */
     private static void parseCommand(GameConsole game, GameState gameState, View view, Puzzle puzzle, Item item, Healing healing,
                                      Weapon weapon, Armor armor, Folder folder, Crate crate, Monster monster, Room room, Player player) {
         String inputCommand = view.inputCommand();
         if(inputCommand.equals("save game")) {
             saveGame(gameState, view);
         }
-        if(inputCommand.equals("load game")) {
+        else if(inputCommand.equals("load game")) {
             loadGame(gameState, view.loadingGameText());
         }
-        if(inputCommand.equals("exit")) {
+        else if(inputCommand.equals("exit")) {
             endGame(gameState, view);
         }
-        if(inputCommand.equals("check stats")) {
+        else if(inputCommand.equals("check stats")) {
             view.printStatText(gameState.getPlayer());
         }
-        if(inputCommand.equals("help")) {
+        else if(inputCommand.equals("help")) {
             view.printBasicText(parseHelpText());
         }
 
         //Player will be able to see the map of the train wagon and the stations linked to each wagon including the spot
         //they are currently at.
-        if(inputCommand.equals("check map")) {
+        else if(inputCommand.equals("check map")) {
             game.readMapTxt();
             //view.printBasicText(gameState.getPlayer().getLocation().toString());
         }
-        if(inputCommand.equals("check inventory")) {
+        else if(inputCommand.equals("check inventory")) {
             view.printInventory(gameState.getPlayer());
         }
-        if(inputCommand.equals("north") || inputCommand.equals("east") || inputCommand.equals("south") || inputCommand.equals("west")){
-            // How are they moving ?
-            //room.directions();
+        else if(inputCommand.equals("north") || inputCommand.equals("east") || inputCommand.equals("south") || inputCommand.equals("west")){
+
+            /*
+            10/30/22 MEETING: DAKOTA
+            We need a method that will allow for the player to move north, south, east, west.
+            It needs to show message:
+            The room name
+            Whether the room has been visited or not.
+            The room description
+
+
+            if player enters a room that is locked, message will say:
+            "Train wagon is locked; need a code to on unlock train wagon"
+             */
         }
-        if(inputCommand.contains("inspect")){
-            item.inspect();
+        else if(inputCommand.equals("inspect room")){
+            /*
+            10/30/22 MEETING:
+            THIS METHOD WORKS!
+             */
+            view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame()));
         }
-        if(inputCommand.contains("store")){
-            item.storeItem(inputCommand);
+
+        else if(inputCommand.contains("inspect")){
+            // NOT SURE IF THIS IS GOING TO WORK
+            view.printBasicText(item.inspect());
         }
-        if(inputCommand.contains("discard")){
+        else if(inputCommand.contains("store")){
+
+            /*
+            10/30/22 MEETING: SHIANNE
+            WE CHANGE IT TO TO HAVE THE INPUT SPILT
+
+            String[] StoreItem = inputCommand.split("(?i)store", 0);
+            if(StoreItem.length != 0){
+                item.storeItem(StoreItem[1]);
+            }
+             */
+
+            gameState.getItemsInGame();
+
+            //item.storeItem(inputCommand);
+        }
+        else if(inputCommand.contains("discard")){
             item.discard();
         }
-        if(inputCommand.contains("use")){
-            //I DON'T KNOW WHAT TO DO THE SET
+        else if(inputCommand.contains("use")){
+            /*
+            10/30/22 MEETING: SHIANNE , CARLTON
+            I DON'T KNOW WHAT TO DO THE SET
+             */
         }
-        if(inputCommand.contains("examine")){
+        else if(inputCommand.contains("examine")){
             crate.examineCrate(inputCommand);
         }
-        if(inputCommand.contains("equip")){
-            // I DON'T KNOW WHAT TO DO WITH THE SET
+        else if(inputCommand.contains("equip")){
+            /*
+            10/30/22 MEETING: CARLTON
+            I DON'T KNOW WHAT TO DO WITH THE SET
+             */
         }
-        if(inputCommand.equals("view code")){
+        else if(inputCommand.equals("view code")){
             folder.viewMysteryItem(inputCommand);
         }
-        if(inputCommand.equals("use code")){
+        else if(inputCommand.equals("use code")){
+            /*
+            10/30/22 MEETING: SHIANNE
+            // NEED A METHOD FOR USE CODE
+            They will take the password to the train wagon and type it in.
+            if code is wrong, message will say:
+            "code is incorrect"
+            if passwords is correct, message will say:
+            "Code is correct. You may enter the train wagon"
+            set room's lock to unlock
+             */
+        }
+        else if(inputCommand.contains("get puzzle")){
+            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+            Puzzle puzzleInRoom = new Puzzle();
+            /*
+            for (Puzzle puzzleYouAreLookingFor : gameState.getPuzzlesInGame())
+            {
+                if ( puzzleYouAreLookingFor.getPuzzleID() == IDofPuzzleInRoom )
+                {
+                    puzzleInRoom = puzzleYouAreLookingFor;
+                    break;
+                }
+            }
 
+             */
+
+            puzzleInRoom.inspectPuzzle(inputCommand);
+
+            //view.inspectPuzzle(puzzleInRoom);
         }
-        if(inputCommand.contains("inspect puzzle")){
-            puzzle.inspectPuzzle(inputCommand);
-        }
-        if(inputCommand.contains("solve")){
+        else if(inputCommand.contains("solve")){
             puzzle.solvePuzzle(inputCommand);
         }
-        if(inputCommand.contains("get hint")){
+        else if(inputCommand.contains("get hint")){
             puzzle.hint(inputCommand);
         }
-        if(inputCommand.contains("claim prize")){
+        else if(inputCommand.contains("claim prize")){
             puzzle.dropRewardsItem(inputCommand);
         }
-        if(inputCommand.contains("retry")){
+        else if(inputCommand.contains("retry")){
             puzzle.retryPuzzle(inputCommand);
         }
-        if(inputCommand.contains("exit puzzle")){
+        else if(inputCommand.contains("exit puzzle")){
             puzzle.exitPuzzle(inputCommand);
         }
-        if(inputCommand.contains("inspect monster")){
+        else if(inputCommand.contains("inspect monster")){
             monster.inspectMonster(inputCommand);
         }
-        if(inputCommand.contains("attack monster")){
+        else if(inputCommand.contains("attack monster")){
             monster.attackMonster(player);
             monster.monsterDrop(room);
         }
-        if(inputCommand.contains("parry monster")){
+        else if(inputCommand.contains("parry monster")){
             monster.parryMonster();
         }
-        if(inputCommand.equals("heal")){
-
+        else if(inputCommand.equals("heal")){
+            /*
+            10/30/22 MEETING: CARLTON
+            NEED A METHOD FOR HEAL
+             */
         }
-        if(inputCommand.equals("run")){
-
+        else if(inputCommand.equals("run")){
+            /*
+            10/30/22 MEETING: DAKOTA
+            NEED A METHOD FOR RUN
+             */
+        }
+        else{
+            System.out.println("Invalid command. Try again");
         }
 
     }
@@ -218,7 +306,27 @@ public class GameConsole {
     public static void newGame(GameState gameState, String playerName) {
         // temp way to create new game for testing purposes (all the parameters are empty except for the instance of new player)
 
+        ArrayList<Room> roomList = new ArrayList<>();
+        ArrayList<Monster> bestiary = new ArrayList<>();
+        ArrayList<Crate> crateList = new ArrayList<>();
+        ArrayList<Item> itemList = new ArrayList<>();
+        ArrayList<Puzzle> puzzleList = new ArrayList<>();
+        readRooms(roomList);
+        readMonsters(bestiary);
+        readCrates(crateList);
+        readItems(itemList, roomList);
+        readPuzzleTxt(puzzleList);
+
+        gameState.setRoomsInGame(roomList);
+        gameState.setItemsInGame(itemList);
+        gameState.setPuzzlesInGame(puzzleList);
+        gameState.setMonstersInGame(bestiary);
+
+        gameState.setPlayer(new Player(playerName, gameState));
+        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(1));
+
         //   -- objects from other methods used to parse the data files (currently empty but proper implementation in comments)
+        /*
         ArrayList<Item> emptyItemList = new ArrayList<>();
         ArrayList<Room> emptyRoomList = new ArrayList<>();
         ArrayList<Puzzle> emptyPuzzleList = new ArrayList<>();
@@ -232,6 +340,12 @@ public class GameConsole {
         //     -- after objects are added to [gameState] a new instance of player is created using the name the player inputted and
         //     an instance of newGame (now filled with data) as a default checkpoint for the player to return to on death
         gameState.setPlayer(new Player(playerName, gameState));
+        gameState.setItemsInGame(parseItemData());
+        gameState.setRoomsInGame(parseRoomData());
+        gameState.setPuzzlesInGame(readPuzzleTxt(emptyPuzzleList));
+        gameState.setMonstersInGame(parseMonsterData());
+        gameState.setPlayer(new Player(playerName, gameState));
+        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(0));
 
         /*
         When the functions that can parse the files used to add the items/rooms/puzzle/monster data for the game are properly implemented:
@@ -240,7 +354,7 @@ public class GameConsole {
         gameState.setItemsInGame(parseItemData(),);
         gameState.setRoomsInGame(parseRoomData());
         gameState.setPuzzlesInGame(parsePuzzleData());
-        gameState.setMonstersInGame(parseMonsterData(););
+        gameState.setMonstersInGame(parseMonsterData());
 
         //     -- after objects are added to [gameState] a new instance of player is created using the name the player inputted and
         //     an instance of newGame (now filled with data) as a default checkpoint for the player to return to on death
@@ -357,7 +471,7 @@ public class GameConsole {
      * @author(s) Shianne Lesure
      * @added 10/17/2022
      */
-    public void readPuzzleTxt(ArrayList<Puzzle> puzzleInfo){
+    public static void readPuzzleTxt(ArrayList<Puzzle> puzzleInfo){
         try{
             File readPuzzleData = new File("src/Puzzle.txt");
             Scanner inputPuzzle = new Scanner(readPuzzleData); // scans Puzzle file
@@ -404,6 +518,26 @@ public class GameConsole {
     }
 
     /**
+     * Method: readGameIntro()
+     * @Function: Will print out the game intro and instructions for the player
+     * @author(s): Shianne Lesure
+     * @added: 10/30/22
+     */
+    public void readGameIntro(){
+        try{
+            File readIntroData = new File("src/GameInstructions.txt");
+            Scanner inputIntro = new Scanner(readIntroData); // scans instructions file
+            while (inputIntro.hasNext()){
+                System.out.println(inputIntro.nextLine()); // print out the game instructions
+            }
+            inputIntro.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * @Method: parseTextFile()
      * @Function: this is a backend method that reads in a text file and returns it as a string
      * - is only really useful for Map.txt and Help.txt, as they are not transferred into objects
@@ -438,7 +572,7 @@ public class GameConsole {
      * @author(s) Dakota Smith
      * 10/26/2022
      */
-    public void readItems(ArrayList<Item> items, ArrayList<Room> rooms) {
+    public static void readItems(ArrayList<Item> items, ArrayList<Room> rooms) {
         File fileIn = new File("src/Item.txt");
         Scanner reader = null;
         try {
@@ -497,7 +631,7 @@ public class GameConsole {
      * @author(s) Dakota Smith
      * 10/17/2022
      */
-    public void readRooms(ArrayList<Room> rooms) {
+    public static void readRooms(ArrayList<Room> rooms) {
         File fileIn = new File("src/Room.txt");
         Scanner reader = null;
         try {
@@ -528,7 +662,7 @@ public class GameConsole {
      * @author(s) Dakota Smith
      * 10/17/2022
      */
-    public void readMonsters(ArrayList<Monster> monsters) {
+    public static void readMonsters(ArrayList<Monster> monsters) {
         File monsterIn = new File("src/Monster.txt");
         Scanner reader = null;
         try {
@@ -559,7 +693,7 @@ public class GameConsole {
      * @author(s) Dakota Smith
      * 10/17/2022
      */
-    public void readCrates(ArrayList<Crate> crates) {
+    public static void readCrates(ArrayList<Crate> crates) {
         File monsterIn = new File("src/Crate.txt");
         Scanner reader = null;
         try {

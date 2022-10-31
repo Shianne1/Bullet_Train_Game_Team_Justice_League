@@ -1,0 +1,48 @@
+               **** WELCOME TO THE BULLET TRAIN GAME ! ****
+Welcome to the Bullet Train! You, as an assassin have been assigned a task to
+swindle a briefcase and any other intel from the world’s most lethal mafia gang leader.
+This train will stop at every station and present a mystery or puzzle that you need
+to solve to get back in your train cabin and onto the next station. If for any reason
+you fail to solve the challenge or are killed you will lose some of your powers and
+travel back a station where you may or may not have to fight a monster to get back
+on track. While you are on the train, make sure to explore the cabin and collect any
+and everything you can to be prepared for your upcoming challenges.
+Be sure to consume a good deal of food and drinks as the mafia gang members are not going to be
+easy to battle and their leader is not going to be happy to see you trying to get your
+hands on the briefcase. Good Luck!
+
+                                  GOAL:
+The player will need to complete all mysteries throughout the stations to be
+able to access the final boss and then defeat the boss and win.
+
+                               HOW TO PLAY:
+The player will start at station 1 to begin and must
+head to the door that leads out to the station that corresponds to the wagon they’re in.
+The player must clear all rooms at the station to be able to go to the next train wagon.
+This process will repeat until they finish the last mystery then fight the final boss. The
+mysteries are simply just paper file item that players will find in a room that allow
+them to progress into the next room. The files include information that pertains to the
+mafia gang leader and their evil plans.
+
+The player will have a general inventory with all the items they have,
+weapons, armor, and healing items. The player can have as many healing items as
+possible they want with no limit. When using a healing item, it will -1 from their
+stack, stacks cannot go under 0. For weapons, once the katana is obtained it will
+replace the knife in their inventory, pistol and rifle are their own object and can both
+exist. For armor, the armor will be equipped and change the player’s stats, once
+equipped will disappear from the player’s inventory.
+
+The fights will be turned based and the player can choose to initiate the fight
+or run away from the fight. The player can use their weapon of their choice when
+fighting (Fists, knife, katana, pistol, rifle). Upon encountering a monster, the player
+will have a choice to fight the monster or running. Fighting will put you into combat
+and the player can choose to run whenever they want. Running will send you back to
+the previous room.
+
+The checkpoints will be the train wagons, every time a new train wagon is
+reach the player will unlock that checkpoint. If a player dies, they will return to the
+latest train wagon they unlocked and will lose their progress and will have to redo the
+fights and obtain their items again.
+
+
+

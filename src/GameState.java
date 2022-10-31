@@ -7,12 +7,13 @@ import java.util.ArrayList;
      @author(s) Carlton Napier
      @added 10/16/2022
   */
-public  class GameState implements Serializable {
+public class GameState implements Serializable {
     private Player player;
     private ArrayList<Item> itemsInGame;
     private ArrayList<Room> roomsInGame;
     private  ArrayList<Puzzle> puzzlesInGame;
     private ArrayList<Monster> monstersInGame;
+    private ArrayList<Crate> cratesInGame;
 
     /*
     public boolean isRunning() {
@@ -29,12 +30,14 @@ public  class GameState implements Serializable {
 
 
     /*----------------------------------------------GameState Constructors--------------------------------------------*/
-    public GameState(Player player, ArrayList<Item> itemsInGame, ArrayList<Room> roomsInGame, ArrayList<Puzzle> puzzlesInGame, ArrayList<Monster> monstersInGame) {
+    public GameState(Player player, ArrayList<Item> itemsInGame, ArrayList<Room> roomsInGame,
+                     ArrayList<Puzzle> puzzlesInGame, ArrayList<Monster> monstersInGame, ArrayList<Crate> cratesInGame) {
         this.player = player;
         this.itemsInGame = itemsInGame;
         this.roomsInGame = roomsInGame;
         this.puzzlesInGame = puzzlesInGame;
         this.monstersInGame = monstersInGame;
+        this.cratesInGame = cratesInGame;
 
         this.isRunning = false;
     }
@@ -63,6 +66,10 @@ public  class GameState implements Serializable {
 
     public void setMonstersInGame(ArrayList<Monster> monstersInGame) { this.monstersInGame = monstersInGame; }
 
+    public ArrayList<Crate> getCratesInGame() { return cratesInGame; }
+
+    public void setCratesInGame(ArrayList<Crate> cratesInGame) { this.cratesInGame = cratesInGame; }
+
     public boolean isRunning() { return isRunning; }
 
     public void setRunning(boolean running) { isRunning = running; }
@@ -79,9 +86,10 @@ public  class GameState implements Serializable {
     public void setGameState(GameState loadedGame) {
         this.player = loadedGame.player;
         this.itemsInGame =  loadedGame.itemsInGame;
-        this.roomsInGame = loadedGame.roomsInGame ;
-        this.puzzlesInGame = loadedGame.puzzlesInGame ;
-        this.monstersInGame = loadedGame.monstersInGame ;
+        this.roomsInGame = loadedGame.roomsInGame;
+        this.puzzlesInGame = loadedGame.puzzlesInGame;
+        this.monstersInGame = loadedGame.monstersInGame;
+        this.cratesInGame = loadedGame.cratesInGame;
         this.isRunning = loadedGame.isRunning;
     }
 

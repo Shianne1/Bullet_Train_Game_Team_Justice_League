@@ -27,6 +27,7 @@ public class Puzzle implements Serializable{
 
     // accessing the game console class
     GameConsole game = new GameConsole();
+    GameState gameState = new GameState();
 
     private ArrayList<Puzzle> puzzles;
     private ArrayList<String> puzzleReward1;
@@ -228,6 +229,7 @@ public class Puzzle implements Serializable{
      * @added: 10/27/2022
      */
     public void inspectPuzzle(String answer){
+        /*
         for(int i = 0; i < puzzles.size(); i++){
             if(answer.contains(puzzles.get(i).getPuzzleName())){ // if player's input contains the puzzle's name
                 System.out.println(puzzles.get(i).getPuzzleQuestion());
@@ -235,6 +237,19 @@ public class Puzzle implements Serializable{
                 answer = input.nextLine();
             }
         }
+
+         */
+
+        /*
+        for(int i = 0; i < gameState.getPuzzlesInGame().size(); i++){
+            if(answer.contains(gameState.getPuzzlesInGame().get(i).getPuzzleName())){ // if player's input contains the puzzle's name
+                System.out.println(gameState.getPuzzlesInGame().get(i).getPuzzleQuestion());
+                System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
+                answer = input.nextLine();
+            }
+        }
+
+         */
 
     }
 

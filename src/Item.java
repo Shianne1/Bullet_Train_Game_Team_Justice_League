@@ -33,7 +33,7 @@ public class Item implements itemInterface, Serializable {
     Room currentRoom;
     Item itemObject;
 
-    Scanner input;
+    Scanner input = new Scanner(System.in);
 
 
     /*--------------------------------------------Item Constructors---------------------------------------------------*/
@@ -106,6 +106,9 @@ public class Item implements itemInterface, Serializable {
             if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
                 System.out.println(items.get(i).getItemText()); // print out the textual description of the item
                 itemDescription = items.get(i).getItemDesc(); // add the description of the item to the string
+                break;
+            } else{
+                System.out.println("Hello");
                 break;
             }
         }

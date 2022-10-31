@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * @Object: Room()
@@ -59,13 +60,17 @@ public class Room implements Serializable {
         this.roomMonster = monster;
         this.roomItems = new ArrayList<>();
         connections = connection.split(",");
-        this.directions(connections);
+        this.directionals(connections);
     }
 
     /*-------------------------------------Getters & Setters for Room variables---------------------------------------*/
     public int getRoomId() { return roomId; }
 
     public String getRoomName() { return roomName; }
+
+    public String getRoomDesc() {
+        return roomDesc;
+    }
 
     public int getRoomMonster() { return roomMonster; }
 
@@ -87,7 +92,7 @@ public class Room implements Serializable {
 
 
     /*-----------------------------------Room Methods for implementing the game---------------------------------------*/
-    public void directions(String[] dir) {
+    public void directionals(String[] dir) {
         this.north = Integer.parseInt(dir[0]);
         this.east = Integer.parseInt(dir[1]);
         this.south = Integer.parseInt(dir[2]);
@@ -155,4 +160,96 @@ public class Room implements Serializable {
      * 10/29/2022
      */
     public void roomItemRemove(Item item) { roomItems.remove(item); }
+
+    public void Direction(Player player, ArrayList<Room> rooms, String cardinal)
+    {
+        Room current = player.getLocation();
+        Room checkLock = null;
+        cardinal = cardinal.toLowerCase();
+        int location;
+        if(cardinal.equals("n") || cardinal.equals("north"))
+        {
+            location = current.getNorth();
+            if(location == -1)
+            {
+                System.out.println("You cannot go this way.");
+            }
+            else
+            {
+                checkLock = rooms.get(location);
+                if(checkLock.isLocked)
+                {
+                    System.out.println("This door is locked, find a way to open it.");
+                }
+                else
+                {
+                    player.move(checkLock);
+                    System.out.println(checkLock.getRoomDesc());
+                }
+            }
+        }
+        else if(cardinal.equals("e") || cardinal.equals("east"))
+        {
+            location = current.getEast();
+            if(location == -1)
+            {
+                System.out.println("You cannot go this way.");
+            }
+            else
+            {
+                checkLock = rooms.get(location);
+                if(checkLock.isLocked)
+                {
+                    System.out.println("This door is locked, find a way to open it.");
+                }
+                else
+                {
+                    player.move(checkLock);
+                    System.out.println(checkLock.getRoomDesc());
+                }
+            }
+        }
+        else if(cardinal.equals("s") || cardinal.equals("south"))
+        {
+            location = current.getSouth();
+            if(location == -1)
+            {
+                System.out.println("You cannot go this way.");
+            }
+            else
+            {
+                checkLock = rooms.get(location);
+                if(checkLock.isLocked)
+                {
+                    System.out.println("This door is locked, find a way to open it.");
+                }
+                else
+                {
+                    player.move(checkLock);
+                    System.out.println(checkLock.getRoomDesc());
+                }
+            }
+        }
+        else
+        {
+            location = current.getWest();
+            if(location == -1)
+            {
+                System.out.println("You cannot go this way.");
+            }
+            else
+            {
+                checkLock = rooms.get(location);
+                if(checkLock.isLocked)
+                {
+                    System.out.println("This door is locked, find a way to open it.");
+                }
+                else
+                {
+                    player.move(checkLock);
+                    System.out.println(checkLock.getRoomDesc());
+                }
+            }
+        }
+    }
 }

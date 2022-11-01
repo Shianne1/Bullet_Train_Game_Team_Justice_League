@@ -144,7 +144,8 @@ public class View {
 
     public void inspectPuzzle(Puzzle puzzle)
     {
-        puzzle.inspectPuzzle(inputCommand());
+        /*
+        puzzle.inspectPuzzle();
         System.out.println(puzzle.getPuzzleQuestion());
         System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
         String puzzleCommand = inputCommand();
@@ -155,5 +156,7 @@ public class View {
             String puzzleAnswer = inputCommand();
             puzzle.solvePuzzle(puzzleAnswer );
         }
+
+         */
     }
 }

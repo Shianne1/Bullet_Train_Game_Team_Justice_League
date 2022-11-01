@@ -199,37 +199,28 @@ public class GameConsole {
         }
         else if(inputCommand.contains("get puzzle")){
             int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
-            Puzzle puzzleInRoom = new Puzzle();
-            /*
-            for (Puzzle puzzleYouAreLookingFor : gameState.getPuzzlesInGame())
-            {
-                if ( puzzleYouAreLookingFor.getPuzzleID() == IDofPuzzleInRoom )
-                {
-                    puzzleInRoom = puzzleYouAreLookingFor;
-                    break;
-                }
-            }
-
-             */
-
-            puzzleInRoom.inspectPuzzle(inputCommand);
-
-            //view.inspectPuzzle(puzzleInRoom);
+            puzzle.inspectPuzzle(IDofPuzzleInRoom);
         }
         else if(inputCommand.contains("solve")){
-            puzzle.solvePuzzle(inputCommand);
+            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+            puzzle.solvePuzzle(IDofPuzzleInRoom);
         }
         else if(inputCommand.contains("get hint")){
-            puzzle.hint(inputCommand);
+            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+            puzzle.hint(IDofPuzzleInRoom);
         }
         else if(inputCommand.contains("claim prize")){
-            puzzle.dropRewardsItem(inputCommand);
+            /*
+            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+            puzzle.dropRewardsItem(IDofPuzzleInRoom);
+
+             */
         }
         else if(inputCommand.contains("retry")){
-            puzzle.retryPuzzle(inputCommand);
+            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+           puzzle.retryPuzzle(IDofPuzzleInRoom);
         }
         else if(inputCommand.contains("exit puzzle")){
-            puzzle.exitPuzzle(inputCommand);
         }
         else if(inputCommand.contains("inspect monster")){
             monster.inspectMonster(inputCommand);

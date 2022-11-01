@@ -27,12 +27,21 @@ public class Room implements Serializable {
     private int south;
     private int west;
     private ArrayList<Item> roomItems;
+    private ArrayList<Room> rooms;
+    private ArrayList<String> itemsInRoom;
 
 
     /*----------------------------------------------Room Constructors-------------------------------------------------*/
+
     public Room(){
+        this.roomItems = new ArrayList<>();
+        rooms = new ArrayList<>();
+        GameConsole.readItems(roomItems,rooms);
+        itemsInRoom = new ArrayList<>();
 
     }
+
+
 
     /**
      * @param id
@@ -85,6 +94,13 @@ public class Room implements Serializable {
 
     public boolean isVisited() { return isVisited; }
 
+    public ArrayList<Item> getRoomItems() {
+        return roomItems;
+    }
+
+    public void setRoomItems(ArrayList<Item> roomItems) {
+        this.roomItems = roomItems;
+    }
 
     /*-----------------------------------Room Methods for implementing the game---------------------------------------*/
     public void directions(String[] dir) {
@@ -124,6 +140,8 @@ public class Room implements Serializable {
         //checks if there are No items
         if(roomItems.isEmpty()) {
             fullDesc += "\nThere are no items visible in this room.";
+
+            fullDesc += roomItems;
         }
         else {
             String temp = "\nThe Items in this room are: ";
@@ -150,9 +168,16 @@ public class Room implements Serializable {
     /**
      * @Method: roomItemRemove()
      * @param item
-     * @Function: will remove item from roomitem arraylist
+     * @Function: will remove item from room item arraylist
      * @author: Shianne Lesure
      * 10/29/2022
      */
     public void roomItemRemove(Item item) { roomItems.remove(item); }
+
+    public void addItem(Item item, int playersLocation){
+        if(playersLocation == this.roomId) {
+            String itemName = item.getItemName();
+            itemsInRoom.add(itemName);
+        }
+    }
 }

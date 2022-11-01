@@ -149,7 +149,7 @@ public class Monster implements EntityInterface, Serializable {
     /**
      * @Method: monsterDrop()
      * @param currentRoom
-     * @param items
+     * @param
      * @Function: when called on, determines what item, if any, a monster drops into the room
      * @author: Dakota Smith
      * 10/25/2022

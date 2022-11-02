@@ -25,12 +25,12 @@ public class Item implements itemInterface, Serializable {
     private ArrayList<Room> roomItems;
 
     // will access the player's inventory arraylist
-    private ArrayList<Item> inventory;
+    //private ArrayList<Item> inventory;
 
     //Player player = new Player();
 
     // will access the room's inventory arraylist
-    Room currentRoom;
+    //Room currentRoom;
     Item itemObject;
 
     Scanner input = new Scanner(System.in);
@@ -51,7 +51,7 @@ public class Item implements itemInterface, Serializable {
         // putting the items data into the item & room arraylist
         game.readItems(items, roomItems);
         //player.checkInventory();
-        inventory = new ArrayList<>();
+       // inventory = new ArrayList<>();
     }
 
     /**
@@ -99,9 +99,16 @@ public class Item implements itemInterface, Serializable {
      * @added: 10/29/2022
      */
     @Override
-    public String inspect() {
-        String item = input.nextLine();
+    public String inspect(String item) {
+        String[] parts = item.split(" ");
         String itemDescription = "";
+        for(Item inspectItem: items){
+            if(parts[1].equalsIgnoreCase(inspectItem.getItemName())){
+                itemDescription = inspectItem.getItemDesc();
+                break;
+            }
+        }
+        /*
         for(int i = 0; i < items.size(); i++){
             if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
                 System.out.println(items.get(i).getItemText()); // print out the textual description of the item
@@ -112,6 +119,8 @@ public class Item implements itemInterface, Serializable {
                 break;
             }
         }
+
+         */
         return itemDescription; // return the string
     }
 
@@ -127,8 +136,7 @@ public class Item implements itemInterface, Serializable {
      * @added: 10/29/2022
      */
     @Override
-    public void discard() {
-        String item = input.nextLine();
+    public void discard(String item, Room current, Player inventory) {
         /*
         for(int i = 0; i < items.size(); i++){
             if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
@@ -139,11 +147,13 @@ public class Item implements itemInterface, Serializable {
         }
 
          */
+        String[] parts = item.split(" ");
         for(Item item1: items){
             itemObject = item1;
-            if(item.contains(this.itemName)){
-                inventory.remove(itemObject);
-                currentRoom.roomItemAdd(itemObject);
+            if(parts[1].equalsIgnoreCase(item1.getItemName())){
+                inventory.inventoryRemove(itemObject);
+                current.roomItemAdd(itemObject);
+                break;
             }
         }
     }
@@ -155,7 +165,7 @@ public class Item implements itemInterface, Serializable {
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
-    public void storeItem(String item){ // store item is the same as pick up item
+    public void storeItem(String item, Room current, Player inventory){ // store item is the same as pick up item
         /*
         for(int i = 0; i < items.size(); i++){
             if(item.contains(items.get(i).getItemName())){ // if player's input contains the item's name
@@ -175,20 +185,29 @@ public class Item implements itemInterface, Serializable {
         }
 
          */
+        String[] parts = item.split(" ");
         for(Item item1: items){
             itemObject = item1;
-            if(item.contains(this.itemName)){
+            if(parts[1].equalsIgnoreCase(itemObject.getItemName())){
+                inventory.inventoryAdd(itemObject);
+
+                current.roomItemRemove(itemObject);
                 if(item.contains("Katana")){ // if player adds katana to their inventory
-                    discard(); // remove knife from inventory
+                    discard("Knife", current, inventory); // remove knife from inventory
                 }
                 else if(item.contains("medium armor")){ // if player adds medium armor to their inventory
-                    discard(); // remove light armor from inventory
+                    discard("Light Armor", current, inventory); // remove light armor from inventory
                 }
                 else if(item.contains("heavy armor")){ // if player add heavy armor to their inventory
-                    discard(); // remove medium armor from inventory
+                    discard("Medium Armor",current, inventory ); // remove medium armor from inventory
                 }
-                inventory.add(itemObject);
-                currentRoom.roomItemRemove(itemObject);
+                System.out.println(item1.getItemName() + " has been added to the inventory.");
+                /*
+                inventory.inventoryAdd(itemObject);
+                current.roomItemRemove(itemObject);
+
+                 */
+                break;
             }
         }
     }

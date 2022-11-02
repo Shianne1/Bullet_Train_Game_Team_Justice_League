@@ -36,7 +36,6 @@ public class Puzzle implements Serializable {
     private ArrayList<String> puzzleReward2;
     //GameState gameState = new GameState();
     // will allow for the puzzle class to access the current room the player is in
-    Room currentRoom = new Room();
     Item itemGames;
     Puzzle puzzleGame;
     Scanner input;
@@ -65,6 +64,7 @@ public class Puzzle implements Serializable {
         // putting the puzzle data into the puzzles arraylist
         game.readPuzzleTxt(puzzles);
         GameConsole.readItems(items,rooms);
+        GameConsole.readRooms(rooms);
 
         // are arraylists that will hold the items the puzzle will drop if player solve them.
         puzzleReward1 = new ArrayList<>();
@@ -219,226 +219,129 @@ public class Puzzle implements Serializable {
     }
 
     /**
-     * @param playersLocation
+     * @param puzzleLocationID
      * @Method: dropRewardsItem()
      * @Function: This method will drop the reward items into the current room the player is in.
      * @author(s): Shianne Lesure
      * @added: 10/27/2022
      */
-    public void dropRewardsItem(int playersLocation, Room currentRoom) {
+    public void dropRewardsItem(int puzzleLocationID, Room currentRoom,String prizeItem) {
         for (Item itemGame : items) {
             itemGames = itemGame;
-            if(playersLocation == this.puzzleID){
-                if (itemGame.getItemName().equals(puzzleGame.getReward1())) {
+            if (puzzleLocationID == this.puzzleID) {
+                if(itemGames.getItemName().equals(prizeItem)){
                     currentRoom.roomItemAdd(itemGames);
-                    //currentRoom.addItem(itemGames, playersLocation);
                     break;
                 }
             }
         }
-        /*
-        for (int p = 0; p < puzzleReward1.size(); p++) {
-            if (puzzleReward1.contains(puzzleReward1.get(p))) {
-                puzzleReward1.remove(puzzleReward1.get(p)); // remove the reward 1 item from the arraylist
-                //currentRoom.roomItemAdd(puzzleReward1.get(p)); // add the reward 1 item to the current room arraylist
-                break;
-            }
-        }
-        for (int i = 0; i < puzzleReward2.size(); i++) {
-            if (puzzleReward2.contains(puzzleReward2.get(i))) {
-                puzzleReward2.remove(puzzleReward2.get(i)); // remove the reward 2 item from the arraylist
-                //currentRoom.roomItemAdd(puzzleReward2.get(i)); // add the reward 2 item to the current room arraylist
-                break;
-            }
-        }
-
-         */
     }
 
     /**
      * @Mehtod: inspectPuzzle()
-     * @param playersLocation
+     * @param puzzleLocationID
+     *
      * @Function: This method will allow the player to see the question of the puzzle as well if they would like to solve the puzzle
      * @author(s): Shianne Lesure
      * @added: 10/27/2022
      */
-    public void inspectPuzzle(int playersLocation) {
-        /*
-        for(int i = 0; i < puzzles.size(); i++){
-            if(playersLocation == this.puzzleID){ // if player's input contains the puzzle's name
-                System.out.println(puzzles.get(i).getPuzzleQuestion());
-                System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
-                answer = input.nextLine();
-                if(answer.equalsIgnoreCase("solve puzzle")){
-                    solvePuzzle();
-                }
-                break;
-            }
-        }
-
-         */
-
+    public void inspectPuzzle(int puzzleLocationID, Room currentRoom) {
         for (Puzzle puzzle : puzzles) {
             puzzleGame = puzzle;
-            if (playersLocation == this.puzzleID) {
+            if (puzzleLocationID == this.puzzleID) {
                 System.out.println(puzzle.getPuzzleQuestion());
                 System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
                 answer = input.nextLine();
                 if (answer.equalsIgnoreCase("solve puzzle")) {
-                    solvePuzzle(playersLocation);
+                    solvePuzzle(puzzleLocationID, currentRoom);
                 }
                 break;
             }
         }
-        /*
-        for(int i = 0; i < gameState.getPuzzlesInGame().size(); i++){
-            if(answer.contains(gameState.getPuzzlesInGame().get(i).getPuzzleName())){ // if player's input contains the puzzle's name
-                System.out.println(gameState.getPuzzlesInGame().get(i).getPuzzleQuestion());
-                System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
-                answer = input.nextLine();
-            }
-        }
-
-         */
     }
 
-    /**
-     * @Mthod: solvePuzzle()
-     * @param playersLocation
-     * @Function: This method will allow for the player to answer the current puzzle to reviews prizes
-     * @author(s): Shianne Lesure
-     * @added: 10/27/2022
-     */
-    public void solvePuzzle(int playersLocation) {
-        for (Puzzle puzzleSolve : puzzles) {
-            puzzleGame = puzzleSolve;
-            if (playersLocation == this.puzzleID) {
-                System.out.println("What is your answer?");
-                String playerAnswer = input.nextLine();
-                    int countAttempts = 1;
+        /**
+         * @Mthod: solvePuzzle()
+         * @param puzzleLocationID
+         * @Function: This method will allow for the player to answer the current puzzle to reviews prizes
+         * @author(s): Shianne Lesure
+         * @added: 10/27/2022
+         */
+        public void solvePuzzle(int puzzleLocationID, Room currentRoom){
+            for (Puzzle puzzleSolve : puzzles) {
+                puzzleGame = puzzleSolve;
+                if (puzzleLocationID == this.puzzleID) {
+                    System.out.println("What is your answer?");
+                    String playerAnswer = input.nextLine();
+                    int resetAttempts = puzzleSolve.getAttempts();
                     while (puzzleSolve.getAttempts() != 0) {
                         if (playerAnswer.equalsIgnoreCase(puzzleSolve.getAnswer()) && puzzleSolve.getAttempts() == 3) { // if player solve the puzzle on their 1st try
                             System.out.println("You solve the puzzle correctly! You can now claim your prizes! \n" + puzzleSolve.reward1 + "\n" + puzzleSolve.reward2);
                             // will drop the reward item as well as bandages
-                            dropRewardsItem(playersLocation, currentRoom);
-                            //dropRewardsItem(puzzleSolve.reward2);
+                            dropRewardsItem(puzzleLocationID, currentRoom, puzzleSolve.reward1);
+                            dropRewardsItem(puzzleLocationID, currentRoom, puzzleSolve.reward2);
+                            currentRoom.setRoomPuzzle(-1);
                             break;
                         } else if (playerAnswer.equalsIgnoreCase(puzzleSolve.getAnswer()) && puzzleSolve.getAttempts() < 3) { // if player solve the puzzle on their 2nd & 3rd try
                             System.out.println("You solve the puzzle correctly! You can now claim your prize!\n" + puzzleSolve.reward2);
                             //will only drop the bandages
-                            dropRewardsItem(playersLocation, currentRoom);
+                            dropRewardsItem(puzzleLocationID, currentRoom, puzzleSolve.reward2);
+                            currentRoom.setRoomPuzzle(-1);
                             break;
                         } else if (!playerAnswer.equalsIgnoreCase(puzzleSolve.getAnswer())) { // if player doesn't solve the puzzle correctly
-                            puzzleSolve.setAttempts(puzzleSolve.getAttempts() - 1); // remove their 1 attempt from player
-                            if(playerAnswer.equalsIgnoreCase("get hint")){
-                                hint(playersLocation);
+                            if (playerAnswer.equalsIgnoreCase("get hint")) {
+                                hint(puzzleLocationID);
                                 puzzleSolve.setAttempts(puzzleSolve.getAttempts() + 1);
                             }
                             if (puzzleSolve.getAttempts() == 0) { // if player runs out of attempts
                                 System.out.println("Failed to solve this puzzle.");
+                                puzzleSolve.setAttempts(resetAttempts); // set the number of attempts back to 3
                                 break;
                             }
                             if (playerAnswer.equalsIgnoreCase("exit puzzle")) {
                                 System.out.println("You have exited out the puzzle.");
+                                puzzleSolve.setAttempts(puzzleSolve.getAttempts() + 1);
+                                puzzleSolve.setAttempts(resetAttempts);
                                 break;
                             }
+                            puzzleSolve.setAttempts(puzzleSolve.getAttempts() - 1); // remove their 1 attempt from player
                             System.out.println("The answer you provided is wrong. You still have " + puzzleSolve.getAttempts() + " attempts left.\nWhat is your answer?");
                             playerAnswer = input.nextLine();
-                            countAttempts++;
                         }
-                    }
-                puzzleSolve.setAttempts(countAttempts); // set the number of attempts back to 3
-            }
-            break;
-        }
-    }
-        /*
-        for(int i = 0; i < puzzles.size(); i++){
-            System.out.println("What is your answer?");
-            String playerAnswer = input.nextLine();
-            if(playerAnswer.contains(puzzles.get(i).getPuzzleName())) { // if player's input contains the puzzle's name
-                int countAttempts = 1;
-                while (puzzles.get(i).getAttempts() != 0) {
-                    if (playerAnswer.equalsIgnoreCase(puzzles.get(i).getAnswer()) && puzzles.get(i).getAttempts() == 3) { // if player solve the puzzle on their 1st try
-                        System.out.println("You solve the puzzle correctly! You can now claim your prizes! \n" + puzzles.get(i).reward1 + "\n" + puzzles.get(i).reward2);
-
-                        // will drop the reward item as well as bandages
-                        dropRewardsItem(puzzles.get(i).reward1);
-                        dropRewardsItem(puzzles.get(i).reward2);
-                        break;
-                    }
-                    else if (playerAnswer.equalsIgnoreCase(puzzles.get(i).getAnswer()) && puzzles.get(i).getAttempts() < 3) { // if player solve the puzzle on their 2nd & 3rd try
-                        System.out.println("You solve the puzzle correctly! You can now claim your prize!\n" + puzzles.get(i).reward2);
-
-                        //will only drop the bandages
-                        dropRewardsItem(puzzles.get(i).reward2);
-                        break;
-                    }
-                    else if (!playerAnswer.equalsIgnoreCase(puzzles.get(i).getAnswer())) { // if player doesn't solve the puzzle correctly
-                        puzzles.get(i).setAttempts(puzzles.get(i).getAttempts() - 1); // remove their 1 attempt from player
-                        if (puzzles.get(i).getAttempts() == 0) { // if player runs out of attempts
-                            System.out.println("Failed tp solve this puzzle.");
-                            break;
-                        }
-                        System.out.println("The answer you provided is wrong. You still have " + puzzles.get(i).getAttempts() + " attempts left.");
-                        playerAnswer = input.nextLine();
-                        countAttempts++;
                     }
                 }
-                puzzles.get(i).setAttempts(countAttempts); // set the number of attempts back to 3
-            }
-        }
-
-         */
-
-
-
-    /**
-     * @Method: hint()
-     * @param playersLocation
-     * @Function: This method will give the player the current hint attach to the current puzzle
-     * @author(s): Shianne Lesure
-     * @added: 10/27/2022
-     */
-    public void hint(int playersLocation){
-        for(Puzzle puzzle: puzzles) {
-            if (playersLocation == this.puzzleID) {
-                System.out.println("Hint: " + puzzle.getHint());
                 break;
             }
         }
-    }
-
-    /**
-     * @Method: retryPuzzle()
-     * @param playersLocation
-     * @Function: This method will allow for the player to retry the puzzle if they have failed
-     * @author(s): Shianne Lesure
-     * @added: 10/27/2022
-     */
-    public void retryPuzzle(int playersLocation){
-        if(playersLocation == this.puzzleID){
-            inspectPuzzle(playersLocation);
-        }
-    }
 
 
-
-    /*
-
-     * @Method: exitPuzzle()
-     * @param answer
-     * @Functions: This method will allow the player to break out the puzzle so they can interact with other things within the train
-     * @author(s): Shianne Lesure
-     * @added: 10/27/2022
-
-    public void exitPuzzle(String answer){
-        for(int i = 0; i < puzzles.size(); i++){
-            if(answer.contains(puzzles.get(i).getPuzzleName())) { // if player's input contains the puzzle's name
-                break; // will break out of the puzzle
+        /**
+         * @Method: hint()
+         * @param puzzleLocationID
+         * @Function: This method will give the player the current hint attach to the current puzzle
+         * @author(s): Shianne Lesure
+         * @added: 10/27/2022
+         */
+        public void hint(int puzzleLocationID){
+            for (Puzzle puzzle : puzzles) {
+                if (puzzleLocationID == this.puzzleID) {
+                    System.out.println("Hint: " + puzzle.getHint());
+                    break;
+                }
             }
         }
-    }
 
-     */
+        /**
+         * @Method: retryPuzzle()
+         * @param puzzleLocationID
+         * @Function: This method will allow for the player to retry the puzzle if they have failed
+         * @author(s): Shianne Lesure
+         * @added: 10/27/2022
+         */
+        public void retryPuzzle(int puzzleLocationID, Room currentRoom){
+            if (puzzleLocationID == this.puzzleID) {
+                inspectPuzzle(puzzleLocationID, currentRoom);
+            }
+
+        }
 }

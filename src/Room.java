@@ -80,6 +80,8 @@ public class Room implements Serializable {
 
     public int getRoomPuzzle() { return roomPuzzle; }
 
+    public void setRoomPuzzle(int roomPuzzle) { this.roomPuzzle = roomPuzzle; }
+
     public int getNorth() { return north; }
 
     public int getEast() { return east; }
@@ -128,25 +130,23 @@ public class Room implements Serializable {
         //Checks if the room has a puzzle, if so adds puzzle name to the room inspect variable
         if(this.roomPuzzle > -1) {
             tempPuzz = puzzles.get(roomPuzzle);
-            fullDesc += "\nThere is Puzzle: " + tempPuzz.getPuzzleName() + ".\n ";
+            fullDesc += "\nThere is Puzzle: " + tempPuzz.getPuzzleName() + ". ";
         }
         //checks if the room has a monster, if so adds monster name to room inspect string
         if(this.roomMonster > -1) {
             tempMon = monsters.get(roomMonster);
-            fullDesc += "\nThere is Monster: " + tempMon.getMonsterName() + ".\n ";
+            fullDesc += "\nThere is Monster: " + tempMon.getMonsterName() + ".";
         }
         //adds if there are any item crates in room
-        fullDesc += this.crates;
+        fullDesc += "\n" + this.crates;
         //checks if there are No items
         if(roomItems.isEmpty()) {
             fullDesc += "\nThere are no items visible in this room.";
-
-            fullDesc += roomItems;
         }
         else {
             String temp = "\nThe Items in this room are: ";
             for(Item a : roomItems) {
-                temp = temp + a.getItemName() + " ";
+                temp = temp + "[" + a.getItemName() + "] ";
             }
             fullDesc += temp;
         }
@@ -174,10 +174,4 @@ public class Room implements Serializable {
      */
     public void roomItemRemove(Item item) { roomItems.remove(item); }
 
-    public void addItem(Item item, int playersLocation){
-        if(playersLocation == this.roomId) {
-            String itemName = item.getItemName();
-            itemsInRoom.add(itemName);
-        }
-    }
 }

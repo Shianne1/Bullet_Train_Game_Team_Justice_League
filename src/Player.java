@@ -240,4 +240,12 @@ public class Player implements playerInterface, EntityInterface, Serializable {
             currentHealth = 0;
     }
 
+    public void inventoryAdd(Item item){
+        inventory.add(item);
+    }
+
+    public void inventoryRemove(Item item){
+        inventory.remove(item);
+    }
+
 }

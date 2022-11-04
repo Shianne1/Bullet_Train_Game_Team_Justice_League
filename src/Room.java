@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * @Object: Room()
@@ -21,6 +22,7 @@ public class Room implements Serializable {
     private String crates;
     private int roomPuzzle;
     private int roomMonster;
+    private String roomCode;
     private String[] connections;
     private int north;
     private int east;
@@ -29,6 +31,7 @@ public class Room implements Serializable {
     private ArrayList<Item> roomItems;
     private ArrayList<Room> rooms;
     private ArrayList<String> itemsInRoom;
+    Scanner input = new Scanner(System.in);
 
 
     /*----------------------------------------------Room Constructors-------------------------------------------------*/
@@ -52,12 +55,13 @@ public class Room implements Serializable {
      * @param crates
      * @param puzzle
      * @param monster
+     * @param roomCode
      * @Function: constructor for pre existing data from the Room text file
      * @author(s) Dakota Smith
      * 10/17/2022
      */
     public Room(int id, String name, String desc, String connection, boolean lock, String crates,
-                int puzzle, int monster) {
+                int puzzle, int monster, String roomCode) {
         this.roomId = id;
         this.roomName = name;
         this.roomDesc = desc;
@@ -66,6 +70,7 @@ public class Room implements Serializable {
         this.crates = crates;
         this.roomPuzzle = puzzle;
         this.roomMonster = monster;
+        this.roomCode = roomCode;
         this.roomItems = new ArrayList<>();
         connections = connection.split(",");
         this.directions(connections);
@@ -75,6 +80,10 @@ public class Room implements Serializable {
     public int getRoomId() { return roomId; }
 
     public String getRoomName() { return roomName; }
+
+    public String getRoomDesc() {
+        return roomDesc;
+    }
 
     public int getRoomMonster() { return roomMonster; }
 
@@ -94,14 +103,16 @@ public class Room implements Serializable {
 
     public boolean isLocked() { return isLocked; }
 
+    public void setLocked(boolean locked) { isLocked = locked; }
+
     public boolean isVisited() { return isVisited; }
 
-    public ArrayList<Item> getRoomItems() {
-        return roomItems;
+    public String getRoomCode() {
+        return roomCode;
     }
 
-    public void setRoomItems(ArrayList<Item> roomItems) {
-        this.roomItems = roomItems;
+    public void setRoomCode(String roomCode) {
+        this.roomCode = roomCode;
     }
 
     /*-----------------------------------Room Methods for implementing the game---------------------------------------*/
@@ -173,5 +184,143 @@ public class Room implements Serializable {
      * 10/29/2022
      */
     public void roomItemRemove(Item item) { roomItems.remove(item); }
+
+
+    /**
+     * @Method: Direction()
+     * @param player
+     * @param rooms
+     * @param cardinal
+     * @Function: will check the direction of wanted player movement to see if movement in that direction is possible
+     * Then moves player in that direction.
+     * @author: Dakota Smith
+     * 10/31/2022
+     *
+     * this method could also be changed to simply return a room that can be used in a call "Player.Move()"
+     */
+    public void Direction(Player player, ArrayList<Room> rooms, String cardinal)
+    {
+        Room current = player.getLocation();
+        Room checkLock = null;
+        cardinal = cardinal.toLowerCase();
+        int location;
+        //checks if the inputted string is wanting to go north
+        if(cardinal.equals("n") || cardinal.equals("north"))
+        {
+            //checks if there is a room to the north
+            location = current.getNorth();
+            if(location == -1)
+            {
+                System.out.println("You cannot go this way.");
+            }
+            //checks if room is locked, if not moves player to new room and outputs room description.
+            else
+            {
+                checkLock = rooms.get(location);
+                if(checkLock.isLocked)
+                {
+                    System.out.println("This door is locked. Get password.");
+                }
+                else
+                {
+                    player.move(checkLock);
+                    System.out.println(checkLock.getRoomDesc());
+                }
+            }
+        }
+        //checks if the inputted string is wanting to go East
+        else if(cardinal.equals("e") || cardinal.equals("east"))
+        {
+            //checks if there is a room to the east
+            location = current.getEast();
+            if(location == -1)
+            {
+                System.out.println("You cannot go this way.");
+            }
+            //checks if room is locked, if not moves player to new room and outputs room description.
+            else
+            {
+                checkLock = rooms.get(location);
+                if(checkLock.isLocked)
+                {
+                    System.out.println("This door is locked. Get password.");
+
+                }
+                else
+                {
+                    player.move(checkLock);
+                    System.out.println(checkLock.getRoomDesc());
+                }
+            }
+        }
+        //checks if the inputted string is wanting to go South
+        else if(cardinal.equals("s") || cardinal.equals("south"))
+        {
+            //checks if there is a room to the south
+            location = current.getSouth();
+            if(location == -1)
+            {
+                System.out.println("You cannot go this way.");
+            }
+            //checks if room is locked, if not moves player to new room and outputs room description.
+            else
+            {
+                checkLock = rooms.get(location);
+                if(checkLock.isLocked)
+                {
+                    System.out.println("This door is locked. Get password.");
+                }
+                else
+                {
+                    player.move(checkLock);
+                    System.out.println(checkLock.getRoomDesc());
+                }
+            }
+        }
+        //if all else fail then player is trying to move west
+        else
+        {
+            //checks if there is a room to the west.
+            location = current.getWest();
+            if(location == -1)
+            {
+                System.out.println("You cannot go this way.");
+            }
+            //checks if room is locked, if not moves player to new room and outputs room description.
+            else
+            {
+                checkLock = rooms.get(location);
+                if(checkLock.isLocked)
+                {
+                    System.out.println("This door is locked. Get password.");
+
+
+                }
+                else
+                {
+                    player.move(checkLock);
+                    System.out.println(checkLock.getRoomDesc());
+                }
+            }
+        }
+    }
+
+    // SHIANNE LESURE
+    public void lockRoom(Player playerInventory){
+        playerInventory.checkCodeInventory();
+        System.out.println("\nPASSWORD: ");
+        String password = input.next();
+        for(Room codeRooms: rooms) {
+            if (password.equalsIgnoreCase(codeRooms.getRoomCode())) {
+                codeRooms.setLocked(false);
+            }
+            else{
+                System.out.println("Wrong password. Try again.");
+                System.out.println("PASSWORD: ");
+                password = input.next();
+            }
+        }
+
+    }
 
 }

@@ -26,6 +26,9 @@ interface playerInterface {
      * @added 10/16/2022
      */
     String checkInventory();
+
+    //SHIANNE LESURE
+    String checkCodeInventory();
 }
 
 public class Player implements playerInterface, EntityInterface, Serializable {
@@ -37,6 +40,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     private Weapon equippedWeapon;
     private Armor equippedArmor;
     private ArrayList<Item> inventory;
+    private ArrayList<String> codeInventory;
 
     private GameState checkpoint;
 
@@ -66,11 +70,12 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.equippedWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5); // durability/uses set to -1 since a fist will never break
         this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
+        this.codeInventory = new ArrayList<>();
 
     }
 
     // constructor for preexisting data
-    public Player(int maxHealth, int currentHealth, int numOfMonstersKilled, String name, Room location, Weapon equippedWeapon, Armor equippedArmor, ArrayList<Item> inventory, GameState checkpoint) {
+    public Player(int maxHealth, int currentHealth, int numOfMonstersKilled, String name, Room location, Weapon equippedWeapon, Armor equippedArmor, ArrayList<Item> inventory, ArrayList<String> codeInventory, GameState checkpoint) {
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
         this.numOfMonstersKilled = numOfMonstersKilled;
@@ -79,6 +84,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.equippedWeapon = equippedWeapon;
         this.equippedArmor = equippedArmor;
         this.inventory = inventory;
+        this.codeInventory = codeInventory;
         this.checkpoint = checkpoint;
 
     }
@@ -92,6 +98,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.equippedWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5); // durability/uses set to -1 since a fist will never break
         this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
+        this.codeInventory = new ArrayList<>();
         this.checkpoint = defaultCheckpoint;
     }
 
@@ -181,7 +188,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     /**
      * @Method: checkInventory()
      * @Function: this code returns a formatted string of the player's inventory that will be printed by the view
-     * @author(s) Carlton Napier
+     * @author(s) Carlton Napier, Shianne Lesure
      * @added 10/18/2022
      */
     @Override
@@ -189,13 +196,29 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         if (!inventory.isEmpty()) {
             String inventoryList = "The current items in your inventory are: ";
             for (Item item : inventory) {
-                inventoryList.concat("[" + item.toString() + "] ");
+                inventoryList += "[" + item.getItemName() + "] ";
             }
             return inventoryList;
         } else {
             return "There are no items in your inventory";
         }
     }
+
+
+    //SHIANNE LESURE
+    @Override
+    public String checkCodeInventory() {
+        if(!codeInventory.isEmpty()){
+            String codeInventoryList = "The codes in your inventory are: ";
+            for(String codes: codeInventory){
+                codeInventoryList += "[" + codes + "] ";
+            }
+            return codeInventoryList;
+        } else {
+            return "There are no codes within the inventory";
+        }
+    }
+
 
 
     /*----------------------------------Player Methods for implementing the game--------------------------------------*/
@@ -240,12 +263,24 @@ public class Player implements playerInterface, EntityInterface, Serializable {
             currentHealth = 0;
     }
 
+    //SHIANNE LESURE
     public void inventoryAdd(Item item){
         inventory.add(item);
     }
 
+    //SHIANNE LESURE
     public void inventoryRemove(Item item){
         inventory.remove(item);
+    }
+
+    //SHIANNE LESURE
+    public void codeInventoryAdd(String codes){
+        codeInventory.add(codes);
+    }
+
+    // SHIANNE LESURE
+    public void codeInventoryRemove(String codes){
+        codeInventory.remove(codes);
     }
 
 }

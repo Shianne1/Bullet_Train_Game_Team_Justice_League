@@ -153,6 +153,7 @@ public class Item implements itemInterface, Serializable {
             if(parts[1].equalsIgnoreCase(item1.getItemName())){
                 inventory.inventoryRemove(itemObject);
                 current.roomItemAdd(itemObject);
+                System.out.println(item1.getItemName() + " has been remove from the inventory.");
                 break;
             }
         }
@@ -185,6 +186,7 @@ public class Item implements itemInterface, Serializable {
         }
 
          */
+        current.roomItemRemove(itemObject);
         String[] parts = item.split(" ");
         for(Item item1: items){
             itemObject = item1;

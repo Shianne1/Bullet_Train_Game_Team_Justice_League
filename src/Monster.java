@@ -200,14 +200,22 @@ public class Monster implements EntityInterface, Serializable {
     }
 
     /**
-     * @Method: inspect()
-     * @param monster
+     * @Method: inspectMonster()
+     * @param monsterLocationID
      * @return monsterDescription
      * @Function: This method will allow for the player to see the descriptions of the monster
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
-    public String inspectMonster(String monster){
+    public String inspectMonster(int monsterLocationID ){
+        String monsterDescription = "";
+        for(Monster monster1: enemy){
+            if(monsterLocationID == this.monsterId){
+                monsterDescription = monster1.getMonsterDesc();
+                break;
+            }
+        }
+        /*
         String monsterDescription = "";
         for(int i = 0; i < enemy.size(); i++){
             if(monster.contains(enemy.get(i).getMonsterName())){ // if player's input contains monster's name
@@ -216,6 +224,8 @@ public class Monster implements EntityInterface, Serializable {
                 break;
             }
         }
+
+         */
         return monsterDescription; // return the string
     }
 }

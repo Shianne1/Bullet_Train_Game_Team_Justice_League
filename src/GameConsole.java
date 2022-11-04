@@ -97,7 +97,10 @@ public class GameConsole {
                                      Weapon weapon, Armor armor, Folder folder, Crate crate, Monster monster, Room room, Player player) {
         String inputCommand = view.inputCommand();
         int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+        int IDofMonsterInRoom = gameState.getPlayer().getLocation().getRoomMonster();
         Room playerLocation = gameState.getPlayer().getLocation();
+        Player currentPlayer = gameState.getPlayer();
+        gameState.getItemsInGame();
 
         if(inputCommand.equals("save game")) { // THIS FEATURE IS WORKING
             saveGame(gameState, view);
@@ -105,7 +108,7 @@ public class GameConsole {
         else if(inputCommand.equals("load game")) { // THIS FEATURE IS WORKING
             loadGame(gameState, view.loadingGameText());
         }
-        else if(inputCommand.equals("exit")) { // THIS FEATURE IS WORKING
+        else if(inputCommand.equals("exit game")) { // THIS FEATURE IS WORKING
             endGame(gameState, view);
         }
         else if(inputCommand.equals("check stats")) { // THIS FEATURE IS WORKING
@@ -139,13 +142,13 @@ public class GameConsole {
             "Train wagon is locked; need a code to on unlock train wagon"
              */
         }
-        else if(inputCommand.equals("inspect room")){ // THIS FEATURE IS WORKING
+        else if(inputCommand.equals("check out room")){ // THIS FEATURE IS WORKING
             view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame()));
         }
         else if(inputCommand.contains("inspect")){ // THIS FEATURE IS WORKING
             view.printBasicText(item.inspect(inputCommand));
         }
-        else if(inputCommand.contains("store")){
+        else if(inputCommand.contains("store")){ // THIS FEATURE IS WORKING
 
             /*
             10/30/22 MEETING: SHIANNE
@@ -159,10 +162,11 @@ public class GameConsole {
 
             //gameState.getItemsInGame();
 
-            item.storeItem(inputCommand, playerLocation, player);
+            item.storeItem(inputCommand, playerLocation, currentPlayer);
+            puzzle.removeRewardsItem(playerLocation, inputCommand);
         }
-        else if(inputCommand.contains("discard")){
-            item.discard(inputCommand, playerLocation, player);
+        else if(inputCommand.contains("discard")){ // THIS FEATURE IS WORKING
+            item.discard(inputCommand, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("use")){
             /*
@@ -170,7 +174,7 @@ public class GameConsole {
             I DON'T KNOW WHAT TO DO THE SET
              */
         }
-        else if(inputCommand.contains("examine")){
+        else if(inputCommand.equalsIgnoreCase("examine crate")){
             crate.examineCrate(inputCommand);
         }
         else if(inputCommand.contains("equip")){
@@ -194,13 +198,13 @@ public class GameConsole {
             set room's lock to unlock
              */
         }
-        else if(inputCommand.contains("get puzzle")){ // THIS FEATURE WORKING
+        else if(inputCommand.equalsIgnoreCase("check out puzzle")){ // THIS FEATURE WORKING
             /*
             int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
             Room playerLocation = gameState.getPlayer().getLocation();
 
              */
-            puzzle.inspectPuzzle(IDofPuzzleInRoom, playerLocation);
+            puzzle.inspectPuzzle(IDofPuzzleInRoom, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("solve puzzle")){ // THIS FEATURE IS WORKING
             /*
@@ -208,7 +212,7 @@ public class GameConsole {
             Room playerLocation = gameState.getPlayer().getLocation();
 
              */
-            puzzle.solvePuzzle(IDofPuzzleInRoom, playerLocation);
+            puzzle.solvePuzzle(IDofPuzzleInRoom, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("get hint")){ // THIS FEATURE IS WORKING
             /*
@@ -223,12 +227,12 @@ public class GameConsole {
             Room playerLocation = gameState.getPlayer().getLocation();
 
              */
-           puzzle.retryPuzzle(IDofPuzzleInRoom, playerLocation);
+           puzzle.retryPuzzle(IDofPuzzleInRoom, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("exit puzzle")){ // THIS FEATURE IS WORKING
         }
-        else if(inputCommand.contains("inspect monster")){
-            monster.inspectMonster(inputCommand);
+        else if(inputCommand.equalsIgnoreCase("check out monster")){ // THIS FEATURE IS WORKING
+            view.printBasicText(monster.inspectMonster(IDofMonsterInRoom));
         }
         else if(inputCommand.contains("attack monster")){
             monster.attackMonster(player);
@@ -319,7 +323,7 @@ public class GameConsole {
         gameState.setMonstersInGame(bestiary);
 
         gameState.setPlayer(new Player(playerName, gameState));
-        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(1));
+        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(2));
 
         //   -- objects from other methods used to parse the data files (currently empty but proper implementation in comments)
         /*
@@ -482,12 +486,13 @@ public class GameConsole {
                 //REWARDS 1 & 2 NEEDS TO BE CONVERTED OVER TO ITEMS
                 String reward1Txt = inputPuzzle.nextLine();
                 String reward2Txt = inputPuzzle.nextLine();
-                int puzzleLocationTxt = Integer.parseInt(inputPuzzle.nextLine());
+                String puzzleCodes = inputPuzzle.nextLine();
+                //int puzzleLocationTxt = Integer.parseInt(inputPuzzle.nextLine());
 
                 inputPuzzle.nextLine(); // reading the empty string
 
                 // add inputs into puzzle objects which is added into the puzzleInfo arraylist
-                puzzleInfo.add(new Puzzle(puzzleIDTxt,puzzleNameTxt,puzzleQuestionTxt,hintTxt,answerTxt,attemptsTxt,reward1Txt,reward2Txt,puzzleLocationTxt));
+                puzzleInfo.add(new Puzzle(puzzleIDTxt,puzzleNameTxt,puzzleQuestionTxt,hintTxt,answerTxt,attemptsTxt,reward1Txt,reward2Txt,puzzleCodes));
             }
             inputPuzzle.close(); // close file
         }
@@ -532,6 +537,21 @@ public class GameConsole {
             inputIntro.close();
         }
         catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readCodes(ArrayList<GameCodes> codes){
+        try{
+            File readCodeData = new File("src/CODES.txt");
+            Scanner inputCode = new Scanner(readCodeData);
+            while(inputCode.hasNext()){
+                int codeRoom = Integer.parseInt(inputCode.nextLine());
+                String code1 = inputCode.nextLine();
+                codes.add(new GameCodes(codeRoom, code1));
+            }
+            inputCode.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -649,7 +669,9 @@ public class GameConsole {
             String crates = reader.nextLine();
             int roomPuzz = Integer.parseInt(reader.nextLine());
             int roomMon = Integer.parseInt(reader.nextLine());
-            Room temp = new Room(roomId, roomName, roomDesc, connect, lock, crates, roomPuzz, roomMon);
+            String codes = reader.nextLine();
+            reader.nextLine();
+            Room temp = new Room(roomId, roomName, roomDesc, connect, lock, crates, roomPuzz, roomMon,codes);
             rooms.add(temp);
         }
         reader.close();

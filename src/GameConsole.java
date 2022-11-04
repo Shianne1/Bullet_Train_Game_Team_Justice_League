@@ -99,6 +99,7 @@ public class GameConsole {
         int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
         int IDofMonsterInRoom = gameState.getPlayer().getLocation().getRoomMonster();
         Room playerLocation = gameState.getPlayer().getLocation();
+        //int roomLocation = gameState.getPlayer().getLocation().getRoomId();
         Player currentPlayer = gameState.getPlayer();
         gameState.getItemsInGame();
 
@@ -127,7 +128,9 @@ public class GameConsole {
         else if(inputCommand.equals("check inventory")) { // THIS FEATURE IS WORKING
             view.printInventory(gameState.getPlayer());
         }
-        else if(inputCommand.equals("north") || inputCommand.equals("east") || inputCommand.equals("south") || inputCommand.equals("west")){
+        else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") ||
+                inputCommand.equals("south") || inputCommand.equals("s") ||  inputCommand.equals("west") || inputCommand.equals("w")){
+            room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand,gameState.getMonstersInGame(), gameState.getPuzzlesInGame() );
 
             /*
             10/30/22 MEETING: DAKOTA
@@ -143,10 +146,28 @@ public class GameConsole {
              */
         }
         else if(inputCommand.equals("check out room")){ // THIS FEATURE IS WORKING
-            view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame()));
+            //view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation));
         }
         else if(inputCommand.contains("inspect")){ // THIS FEATURE IS WORKING
             view.printBasicText(item.inspect(inputCommand));
+        }
+        else if(inputCommand.equals("view code")){
+
+        }
+        else if(inputCommand.equals("use code")){
+            /*
+            view.printBasicText(gameState.getPlayer().checkCodeInventory());
+            room.lockRoom(playerLocation);
+            /*
+            10/30/22 MEETING: SHIANNE
+            // NEED A METHOD FOR USE CODE
+            They will take the password to the train wagon and type it in.
+            if code is wrong, message will say:
+            "code is incorrect"
+            if passwords is correct, message will say:
+            "Code is correct. You may enter the train wagon"
+            set room's lock to unlock
+             */
         }
         else if(inputCommand.contains("store")){ // THIS FEATURE IS WORKING
 
@@ -173,6 +194,7 @@ public class GameConsole {
             10/30/22 MEETING: SHIANNE , CARLTON
             I DON'T KNOW WHAT TO DO THE SET
              */
+
         }
         else if(inputCommand.equalsIgnoreCase("examine crate")){
             crate.examineCrate(inputCommand);
@@ -181,21 +203,6 @@ public class GameConsole {
             /*
             10/30/22 MEETING: CARLTON
             I DON'T KNOW WHAT TO DO WITH THE SET
-             */
-        }
-        else if(inputCommand.equals("view code")){
-            folder.viewMysteryItem(inputCommand);
-        }
-        else if(inputCommand.equals("use code")){
-            /*
-            10/30/22 MEETING: SHIANNE
-            // NEED A METHOD FOR USE CODE
-            They will take the password to the train wagon and type it in.
-            if code is wrong, message will say:
-            "code is incorrect"
-            if passwords is correct, message will say:
-            "Code is correct. You may enter the train wagon"
-            set room's lock to unlock
              */
         }
         else if(inputCommand.equalsIgnoreCase("check out puzzle")){ // THIS FEATURE WORKING
@@ -280,6 +287,8 @@ public class GameConsole {
                to make a new instance of the game
             */
             newGame(gameState, view.setSaveNameText());
+            view.printBasicText("\nYou are in " + gameState.getPlayer().getLocation().getRoomName() + "\n" + gameState.getPlayer().getLocation().getRoomDesc());
+
         }
         /*
         saying ["load game"] gets the view to ask the player for a name (this name is used to load an existing save file, if it exists)
@@ -323,7 +332,7 @@ public class GameConsole {
         gameState.setMonstersInGame(bestiary);
 
         gameState.setPlayer(new Player(playerName, gameState));
-        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(2));
+        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(0));
 
         //   -- objects from other methods used to parse the data files (currently empty but proper implementation in comments)
         /*
@@ -670,7 +679,6 @@ public class GameConsole {
             int roomPuzz = Integer.parseInt(reader.nextLine());
             int roomMon = Integer.parseInt(reader.nextLine());
             String codes = reader.nextLine();
-            reader.nextLine();
             Room temp = new Room(roomId, roomName, roomDesc, connect, lock, crates, roomPuzz, roomMon,codes);
             rooms.add(temp);
         }

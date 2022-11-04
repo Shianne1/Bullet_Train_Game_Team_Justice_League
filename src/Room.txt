@@ -7,7 +7,6 @@ No Crates
 -1
 -1
 NULL
-
 1
 Station 1 Puzzle Room
 The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be puzzle.
@@ -17,17 +16,15 @@ No Crates
 0
 -1
 NULL
-
 2
 Station 1 Mystery Room
 The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
 -1,-1,1,-1
 true
-Folder 1
+No Crates
 -1
 -1
 31GH1
-
 3
 Station 1 Loot Room
 The room has many crates that can possibly be looted.
@@ -37,7 +34,6 @@ Crate 1, Crate 2, Crate 3
 -1
 -1
 NULL
-
 4
 Station 1 Monster Room
 The dark and desolate room is haunting with an enemy standing in front of you.
@@ -47,7 +43,6 @@ No Crates
 -1
 0
 NULL
-
 5
 Train Wagon 2
 The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
@@ -57,7 +52,6 @@ No Crates
 -1
 -1
 MONEY
-
 6
 station 2 Puzzle Room
 The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be a puzzle.
@@ -67,7 +61,6 @@ No Crates
 2
 -1
 NULL
-
 7
 Station 2 Monster Room
 The dark and desolate room is haunting with an enemy standing in front of you.
@@ -77,17 +70,15 @@ No Crates
 -1
 4
 NULL
-
 8
 Station 2 Mystery Room
 The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
 -1,-1,-1,6
 true
-Folder 2
+No Crates
 -1
 -1
 1R41N5
-
 9
 Station 2 Loot Room
 The room has many crates that can possibly be looted.
@@ -97,7 +88,6 @@ Crate 4, Crate 5, Crate 6
 -1
 -1
 NULL
-
 10
 Train Wagon 3
 The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
@@ -107,7 +97,6 @@ No Crates
 -1
 -1
 CHEMICALS
-
 11
 Station 3 Puzzle Room
 The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be a puzzle.
@@ -117,7 +106,6 @@ No Crates
 1
 -1
 NULL
-
 12
 Station 3 Loot And Puzzle Room
 The room has many crates that can possibly be looted along with a puzzle.
@@ -127,17 +115,15 @@ Crate 7, Crate 8, Crate 9
 5
 -1
 NULL
-
 13
 Station 3 Mystery Room
 The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
 -1,-1,-1,11
 true
-Folder 3
+No Crates
 -1
 -1
 R0801
-
 14
 Station 3 Monster Room
 The dark and desolate room is haunting with an enemy standing in front of you.
@@ -147,7 +133,6 @@ No Crates
 -1
 1
 NULL
-
 15
 Train Wagon 4
 The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
@@ -157,7 +142,6 @@ No Crates
 -1
 -1
 BOMBS
-
 16
 Station 4 Puzzle Room
 The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be a puzzle.
@@ -167,7 +151,6 @@ No Crates
 4
 -1
 NULL
-
 17
 Station 4 Monster Room
 The dark and desolate room is haunting with an enemy standing in front of you.
@@ -177,7 +160,6 @@ No Crates
 -1
 5
 NULL
-
 18
 Station 4 Loot and Puzzle Room
 The room has many crates that can possibly be looted along with a puzzle.
@@ -187,17 +169,15 @@ Crate 10, Crate 11, Crate 12
 6
 -1
 NULL
-
 19
 Station 4 Mystery Room
 The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
 16,-1,-1,-1
 true
-Folder 4
+No Crates
 -1
 -1
 5W07D
-
 20
 Train Wagon 5
 The train wagon looks empty, with seats along the window with a doorway out of the train to the south.
@@ -207,7 +187,6 @@ No Crates
 -1
 -1
 CHEMICALS
-
 21
 Station 5 Puzzle Room
 The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be  puzzle.
@@ -217,7 +196,6 @@ false
 3
 -1
 NULL
-
 22
 Station 5 Loot and Monster Room
 The room has many crates that can possibly be looted, but they are all blocked by an enemy.
@@ -227,7 +205,6 @@ Crate 13, Crate 14, Crate 15
 -1
 2
 NULL
-
 23
 Station 5 Monster Room
 The dark and desolate room is haunting with an enemy standing in front of you.
@@ -237,7 +214,6 @@ No Crates
 -1
 3
 NULL
-
 24
 Final Room Locomotive
 This last train wagon is dimly lit. There is a suitcase that is being guarded by an enemy.

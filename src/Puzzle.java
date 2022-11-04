@@ -266,7 +266,7 @@ public class Puzzle implements Serializable {
             puzzleGame = puzzle;
             if (puzzleLocationID == this.puzzleID) {
                 System.out.println(puzzle.getPuzzleQuestion());
-                System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
+                System.out.println("If you would like to solve the puzzle type: [solve puzzle]");
                 answer = input.nextLine();
                 if (answer.equalsIgnoreCase("solve puzzle")) {
                     solvePuzzle(puzzleLocationID, currentRoom, playerCode);

@@ -105,7 +105,7 @@ public class GameConsole {
         if(inputCommand.equals("save game")) { // THIS FEATURE IS WORKING
             saveGame(gameState, view);
         }
-        else if(inputCommand.equals("load game")) { // THIS FEATURE IS WORKING
+        else if(inputCommand.equals("load game")) { 
             loadGame(gameState, view.loadingGameText());
         }
         else if(inputCommand.equals("exit game")) { // THIS FEATURE IS WORKING
@@ -150,8 +150,8 @@ public class GameConsole {
         else if(inputCommand.contains("inspect")){ // THIS FEATURE IS WORKING
             view.printBasicText(item.inspect(inputCommand));
         }
-        else if(inputCommand.equals("view code")){
-            player.viewCode();
+        else if(inputCommand.equals("view code")){ // THIS FEATURE IS WORKING
+            gameState.getPlayer().viewCode();
         }
         else if(inputCommand.equals("use code")){ // THIS FEATURE IS WORKING
             /*
@@ -191,8 +191,8 @@ public class GameConsole {
             I DON'T KNOW WHAT TO DO THE SET
              */
         }
-        else if(inputCommand.equalsIgnoreCase("examine crate")){
-            crate.examineCrate(inputCommand);
+        else if(inputCommand.contains("examine crate")){
+            view.printBasicText(crate.examineCrate(inputCommand));
         }
         else if(inputCommand.contains("equip")){
             /*
@@ -541,21 +541,6 @@ public class GameConsole {
             inputIntro.close();
         }
         catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void readCodes(ArrayList<GameCodes> codes){
-        try{
-            File readCodeData = new File("src/CODES.txt");
-            Scanner inputCode = new Scanner(readCodeData);
-            while(inputCode.hasNext()){
-                int codeRoom = Integer.parseInt(inputCode.nextLine());
-                String code1 = inputCode.nextLine();
-                codes.add(new GameCodes(codeRoom, code1));
-            }
-            inputCode.close();
-        } catch (Exception e) {
             e.printStackTrace();
         }
     }

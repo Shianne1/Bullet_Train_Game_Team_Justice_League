@@ -225,12 +225,15 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
     // SHIANNE LESURE
     public void viewCode(){
-        if(codeInventory.isEmpty()){
-            System.out.println("There is no code to view.");
+        if(codeInventory.size() == 1){
+            System.out.println("Recent code: [" + codeInventory.get(0) + "]");
         }
-        else {
+        else if(!codeInventory.isEmpty()){
             String recentCode = codeInventory.get(codeInventory.size() - 1);
             System.out.println("Recent code: [" + recentCode + "]");
+        }
+        else{
+            System.out.println("There is no code to view.");
         }
     }
 

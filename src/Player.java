@@ -222,6 +222,19 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
 
     /*----------------------------------Player Methods for implementing the game--------------------------------------*/
+
+    // SHIANNE LESURE
+    public void viewCode(){
+        if(codeInventory.isEmpty()){
+            System.out.println("There is no code to view.");
+        }
+        else {
+            String recentCode = codeInventory.get(codeInventory.size() - 1);
+            System.out.println("Recent code: [" + recentCode + "]");
+        }
+    }
+
+
     /**
      * @Method: healHealth()
      * @Function: this code increases the player by the specified amount, capping at the player's max health

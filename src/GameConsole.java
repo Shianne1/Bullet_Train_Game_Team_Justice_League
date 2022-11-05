@@ -99,7 +99,6 @@ public class GameConsole {
         int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
         int IDofMonsterInRoom = gameState.getPlayer().getLocation().getRoomMonster();
         Room playerLocation = gameState.getPlayer().getLocation();
-        //int roomLocation = gameState.getPlayer().getLocation().getRoomId();
         Player currentPlayer = gameState.getPlayer();
         gameState.getItemsInGame();
 
@@ -128,9 +127,9 @@ public class GameConsole {
         else if(inputCommand.equals("check inventory")) { // THIS FEATURE IS WORKING
             view.printInventory(gameState.getPlayer());
         }
-        else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") ||
+        else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") || // THIS FEATURE IS WORKING
                 inputCommand.equals("south") || inputCommand.equals("s") ||  inputCommand.equals("west") || inputCommand.equals("w")){
-            room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand,gameState.getMonstersInGame(), gameState.getPuzzlesInGame() );
+            room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand);
 
             /*
             10/30/22 MEETING: DAKOTA
@@ -146,15 +145,15 @@ public class GameConsole {
              */
         }
         else if(inputCommand.equals("check out room")){ // THIS FEATURE IS WORKING
-            //view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation));
+            view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation, gameState.getItemsInGame()));
         }
         else if(inputCommand.contains("inspect")){ // THIS FEATURE IS WORKING
             view.printBasicText(item.inspect(inputCommand));
         }
         else if(inputCommand.equals("view code")){
-
+            player.viewCode();
         }
-        else if(inputCommand.equals("use code")){
+        else if(inputCommand.equals("use code")){ // THIS FEATURE IS WORKING
             /*
             view.printBasicText(gameState.getPlayer().checkCodeInventory());
             room.lockRoom(playerLocation);
@@ -180,9 +179,6 @@ public class GameConsole {
                 item.storeItem(StoreItem[1]);
             }
              */
-
-            //gameState.getItemsInGame();
-
             item.storeItem(inputCommand, playerLocation, currentPlayer);
             puzzle.removeRewardsItem(playerLocation, inputCommand);
         }
@@ -194,7 +190,6 @@ public class GameConsole {
             10/30/22 MEETING: SHIANNE , CARLTON
             I DON'T KNOW WHAT TO DO THE SET
              */
-
         }
         else if(inputCommand.equalsIgnoreCase("examine crate")){
             crate.examineCrate(inputCommand);

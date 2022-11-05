@@ -21,7 +21,7 @@ Station 1 Mystery Room
 The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
 -1,-1,1,-1
 true
-Folder 1
+No Crates
 -1
 -1
 31GH1
@@ -75,7 +75,7 @@ Station 2 Mystery Room
 The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
 -1,-1,-1,6
 true
-Folder 2
+No Crates
 -1
 -1
 1R41N5
@@ -120,7 +120,7 @@ Station 3 Mystery Room
 The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
 -1,-1,-1,11
 true
-Folder 3
+No Crates
 -1
 -1
 R0801
@@ -174,7 +174,7 @@ Station 4 Mystery Room
 The room has many tables with computers and maps. one of the tables seems to have a folder of papers.
 16,-1,-1,-1
 true
-Folder 4
+No Crates
 -1
 -1
 5W07D

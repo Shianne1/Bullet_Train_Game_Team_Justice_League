@@ -199,7 +199,10 @@ public class Room implements Serializable {
                 else
                 {
                     player.move(checkLock);
-                    System.out.println(checkLock.getRoomDesc());
+                    if(isVisited)
+                        System.out.println("You've Already Been Here.");
+                    else
+                        System.out.println(checkLock.getRoomDesc());
                 }
             }
         }
@@ -223,7 +226,10 @@ public class Room implements Serializable {
                 else
                 {
                     player.move(checkLock);
-                    System.out.println(checkLock.getRoomDesc());
+                    if(isVisited)
+                        System.out.println("You've Already Been Here.");
+                    else
+                        System.out.println(checkLock.getRoomDesc());
                 }
             }
         }
@@ -247,7 +253,10 @@ public class Room implements Serializable {
                 else
                 {
                     player.move(checkLock);
-                    System.out.println(checkLock.getRoomDesc());
+                    if(isVisited)
+                        System.out.println("You've Already Been Here.");
+                    else
+                        System.out.println(checkLock.getRoomDesc());
                 }
             }
         }
@@ -271,7 +280,10 @@ public class Room implements Serializable {
                 else
                 {
                     player.move(checkLock);
-                    System.out.println(checkLock.getRoomDesc());
+                    if(isVisited)
+                        System.out.println("You've Already Been Here.");
+                    else
+                        System.out.println(checkLock.getRoomDesc());
                 }
             }
         }

@@ -177,6 +177,48 @@ public class Monster implements EntityInterface, Serializable {
         }
     }
 
+    /**
+     * @Method: flee()
+     * @param player
+     * @param roomList
+     * @Function: when called on, moves player to previous room.
+     * @author: Dakota Smith
+     * 11/1/2022
+     */
+    public void flee(Player player, ArrayList<Room> roomList)
+    {
+        //creates holder variables
+        Room temp = player.getLocation();
+        int newLocation;
+
+        //checks if there is any room that player can move to
+        //There should only be one room that a monster room connects to.
+        if(temp.getNorth() >= 0)
+        {
+            newLocation = temp.getNorth();
+            temp = roomList.get(newLocation);
+            player.move(temp);
+        }
+        else if(temp.getEast() >= 0)
+        {
+            newLocation = temp.getEast();
+            temp = roomList.get(newLocation);
+            player.move(temp);
+        }
+        else if(temp.getSouth() >= 0)
+        {
+            newLocation = temp.getSouth();
+            temp = roomList.get(newLocation);
+            player.move(temp);
+        }
+        else
+        {
+            newLocation = temp.getWest();
+            temp = roomList.get(newLocation);
+            player.move(temp);
+        }
+    }
+
     @Override
     public void healHealth(int healthModifier) {
 

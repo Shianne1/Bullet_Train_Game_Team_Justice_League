@@ -1,32 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="missed a small line break">
-      <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Armor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Armor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Folder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Folder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameConsole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameState.class" afterDir="false" />
+    <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="Worked on equip() in Armor.java and Weapon.java">
       <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Healing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Healing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Help.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Help.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Map.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Monster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Monster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Monster.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Monster.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Puzzle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Puzzle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Puzzle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Puzzle.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/README.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Room.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Room.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/View.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Weapon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Weapon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Armor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Healing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Healing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Weapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/equipItemInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equipItemInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666301462350</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Worked on equip() in Armor.java and Weapon.java">
+      <created>1667761790837</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667761790837</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,7 +115,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="Mark_Branch" />
                       </list>
                     </value>
                   </entry>
@@ -146,6 +130,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="missed a small line break when checking stats" />
     <MESSAGE value="missed a small line break" />
-    <option name="LAST_COMMIT_MESSAGE" value="missed a small line break" />
+    <MESSAGE value="Worked on equip() in Armor.java and Weapon.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Worked on equip() in Armor.java and Weapon.java" />
   </component>
 </project>

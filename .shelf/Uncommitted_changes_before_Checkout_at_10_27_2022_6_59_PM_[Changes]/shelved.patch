@@ -1,0 +1,10 @@
+Index: .idea/.name
+===================================================================
+diff --git a/.idea/.name b/.idea/.name
+--- a/.idea/.name	
++++ b/.idea/.name	
+@@ -1,1 +1,1 @@
+-Monster.java
+\ No newline at end of file
++Item.java
+\ No newline at end of file

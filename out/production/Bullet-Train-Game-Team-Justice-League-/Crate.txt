@@ -1,0 +1,45 @@
+Crate 1
+No item
+3
+Crate 2
+No item
+3
+Crate 3
+Med Kit
+3
+Crate 4
+Med Kit
+9
+Crate 5
+No Item
+9
+Crate 6
+No Item
+9
+Crate 7
+No Item
+12
+Crate 8
+Med Kit
+12
+Crate 9
+No Item
+12
+Crate 10
+Med Kit
+18
+Crate 11
+No Item
+18
+Crate 12
+No Item
+18
+Crate 13
+No item
+22
+Crate 14
+Med Kit
+22
+Crate 15
+No Item
+22

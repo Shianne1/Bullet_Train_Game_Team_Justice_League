@@ -95,13 +95,13 @@ public class Healing extends Item implements itemInterface {
         for(Item item1: items){
             itemObjectHeal = item1;
             if(item.contains(super.getItemName())){ // if input contains the item name
-                healingItem.setStackAmount(getStackAmount() - 1); // subtract 1 from the healing item stack
+                this.setStackAmount(getStackAmount() - 1); // subtract 1 from the healing item stack
 
                 // add the healing points to the player's current health
-                currentHealth.setCurrentHealth(healingItem.getHealAmount() + currentHealth.getCurrentHealth());
+                player.setCurrentHealth(this.getHealAmount() + player.getCurrentHealth());
 
                 // print out to the player how much their current health has went up
-                System.out.println("You health has jumped up by " + healingItem.getHealAmount());
+                System.out.println("You health has jumped up by " + this.getHealAmount());
                 break;
             }
         }

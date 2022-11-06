@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="Worked on equip() in Armor.java and Weapon.java">
-      <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Healing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Healing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Item.java" afterDir="false" />
-    </list>
+    <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="Worked on equip() in Armor.java and Weapon.java" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

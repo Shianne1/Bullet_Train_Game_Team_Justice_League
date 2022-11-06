@@ -90,7 +90,7 @@ public class Healing extends Item implements itemInterface {
      */
 
     @Override
-    public void use() {
+    public void use(Player player) {
         String item = input.nextLine();
         for(Item item1: items){
             itemObjectHeal = item1;

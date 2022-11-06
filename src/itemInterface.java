@@ -7,6 +7,6 @@
   */
 interface itemInterface {
     String inspect(); // returns the item's description/item's text
-    void use(); // uses the item based on its function
+    void use(Player player); // uses the item based on its function
     void discard(); // discards the item
 }

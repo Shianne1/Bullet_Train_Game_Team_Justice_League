@@ -116,7 +116,7 @@ public class Item implements itemInterface, Serializable {
     }
 
     @Override
-    public void use() {
+    public void use(Player player) {
 
     }
 

@@ -67,7 +67,7 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
      * @added: 10/29/2022
      */
     @Override
-    public void use() {
+    public void use(Player player) {
         String item = input.nextLine();
         for (Item item1 : items) {
             itemObjectWeapon = item1;

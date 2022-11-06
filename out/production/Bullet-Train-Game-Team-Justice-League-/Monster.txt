@@ -1,0 +1,63 @@
+0
+Dog
+Low Rank Mafia Pet
+30
+20
+Bandage
+Syringe
+50
+10
+1
+Tiger
+High Rank Mafia Pet
+50
+30
+Bandage
+Syringe
+50
+25
+2
+GoodFella
+Low Rank Mafia Member
+75
+40
+Bandage
+Syringe
+60
+30
+3
+Goombah
+Senior Rank Mafia Member
+100
+60
+Syringe
+Med Kit
+50
+25
+4
+Scrap
+Robot Mafia Member
+40
+10
+Bandage
+Syringe
+60
+20
+5
+Spark
+Robotic Mafia Pet
+60
+20
+Bandage
+Syringe
+40
+15
+6
+Mr.Big
+The Big Boss
+150
+80
+suitcase
+N/A
+100
+0

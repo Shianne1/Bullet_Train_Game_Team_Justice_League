@@ -36,6 +36,15 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     private Room location;
     private Weapon equippedWeapon;
     private Armor equippedArmor;
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(ArrayList<Item> inventory) {
+        this.inventory = inventory;
+    }
+
     private ArrayList<Item> inventory;
 
     private GameState checkpoint;

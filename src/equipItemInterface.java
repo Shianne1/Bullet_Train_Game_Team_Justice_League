@@ -6,5 +6,5 @@
      @added 10/16/2022
   */
 interface equipItemInterface extends itemInterface{
-    void equip(); // equips the item
+    void equip(Player player); // equips the item
 }

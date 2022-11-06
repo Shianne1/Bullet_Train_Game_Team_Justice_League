@@ -3,6 +3,30 @@
   <component name="ChangeListManager">
     <list default="true" id="8ef12d28-b6a6-4115-8f80-737a24d60c92" name="Changes" comment="missed a small line break">
       <change beforePath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Bullet-Train-Game-Team-Justice-League-.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Armor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Armor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Folder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Folder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameConsole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Healing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Healing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Help.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Help.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Item.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Map.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Monster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Monster.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Monster.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Monster.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Puzzle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Puzzle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Puzzle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Puzzle.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Room.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Room.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Room.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/View.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Weapon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bullet-Train-Game-Team-Justice-League-/Weapon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Armor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Healing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Healing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/equipItemInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equipItemInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +42,24 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Armor.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/GameConsole.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/GameState.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Item.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Player.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/README.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/View.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Weapon.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/itemInterface.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/savedata/real_data.bin" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -84,7 +125,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

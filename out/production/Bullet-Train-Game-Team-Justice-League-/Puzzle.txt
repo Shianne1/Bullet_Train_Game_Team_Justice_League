@@ -1,0 +1,70 @@
+1
+Hit Points
+If a monster has 150HP and you deal 20HP of damage each hit, what are the minimum hits required to kill the monster?
+Divide 150 by 20
+8
+3
+Knife
+Bandage
+1
+
+2
+What does it say?
+In the second station, what monster did you to defeat? [ Pig | Robot | Demon | Squirrel ]
+No hint
+Robot
+3
+Katana
+Bandage
+11
+
+3
+Trains
+A train goes (    -    ) !
+Chuga - Chuga
+Choo - Choo
+3
+Light armor
+Bandage
+6
+
+4
+Miles Per Hour
+If the train is moving at a rate of 5mph, how long will it take to cover miles?
+Divide 20 by 5
+4
+3
+Heavy armor
+Bandage
+21
+
+5
+It's Sharp!
+What was the name of your second blade item? [ Dagger | Kitchen Knife | Katana | Sword ]
+No hint
+Katana
+3
+Medium armor
+Bandage
+16
+
+6
+Fill in the blank
+You can always find a train by following its (       ) ?
+what does the train ride on top of?
+Tracks
+3
+Pistol
+Bandage
+12
+
+7
+Wheels
+If the first train cart (the engine) has 10 wheels and a passenger cart has 8, How many wheels are there if there are 7 passenger carts and 1 engine cart?
+Multiply 8, and 7, then add 10
+66
+3
+Rifle
+Bandage
+18
+

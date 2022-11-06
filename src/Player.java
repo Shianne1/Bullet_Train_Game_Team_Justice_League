@@ -27,7 +27,12 @@ interface playerInterface {
      */
     String checkInventory();
 
-    //SHIANNE LESURE
+    /**
+     * @Object: checkCodeInventory
+     * @Function: This method return a the relays the inventory of codes to the player
+     * @author(s): Shianne Lesure
+     * @added 11/3/2022
+     */
     String checkCodeInventory();
 }
 
@@ -188,7 +193,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     /**
      * @Method: checkInventory()
      * @Function: this code returns a formatted string of the player's inventory that will be printed by the view
-     * @author(s) Carlton Napier, Shianne Lesure
+     * @author(s) Carlton Napier
      * @added 10/18/2022
      */
     @Override
@@ -204,39 +209,46 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         }
     }
 
-
-    //SHIANNE LESURE
+    /**
+     * @Method: checkCodeInventory()
+     * @return codeInventoryList
+     * @Function: this method will print out the codes the player gather throughout the game
+     * @author(s): Shianne Lesure
+     * @added: 11/3/2022
+     */
     @Override
     public String checkCodeInventory() {
-        if(!codeInventory.isEmpty()){
+        if(!codeInventory.isEmpty()){ // if inventory is not empty
             String codeInventoryList = "The codes in your inventory are: ";
             for(String codes: codeInventory){
-                codeInventoryList += "[" + codes + "] ";
+                codeInventoryList += "[" + codes + "] "; // will add the codes to the string
             }
             return codeInventoryList;
         } else {
-            return "There are no codes within the inventory";
+            return "There are no codes within the inventory"; // if player doesn't have any codes
         }
     }
 
 
-
     /*----------------------------------Player Methods for implementing the game--------------------------------------*/
-
-    // SHIANNE LESURE
+    /**
+     * @Method: viewCode()
+     * @Function: this method will print out the most recent code the player gathered
+     * @author(s): Shianne Lesure
+     * @added: 11/5/2022
+     */
     public void viewCode(){
-        if(codeInventory.size() == 1){
+        if(codeInventory.size() == 1){ // if inventory has only one code
             System.out.println("Recent code: [" + codeInventory.get(0) + "]");
         }
-        else if(!codeInventory.isEmpty()){
+        else if(!codeInventory.isEmpty()){ // if inventory is not empty
             String recentCode = codeInventory.get(codeInventory.size() - 1);
-            System.out.println("Recent code: [" + recentCode + "]");
+            System.out.println("Recent code: [" + recentCode + "]"); // print out the last element
         }
         else{
             System.out.println("There is no code to view.");
         }
     }
-
 
     /**
      * @Method: healHealth()
@@ -279,24 +291,29 @@ public class Player implements playerInterface, EntityInterface, Serializable {
             currentHealth = 0;
     }
 
-    //SHIANNE LESURE
-    public void inventoryAdd(Item item){
-        inventory.add(item);
-    }
+    /**
+     * @Method: inventoryAdd()
+     * @param item
+     * @Function: this method will add the items to the inventory
+     * @author(s): Shianne Lesure
+     * @added: 10/29/2022
+     */
+    public void inventoryAdd(Item item){ inventory.add(item); }
 
-    //SHIANNE LESURE
-    public void inventoryRemove(Item item){
-        inventory.remove(item);
-    }
+    /**
+     * @Method: inventoryRemove()
+     * @param item
+     * @Function: this method will remove the items from the inventory
+     * @author(s): Shianne Lesure
+     */
+    public void inventoryRemove(Item item){ inventory.remove(item); }
 
-    //SHIANNE LESURE
-    public void codeInventoryAdd(String codes){
-        codeInventory.add(codes);
-    }
-
-    // SHIANNE LESURE
-    public void codeInventoryRemove(String codes){
-        codeInventory.remove(codes);
-    }
-
+    /**
+     * @Method: codeInventoryAdd()
+     * @param codes
+     * @Function: this method will add the codes to the inventory
+     * @author(s): Shianne Lesure
+     * @added: 11/3/2022
+     */
+    public void codeInventoryAdd(String codes){ codeInventory.add(codes); }
 }

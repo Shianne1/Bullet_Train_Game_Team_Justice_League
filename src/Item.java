@@ -24,13 +24,6 @@ public class Item implements itemInterface, Serializable {
     private ArrayList<Item> items;
     private ArrayList<Room> roomItems;
 
-    // will access the player's inventory arraylist
-    //private ArrayList<Item> inventory;
-
-    //Player player = new Player();
-
-    // will access the room's inventory arraylist
-    //Room currentRoom;
     Item itemObject;
 
     Scanner input = new Scanner(System.in);
@@ -50,8 +43,6 @@ public class Item implements itemInterface, Serializable {
 
         // putting the items data into the item & room arraylist
         game.readItems(items, roomItems);
-        //player.checkInventory();
-       // inventory = new ArrayList<>();
     }
 
     /**
@@ -63,8 +54,7 @@ public class Item implements itemInterface, Serializable {
      * @author(s) Dakota Smith
      * 10/17/2022
      */
-    public Item(int id, String name, String desc, String text)
-    {
+    public Item(int id, String name, String desc, String text) {
         this.itemId = id;
         this.itemName = name;
         this.itemDesc = desc;
@@ -100,28 +90,45 @@ public class Item implements itemInterface, Serializable {
      */
     @Override
     public String inspect(String item) {
-        String[] parts = item.split(" ");
+        String[] parts = item.split(" "); // will split the player's input to get the item's name
         String itemDescription = "";
         for(Item inspectItem: items){
             if(parts[1].equalsIgnoreCase(inspectItem.getItemName())){
-                itemDescription = inspectItem.getItemDesc();
+                itemDescription = inspectItem.getItemDesc(); // will add the description to the string
                 break;
             }
         }
-        /*
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
-                System.out.println(items.get(i).getItemText()); // print out the textual description of the item
-                itemDescription = items.get(i).getItemDesc(); // add the description of the item to the string
-                break;
-            } else{
-                System.out.println("Hello");
-                break;
-            }
-        }
-
-         */
         return itemDescription; // return the string
+    }
+
+
+    // SHIANNE LESURE 11/6/2022
+    public void getFolderCode(Room current, Player player){
+        current.getRoomCode();
+        for(Item folderItem: items){
+            folderItem.getItemDesc();
+            if(folderItem.getItemDesc().contains(current.getRoomCode())){
+                player.codeInventoryAdd(current.getRoomCode());
+            }
+            /*
+            if(folderItem.getItemDesc().contains("MONEY")){
+                player.codeInventoryAdd("MONEY");
+            }
+
+            if(folderItem.getItemDesc().contains("CHEMICALS")){
+                player.codeInventoryAdd("CHEMICALS");
+            }
+
+            if(folderItem.getItemDesc().contains("BOMBS")){
+                player.codeInventoryAdd("BOMBS");
+            }
+
+            if(folderItem.getItemDesc().contains("WEAPONS")){
+                player.codeInventoryAdd("WEAPONS");
+            }
+
+             */
+        }
     }
 
     @Override
@@ -131,28 +138,21 @@ public class Item implements itemInterface, Serializable {
 
     /**
      * @Method: discardItem()
+     * @param current
+     * @param inventory
+     * @param item
      * @Function: This method will allow for the player to remove the item from their inventory
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
     @Override
     public void discard(String item, Room current, Player inventory) {
-        /*
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
-                inventory.remove(items.get(i).getItemName()); // remove item from player's inventory
-
-                break;
-            }
-        }
-
-         */
-        String[] parts = item.split(" ");
+        String[] parts = item.split(" "); // will split the player's input to get the item's name
         for(Item item1: items){
             itemObject = item1;
             if(parts[1].equalsIgnoreCase(item1.getItemName())){
-                inventory.inventoryRemove(itemObject);
-                current.roomItemAdd(itemObject);
+                inventory.inventoryRemove(itemObject); // will remove item from player's inventory
+                current.roomItemAdd(itemObject); // will drop item into current room
                 System.out.println(item1.getItemName() + " has been remove from the inventory.");
                 break;
             }
@@ -162,30 +162,13 @@ public class Item implements itemInterface, Serializable {
     /**
      * @Method: storeItem()
      * @param item
+     * @param current
+     * @param inventory
      * @Function: This method will allow the player to take the item and store it within their inventory
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
     public void storeItem(String item, Room current, Player inventory){ // store item is the same as pick up item
-        /*
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if player's input contains the item's name
-                if(item.contains("Katana")){ // if player adds katana to their inventory
-                    discard(); // remove knife from inventory
-                }
-                else if(item.contains("medium armor")){ // if player adds medium armor to their inventory
-                    discard(); // remove light armor from inventory
-                }
-                else if(item.contains("heavy armor")){ // if player add heavy armor to their inventory
-                    discard(); // remove medium armor from inventory
-                }
-                inventory.add(items.get(i).getItemName()); // add item to player's inventory
-                roomItems.remove(items.get(i).getItemName()); // remove item from current room
-                break;
-            }
-        }
-
-         */
         current.roomItemRemove(itemObject);
         String[] parts = item.split(" ");
         for(Item item1: items){
@@ -204,43 +187,8 @@ public class Item implements itemInterface, Serializable {
                     discard("Medium Armor",current, inventory ); // remove medium armor from inventory
                 }
                 System.out.println(item1.getItemName() + " has been added to the inventory.");
-                /*
-                inventory.inventoryAdd(itemObject);
-                current.roomItemRemove(itemObject);
-
-                 */
                 break;
             }
         }
     }
-
-    /*
-    @Override
-    public String inspect(String item){
-        String item = input.nextLine();
-        String itemDescription = "";
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
-                System.out.println(items.get(i).getItemText()); // print out the textual description of the item
-                itemDescription = items.get(i).itemDesc; // add the description of the item to the string
-                break;
-            }
-        }
-        return itemDescription; // return the string
-    }
-
-    public void discardItem(String item){
-        String item = input.nextLine();
-        for(int i = 0; i < items.size(); i++){
-            if(item.contains(items.get(i).getItemName())){ // if player's input contains item's name
-                inventory.remove(items.get(i).getItemName()); // remove item from player's inventory
-                currentRoom.roomItemAdd(items.get(i).getItemName()); // add item  to current room
-
-                break;
-            }
-        }
-
-    }
-
-     */
 }

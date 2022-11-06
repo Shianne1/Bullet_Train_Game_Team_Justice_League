@@ -32,16 +32,10 @@ public class Puzzle implements Serializable {
     private ArrayList<Item> items;
     private ArrayList<Room> rooms;
 
-    private ArrayList<String> puzzleReward1;
-    private ArrayList<String> puzzleReward2;
-    //GameState gameState = new GameState();
-    // will allow for the puzzle class to access the current room the player is in
+
     Item itemObject;
     Puzzle puzzleGame;
     Scanner input;
-
-    // NEED TO ACCESS THE ITEMS ARRAYLIST
-    // NEED TO ACCESS ROOMS ARRAYLIST
 
 
     /*-----------------------------------------------Puzzle Constructors----------------------------------------------*/
@@ -56,23 +50,15 @@ public class Puzzle implements Serializable {
         // will take the player's input
         input = new Scanner(System.in);
 
-        // an arraylist that will hold the puzzle's data
+        // an arraylist that will hold the puzzle, room, and item's data
         puzzles = new ArrayList<>();
         items = new ArrayList<>();
         rooms = new ArrayList<>();
 
-        // putting the puzzle data into the puzzles arraylist
+        // putting the data into the arraylist
         game.readPuzzleTxt(puzzles);
         GameConsole.readItems(items,rooms);
         GameConsole.readRooms(rooms);
-
-        // are arraylists that will hold the items the puzzle will drop if player solve them.
-        puzzleReward1 = new ArrayList<>();
-        puzzleReward2 = new ArrayList<>();
-
-        //itemInventoryForPuzzles(puzzleReward1, puzzleReward2);
-        //gameState.setPuzzlesInGame(puzzles);
-        //gameState.getPuzzlesInGame();
     }
 
     /**
@@ -100,6 +86,7 @@ public class Puzzle implements Serializable {
         this.reward2 = reward2;
         this.puzzleCode = puzzleCode;
     }
+
 
     /*------------------------------------Getters & Setters for Puzzle variables--------------------------------------*/
     public int getPuzzleID() {
@@ -178,44 +165,10 @@ public class Puzzle implements Serializable {
 
 
     /*-------------------------------Puzzle Methods for implementing the game-----------------------------------------*/
-    // THIS IS JUST A PRACTICE RUN TO TEST IF MY ARRAYLIST IS BEING READ
-    public void practiceRun() {
-
-        for (int i = 0; i < puzzles.size(); i++) {
-            System.out.println(puzzles.get(i));
-            System.out.println();
-        }
-
-
-        System.out.println("-----------------------------------------------------------------------------------------");
-        //System.out.print(puzzles);
-    }
-
-    /**
-     * @param puzzleReward1
-     * @param puzzleReward2
-     * @Method: itemInventoryForPuzzles()
-     * @Function: This method will take the variables reward1 & reward2 from the puzzle arraylist and added to 2 separate arraylist.
-     * @author(s): Shianne Lesure
-     * @added: 10/27/2022
-     */
-    public void itemInventoryForPuzzles(ArrayList<String> puzzleReward1, ArrayList<String> puzzleReward2) {
-        for (Puzzle prize1 : puzzles) {
-            String reward1Name = prize1.getReward1();
-            if (reward1Name.equals(reward1)) {
-                puzzleReward1.add(reward1Name); // adding the reward1 item into the puzzleReward1
-            }
-        }
-        for (Puzzle prize2 : puzzles) {
-            String reward2Name = prize2.getReward2();
-            if (reward2Name.equals(reward2)) {
-                puzzleReward2.add(reward2Name); // adding the reward2 item into the puzzleReward2
-            }
-        }
-    }
-
     /**
      * @param puzzleLocationID
+     * @param currentRoom
+     * @param prizeItem
      * @Method: dropRewardsItem()
      * @Function: This method will drop the reward items into the current room the player is in.
      * @author(s): Shianne Lesure, Carlton Napier
@@ -224,39 +177,51 @@ public class Puzzle implements Serializable {
     public void dropRewardsItem(int puzzleLocationID, Room currentRoom, String prizeItem) {
         for (Item itemGame : items) {
             itemObject = itemGame;
-            if (puzzleLocationID == this.puzzleID) {
+            if (puzzleLocationID == this.puzzleID) { // if the puzzle is in the current room
                 if(itemObject.getItemName().equals(prizeItem)){
-                    currentRoom.roomItemAdd(itemObject);
+                    currentRoom.roomItemAdd(itemObject); // add the prize item to the room
                     break;
                 }
             }
         }
     }
 
-    //SHIANNE LESURE
+    /**
+     * @Method: removeRewardsItem()
+     * @param currentRoom
+     * @param prizeItem
+     * @Function: This method will remove the prize items from the current room the player is in.
+     * @author(s): Shianne Lesure
+     * @added: 11/3/2022
+     */
     public void removeRewardsItem(Room currentRoom, String prizeItem){
-        String[] parts = prizeItem.split(" ");
+        String[] parts = prizeItem.split(" "); // taking player's input and splitting it to get the item's name
         for(Item itemGame: items){
             itemObject = itemGame;
             if(parts[1].equalsIgnoreCase(itemObject.getItemName())){
-                currentRoom.roomItemRemove(itemObject);
+                currentRoom.roomItemRemove(itemObject); // remove the prize item from current room
                 break;
             }
         }
     }
 
-    //SHIANNE LESURE
+    /**
+     * @Method: addPuzzleCodes()
+     * @param playerCodes
+     * @param puzzleCodes
+     * @Function: This method will add the codes the game gets from the puzzle and add them the player's code inventory.
+     * @author(s): Shianne Lesure
+     * @added: 10/27/2022
+     */
     public void addPuzzleCodes(Player playerCodes, String puzzleCodes){
         playerCodes.codeInventoryAdd(puzzleCodes);
     }
 
-
-
-
     /**
      * @Mehtod: inspectPuzzle()
      * @param puzzleLocationID
-     *
+     * @param currentRoom
+     * @param playerCode
      * @Function: This method will allow the player to see the question of the puzzle as well if they would like to solve the puzzle
      * @author(s): Shianne Lesure
      * @added: 10/27/2022
@@ -265,10 +230,10 @@ public class Puzzle implements Serializable {
         for (Puzzle puzzle : puzzles) {
             puzzleGame = puzzle;
             if (puzzleLocationID == this.puzzleID) {
-                System.out.println(puzzle.getPuzzleQuestion());
+                System.out.println(puzzle.getPuzzleQuestion()); // print out puzzle question
                 System.out.println("If you would like to solve the puzzle type: [solve puzzle]");
-                answer = input.nextLine();
-                if (answer.equalsIgnoreCase("solve puzzle")) {
+                answer = input.nextLine(); // take player's input
+                if (answer.equalsIgnoreCase("solve puzzle")) { // if player's input is solve puzzle, then the solve puzzle method is called
                     solvePuzzle(puzzleLocationID, currentRoom, playerCode);
                 }
                 break;
@@ -279,6 +244,8 @@ public class Puzzle implements Serializable {
         /**
          * @Mthod: solvePuzzle()
          * @param puzzleLocationID
+         * @param currentRoom
+         * @param playerCode
          * @Function: This method will allow for the player to answer the current puzzle to reviews prizes
          * @author(s): Shianne Lesure
          * @added: 10/27/2022
@@ -288,28 +255,26 @@ public class Puzzle implements Serializable {
                 puzzleGame = puzzleSolve;
                 if (puzzleLocationID == this.puzzleID) {
                     System.out.println("What is your answer?");
-                    String playerAnswer = input.nextLine();
-                    int resetAttempts = puzzleSolve.getAttempts();
+                    String playerAnswer = input.nextLine(); // take player's answer
+                    int resetAttempts = puzzleSolve.getAttempts(); // reset the puzzle attempts
                     while (puzzleSolve.getAttempts() != 0) {
                         if (playerAnswer.equalsIgnoreCase(puzzleSolve.getAnswer()) && puzzleSolve.getAttempts() == 3) { // if player solve the puzzle on their 1st try
                             System.out.println("You solve the puzzle correctly! You can now claim your prizes! \n" + puzzleSolve.reward1 + "\n" + puzzleSolve.reward2 + "\nCODE: " + puzzleSolve.puzzleCode);
-                            // will drop the reward item as well as bandages
-                            dropRewardsItem(puzzleLocationID, currentRoom, puzzleSolve.reward1);
-                            dropRewardsItem(puzzleLocationID, currentRoom, puzzleSolve.reward2);
-                            addPuzzleCodes(playerCode,puzzleSolve.puzzleCode);
-                            currentRoom.setRoomPuzzle(-1);
+                            dropRewardsItem(puzzleLocationID, currentRoom, puzzleSolve.reward1); // will drop the 1st prize
+                            dropRewardsItem(puzzleLocationID, currentRoom, puzzleSolve.reward2); // will drop the 2nd prize
+                            addPuzzleCodes(playerCode,puzzleSolve.puzzleCode); // will show the puzzle code within the room
+                            currentRoom.setRoomPuzzle(-1); // will take the puzzle out the current room
                             break;
                         } else if (playerAnswer.equalsIgnoreCase(puzzleSolve.getAnswer()) && puzzleSolve.getAttempts() < 3) { // if player solve the puzzle on their 2nd & 3rd try
                             System.out.println("You solve the puzzle correctly! You can now claim your prize!\n" + puzzleSolve.reward2 + "\nCODE: " + puzzleSolve.puzzleCode);
-                            //will only drop the bandages
-                            dropRewardsItem(puzzleLocationID, currentRoom, puzzleSolve.reward2);
-                            addPuzzleCodes(playerCode,puzzleSolve.puzzleCode);
-                            currentRoom.setRoomPuzzle(-1);
+                            dropRewardsItem(puzzleLocationID, currentRoom, puzzleSolve.reward2); // will drop the 2nd prize
+                            addPuzzleCodes(playerCode,puzzleSolve.puzzleCode); // will show the puzzle code within the room
+                            currentRoom.setRoomPuzzle(-1); // will take the puzzle out the current room
                             break;
                         } else if (!playerAnswer.equalsIgnoreCase(puzzleSolve.getAnswer())) { // if player doesn't solve the puzzle correctly
                             if (playerAnswer.equalsIgnoreCase("get hint")) {
-                                hint(puzzleLocationID);
-                                puzzleSolve.setAttempts(puzzleSolve.getAttempts() + 1);
+                                hint(puzzleLocationID); // print out the puzzle's hint
+                                puzzleSolve.setAttempts(puzzleSolve.getAttempts() + 1); // will add an attempts back to the player
                             }
                             if (puzzleSolve.getAttempts() == 0) { // if player runs out of attempts
                                 System.out.println("Failed to solve this puzzle.");
@@ -319,8 +284,8 @@ public class Puzzle implements Serializable {
                             if (playerAnswer.equalsIgnoreCase("exit puzzle")) {
                                 System.out.println("You have exited out the puzzle.");
                                 puzzleSolve.setAttempts(puzzleSolve.getAttempts() + 1);
-                                puzzleSolve.setAttempts(resetAttempts);
-                                break;
+                                puzzleSolve.setAttempts(resetAttempts); // reset puzzle attempts
+                                break; // will break out the method
                             }
                             puzzleSolve.setAttempts(puzzleSolve.getAttempts() - 1); // remove their 1 attempt from player
                             System.out.println("The answer you provided is wrong. You still have " + puzzleSolve.getAttempts() + " attempts left.\nWhat is your answer?");
@@ -332,7 +297,6 @@ public class Puzzle implements Serializable {
             }
         }
 
-
         /**
          * @Method: hint()
          * @param puzzleLocationID
@@ -343,7 +307,7 @@ public class Puzzle implements Serializable {
         public void hint(int puzzleLocationID){
             for (Puzzle puzzle : puzzles) {
                 if (puzzleLocationID == this.puzzleID) {
-                    System.out.println("Hint: " + puzzle.getHint());
+                    System.out.println("Hint: " + puzzle.getHint()); //will print out current puzzle's hint
                     break;
                 }
             }
@@ -352,14 +316,15 @@ public class Puzzle implements Serializable {
         /**
          * @Method: retryPuzzle()
          * @param puzzleLocationID
+         * @param currentRoom
+         * @param playerCode
          * @Function: This method will allow for the player to retry the puzzle if they have failed
          * @author(s): Shianne Lesure
          * @added: 10/27/2022
          */
         public void retryPuzzle(int puzzleLocationID, Room currentRoom, Player playerCode){
             if (puzzleLocationID == this.puzzleID) {
-                inspectPuzzle(puzzleLocationID, currentRoom, playerCode);
+                inspectPuzzle(puzzleLocationID, currentRoom, playerCode); // go back to the inspect puzzle method
             }
-
         }
 }

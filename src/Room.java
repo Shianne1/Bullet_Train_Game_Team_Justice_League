@@ -132,7 +132,7 @@ public class Room implements Serializable {
      * @author: Dakota Smith, Shianne Lesure
      * 10/19/2022
      */
-    public String inspectRoom(ArrayList<Monster> monsters, ArrayList<Puzzle> puzzles, Room roomLocation, ArrayList<Item> folder) { // WORK ON THIS IT IS PRINTING OUT EMPTY BECAUSE IT THINK IT IS STILL IN THE TRAIN WAGON
+    public String inspectRoom(ArrayList<Monster> monsters, ArrayList<Puzzle> puzzles, Room roomLocation, ArrayList<Item> folder) {
         String fullDesc = "";
         Puzzle tempPuzz;
         Monster tempMon;
@@ -176,38 +176,45 @@ public class Room implements Serializable {
         return fullDesc;
     }
 
-    // SHIANNE LESURE
+    /**
+     * @Method: folderList()
+     * @param currentRoom
+     * @param folder
+     * @Function: this method will add the folder to what room they are suppose to be in
+     * @author(s): Shianne Lesure
+     * @added: 11/5/2022
+     */
     public void folderList(Room currentRoom, ArrayList<Item> folder){
         this.roomName = currentRoom.getRoomName();
 
-        if(this.roomName.contains("1 Mystery") ){
+        if(this.roomName.contains("1 Mystery") ){ // if player is within the Mystery 1 room
             for(Item a : folder){
                 if(a.getItemName().contains("1")){
-                    roomItems.add(a);
+                    roomItems.add(a); // add folder 1 to that room
                     break;
                 }
             }
         }
-        if(this.roomName.contains("2 Mystery") ){
+        if(this.roomName.contains("2 Mystery") ){ // if player is within the Mystery 2 room
             for(Item a : folder){
                 if(a.getItemName().contains("2")){
-                    roomItems.add(a);
+                    roomItems.add(a); // add folder 2 to that room
                     break;
                 }
             }
         }
-        if(this.roomName.contains("3 Mystery") ){
+        if(this.roomName.contains("3 Mystery") ){ // if player is within the Mystery 3 room
             for(Item a : folder){
                 if(a.getItemName().contains("3")){
-                    roomItems.add(a);
+                    roomItems.add(a); // add folder 3 to that room
                     break;
                 }
             }
         }
-        if(this.roomName.contains("4 Mystery") ){
+        if(this.roomName.contains("4 Mystery") ){ // if player is within the Mystery 4 room
             for(Item a : folder){
                 if(a.getItemName().contains("4")){
-                    roomItems.add(a);
+                    roomItems.add(a); // add folder 4 to that room
                     break;
                 }
             }
@@ -277,14 +284,6 @@ public class Room implements Serializable {
                 else {
                     player.move(checkLock);
                     System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                    /*
-                    System.out.println("If you would like to inspect room type: [check out room]");
-                    playerAnswer = input.nextLine();
-                    if(playerAnswer.equalsIgnoreCase("check out room")){
-                        current.inspectRoom(monsters, puzzles,checkLock);
-                    }
-
-                     */
                 }
             }
         }
@@ -312,14 +311,6 @@ public class Room implements Serializable {
                 else {
                     player.move(checkLock);
                     System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                    /*
-                    System.out.println("If you would like to inspect room type: [check out room]");
-                    playerAnswer = input.nextLine();
-                    if(playerAnswer.equalsIgnoreCase("check out room")){
-                        System.out.println(current.inspectRoom(monsters, puzzles,checkLock));
-                    }
-
-                     */
                 }
             }
         }
@@ -347,14 +338,6 @@ public class Room implements Serializable {
                 else {
                     player.move(checkLock);
                     System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                    /*
-                    System.out.println("If you would like to inspect room type: [check out room]");
-                    playerAnswer = input.nextLine();
-                    if(playerAnswer.equalsIgnoreCase("check out room")){
-                        current.inspectRoom(monsters, puzzles,checkLock);
-                    }
-
-                     */
                 }
             }
         }
@@ -382,37 +365,35 @@ public class Room implements Serializable {
                 else {
                     player.move(checkLock);
                     System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                    /*
-                    System.out.println("If you would like to inspect room type: [check out room]");
-                    playerAnswer = input.nextLine();
-                    if(playerAnswer.equalsIgnoreCase("check out room")){
-                        System.out.println(current.inspectRoom(monsters, puzzles,checkLock));
-                    }
-
-                     */
                 }
             }
         }
     }
 
-    // SHIANNE LESURE
+    /**
+     * @Method: lockRoom()
+     * @param currentLockRoom
+     * @param player
+     * @Function: this method will ask the player to use the code to unlock the room
+     * @author(s): Shianne Lesure
+     * @added: 11/3/2022
+     */
     public void lockRoom(Room currentLockRoom, Player player){
         System.out.println(player.checkCodeInventory());
-        this.roomCode = currentLockRoom.getRoomCode();
-        this.isLocked = currentLockRoom.isLocked();
+        this.roomCode = currentLockRoom.getRoomCode(); // will grab the current room
+        this.isLocked = currentLockRoom.isLocked(); // will check to see if the current room is locked
         System.out.print("\nPASSWORD: ");
-        String password = input.next();
+        String password = input.next(); // takes player's input
         while(this.isLocked == true) {
-            if (password.equalsIgnoreCase(this.roomCode)) {
-                currentLockRoom.setLocked(false);
+            if (password.equalsIgnoreCase(this.roomCode)) { // if code is correct
+                currentLockRoom.setLocked(false); // set room to be unlock
                 System.out.println("Room has been unlock.");
                 break;
             } else {
                 System.out.println("Wrong password.");
                 System.out.print("\nPASSWORD: ");
-                password = input.next();
+                password = input.next(); // take player's input
             }
         }
     }
-
 }

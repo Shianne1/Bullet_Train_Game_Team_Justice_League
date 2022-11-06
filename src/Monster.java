@@ -211,21 +211,10 @@ public class Monster implements EntityInterface, Serializable {
         String monsterDescription = "";
         for(Monster monster1: enemy){
             if(monsterLocationID == this.monsterId){
-                monsterDescription = monster1.getMonsterDesc();
+                monsterDescription = monster1.getMonsterDesc(); // will add description to the string
                 break;
             }
         }
-        /*
-        String monsterDescription = "";
-        for(int i = 0; i < enemy.size(); i++){
-            if(monster.contains(enemy.get(i).getMonsterName())){ // if player's input contains monster's name
-                //System.out.println(enemy.get(i).getMonsterDesc());
-                monsterDescription = enemy.get(i).getMonsterDesc(); // add the monster's description to the string
-                break;
-            }
-        }
-
-         */
         return monsterDescription; // return the string
     }
 }

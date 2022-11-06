@@ -81,38 +81,13 @@ public class Healing extends Item implements itemInterface {
     }
 
 
-
-
     /*--------------------------------Healing Methods for implementing the game---------------------------------------*/
-    /**
-     * @Method: useItem()
-     * @param item
-     * @Function: This method will allow the player use an item to heal their wounds and increase their health
-     * @author(s): Shianne Lesure
-     * @added: 10/29/2022
-     *
-    public void useItem(String item) {
-        for (int i = 0; i < items.size(); i++) {
-            if (item.contains(items.get(i).getItemName())) { // if input contains the item name
-                items.get(i).setStackAmount(getStackAmount() - 1); // subtract 1 from the healing item stack
-                currentHealth = items.get(i).getHealAmount() + currentHealth; // add the healing points to the player's current health
-
-                // print out to the player how much their current health has went up
-                System.out.println("You health has jumped up by " + items.get(i).getHealAmount());
-                break;
-            }
-
-        }
-    }
-    */
-
     /**
      * @Method: use()
      * @Function: This method will allow the player use an item to heal their wounds and increase their health
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
-
     @Override
     public void use() {
         /*
@@ -144,6 +119,4 @@ public class Healing extends Item implements itemInterface {
             }
         }
     }
-
-
 }

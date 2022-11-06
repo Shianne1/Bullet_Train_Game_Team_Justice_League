@@ -31,7 +31,7 @@ public class GameConsole {
         Healing healing = new Healing();
         Weapon weapon = new Weapon();
         Armor armor = new Armor();
-        Folder folder = new Folder();
+        //Folder folder = new Folder();
         Crate crate = new Crate();
         Puzzle puzzle = new Puzzle();
         Monster monster = new Monster();
@@ -71,7 +71,7 @@ public class GameConsole {
             // THIS IS A TEMP LOOP FOR TESTING
 
             view.printGameLoop(gameState);
-            parseCommand(game, gameState, view, puzzle, item, healing, weapon, armor, folder, crate, monster, room, player);
+            parseCommand(game, gameState, view, puzzle, item, healing, weapon, armor, crate, monster, room, player);
 
         }
     }
@@ -94,7 +94,7 @@ public class GameConsole {
             EX. view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame()));
     */
     private static void parseCommand(GameConsole game, GameState gameState, View view, Puzzle puzzle, Item item, Healing healing,
-                                     Weapon weapon, Armor armor, Folder folder, Crate crate, Monster monster, Room room, Player player) {
+                                     Weapon weapon, Armor armor, Crate crate, Monster monster, Room room, Player player) {
         String inputCommand = view.inputCommand();
         int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
         int IDofMonsterInRoom = gameState.getPlayer().getLocation().getRoomMonster();
@@ -105,7 +105,7 @@ public class GameConsole {
         if(inputCommand.equals("save game")) { // THIS FEATURE IS WORKING
             saveGame(gameState, view);
         }
-        else if(inputCommand.equals("load game")) { 
+        else if(inputCommand.equals("load game")) {
             loadGame(gameState, view.loadingGameText());
         }
         else if(inputCommand.equals("exit game")) { // THIS FEATURE IS WORKING
@@ -147,8 +147,9 @@ public class GameConsole {
         else if(inputCommand.equals("check out room")){ // THIS FEATURE IS WORKING
             view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation, gameState.getItemsInGame()));
         }
-        else if(inputCommand.contains("inspect")){ // THIS FEATURE IS WORKING
+        else if(inputCommand.contains("inspect")){
             view.printBasicText(item.inspect(inputCommand));
+            item.getFolderCode(playerLocation, currentPlayer);
         }
         else if(inputCommand.equals("view code")){ // THIS FEATURE IS WORKING
             gameState.getPlayer().viewCode();

@@ -88,7 +88,6 @@ public class Healing extends Item implements itemInterface {
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
-
     @Override
     public void use(Player player) {
         String item = input.nextLine();
@@ -106,6 +105,4 @@ public class Healing extends Item implements itemInterface {
             }
         }
     }
-
-
 }

@@ -26,6 +26,14 @@ interface playerInterface {
      * @added 10/16/2022
      */
     String checkInventory();
+
+    /**
+     * @Object: checkCodeInventory
+     * @Function: This method return a the relays the inventory of codes to the player
+     * @author(s): Shianne Lesure
+     * @added 11/3/2022
+     */
+    String checkCodeInventory();
 }
 
 public class Player implements playerInterface, EntityInterface, Serializable {
@@ -46,6 +54,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     }
 
     private ArrayList<Item> inventory;
+    private ArrayList<String> codeInventory;
 
     private GameState checkpoint;
 
@@ -75,11 +84,12 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.equippedWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5); // durability/uses set to -1 since a fist will never break
         this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
+        this.codeInventory = new ArrayList<>();
 
     }
 
     // constructor for preexisting data
-    public Player(int maxHealth, int currentHealth, int numOfMonstersKilled, String name, Room location, Weapon equippedWeapon, Armor equippedArmor, ArrayList<Item> inventory, GameState checkpoint) {
+    public Player(int maxHealth, int currentHealth, int numOfMonstersKilled, String name, Room location, Weapon equippedWeapon, Armor equippedArmor, ArrayList<Item> inventory, ArrayList<String> codeInventory, GameState checkpoint) {
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
         this.numOfMonstersKilled = numOfMonstersKilled;
@@ -88,6 +98,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.equippedWeapon = equippedWeapon;
         this.equippedArmor = equippedArmor;
         this.inventory = inventory;
+        this.codeInventory = codeInventory;
         this.checkpoint = checkpoint;
 
     }
@@ -101,6 +112,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.equippedWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5); // durability/uses set to -1 since a fist will never break
         this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
+        this.codeInventory = new ArrayList<>();
         this.checkpoint = defaultCheckpoint;
     }
 
@@ -198,7 +210,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         if (!inventory.isEmpty()) {
             String inventoryList = "The current items in your inventory are: ";
             for (Item item : inventory) {
-                inventoryList.concat("[" + item.toString() + "] ");
+                inventoryList += "[" + item.getItemName() + "] ";
             }
             return inventoryList;
         } else {
@@ -206,8 +218,47 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         }
     }
 
+    /**
+     * @Method: checkCodeInventory()
+     * @return codeInventoryList
+     * @Function: this method will print out the codes the player gather throughout the game
+     * @author(s): Shianne Lesure
+     * @added: 11/3/2022
+     */
+    @Override
+    public String checkCodeInventory() {
+        if(!codeInventory.isEmpty()){ // if inventory is not empty
+            String codeInventoryList = "The codes in your inventory are: ";
+            for(String codes: codeInventory){
+                codeInventoryList += "[" + codes + "] "; // will add the codes to the string
+            }
+            return codeInventoryList;
+        } else {
+            return "There are no codes within the inventory"; // if player doesn't have any codes
+        }
+    }
+
 
     /*----------------------------------Player Methods for implementing the game--------------------------------------*/
+    /**
+     * @Method: viewCode()
+     * @Function: this method will print out the most recent code the player gathered
+     * @author(s): Shianne Lesure
+     * @added: 11/5/2022
+     */
+    public void viewCode(){
+        if(codeInventory.size() == 1){ // if inventory has only one code
+            System.out.println("Recent code: [" + codeInventory.get(0) + "]");
+        }
+        else if(!codeInventory.isEmpty()){ // if inventory is not empty
+            String recentCode = codeInventory.get(codeInventory.size() - 1);
+            System.out.println("Recent code: [" + recentCode + "]"); // print out the last element
+        }
+        else{
+            System.out.println("There is no code to view.");
+        }
+    }
+
     /**
      * @Method: healHealth()
      * @Function: this code increases the player by the specified amount, capping at the player's max health
@@ -249,4 +300,29 @@ public class Player implements playerInterface, EntityInterface, Serializable {
             currentHealth = 0;
     }
 
+    /**
+     * @Method: inventoryAdd()
+     * @param item
+     * @Function: this method will add the items to the inventory
+     * @author(s): Shianne Lesure
+     * @added: 10/29/2022
+     */
+    public void inventoryAdd(Item item){ inventory.add(item); }
+
+    /**
+     * @Method: inventoryRemove()
+     * @param item
+     * @Function: this method will remove the items from the inventory
+     * @author(s): Shianne Lesure
+     */
+    public void inventoryRemove(Item item){ inventory.remove(item); }
+
+    /**
+     * @Method: codeInventoryAdd()
+     * @param codes
+     * @Function: this method will add the codes to the inventory
+     * @author(s): Shianne Lesure
+     * @added: 11/3/2022
+     */
+    public void codeInventoryAdd(String codes){ codeInventory.add(codes); }
 }

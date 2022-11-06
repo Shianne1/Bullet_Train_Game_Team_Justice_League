@@ -18,7 +18,9 @@ public class View {
      */
     public void printInventory(Player player) {
         System.out.println((player.checkInventory()));
+        System.out.println("\n" + player.checkCodeInventory());
     }
+
 
     /**
      * @Method: printStatText()
@@ -140,20 +142,4 @@ public class View {
         System.out.println("It seems you have died, you will now be returned to your last check point");
     }
 
-
-
-    public void inspectPuzzle(Puzzle puzzle)
-    {
-        puzzle.inspectPuzzle(inputCommand());
-        System.out.println(puzzle.getPuzzleQuestion());
-        System.out.println("If you would like to solve the puzzle type: (solve puzzle)");
-        String puzzleCommand = inputCommand();
-
-        if(puzzleCommand.toLowerCase().equals("Solve Puzzle"))
-        {
-            System.out.println("What is your answer?");
-            String puzzleAnswer = inputCommand();
-            puzzle.solvePuzzle(puzzleAnswer );
-        }
-    }
 }

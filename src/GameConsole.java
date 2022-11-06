@@ -31,7 +31,7 @@ public class GameConsole {
         Healing healing = new Healing();
         Weapon weapon = new Weapon();
         Armor armor = new Armor();
-        Folder folder = new Folder();
+        //Folder folder = new Folder();
         Crate crate = new Crate();
         Puzzle puzzle = new Puzzle();
         Monster monster = new Monster();
@@ -71,7 +71,7 @@ public class GameConsole {
             // THIS IS A TEMP LOOP FOR TESTING
 
             view.printGameLoop(gameState);
-            parseCommand(game, gameState, view, puzzle, item, healing, weapon, armor, folder, crate, monster, room, player);
+            parseCommand(game, gameState, view, puzzle, item, healing, weapon, armor, crate, monster, room, player);
 
         }
     }
@@ -94,34 +94,42 @@ public class GameConsole {
             EX. view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame()));
     */
     private static void parseCommand(GameConsole game, GameState gameState, View view, Puzzle puzzle, Item item, Healing healing,
-                                     Weapon weapon, Armor armor, Folder folder, Crate crate, Monster monster, Room room, Player player) {
+                                     Weapon weapon, Armor armor, Crate crate, Monster monster, Room room, Player player) {
         String inputCommand = view.inputCommand();
-        if(inputCommand.equals("save game")) {
+        int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+        int IDofMonsterInRoom = gameState.getPlayer().getLocation().getRoomMonster();
+        Room playerLocation = gameState.getPlayer().getLocation();
+        Player currentPlayer = gameState.getPlayer();
+        gameState.getItemsInGame();
+
+        if(inputCommand.equals("save game")) { // THIS FEATURE IS WORKING
             saveGame(gameState, view);
         }
         else if(inputCommand.equals("load game")) {
             loadGame(gameState, view.loadingGameText());
         }
-        else if(inputCommand.equals("exit")) {
+        else if(inputCommand.equals("exit game")) { // THIS FEATURE IS WORKING
             endGame(gameState, view);
         }
-        else if(inputCommand.equals("check stats")) {
+        else if(inputCommand.equals("check stats")) { // THIS FEATURE IS WORKING
             view.printStatText(gameState.getPlayer());
         }
-        else if(inputCommand.equals("help")) {
+        else if(inputCommand.equals("help")) { // THIS FEATURE IS WORKING
             view.printBasicText(parseHelpText());
         }
 
         //Player will be able to see the map of the train wagon and the stations linked to each wagon including the spot
         //they are currently at.
-        else if(inputCommand.equals("check map")) {
+        else if(inputCommand.equals("check map")) { // THIS FEATURE IS WORKING
             game.readMapTxt();
-            //view.printBasicText(gameState.getPlayer().getLocation().toString());
+            view.printBasicText("\nYou are in " + gameState.getPlayer().getLocation().getRoomName());
         }
-        else if(inputCommand.equals("check inventory")) {
+        else if(inputCommand.equals("check inventory")) { // THIS FEATURE IS WORKING
             view.printInventory(gameState.getPlayer());
         }
-        else if(inputCommand.equals("north") || inputCommand.equals("east") || inputCommand.equals("south") || inputCommand.equals("west")){
+        else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") || // THIS FEATURE IS WORKING
+                inputCommand.equals("south") || inputCommand.equals("s") ||  inputCommand.equals("west") || inputCommand.equals("w")){
+            room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand);
 
             /*
             10/30/22 MEETING: DAKOTA
@@ -136,56 +144,20 @@ public class GameConsole {
             "Train wagon is locked; need a code to on unlock train wagon"
              */
         }
-        else if(inputCommand.equals("inspect room")){
-            /*
-            10/30/22 MEETING:
-            THIS METHOD WORKS!
-             */
-            view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame()));
+        else if(inputCommand.equals("check out room")){ // THIS FEATURE IS WORKING
+            view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation, gameState.getItemsInGame()));
         }
-
         else if(inputCommand.contains("inspect")){
-            // NOT SURE IF THIS IS GOING TO WORK
-            view.printBasicText(item.inspect());
+            view.printBasicText(item.inspect(inputCommand));
+            item.getFolderCode(playerLocation, currentPlayer);
         }
-        else if(inputCommand.contains("store")){
-
+        else if(inputCommand.equals("view code")){ // THIS FEATURE IS WORKING
+            gameState.getPlayer().viewCode();
+        }
+        else if(inputCommand.equals("use code")){ // THIS FEATURE IS WORKING
             /*
-            10/30/22 MEETING: SHIANNE
-            WE CHANGE IT TO TO HAVE THE INPUT SPILT
-
-            String[] StoreItem = inputCommand.split("(?i)store", 0);
-            if(StoreItem.length != 0){
-                item.storeItem(StoreItem[1]);
-            }
-             */
-
-            gameState.getItemsInGame();
-
-            //item.storeItem(inputCommand);
-        }
-        else if(inputCommand.contains("discard")){
-            item.discard();
-        }
-        else if(inputCommand.contains("use")){
-            /*
-            10/30/22 MEETING: SHIANNE , CARLTON
-            I DON'T KNOW WHAT TO DO THE SET
-             */
-        }
-        else if(inputCommand.contains("examine")){
-            crate.examineCrate(inputCommand);
-        }
-        else if(inputCommand.contains("equip")){
-            /*
-            10/30/22 MEETING: CARLTON
-            I DON'T KNOW WHAT TO DO WITH THE SET
-             */
-        }
-        else if(inputCommand.equals("view code")){
-            folder.viewMysteryItem(inputCommand);
-        }
-        else if(inputCommand.equals("use code")){
+            view.printBasicText(gameState.getPlayer().checkCodeInventory());
+            room.lockRoom(playerLocation);
             /*
             10/30/22 MEETING: SHIANNE
             // NEED A METHOD FOR USE CODE
@@ -197,42 +169,73 @@ public class GameConsole {
             set room's lock to unlock
              */
         }
-        else if(inputCommand.contains("get puzzle")){
-            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
-            Puzzle puzzleInRoom = new Puzzle();
+        else if(inputCommand.contains("store")){ // THIS FEATURE IS WORKING
+
             /*
-            for (Puzzle puzzleYouAreLookingFor : gameState.getPuzzlesInGame())
-            {
-                if ( puzzleYouAreLookingFor.getPuzzleID() == IDofPuzzleInRoom )
-                {
-                    puzzleInRoom = puzzleYouAreLookingFor;
-                    break;
-                }
+            10/30/22 MEETING: SHIANNE
+            WE CHANGE IT TO TO HAVE THE INPUT SPILT
+
+            String[] StoreItem = inputCommand.split("(?i)store", 0);
+            if(StoreItem.length != 0){
+                item.storeItem(StoreItem[1]);
             }
+             */
+            item.storeItem(inputCommand, playerLocation, currentPlayer);
+            puzzle.removeRewardsItem(playerLocation, inputCommand);
+        }
+        else if(inputCommand.contains("discard")){ // THIS FEATURE IS WORKING
+            item.discard(inputCommand, playerLocation, currentPlayer);
+        }
+        else if(inputCommand.contains("use")){
+            /*
+            10/30/22 MEETING: SHIANNE , CARLTON
+            I DON'T KNOW WHAT TO DO THE SET
+             */
+        }
+        else if(inputCommand.contains("examine crate")){
+            view.printBasicText(crate.examineCrate(inputCommand));
+        }
+        else if(inputCommand.contains("equip")){
+            /*
+            10/30/22 MEETING: CARLTON
+            I DON'T KNOW WHAT TO DO WITH THE SET
+             */
+        }
+        else if(inputCommand.equalsIgnoreCase("check out puzzle")){ // THIS FEATURE WORKING
+            /*
+            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+            Room playerLocation = gameState.getPlayer().getLocation();
 
              */
+            puzzle.inspectPuzzle(IDofPuzzleInRoom, playerLocation, currentPlayer);
+        }
+        else if(inputCommand.contains("solve puzzle")){ // THIS FEATURE IS WORKING
+            /*
+            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+            Room playerLocation = gameState.getPlayer().getLocation();
 
-            puzzleInRoom.inspectPuzzle(inputCommand);
+             */
+            puzzle.solvePuzzle(IDofPuzzleInRoom, playerLocation, currentPlayer);
+        }
+        else if(inputCommand.contains("get hint")){ // THIS FEATURE IS WORKING
+            /*
+            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
 
-            //view.inspectPuzzle(puzzleInRoom);
+             */
+            puzzle.hint(IDofPuzzleInRoom);
         }
-        else if(inputCommand.contains("solve")){
-            puzzle.solvePuzzle(inputCommand);
+        else if(inputCommand.contains("retry puzzle")){ // THIS FEATURE IS WORKING
+            /*
+            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
+            Room playerLocation = gameState.getPlayer().getLocation();
+
+             */
+           puzzle.retryPuzzle(IDofPuzzleInRoom, playerLocation, currentPlayer);
         }
-        else if(inputCommand.contains("get hint")){
-            puzzle.hint(inputCommand);
+        else if(inputCommand.contains("exit puzzle")){ // THIS FEATURE IS WORKING
         }
-        else if(inputCommand.contains("claim prize")){
-            puzzle.dropRewardsItem(inputCommand);
-        }
-        else if(inputCommand.contains("retry")){
-            puzzle.retryPuzzle(inputCommand);
-        }
-        else if(inputCommand.contains("exit puzzle")){
-            puzzle.exitPuzzle(inputCommand);
-        }
-        else if(inputCommand.contains("inspect monster")){
-            monster.inspectMonster(inputCommand);
+        else if(inputCommand.equalsIgnoreCase("check out monster")){ // THIS FEATURE IS WORKING
+            view.printBasicText(monster.inspectMonster(IDofMonsterInRoom));
         }
         else if(inputCommand.contains("attack monster")){
             monster.attackMonster(player);
@@ -280,6 +283,8 @@ public class GameConsole {
                to make a new instance of the game
             */
             newGame(gameState, view.setSaveNameText());
+            view.printBasicText("\nYou are in " + gameState.getPlayer().getLocation().getRoomName() + "\n" + gameState.getPlayer().getLocation().getRoomDesc());
+
         }
         /*
         saying ["load game"] gets the view to ask the player for a name (this name is used to load an existing save file, if it exists)
@@ -323,7 +328,7 @@ public class GameConsole {
         gameState.setMonstersInGame(bestiary);
 
         gameState.setPlayer(new Player(playerName, gameState));
-        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(1));
+        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(0));
 
         //   -- objects from other methods used to parse the data files (currently empty but proper implementation in comments)
         /*
@@ -482,13 +487,17 @@ public class GameConsole {
                 String hintTxt = inputPuzzle.nextLine();
                 String answerTxt = inputPuzzle.nextLine();
                 int attemptsTxt = Integer.parseInt(inputPuzzle.nextLine()); // converts the puzzle attempts into an integer
+
+                //REWARDS 1 & 2 NEEDS TO BE CONVERTED OVER TO ITEMS
                 String reward1Txt = inputPuzzle.nextLine();
                 String reward2Txt = inputPuzzle.nextLine();
-                int puzzleLocationTxt = Integer.parseInt(inputPuzzle.nextLine());
+                String puzzleCodes = inputPuzzle.nextLine();
+                //int puzzleLocationTxt = Integer.parseInt(inputPuzzle.nextLine());
+
                 inputPuzzle.nextLine(); // reading the empty string
 
                 // add inputs into puzzle objects which is added into the puzzleInfo arraylist
-                puzzleInfo.add(new Puzzle(puzzleIDTxt,puzzleNameTxt,puzzleQuestionTxt,hintTxt,answerTxt,attemptsTxt,reward1Txt,reward2Txt,puzzleLocationTxt));
+                puzzleInfo.add(new Puzzle(puzzleIDTxt,puzzleNameTxt,puzzleQuestionTxt,hintTxt,answerTxt,attemptsTxt,reward1Txt,reward2Txt,puzzleCodes));
             }
             inputPuzzle.close(); // close file
         }
@@ -650,7 +659,8 @@ public class GameConsole {
             String crates = reader.nextLine();
             int roomPuzz = Integer.parseInt(reader.nextLine());
             int roomMon = Integer.parseInt(reader.nextLine());
-            Room temp = new Room(roomId, roomName, roomDesc, connect, lock, crates, roomPuzz, roomMon);
+            String codes = reader.nextLine();
+            Room temp = new Room(roomId, roomName, roomDesc, connect, lock, crates, roomPuzz, roomMon,codes);
             rooms.add(temp);
         }
         reader.close();

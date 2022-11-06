@@ -145,6 +145,7 @@ public class Monster implements EntityInterface, Serializable {
     /**
      * @Method: monsterDrop()
      * @param currentRoom
+     * @param
      * @Function: when called on, determines what item, if any, a monster drops into the room
      * @author: Dakota Smith
      * 10/25/2022
@@ -230,19 +231,18 @@ public class Monster implements EntityInterface, Serializable {
     }
 
     /**
-     * @Method: inspect()
-     * @param monster
+     * @Method: inspectMonster()
+     * @param monsterLocationID
      * @return monsterDescription
      * @Function: This method will allow for the player to see the descriptions of the monster
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
-    public String inspectMonster(String monster){
+    public String inspectMonster(int monsterLocationID ){
         String monsterDescription = "";
-        for(int i = 0; i < enemy.size(); i++){
-            if(monster.contains(enemy.get(i).getMonsterName())){ // if player's input contains monster's name
-                //System.out.println(enemy.get(i).getMonsterDesc());
-                monsterDescription = enemy.get(i).getMonsterDesc(); // add the monster's description to the string
+        for(Monster monster1: enemy){
+            if(monsterLocationID == this.monsterId){
+                monsterDescription = monster1.getMonsterDesc(); // will add description to the string
                 break;
             }
         }

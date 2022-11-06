@@ -6,7 +6,7 @@
      @added 10/16/2022
   */
 interface itemInterface {
-    String inspect(); // returns the item's description/item's text
+    String inspect(String item); // returns the item's description/item's text
     void use(Player player); // uses the item based on its function
-    void discard(); // discards the item
+    void discard(String item, Room current, Player inventory); // discards the item
 }

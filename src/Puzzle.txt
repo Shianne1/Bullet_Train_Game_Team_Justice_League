@@ -6,17 +6,17 @@ Divide 150 by 20
 3
 Knife
 Bandage
-1
+31GH1
 
 1
 What does it say?
-In the second station, what monster did you to defeat? [ Pig | Robot | Demon | Squirrel ]
+In the second station, what monster did you to defeat? [Pig]  [Robot]  [Demon]  [Squirrel]
 No hint
 Robot
 3
 Katana
 Bandage
-11
+R0801
 
 2
 Trains
@@ -26,7 +26,7 @@ Choo - Choo
 3
 Light armor
 Bandage
-6
+1R41N5
 
 3
 Miles Per Hour
@@ -36,17 +36,17 @@ Divide 20 by 5
 3
 Heavy armor
 Bandage
-21
+40U7
 
 4
 It's Sharp!
-What was the name of your second blade item? [ Dagger | Kitchen Knife | Katana | Sword ]
+What was the name of your second blade item? [Dagger]  [Kitchen Knife]  [Katana]  [Sword]
 No hint
 Katana
 3
 Medium armor
 Bandage
-16
+5W07D
 
 5
 Fill in the blank
@@ -56,7 +56,7 @@ Tracks
 3
 Pistol
 Bandage
-12
+1R4CK5
 
 6
 Wheels
@@ -66,5 +66,5 @@ Multiply 8, and 7, then add 10
 3
 Rifle
 Bandage
-18
+51XTY51X
 

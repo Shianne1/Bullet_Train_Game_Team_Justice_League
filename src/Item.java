@@ -20,6 +20,7 @@ public class Item implements itemInterface, Serializable {
 
     // accessing the game console class
     GameConsole game = new GameConsole();
+    GameState gameConsole = new GameState();
 
     private ArrayList<Item> items;
     private ArrayList<Room> roomItems;
@@ -30,13 +31,14 @@ public class Item implements itemInterface, Serializable {
 
 
     /*--------------------------------------------Item Constructors---------------------------------------------------*/
+
     /**
      * @Function: This is a no - arg constructor that will access the item parse method and add the data into
      * their object arraylist
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
-    public Item(){
+    public Item() {
         // an arraylist that will hold the item's data
         roomItems = new ArrayList();
         items = new ArrayList();
@@ -81,9 +83,10 @@ public class Item implements itemInterface, Serializable {
 
 
     /*----------------------------------Item Methods for implementing the game----------------------------------------*/
+
     /**
-     * @Method: inspect()
      * @return itemDescription
+     * @Method: inspect()
      * @Function: This method will allow for the player to see the description of the item
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
@@ -92,8 +95,16 @@ public class Item implements itemInterface, Serializable {
     public String inspect(String item) {
         String[] parts = item.split(" "); // will split the player's input to get the item's name
         String itemDescription = "";
-        for(Item inspectItem: items){
-            if(parts[1].equalsIgnoreCase(inspectItem.getItemName())){
+        for (Item inspectItem : items) {
+            /*
+            if(item.contains(inspectItem.getItemName())){
+                itemDescription = inspectItem.getItemDesc(); // will add the description to the string
+                break;
+            }
+
+             */
+
+            if (parts[1].equalsIgnoreCase(inspectItem.getItemName())) {
                 itemDescription = inspectItem.getItemDesc(); // will add the description to the string
                 break;
             }
@@ -102,33 +113,49 @@ public class Item implements itemInterface, Serializable {
     }
 
     // SHIANNE LESURE 11/6/2022
-    public void getFolderCode(Room current, Player player){
-        current.getRoomCode();
-        for(Item folderItem: items){
-            folderItem.getItemDesc();
-            if(folderItem.getItemDesc().contains(current.getRoomCode())){
-                player.codeInventoryAdd(current.getRoomCode());
-            }
-            /*
-            if(folderItem.getItemDesc().contains("MONEY")){
-                player.codeInventoryAdd("MONEY");
-            }
+    public void getFolderCode(Room current, Player player) {
+        current.getRoomItems();
+        for (Item folderItem : current.getRoomItems()) {
+            if(folderItem.getItemName().equalsIgnoreCase("folder-1")) {
+                if (folderItem.getItemDesc().contains("MONEY")) {
+                    player.codeInventoryAdd("MONEY");
+                }
+                if (folderItem.getItemDesc().contains("CHEMICALS")) {
+                    player.codeInventoryAdd("CHEMICALS");
+                }
 
-            if(folderItem.getItemDesc().contains("CHEMICALS")){
-                player.codeInventoryAdd("CHEMICALS");
-            }
+                if (folderItem.getItemDesc().contains("BOMBS")) {
+                    player.codeInventoryAdd("BOMBS");
+                }
 
-            if(folderItem.getItemDesc().contains("BOMBS")){
-                player.codeInventoryAdd("BOMBS");
+                if (folderItem.getItemDesc().contains("WEAPONS")) {
+                    player.codeInventoryAdd("WEAPONS");
+                }
             }
-
-            if(folderItem.getItemDesc().contains("WEAPONS")){
-                player.codeInventoryAdd("WEAPONS");
-            }
-
-             */
         }
+        /*
+        if(current.getRoomItems().contains("folder")) {
+            for (Item folderItem : items) {
+                if (folderItem.getItemDesc().contains("MONEY")) {
+                    player.codeInventoryAdd("MONEY");
+                }
+
+                if (folderItem.getItemDesc().contains("CHEMICALS")) {
+                    player.codeInventoryAdd("CHEMICALS");
+                }
+
+                if (folderItem.getItemDesc().contains("BOMBS")) {
+                    player.codeInventoryAdd("BOMBS");
+                }
+
+                if (folderItem.getItemDesc().contains("WEAPONS")) {
+                    player.codeInventoryAdd("WEAPONS");
+                }
+            }
+
+         */
     }
+
 
 
     @Override
@@ -151,12 +178,21 @@ public class Item implements itemInterface, Serializable {
         String[] parts = item.split(" "); // will split the player's input to get the item's name
         for(Item item1: items){
             itemObject = item1;
+            if(item.contains(item1.getItemName())){
+                inventory.inventoryRemove(itemObject); // will remove item from player's inventory
+                current.roomItemAdd(itemObject); // will drop item into current room
+                System.out.println(item1.getItemName() + " has been remove from the inventory.");
+                break;
+            }
+            /*
             if(parts[1].equalsIgnoreCase(item1.getItemName())){
                 inventory.inventoryRemove(itemObject); // will remove item from player's inventory
                 current.roomItemAdd(itemObject); // will drop item into current room
                 System.out.println(item1.getItemName() + " has been remove from the inventory.");
                 break;
             }
+
+             */
         }
     }
 
@@ -174,6 +210,22 @@ public class Item implements itemInterface, Serializable {
         String[] parts = item.split(" ");
         for(Item item1: items){
             itemObject = item1;
+            if(item.contains(itemObject.getItemName())){
+                inventory.inventoryAdd(itemObject);
+                current.roomItemRemove(itemObject);
+                if(item.contains("Katana")){ // if player adds katana to their inventory
+                    discard("Knife", current, inventory); // remove knife from inventory
+                }
+                else if(item.contains("medium armor")){ // if player adds medium armor to their inventory
+                    discard("Light Armor", current, inventory); // remove light armor from inventory
+                }
+                else if(item.contains("heavy armor")){ // if player add heavy armor to their inventory
+                    discard("Medium Armor",current, inventory ); // remove medium armor from inventory
+                }
+                System.out.println(item1.getItemName() + " has been added to the inventory.");
+                break;
+            }
+            /*
             if(parts[1].equalsIgnoreCase(itemObject.getItemName())){
                 inventory.inventoryAdd(itemObject);
                 current.roomItemRemove(itemObject);
@@ -189,6 +241,8 @@ public class Item implements itemInterface, Serializable {
                 System.out.println(item1.getItemName() + " has been added to the inventory.");
                 break;
             }
+
+             */
         }
     }
 }

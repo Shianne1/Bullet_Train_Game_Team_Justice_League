@@ -106,6 +106,8 @@ public class Room implements Serializable {
 
     public boolean isVisited() { return isVisited; }
 
+    public void setVisited(boolean visited) { isVisited = visited; }
+
     public String getRoomCode() {
         return roomCode;
     }
@@ -113,6 +115,8 @@ public class Room implements Serializable {
     public void setRoomCode(String roomCode) {
         this.roomCode = roomCode;
     }
+
+    public ArrayList<Item> getRoomItems() { return roomItems; }
 
     /*-----------------------------------Room Methods for implementing the game---------------------------------------*/
     public void directionals(String[] dir) {
@@ -254,6 +258,7 @@ public class Room implements Serializable {
      */
     public void Direction(Player player, ArrayList<Room> rooms, String cardinal) {
         Room current = player.getLocation();
+        boolean visitedRoom = player.getLocation().isVisited();
         Room checkLock = null;
         cardinal = cardinal.toLowerCase();
         int location;
@@ -268,7 +273,7 @@ public class Room implements Serializable {
             //checks if room is locked, if not moves player to new room and outputs room description.
             else {
                 checkLock = rooms.get(location);
-                if(checkLock.isLocked) {
+                if(checkLock.isLocked == true) {
                     player.move(checkLock);
                     System.out.println("This door is locked. Get password.");
                     System.out.println("If you would like to use code type: [use code]");
@@ -276,15 +281,21 @@ public class Room implements Serializable {
                     if(playerAnswer.equalsIgnoreCase("use code")){
                         current.lockRoom(checkLock, player);
                     }
-                    System.out.println("\n" + checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                    //System.out.println("\n" + checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                 }
                 else {
                     player.move(checkLock);
-                    if(isVisited) {
+                    if(visitedRoom == true) {
                         System.out.println("You've Already Been Here.");
                         System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                     }
-                    System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                    else {
+                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                        current.setVisited(true);
+                        if(current.getRoomId() == 0){
+                            current.setVisited(true);
+                        }
+                    }
                 }
             }
         }
@@ -299,7 +310,7 @@ public class Room implements Serializable {
             //checks if room is locked, if not moves player to new room and outputs room description.
             else {
                 checkLock = rooms.get(location);
-                if(checkLock.isLocked) {
+                if(checkLock.isLocked == true) {
                     player.move(checkLock);
                     System.out.println("This door is locked. Get password.");
                     System.out.println("If you would like to use code type: [use code]");
@@ -307,11 +318,11 @@ public class Room implements Serializable {
                     if(playerAnswer.equalsIgnoreCase("use code")){
                         current.lockRoom(checkLock, player);
                     }
-                    System.out.println("\n" + checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                    //System.out.println("\n" + checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                 }
                 else {
                     player.move(checkLock);
-                    if(isVisited) {
+                    if(visitedRoom == true) {
                         System.out.println("You've Already Been Here.");
                         System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                     }
@@ -330,7 +341,7 @@ public class Room implements Serializable {
             //checks if room is locked, if not moves player to new room and outputs room description.
             else {
                 checkLock = rooms.get(location);
-                if(checkLock.isLocked) {
+                if(checkLock.isLocked == true) {
                     player.move(checkLock);
                     System.out.println("This door is locked. Get password.");
                     System.out.println("If you would like to use code type: [use code]");
@@ -338,11 +349,11 @@ public class Room implements Serializable {
                     if(playerAnswer.equalsIgnoreCase("use code")){
                         current.lockRoom(checkLock, player);
                     }
-                    System.out.println("\n" + checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                   // System.out.println("\n" + checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                 }
                 else {
                     player.move(checkLock);
-                    if(isVisited) {
+                    if(visitedRoom == true) {
                         System.out.println("You've Already Been Here.");
                         System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                     }
@@ -361,7 +372,7 @@ public class Room implements Serializable {
             //checks if room is locked, if not moves player to new room and outputs room description.
             else {
                 checkLock = rooms.get(location);
-                if(checkLock.isLocked) {
+                if(checkLock.isLocked == true) {
                     player.move(checkLock);
                     System.out.println("This door is locked. Get password.");
                     System.out.println("If you would like to use code type: [use code]");
@@ -369,11 +380,11 @@ public class Room implements Serializable {
                     if(playerAnswer.equalsIgnoreCase("use code")){
                         current.lockRoom(checkLock, player);
                     }
-                    System.out.println("\n" + checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                    //System.out.println("\n" + checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                 }
                 else {
                     player.move(checkLock);
-                    if(isVisited) {
+                    if(visitedRoom == true) {
                         System.out.println("You've Already Been Here.");
                         System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                     }
@@ -401,6 +412,7 @@ public class Room implements Serializable {
             if (password.equalsIgnoreCase(this.roomCode)) { // if code is correct
                 currentLockRoom.setLocked(false); // set room to be unlock
                 System.out.println("Room has been unlock.");
+                System.out.println("\n" + currentLockRoom.getRoomName() + "\n" + currentLockRoom.getRoomDesc());
                 break;
             } else {
                 System.out.println("Wrong password.");

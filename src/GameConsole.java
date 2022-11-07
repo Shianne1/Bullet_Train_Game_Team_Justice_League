@@ -144,7 +144,7 @@ public class GameConsole {
             "Train wagon is locked; need a code to on unlock train wagon"
              */
         }
-        else if(inputCommand.equals("check out room")){ // THIS FEATURE IS WORKING
+        else if(inputCommand.equals("checkout room")){ // THIS FEATURE IS WORKING
             view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation, gameState.getItemsInGame()));
         }
         else if(inputCommand.contains("inspect")){
@@ -196,12 +196,13 @@ public class GameConsole {
             view.printBasicText(crate.examineCrate(inputCommand));
         }
         else if(inputCommand.contains("equip")){
+            weapon.equip(currentPlayer);
             /*
             10/30/22 MEETING: CARLTON
             I DON'T KNOW WHAT TO DO WITH THE SET
              */
         }
-        else if(inputCommand.equalsIgnoreCase("check out puzzle")){ // THIS FEATURE WORKING
+        else if(inputCommand.equalsIgnoreCase("checkout puzzle")){ // THIS FEATURE WORKING
             /*
             int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
             Room playerLocation = gameState.getPlayer().getLocation();
@@ -234,7 +235,7 @@ public class GameConsole {
         }
         else if(inputCommand.contains("exit puzzle")){ // THIS FEATURE IS WORKING
         }
-        else if(inputCommand.equalsIgnoreCase("check out monster")){ // THIS FEATURE IS WORKING
+        else if(inputCommand.equalsIgnoreCase("checkout monster")){ // THIS FEATURE IS WORKING
             view.printBasicText(monster.inspectMonster(IDofMonsterInRoom));
         }
         else if(inputCommand.contains("attack monster")){

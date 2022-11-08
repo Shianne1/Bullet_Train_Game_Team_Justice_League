@@ -1,10 +1,27 @@
+import java.util.ArrayList;
+
 public class Armor extends Item implements equipItemInterface {
-    public int armorMod;
+    private int armorMod;
+    private ArrayList<Armor> armorInventory;
+
+    GameConsole game = new GameConsole();
+
+    private ArrayList<Item> items;
+    private ArrayList<Room> roomItems;
+
 
 
     /*---------------------------------------------Armor Constructor--------------------------------------------------*/
+    // SHIANNE LESURE 11/7/2022
     public Armor(){
+       armorInventory = new ArrayList<>();
 
+        // an arraylist that will hold the item's data
+        roomItems = new ArrayList();
+        items = new ArrayList();
+
+        // putting the items data into the item & room arraylist
+        game.readItems(items, roomItems);
     }
 
     /**
@@ -23,7 +40,34 @@ public class Armor extends Item implements equipItemInterface {
     }
 
 
+    /*------------------------------------------Getter & Setters for Armor--------------------------------------------*/
+    public int getArmorMod() { return armorMod; }
+
+
     /*-----------------------------------Armor Methods for implementing the game--------------------------------------*/
+    // SHIANNE LESURE 11/7/2022
+    public void addingArmor(Player player){
+        for(Item armorItem : items) {
+            for (Item item : player.getInventory()) {
+                if (item.getItemName().equalsIgnoreCase(armorItem.getItemName())) {
+                    armorInventory.add((Armor) item);
+                }
+                /*
+                if (item.getItemName().equalsIgnoreCase("medium-armor")) {
+                    armorInventory.add((Armor) item);
+                }
+                if (item.getItemName().equalsIgnoreCase("heavy-armor")) {
+                    armorInventory.add((Armor) item);
+                }
+
+                 */
+            }
+        }
+    }
+
+
+
+
     /**
      * @Method: equip()
      * @param //Player

@@ -60,6 +60,8 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
     boolean hasCheckPoint;
 
+    Weapon defaultWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5);
+
       /*
     Starting Stats:
     HP – 100
@@ -81,7 +83,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.numOfMonstersKilled = 0;
         this.maxHealth = 100;
         this.currentHealth = maxHealth;
-        this.equippedWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5); // durability/uses set to -1 since a fist will never break
+        this.equippedWeapon = defaultWeapon; // durability/uses set to -1 since a fist will never break
         this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
         this.codeInventory = new ArrayList<>();
@@ -109,7 +111,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.numOfMonstersKilled = 0;
         this.maxHealth = 100;
         this.currentHealth = this.maxHealth;
-        this.equippedWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5); // durability/uses set to -1 since a fist will never break
+        this.equippedWeapon = defaultWeapon; // durability/uses set to -1 since a fist will never break
         this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
         this.codeInventory = new ArrayList<>();
@@ -135,7 +137,6 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added 10/18/2022
      */
     public void setEquippedWeapon(Weapon equippedWeapon) {
-        //this.inventory.remove(equippedWeapon);
         this.equippedWeapon = equippedWeapon;
     }
 
@@ -147,7 +148,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      */
     public void removeEquippedWeapon() {
         this.inventory.add(this.equippedWeapon);
-        this.equippedWeapon = null;
+        this.equippedWeapon = defaultWeapon; // I had to change this from null because I was getting an nuller exception
     }
 
     public Armor getEquippedArmor() {
@@ -163,7 +164,8 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     public void setEquippedArmor(Armor equippedArmor) {
         //this.inventory.remove(equippedArmor);
         this.equippedArmor = equippedArmor;
-        this.maxHealth = playerInterface.maxHealth + this.equippedArmor.armorMod;
+        //this.maxHealth = playerInterface.maxHealth + this.equippedArmor.armorMod;
+        this.currentHealth = this.currentHealth + this.equippedArmor.getArmorMod();
     }
 
     /**
@@ -173,9 +175,11 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added 10/18/2022
      */
     public void removeEquippedArmor() {
-        this.inventory.add(this.equippedArmor);
+       // this.inventory.add(this.equippedArmor);
+        this.currentHealth = this.currentHealth - this.equippedArmor.getArmorMod();
         this.equippedArmor = null;
-        this.maxHealth = playerInterface.maxHealth - equippedArmor.armorMod;
+        //this.maxHealth = playerInterface.maxHealth - equippedArmor.armorMod;
+        //this.currentHealth = this.currentHealth - this.equippedArmor.getArmorMod();
     }
 
     public GameState getCheckpoint() {
@@ -191,6 +195,9 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     }
 
     public void setCurrentHealth(int currentHealth) {
+        if(currentHealth > 300){
+            this.currentHealth = 300; // I added this because the player can't go past 300
+        }
         this.currentHealth = currentHealth;
     }
 

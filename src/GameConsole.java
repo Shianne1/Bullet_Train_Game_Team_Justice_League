@@ -113,7 +113,7 @@ public class GameConsole {
         }
         else if(inputCommand.equals("check stats")) { // THIS FEATURE IS WORKING
             view.printBasicText(gameState.getPlayer().checkStatsPlayer(currentPlayer));
-            //view.printStatText(gameState.getPlayer());
+            //view.printStatText(gameState.getPlayer().checkStatsPlayer(currentPlayer));
         }
         else if(inputCommand.equals("help")) { // THIS FEATURE IS WORKING
             view.printBasicText(parseHelpText());
@@ -198,8 +198,12 @@ public class GameConsole {
         else if(inputCommand.contains("examine crate")){
             view.printBasicText(crate.examineCrate(inputCommand));
         }
+        else if(inputCommand.contains("unequip")){
+            weapon.unequipWeapon(currentPlayer, inputCommand);
+        }
         else if(inputCommand.contains("equip")){
             weapon.equipWeapon(currentPlayer, inputCommand);
+            //armor.equipArmor(currentPlayer, inputCommand);
             /*
             10/30/22 MEETING: CARLTON
             I DON'T KNOW WHAT TO DO WITH THE SET

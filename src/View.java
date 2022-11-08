@@ -29,7 +29,7 @@ public class View {
      * @added 10/16/2022
      */
     public void printStatText(Player player) {
-        System.out.println(player.checkStats());
+        System.out.println(player.checkStatsPlayer(player));
     }
 
 

@@ -96,20 +96,17 @@ public class Item implements itemInterface, Serializable {
         String[] parts = item.split(" "); // will split the player's input to get the item's name
         String itemDescription = "";
         for (Item inspectItem : items) {
-            /*
-            if(item.contains(inspectItem.getItemName())){
-                itemDescription = inspectItem.getItemDesc(); // will add the description to the string
-                break;
-            }
-
-             */
-
             if (parts[1].equalsIgnoreCase(inspectItem.getItemName())) {
                 itemDescription = inspectItem.getItemDesc(); // will add the description to the string
                 break;
             }
         }
         return itemDescription; // return the string
+    }
+
+    @Override
+    public void use(Player player, String item) {
+
     }
 
     // SHIANNE LESURE 11/6/2022
@@ -133,36 +130,7 @@ public class Item implements itemInterface, Serializable {
                 }
             }
         }
-        /*
-        if(current.getRoomItems().contains("folder")) {
-            for (Item folderItem : items) {
-                if (folderItem.getItemDesc().contains("MONEY")) {
-                    player.codeInventoryAdd("MONEY");
-                }
-
-                if (folderItem.getItemDesc().contains("CHEMICALS")) {
-                    player.codeInventoryAdd("CHEMICALS");
-                }
-
-                if (folderItem.getItemDesc().contains("BOMBS")) {
-                    player.codeInventoryAdd("BOMBS");
-                }
-
-                if (folderItem.getItemDesc().contains("WEAPONS")) {
-                    player.codeInventoryAdd("WEAPONS");
-                }
-            }
-
-         */
     }
-
-
-
-    @Override
-    public void use(Player player, String item) {
-
-    }
-
 
     /**
      * @Method: discardItem()
@@ -178,16 +146,6 @@ public class Item implements itemInterface, Serializable {
         String[] parts = item.split(" "); // will split the player's input to get the item's name
         for(Item item1: items){
             itemObject = item1;
-            /*
-            if(item.contains(item1.getItemName())){
-                inventory.inventoryRemove(itemObject); // will remove item from player's inventory
-                current.roomItemAdd(itemObject); // will drop item into current room
-                System.out.println(item1.getItemName() + " has been remove from the inventory.");
-                break;
-            }
-
-             */
-
             if(parts[1].equalsIgnoreCase(item1.getItemName())){
                 inventory.inventoryRemove(itemObject); // will remove item from player's inventory
                 current.roomItemAdd(itemObject); // will drop item into current room
@@ -211,24 +169,6 @@ public class Item implements itemInterface, Serializable {
         String[] parts = item.split(" ");
         for(Item item1: items){
             itemObject = item1;
-            /*
-            if(item.contains(itemObject.getItemName())){
-                inventory.inventoryAdd(itemObject);
-                current.roomItemRemove(itemObject);
-                if(item.contains("Katana")){ // if player adds katana to their inventory
-                    discard("Knife", current, inventory); // remove knife from inventory
-                }
-                else if(item.contains("medium armor")){ // if player adds medium armor to their inventory
-                    discard("Light Armor", current, inventory); // remove light armor from inventory
-                }
-                else if(item.contains("heavy armor")){ // if player add heavy armor to their inventory
-                    discard("Medium Armor",current, inventory ); // remove medium armor from inventory
-                }
-                System.out.println(item1.getItemName() + " has been added to the inventory.");
-                break;
-            }
-
-             */
             if(parts[1].equalsIgnoreCase(itemObject.getItemName())){
                 inventory.inventoryAdd(itemObject);
                 current.roomItemRemove(itemObject);

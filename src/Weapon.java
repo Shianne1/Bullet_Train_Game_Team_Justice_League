@@ -89,25 +89,29 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
 
     //SHIANNE LESURE 11/7/2022
     public void addingWeapons(Player player ){
-        for(Item item : player.getInventory()){
-            if(item.getItemName().equalsIgnoreCase("knife")){
-                weaponsInventory.add((Weapon) item);
-            }
-            if(item.getItemName().equalsIgnoreCase("katana")){
-                weaponsInventory.add((Weapon) item);
-            }
-            if(item.getItemName().equalsIgnoreCase("pistol")){
-                weaponsInventory.add((Weapon) item);
-            }
-            if(item.getItemName().equalsIgnoreCase("rifle")){
-                weaponsInventory.add((Weapon) item);
+        for(Item weaponItem : items) {
+            for (Item item : player.getInventory()) {
+                if (item.getItemName().equalsIgnoreCase(weaponItem.getItemName())) {
+                    weaponsInventory.add((Weapon) item);
+                }
+                /*
+                if (item.getItemName().equalsIgnoreCase("katana")) {
+                    weaponsInventory.add((Weapon) item);
+                }
+                if (item.getItemName().equalsIgnoreCase("pistol")) {
+                    weaponsInventory.add((Weapon) item);
+                }
+                if (item.getItemName().equalsIgnoreCase("rifle")) {
+                    weaponsInventory.add((Weapon) item);
+                }
+
+                 */
             }
         }
     }
 
     // SHIANNE LESURE 11/7/2022
     public void useWeapon(Player player, String item){
-        //addingWeapons(player);
         String[] parts = item.split(" ");
        for(Item item1 : player.getInventory()) {
            for (Weapon weapon : weaponsInventory) {
@@ -131,14 +135,6 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
         player.getInventory();
         addingWeapons(player);
         String[] parts = item.split(" ");
-        /*
-        for(Item weaponInventory: player.getInventory()){
-            if(parts[1].equalsIgnoreCase(weaponInventory.getItemName())){
-
-            }
-        }
-
-         */
         for(Weapon weapon : weaponsInventory){
             if(parts[1].equalsIgnoreCase(weapon.getItemName())){
                 player.setEquippedWeapon(weapon);
@@ -148,9 +144,22 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
                 if(playerAnswer.equalsIgnoreCase("use " + weapon.getItemName())){
                     useWeapon(player, playerAnswer);
                 }
+                player.inventoryRemove(weapon);
             }
         }
     }
+
+    // SHIANNE LESURE 11/7/2022
+    public void unequipWeapon(Player player, String item){
+        String[] parts = item.split(" ");
+        for(Weapon weapon: weaponsInventory){
+            if(parts[1].equalsIgnoreCase(weapon.getItemName())){
+                player.removeEquippedWeapon();
+                System.out.println("You have unequipped " + weapon.getItemName());
+            }
+        }
+    }
+
     /**
      * @param //Player
      * @Method: equip()

@@ -18,15 +18,11 @@ public class Healing extends Item implements itemInterface {
 
     private ArrayList<Item> items;
     private ArrayList<Room> roomItems;
+    private ArrayList<Healing> healingInventory;
     Scanner input;
 
-    // will access the player's inventory arraylist
-    Player inventory;
-
     // will access the player's current health
-    Player currentHealth;
     Item itemObjectHeal;
-    Healing healingItem;
 
 
     /*---------------------------------------------Healing Constructors-----------------------------------------------*/
@@ -43,6 +39,8 @@ public class Healing extends Item implements itemInterface {
 
         // putting the items data into the item & room arraylist
         game.readItems(items, roomItems);
+
+        healingInventory = new ArrayList<>();
     }
 
     /**
@@ -89,11 +87,12 @@ public class Healing extends Item implements itemInterface {
      * @added: 10/29/2022
      */
     @Override
-    public void use(Player player) {
-        String item = input.nextLine();
+    public void use(Player player, String item) {
+        //String item = input.nextLine();
+        String[] parts = item.split(" ");
         for(Item item1: items){
             itemObjectHeal = item1;
-            if(item.contains(super.getItemName())){ // if input contains the item name
+            if(parts[1].equalsIgnoreCase(super.getItemName())){ // if input contains the item name
                 this.setStackAmount(getStackAmount() - 1); // subtract 1 from the healing item stack
 
                 // add the healing points to the player's current health
@@ -104,5 +103,37 @@ public class Healing extends Item implements itemInterface {
                 break;
             }
         }
+    }
+
+    // SHIANNE LESURE 11/7/2022
+    public void addingHealingItem(Player player){
+        for(Item item : player.getInventory()){
+            if(item.getItemName().equalsIgnoreCase("Bandage")){
+                healingInventory.add((Healing) item);
+            }
+            if(item.getItemName().equalsIgnoreCase("Syringe")){
+                healingInventory.add((Healing) item);
+            }
+            if(item.getItemName().equalsIgnoreCase("Med-Kit")){
+                healingInventory.add((Healing) item);
+            }
+        }
+    }
+
+    // SHIANNE LESURE 11/7/2022
+    // I AM STILL TRYING TO FIX THE STACK AMOUNT
+    public void useHealing(Player player, String item){
+        addingHealingItem(player);
+        String[] parts = item.split(" ");
+            for(Healing healing : healingInventory){
+                if(parts[1].equalsIgnoreCase(healing.getItemName())){
+                    //healing.setStackAmount(healing.getStackAmount() - 1);
+                    System.out.println("This " + healing.getItemName() + " has added " + healing.getHealAmount() + " points to your health bar.");
+                    int updateHealth = player.getCurrentHealth() + healing.getHealAmount();
+                    player.setCurrentHealth(updateHealth);
+                    //System.out.println("You have " + healing.getStackAmount() + " use left.");
+                    break;
+                }
+            }
     }
 }

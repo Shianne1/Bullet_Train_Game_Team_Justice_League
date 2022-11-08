@@ -112,7 +112,8 @@ public class GameConsole {
             endGame(gameState, view);
         }
         else if(inputCommand.equals("check stats")) { // THIS FEATURE IS WORKING
-            view.printStatText(gameState.getPlayer());
+            view.printBasicText(gameState.getPlayer().checkStatsPlayer(currentPlayer));
+            //view.printStatText(gameState.getPlayer());
         }
         else if(inputCommand.equals("help")) { // THIS FEATURE IS WORKING
             view.printBasicText(parseHelpText());
@@ -187,6 +188,8 @@ public class GameConsole {
             item.discard(inputCommand, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("use")){
+            //weapon.useWeapon(currentPlayer, inputCommand);
+            //healing.useHealing(currentPlayer, inputCommand);
             /*
             10/30/22 MEETING: SHIANNE , CARLTON
             I DON'T KNOW WHAT TO DO THE SET
@@ -196,7 +199,7 @@ public class GameConsole {
             view.printBasicText(crate.examineCrate(inputCommand));
         }
         else if(inputCommand.contains("equip")){
-            weapon.equip(currentPlayer);
+            weapon.equipWeapon(currentPlayer, inputCommand);
             /*
             10/30/22 MEETING: CARLTON
             I DON'T KNOW WHAT TO DO WITH THE SET

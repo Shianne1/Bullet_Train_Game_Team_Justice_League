@@ -12,7 +12,7 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
     private ArrayList<Room> roomItems;
     Scanner input;
     // will access the player's inventory arraylist
-    private ArrayList<Item> inventory;
+    private ArrayList<Weapon> weaponsInventory;
 
     Item itemObjectWeapon;
     Weapon weaponItem;
@@ -33,7 +33,8 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
         // putting the items data into the item & room arraylist
         game.readItems(items, roomItems);
 
-        inventory = new ArrayList<>();
+        weaponsInventory = new ArrayList<>();
+        input = new Scanner(System.in);
     }
 
     public Weapon(String name, int id, String itemDesc, String itemText, int durability, int strength) {
@@ -67,25 +68,89 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
      * @added: 10/29/2022
      */
     @Override
-    public void use(Player player) {
-        String item = input.nextLine();
+    public void use(Player player, String item) {
+        //String item = input.nextLine();
+        String[] parts = item.split(" ");
         for (Item item1 : items) {
             itemObjectWeapon = item1;
-            if (item.contains(super.getItemName())) {
+            if (parts[1].equalsIgnoreCase(super.getItemName())) {
                 weaponItem.setDurability(getDurability() - 1);
                 System.out.println("You inflicted " + weaponItem.getStrength() + " damage onto the enemy.");
                 System.out.println("You have " + weaponItem.getDurability() + " uses left.");
                 if (weaponItem.getDurability() == 0) { // if the weapons uses get to 0
                     System.out.println("You can no longer use this weapon");
-                    inventory.remove(itemObjectWeapon); // remove item from player's inventory
+                    player.inventoryRemove(itemObjectWeapon);
+                    //inventory.remove(itemObjectWeapon); // remove item from player's inventory
                     break;
                 }
-                break;
             }
         }
     }
 
+    //SHIANNE LESURE 11/7/2022
+    public void addingWeapons(Player player ){
+        for(Item item : player.getInventory()){
+            if(item.getItemName().equalsIgnoreCase("knife")){
+                weaponsInventory.add((Weapon) item);
+            }
+            if(item.getItemName().equalsIgnoreCase("katana")){
+                weaponsInventory.add((Weapon) item);
+            }
+            if(item.getItemName().equalsIgnoreCase("pistol")){
+                weaponsInventory.add((Weapon) item);
+            }
+            if(item.getItemName().equalsIgnoreCase("rifle")){
+                weaponsInventory.add((Weapon) item);
+            }
+        }
+    }
 
+    // SHIANNE LESURE 11/7/2022
+    public void useWeapon(Player player, String item){
+        //addingWeapons(player);
+        String[] parts = item.split(" ");
+       for(Item item1 : player.getInventory()) {
+           for (Weapon weapon : weaponsInventory) {
+               if (parts[1].equalsIgnoreCase(weapon.getItemName())) {
+                   weapon.setDurability(weapon.getDurability() - 1);
+                   System.out.println("You inflicted " + weapon.getStrength() + " point damage onto the enemy.");
+                   System.out.println("You have " + weapon.getDurability() + " uses left.");
+                   if (weapon.getDurability() == 0) {
+                       System.out.println("You can no longer use this weapon");
+                       player.inventoryRemove(item1);
+                       break;
+                   }
+                   break;
+               }
+           }
+       }
+    }
+
+    // SHIANNE LESURE 11/7/2022
+    public void equipWeapon(Player player, String item){
+        player.getInventory();
+        addingWeapons(player);
+        String[] parts = item.split(" ");
+        /*
+        for(Item weaponInventory: player.getInventory()){
+            if(parts[1].equalsIgnoreCase(weaponInventory.getItemName())){
+
+            }
+        }
+
+         */
+        for(Weapon weapon : weaponsInventory){
+            if(parts[1].equalsIgnoreCase(weapon.getItemName())){
+                player.setEquippedWeapon(weapon);
+                System.out.println("You have equipped " + weapon.getItemName());
+                System.out.println("If you would like to use the " + weapon.getItemName() + " type: [use " + weapon.getItemName() + "]");
+                String playerAnswer = input.nextLine();
+                if(playerAnswer.equalsIgnoreCase("use " + weapon.getItemName())){
+                    useWeapon(player, playerAnswer);
+                }
+            }
+        }
+    }
     /**
      * @param //Player
      * @Method: equip()
@@ -105,7 +170,6 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
 
         if (player.getEquippedWeapon() != null) {
             player.removeEquippedWeapon();
-
         }
 
             player.setEquippedWeapon(this);

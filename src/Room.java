@@ -292,9 +292,6 @@ public class Room implements Serializable {
                     else {
                         System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                         current.setVisited(true);
-                        if(current.getRoomId() == 0){
-                            current.setVisited(true);
-                        }
                     }
                 }
             }
@@ -326,7 +323,10 @@ public class Room implements Serializable {
                         System.out.println("You've Already Been Here.");
                         System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                     }
-                    System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                    else {
+                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                        current.setVisited(true);
+                    }
                 }
             }
         }
@@ -357,7 +357,10 @@ public class Room implements Serializable {
                         System.out.println("You've Already Been Here.");
                         System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                     }
-                    System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                    else {
+                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                        current.setVisited(true);
+                    }
                 }
             }
         }
@@ -388,7 +391,10 @@ public class Room implements Serializable {
                         System.out.println("You've Already Been Here.");
                         System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
                     }
-                    System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                    else {
+                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
+                        current.setVisited(true);
+                    }
                 }
             }
         }

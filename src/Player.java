@@ -135,7 +135,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added 10/18/2022
      */
     public void setEquippedWeapon(Weapon equippedWeapon) {
-        this.inventory.remove(equippedWeapon);
+        //this.inventory.remove(equippedWeapon);
         this.equippedWeapon = equippedWeapon;
     }
 
@@ -161,7 +161,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added 10/18/2022
      */
     public void setEquippedArmor(Armor equippedArmor) {
-        this.inventory.remove(equippedArmor);
+        //this.inventory.remove(equippedArmor);
         this.equippedArmor = equippedArmor;
         this.maxHealth = playerInterface.maxHealth + this.equippedArmor.armorMod;
     }
@@ -194,6 +194,17 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.currentHealth = currentHealth;
     }
 
+    public int getMaxHealth() { return maxHealth; }
+
+    public void setMaxHealth(int maxHealth) { this.maxHealth = maxHealth; }
+
+    public int getNumOfMonstersKilled() {
+        return numOfMonstersKilled;
+    }
+
+    public void setNumOfMonstersKilled(int numOfMonstersKilled) {
+        this.numOfMonstersKilled = numOfMonstersKilled;
+    }
 
     /*--------------------------------Interface Methods for implementing the game-------------------------------------*/
     @Override
@@ -275,9 +286,10 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     /**
      * @Method: checkStats()
      * @Function: this code returns a formated string of the player's current stats
-     * @author(s) Carlton Napier
+     * @author(s) Carlton Napier, Shianne Lesure
      * @added 10/18/2022
      */
+    /*
     public String checkStats() {
         return "Name: " + this.name + "\n" +
                 "Health (current/max): " + this.currentHealth + "/" + this.maxHealth + "\n" +
@@ -285,6 +297,18 @@ public class Player implements playerInterface, EntityInterface, Serializable {
                 "Equipped Weapon: " + this.equippedWeapon + "\n" +
                 "Equipped Armor: " + this.equippedArmor + "\n" +
                 "Monsters Killed: " + this.numOfMonstersKilled + "\n";
+    }
+
+     */
+    // SHIANNE LESURE 11/7/2022
+    public String checkStatsPlayer(Player player){
+        player.getLocation().getRoomName();
+        return "Name: " + player.getName() + "\n" +
+                "Health [current / max]: " + player.getCurrentHealth() + " / " + player.getMaxHealth() + "\n" +
+                "Location: " + player.getLocation().getRoomName() + "\n" +
+                "Equipped Weapon: " + player.getEquippedWeapon().getItemName() + "\n" +
+                "Equipped Armor: " + player.getEquippedArmor().getItemName() + "\n" +
+                "Monster Killed: " + player.getNumOfMonstersKilled() + "\n";
     }
 
     /**

@@ -159,7 +159,7 @@ public class Item implements itemInterface, Serializable {
 
 
     @Override
-    public void use(Player player) {
+    public void use(Player player, String item) {
 
     }
 
@@ -178,14 +178,8 @@ public class Item implements itemInterface, Serializable {
         String[] parts = item.split(" "); // will split the player's input to get the item's name
         for(Item item1: items){
             itemObject = item1;
-            if(item.contains(item1.getItemName())){
-                inventory.inventoryRemove(itemObject); // will remove item from player's inventory
-                current.roomItemAdd(itemObject); // will drop item into current room
-                System.out.println(item1.getItemName() + " has been remove from the inventory.");
-                break;
-            }
             /*
-            if(parts[1].equalsIgnoreCase(item1.getItemName())){
+            if(item.contains(item1.getItemName())){
                 inventory.inventoryRemove(itemObject); // will remove item from player's inventory
                 current.roomItemAdd(itemObject); // will drop item into current room
                 System.out.println(item1.getItemName() + " has been remove from the inventory.");
@@ -193,6 +187,13 @@ public class Item implements itemInterface, Serializable {
             }
 
              */
+
+            if(parts[1].equalsIgnoreCase(item1.getItemName())){
+                inventory.inventoryRemove(itemObject); // will remove item from player's inventory
+                current.roomItemAdd(itemObject); // will drop item into current room
+                System.out.println(item1.getItemName() + " has been remove from the inventory.");
+                break;
+            }
         }
     }
 
@@ -206,10 +207,11 @@ public class Item implements itemInterface, Serializable {
      * @added: 10/29/2022
      */
     public void storeItem(String item, Room current, Player inventory){ // store item is the same as pick up item
-        current.roomItemRemove(itemObject);
+       // current.roomItemRemove(itemObject);
         String[] parts = item.split(" ");
         for(Item item1: items){
             itemObject = item1;
+            /*
             if(item.contains(itemObject.getItemName())){
                 inventory.inventoryAdd(itemObject);
                 current.roomItemRemove(itemObject);
@@ -225,7 +227,8 @@ public class Item implements itemInterface, Serializable {
                 System.out.println(item1.getItemName() + " has been added to the inventory.");
                 break;
             }
-            /*
+
+             */
             if(parts[1].equalsIgnoreCase(itemObject.getItemName())){
                 inventory.inventoryAdd(itemObject);
                 current.roomItemRemove(itemObject);
@@ -241,8 +244,6 @@ public class Item implements itemInterface, Serializable {
                 System.out.println(item1.getItemName() + " has been added to the inventory.");
                 break;
             }
-
-             */
         }
     }
 }

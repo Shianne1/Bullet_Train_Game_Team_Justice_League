@@ -18,12 +18,21 @@ public class Crate {
     GameConsole game = new GameConsole();
     private ArrayList<Crate> crates;
 
+    private ArrayList<Item> items;
+    private ArrayList<Room> roomItems;
+
 
     /*----------------------------------------------Crate Constructors------------------------------------------------*/
     public Crate(){
         crates = new ArrayList<>();
         game.readCrates(crates);
 
+        // an arraylist that will hold the item's data
+        roomItems = new ArrayList();
+        items = new ArrayList();
+
+        // putting the items data into the item & room arraylist
+        game.readItems(items, roomItems);
     }
 
     /**
@@ -50,6 +59,8 @@ public class Crate {
         return itemName;
     }
 
+    public void setItemName(String itemName) { this.itemName = itemName; }
+
     public int getCrateLocation() {
         return crateLocation;
     }
@@ -65,8 +76,18 @@ public class Crate {
      */
     public String examineCrate(String item) {
         //creates null string
-        String check = null;
+       // String check = null;
 
+        String[] parts = item.split(" ");
+        String checkCrate = "";
+            for(Crate temp : crates){
+                if(parts[1].equalsIgnoreCase(temp.getCrateName())){
+                    checkCrate = temp.getItemName();
+                    break;
+                }
+            }
+        return checkCrate;
+            /*
         //goes through crate arraylist, finds relevant crate, outputs contents of crate
         for(int i = 0; i < crates.size(); i++) {
             Crate temp = crates.get(i);
@@ -75,5 +96,22 @@ public class Crate {
             }
         }
         return check;
+
+             */
+    }
+
+    // SHIANNE LESURE 11/8/2022
+    public void removeItemFromCrate(Room current, String item, Crate crate){ // ADD THE - TO ALL THE 2 WORDED ITEMS WITHIN ROOM & CRATE TEXTILE
+        String[] parts = item.split(" ");
+            for (Crate temp : crates) {
+                if(current.getRoomId() == temp.getCrateLocation()) {
+                    if(current.getCrates().contains(temp.getCrateName())) {
+                        if (parts[1].equalsIgnoreCase(temp.getItemName())) {
+                            temp.setItemName("No item");
+                            break;
+                        }
+                    }
+                }
+            }
     }
 }

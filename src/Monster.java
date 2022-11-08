@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * @Object: Monster()
@@ -28,6 +29,9 @@ public class Monster implements EntityInterface, Serializable {
 
     private ArrayList<Monster> enemy;
     private ArrayList<Item> items;
+    private ArrayList<Room> roomItems;
+
+    Scanner input;
 
 
     /*---------------------------------------------Monster Constructors-----------------------------------------------*/
@@ -44,7 +48,13 @@ public class Monster implements EntityInterface, Serializable {
         // putting the monster data into the monster arraylist
         game.readMonsters(enemy);
 
-        items = new ArrayList<>();
+        // an arraylist that will hold the item's data
+        roomItems = new ArrayList();
+        items = new ArrayList();
+
+        // putting the items data into the item & room arraylist
+        game.readItems(items, roomItems);
+        input = new Scanner(System.in);
     }
 
     /**
@@ -90,6 +100,8 @@ public class Monster implements EntityInterface, Serializable {
         return health;
     }
 
+    public void setHealth(int health) { this.health = health; }
+
     public int getDamage() { return damage; }
 
     public double getDropRate1() { return dropRate1; }
@@ -114,14 +126,62 @@ public class Monster implements EntityInterface, Serializable {
      * @author: Dakota Smith
      * 10/19/2022
      */
-    public void attackMonster(Player player) {
+    public void attackMonster(Player player, int monsterLocation, Armor armor) {
         //creates delta health variable, sets to current player health, decreases variable by
         //monster damage, then sets player health to the difference
+            for (Monster villains : enemy) {
+                if (monsterLocation == this.monsterId) {
+                    /*
+                    System.out.println("If you would like to use your weapon type: [use " + player.getEquippedWeapon().getItemName() + "]");
+                    String useItem = input.nextLine();
+                    if (useItem.equalsIgnoreCase("use " + player.getEquippedWeapon().getItemName())) {
+                        weapon.useWeapon(player, useItem, monsterLocation);
+                    }
+
+                     */
+                        System.out.println("Monster HP Life: " + villains.getHealth());
+                        System.out.println(villains.getMonsterName() + " inflicted " + villains.getDamage() + " damage points onto you.");
+                        if (player.getEquippedArmor() != null) {
+                            int damageAfterArmor = villains.getDamage() - armor.getArmorMod();
+                            player.setCurrentHealth(player.getCurrentHealth() - damageAfterArmor);
+                        } else {
+                            player.setCurrentHealth(player.getCurrentHealth() - villains.getDamage());
+                        }
+                        System.out.println("Your current HP: " + player.getCurrentHealth());
+
+                        if (villains.getHealth() <= 0) {
+                            System.out.println("You have killed the " + villains.getMonsterName());
+                            player.setNumOfMonstersKilled(player.getNumOfMonstersKilled() + 1);
+                        }
+
+                    /*
+                    System.out.println("Monster HP Life: " + villains.getHealth());
+                    System.out.println(villains.getMonsterName() + " inflicted " + villains.getDamage() + " damage points onto you.");
+                    if (player.getEquippedArmor() != null) {
+                        int damageAfterArmor = villains.getDamage() - armor.getArmorMod();
+                        player.setCurrentHealth(player.getCurrentHealth() - damageAfterArmor);
+                    } else {
+                        player.setCurrentHealth(player.getCurrentHealth() - villains.getDamage());
+                    }
+                    System.out.println("Your current HP: " + player.getCurrentHealth());
+
+                    if (villains.getHealth() <= 0) {
+                        System.out.println("You have killed the " + villains.getMonsterName());
+                        player.setNumOfMonstersKilled(player.getNumOfMonstersKilled() + 1);
+                    }
+
+                     */
+                    break;
+                }
+            }
+        /*
         int dHealth = player.getCurrentHealth();
         dHealth = dHealth - damage;
         player.setCurrentHealth(dHealth);
         System.out.println("Monster Dealt: " + damage + " Damage.");
         System.out.println("Current HP: " + player.getCurrentHealth());
+
+         */
     }
 
     /**
@@ -130,14 +190,24 @@ public class Monster implements EntityInterface, Serializable {
      * @author: Dakota Smith
      * 10/19/2022
      */
-    public boolean parryMonster() {
+    public boolean parryMonster(int monsterLocation, Weapon weapon) {
         //generate random number 1-100
         //if number is greater than 50, the monster is parried
         boolean parry = false;
-        Random r = new Random();
-        int randomInt = r.nextInt(100) + 1;
-        if(randomInt > 50) {
-            parry = true;
+        for(Monster villan : enemy) {
+            if(monsterLocation == this.monsterId) {
+                Random r = new Random();
+                int randomInt = r.nextInt(100) + 1;
+                if (randomInt > 50) {
+                    System.out.println("You have double your damage towards " + villan.getMonsterName());
+                    weapon.setStrength(weapon.getStrength() * 2);
+                    villan.setHealth(villan.getHealth() - weapon.getStrength());
+                    parry = true;
+                }
+                else {
+                    System.out.println("You inflicted no damage.");
+                }
+            }
         }
         return parry;
     }

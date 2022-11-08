@@ -112,21 +112,23 @@ public class Item implements itemInterface, Serializable {
     // SHIANNE LESURE 11/6/2022
     public void getFolderCode(Room current, Player player) {
         current.getRoomItems();
-        for (Item folderItem : current.getRoomItems()) {
-            if(folderItem.getItemName().equalsIgnoreCase("folder-1")) {
-                if (folderItem.getItemDesc().contains("MONEY")) {
-                    player.codeInventoryAdd("MONEY");
-                }
-                if (folderItem.getItemDesc().contains("CHEMICALS")) {
-                    player.codeInventoryAdd("CHEMICALS");
-                }
+        for(Item itemFD : items) {
+            for (Item folderItem : current.getRoomItems()) {
+                if (folderItem.getItemName().equalsIgnoreCase(itemFD.getItemName())) {
+                    if (folderItem.getItemDesc().contains("MONEY")) {
+                        player.codeInventoryAdd("MONEY");
+                    }
+                    if (folderItem.getItemDesc().contains("CHEMICALS")) {
+                        player.codeInventoryAdd("CHEMICALS");
+                    }
 
-                if (folderItem.getItemDesc().contains("BOMBS")) {
-                    player.codeInventoryAdd("BOMBS");
-                }
+                    if (folderItem.getItemDesc().contains("BOMBS")) {
+                        player.codeInventoryAdd("BOMBS");
+                    }
 
-                if (folderItem.getItemDesc().contains("WEAPONS")) {
-                    player.codeInventoryAdd("WEAPONS");
+                    if (folderItem.getItemDesc().contains("WEAPONS")) {
+                        player.codeInventoryAdd("WEAPONS");
+                    }
                 }
             }
         }

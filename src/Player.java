@@ -81,8 +81,8 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     public Player() {
         this.name = "PlayerName";
         this.numOfMonstersKilled = 0;
-        this.maxHealth = 100;
-        this.currentHealth = maxHealth;
+        this.maxHealth = 300;
+        this.currentHealth = 100;
         this.equippedWeapon = defaultWeapon; // durability/uses set to -1 since a fist will never break
         this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();
@@ -109,8 +109,8 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     public Player(String name, GameState defaultCheckpoint) {
         this.name = name;
         this.numOfMonstersKilled = 0;
-        this.maxHealth = 100;
-        this.currentHealth = this.maxHealth;
+        this.maxHealth = 300;
+        this.currentHealth = 100;
         this.equippedWeapon = defaultWeapon; // durability/uses set to -1 since a fist will never break
         this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
         this.inventory = new ArrayList<>();

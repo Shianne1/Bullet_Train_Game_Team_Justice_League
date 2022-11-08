@@ -100,7 +100,8 @@ public class GameConsole {
         int IDofMonsterInRoom = gameState.getPlayer().getLocation().getRoomMonster();
         Room playerLocation = gameState.getPlayer().getLocation();
         Player currentPlayer = gameState.getPlayer();
-        gameState.getItemsInGame();
+        Armor currentArmor = gameState.getPlayer().getEquippedArmor();
+        Weapon currentWeapon = gameState.getPlayer().getEquippedWeapon();
 
         if(inputCommand.equals("save game")) { // THIS FEATURE IS WORKING
             saveGame(gameState, view);
@@ -183,33 +184,34 @@ public class GameConsole {
              */
             item.storeItem(inputCommand, playerLocation, currentPlayer);
             puzzle.removeRewardsItem(playerLocation, inputCommand);
+            crate.removeItemFromCrate(playerLocation,inputCommand,crate);
         }
         else if(inputCommand.contains("discard")){ // THIS FEATURE IS WORKING
             item.discard(inputCommand, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("use")){
-            //weapon.useWeapon(currentPlayer, inputCommand);
+            weapon.useWeapon(currentPlayer, inputCommand, IDofMonsterInRoom);
             //healing.useHealing(currentPlayer, inputCommand);
             /*
             10/30/22 MEETING: SHIANNE , CARLTON
             I DON'T KNOW WHAT TO DO THE SET
              */
         }
-        else if(inputCommand.contains("examine crate")){
+        else if(inputCommand.contains("examine")){ // THIS FEATURE IS WORKING
             view.printBasicText(crate.examineCrate(inputCommand));
         }
         else if(inputCommand.contains("unequip")){
             weapon.unequipWeapon(currentPlayer, inputCommand);
         }
-        else if(inputCommand.contains("equip")){
-            weapon.equipWeapon(currentPlayer, inputCommand);
+        else if(inputCommand.contains("equip")){ // THIS FEATURE IS WORKING FOR WEAPONS
+            weapon.equipWeapon(currentPlayer, inputCommand, IDofMonsterInRoom);
             //armor.equipArmor(currentPlayer, inputCommand);
             /*
             10/30/22 MEETING: CARLTON
             I DON'T KNOW WHAT TO DO WITH THE SET
              */
         }
-        else if(inputCommand.equalsIgnoreCase("checkout puzzle")){ // THIS FEATURE WORKING
+        else if(inputCommand.equalsIgnoreCase("checkout puzzle")){ // THIS FEATURE IS WORKING
             /*
             int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
             Room playerLocation = gameState.getPlayer().getLocation();
@@ -246,11 +248,11 @@ public class GameConsole {
             view.printBasicText(monster.inspectMonster(IDofMonsterInRoom));
         }
         else if(inputCommand.contains("attack monster")){
-            monster.attackMonster(player);
+            monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor);
             monster.monsterDrop(room);
         }
         else if(inputCommand.contains("parry monster")){
-            monster.parryMonster();
+            monster.parryMonster(IDofMonsterInRoom, currentWeapon);
         }
         else if(inputCommand.equals("heal")){
             /*

@@ -30,7 +30,7 @@ Station 1 Loot Room
 The room has many crates that can possibly be looted.
 -1,-1,-1,1
 false
-Crate 1, Crate 2, Crate 3
+Crate-1, Crate-2, Crate-3
 -1
 -1
 NULL
@@ -84,7 +84,7 @@ Station 2 Loot Room
 The room has many crates that can possibly be looted.
 6,-1,-1,-1
 false
-Crate 4, Crate 5, Crate 6
+Crate-4, Crate-5, Crate-6
 -1
 -1
 NULL
@@ -111,7 +111,7 @@ Station 3 Loot And Puzzle Room
 The room has many crates that can possibly be looted along with a puzzle.
 -1,-1,11,-1
 false
-Crate 7, Crate 8, Crate 9
+Crate-7, Crate-8, Crate-9
 5
 -1
 NULL
@@ -165,7 +165,7 @@ Station 4 Loot and Puzzle Room
 The room has many crates that can possibly be looted along with a puzzle.
 -1,-1,-1,16
 false
-Crate 10, Crate 11, Crate 12
+Crate-10, Crate-11, Crate-12
 6
 -1
 NULL
@@ -201,7 +201,7 @@ Station 5 Loot and Monster Room
 The room has many crates that can possibly be looted, but they are all blocked by an enemy.
 -1,-1,21,-1
 false
-Crate 13, Crate 14, Crate 15
+Crate-13, Crate-14, Crate-15
 -1
 2
 NULL

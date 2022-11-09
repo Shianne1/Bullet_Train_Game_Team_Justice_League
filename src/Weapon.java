@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Weapon extends Item implements itemInterface {
+public class Weapon extends Item implements itemInterface, Serializable {
     private int durability; // the amount of uses the item has
     private int strength; // the amount of damage the weapon deals
 

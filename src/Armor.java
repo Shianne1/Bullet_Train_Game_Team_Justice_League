@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Armor extends Item  {
+public class Armor extends Item implements Serializable {
     private int armorMod;
     private ArrayList<Armor> armorInventory;
 

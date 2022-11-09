@@ -15,17 +15,6 @@ public class GameState implements Serializable {
     private ArrayList<Monster> monstersInGame;
     private ArrayList<Crate> cratesInGame;
 
-    /*
-    public boolean isRunning() {
-        return isRunning;
-    }
-
-    public void setRunning(boolean running) {
-        isRunning = running;
-    }
-
-     */
-
     boolean isRunning;
 
 

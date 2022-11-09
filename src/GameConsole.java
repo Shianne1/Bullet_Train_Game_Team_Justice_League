@@ -146,7 +146,6 @@ public class GameConsole {
             item.discard(inputCommand, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("use")){ // THIS FEATURE IS WORKING
-            healing.useHealing(currentPlayer, inputCommand);
         }
         else if(inputCommand.contains("examine")){ // THIS FEATURE IS WORKING
             view.printBasicText(crate.examineCrate(inputCommand));
@@ -177,22 +176,15 @@ public class GameConsole {
             view.printBasicText(monster.inspectMonster(IDofMonsterInRoom));
         }
         else if(inputCommand.contains("attack monster")){ // THIS FEATURE IS WORKING
-            monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor, currentWeapon, playerLocation);
+            monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor, currentWeapon, playerLocation, gameState.getRoomsInGame());
         }
         else if(inputCommand.contains("parry monster")){ // THIS FEATURE IS WORKING
             monster.parryMonster(IDofMonsterInRoom, currentWeapon);
         }
         else if(inputCommand.equals("heal")){
-            /*
-            10/30/22 MEETING: CARLTON
-            NEED A METHOD FOR HEAL
-             */
+            healing.useHealing(currentPlayer, inputCommand);
         }
-        else if(inputCommand.equals("run")){
-            /*
-            10/30/22 MEETING: DAKOTA
-            NEED A METHOD FOR RUN
-             */
+        else if(inputCommand.equals("run")){ // THIS FEATURE IS WORKING
         }
         else{
             System.out.println("Invalid command. Try again");

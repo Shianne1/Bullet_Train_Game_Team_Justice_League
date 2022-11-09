@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @author(s) Dakota Smith
  * @added 10/17/2022
  */
-public class Folder extends Item {
+public class Folder extends Item implements Serializable {
     // accessing the game console class
     GameConsole game = new GameConsole();
 

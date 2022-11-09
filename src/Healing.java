@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ import java.util.Scanner;
  * @author(s) Dakota Smith
  * @added 10/17/2022
  */
-public class Healing extends Item implements itemInterface {
+public class Healing extends Item implements itemInterface, Serializable {
     private int healAmount;
     private int stackAmount;
 

@@ -126,11 +126,20 @@ public class Monster implements EntityInterface, Serializable {
      * @author: Dakota Smith
      * 10/19/2022
      */
-    public void attackMonster(Player player, int monsterLocation, Armor armor, Weapon weapon, Room current) {
+    public void attackMonster(Player player, int monsterLocation, Armor armor, Weapon weapon, Room current, ArrayList<Room> roomArrayList) {
         //creates delta health variable, sets to current player health, decreases variable by
         //monster damage, then sets player health to the difference
             for (Monster villains : enemy) {
                 if (monsterLocation == this.monsterId) {
+                    if(player.getCurrentHealth() <= 20){
+                        System.out.println("If you would like to run type: [run]");
+                        String running = input.nextLine();
+                        if(running.equalsIgnoreCase("run")) {
+                            System.out.println("You have ran away from the enemy.");
+                            run(player, roomArrayList);
+                            break;
+                        }
+                    }
                     if (villains.getHealth() <= 0) {
                         System.out.println("You have killed the " + villains.getMonsterName());
                         player.setNumOfMonstersKilled(player.getNumOfMonstersKilled() + 1);
@@ -188,6 +197,7 @@ public class Monster implements EntityInterface, Serializable {
         return parry;
     }
 
+
     /**
      * @Method: monsterDrop()
      * @param currentRoom
@@ -227,44 +237,49 @@ public class Monster implements EntityInterface, Serializable {
     }
 
     /**
-     * @Method: flee()
+     * @Method: run()
      * @param player
      * @param roomList
      * @Function: when called on, moves player to previous room.
      * @author: Dakota Smith
      * 11/1/2022
      */
-    public void flee(Player player, ArrayList<Room> roomList)
-    {
-        //creates holder variables
-        Room temp = player.getLocation();
-        int newLocation;
 
-        //checks if there is any room that player can move to
-        //There should only be one room that a monster room connects to.
-        if(temp.getNorth() >= 0)
-        {
-            newLocation = temp.getNorth();
-            temp = roomList.get(newLocation);
-            player.move(temp);
-        }
-        else if(temp.getEast() >= 0)
-        {
-            newLocation = temp.getEast();
-            temp = roomList.get(newLocation);
-            player.move(temp);
-        }
-        else if(temp.getSouth() >= 0)
-        {
-            newLocation = temp.getSouth();
-            temp = roomList.get(newLocation);
-            player.move(temp);
-        }
-        else
-        {
-            newLocation = temp.getWest();
-            temp = roomList.get(newLocation);
-            player.move(temp);
+    // SHIANNE LESURE 11/9/2022 DAKOTA SMITH
+    public void run(Player player, ArrayList<Room> roomList){
+        if(player.getCurrentHealth() <= 20){
+            Room newRoom;
+            for(Room safeSpot : roomList){
+                if(player.getLocation().getRoomId() == safeSpot.getRoomId()) {
+                    if (safeSpot.getNorth() >= 0) {
+                        newRoom = roomList.get(safeSpot.getNorth());
+                        player.move(newRoom);
+                        System.out.println("You are in the " + newRoom.getRoomName());
+                        break;
+                    }
+
+                    if (safeSpot.getEast() >= 0) {
+                        newRoom = roomList.get(safeSpot.getEast());
+                        player.move(newRoom);
+                        System.out.println("You are in the " + newRoom.getRoomName());
+                        break;
+                    }
+
+                    if (safeSpot.getSouth() >= 0) {
+                        newRoom = roomList.get(safeSpot.getSouth());
+                        player.move(newRoom);
+                        System.out.println("You are in the " + newRoom.getRoomName());
+                        break;
+                    }
+
+                    if (safeSpot.getWest() >= 0) {
+                        newRoom = roomList.get(safeSpot.getWest());
+                        player.move(newRoom);
+                        System.out.println("You are in the " + newRoom.getRoomName());
+                        break;
+                    }
+                }
+            }
         }
     }
 

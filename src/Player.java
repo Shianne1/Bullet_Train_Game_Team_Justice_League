@@ -296,17 +296,6 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @author(s) Carlton Napier, Shianne Lesure
      * @added 10/18/2022
      */
-    /*
-    public String checkStats() {
-        return "Name: " + this.name + "\n" +
-                "Health (current/max): " + this.currentHealth + "/" + this.maxHealth + "\n" +
-                "Location: " + this.location + "\n" +
-                "Equipped Weapon: " + this.equippedWeapon + "\n" +
-                "Equipped Armor: " + this.equippedArmor + "\n" +
-                "Monsters Killed: " + this.numOfMonstersKilled + "\n";
-    }
-
-     */
     // SHIANNE LESURE 11/7/2022
     public String checkStatsPlayer(Player player){
         player.getLocation().getRoomName();
@@ -356,4 +345,13 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added: 11/3/2022
      */
     public void codeInventoryAdd(String codes){ codeInventory.add(codes); }
+
+
+    public void stackHealers(){
+        for(Item healers : inventory){
+            if(!healers.getItemName().equalsIgnoreCase("bandage")){
+
+            }
+        }
+    }
 }

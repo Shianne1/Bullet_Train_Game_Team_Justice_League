@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Weapon extends Item implements equipItemInterface, itemInterface {
+public class Weapon extends Item implements itemInterface {
     private int durability; // the amount of uses the item has
     private int strength; // the amount of damage the weapon deals
 
@@ -15,8 +15,6 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
     private ArrayList<Weapon> weaponsInventory;
     private ArrayList<Monster> enemy;
 
-    Item itemObjectWeapon;
-    Weapon weaponItem;
 
     /*--------------------------------------------Weapon Constructors-------------------------------------------------*/
 
@@ -67,47 +65,9 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
 
     /*---------------------------------Weapon Methods for implementing the game---------------------------------------*/
 
-    /**
-     * @param //item
-     * @Method: useItem()
-     * @Function: This method will allow the player to use an item to fight a monster
-     * @author(s): Shianne Lesure
-     * @added: 10/29/2022
-     */
-    @Override
-    public void use(Player player, String item) {
-        //String item = input.nextLine();
-        String[] parts = item.split(" ");
-        for (Item item1 : items) {
-            itemObjectWeapon = item1;
-            if (parts[1].equalsIgnoreCase(super.getItemName())) {
-                weaponItem.setDurability(getDurability() - 1);
-                System.out.println("You inflicted " + weaponItem.getStrength() + " damage onto the enemy.");
-                System.out.println("You have " + weaponItem.getDurability() + " uses left.");
-                if (weaponItem.getDurability() == 0) { // if the weapons uses get to 0
-                    System.out.println("You can no longer use this weapon");
-                    player.inventoryRemove(itemObjectWeapon);
-                    //inventory.remove(itemObjectWeapon); // remove item from player's inventory
-                    break;
-                }
-            }
-        }
-    }
-
     //SHIANNE LESURE 11/7/2022
     public void addingWeapons(Player player){
             for (Item item : player.getInventory()) {
-                /*
-                if (item.getItemName().equalsIgnoreCase(weaponItem.getItemName())) {
-                    if((Healing) item){
-                        continue;
-                    }else {
-                        weaponsInventory.add((Weapon)item);
-                    }
-                   // weaponsInventory.add((Weapon)item);
-                }
-
-                 */
                 if (item.getItemName().equalsIgnoreCase("knife")) {
                     weaponsInventory.add((Weapon) item);
                 }
@@ -138,32 +98,7 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
     }
 
     // SHIANNE LESURE 11/7/2022
-    public void useWeapon(Player player, String item, int monsterLocation, ArrayList<Item> itemArrayList){
-        addingWeapons(player);
-        String[] parts = item.split(" ");
-            for (Weapon weapon : weaponsInventory) {
-                for(Monster monster : enemy) {
-                    if(monsterLocation == monster.getMonsterId()) {
-                        if (parts[1].equalsIgnoreCase(weapon.getItemName())) {
-                            weapon.setDurability(weapon.getDurability() - 1);
-                            System.out.println("You inflicted " + weapon.getStrength() + " point damage onto the enemy.");
-                            System.out.println("You have " + weapon.getDurability() + " uses left.");
-                            if (weapon.getDurability() == 0) {
-                                System.out.println("You can no longer use this weapon");
-                                player.inventoryRemove(weapon);
-                                break;
-                            }
-                            break;
-                        }
-                    }
-                }
-                break;
-            }
-
-    }
-
-    // SHIANNE LESURE 11/7/2022
-    public void equipWeapon(Player player, String item, int monsterLocation){
+    public void equipWeapon(Player player, String item){
         player.getInventory();
         addingWeapons(player);
         String[] parts = item.split(" ");
@@ -171,16 +106,6 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
             if(parts[1].equalsIgnoreCase(weapon.getItemName())){
                 player.setEquippedWeapon(weapon);
                 System.out.println("You have equipped " + weapon.getItemName());
-                /*
-                System.out.println("If you would like to use the " + weapon.getItemName() + " type: [use " + weapon.getItemName() + "]");
-                String playerAnswer = input.nextLine();
-                if(playerAnswer.equalsIgnoreCase("use " + weapon.getItemName())){
-                    useWeapon(player, playerAnswer, monsterLocation);
-                }
-
-                 */
-
-               // player.inventoryRemove(weapon);
             }
         }
     }
@@ -192,32 +117,9 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
             if(parts[1].equalsIgnoreCase(weapon.getItemName())){
                 player.removeEquippedWeapon();
                 System.out.println("You have unequipped " + weapon.getItemName());
+                weaponsInventory.remove(weapon);
+                break;
             }
         }
-    }
-
-    /**
-     * @param //Player
-     * @Method: equip()
-     * @Function: This method will equip the item calling the method to the player, while unequipping the player's current item
-     * @author(s): Carlton Napier
-     * @added: 10/31/2022
-     */
-    @Override
-    public void equip(Player player) {
-
-
-        /*
-        if the player has an equipped weapon, the equipped weapon is added to the inventory,
-        the weapon trying to be equipped is then set to the player
-        the weapon trying to be equipped is then removed from the player's inventory
-         */
-
-        if (player.getEquippedWeapon() != null) {
-            player.removeEquippedWeapon();
-        }
-
-            player.setEquippedWeapon(this);
-
     }
 }

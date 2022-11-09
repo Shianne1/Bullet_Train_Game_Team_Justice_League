@@ -83,16 +83,6 @@ public class GameConsole {
      * @author(s) Carlton Napier, Shianne Lesure 
      * @added 10/16/2022
      */
-    /*
-       10/30/22 MEETING: CARLTON, SHIANNE
-       CARLTON, I WILL LET YOU FIX THIS THIS METHOD
-     */
-
-    /*
-       10/30/22 MEETING:
-            IF THE METHOD IS RETURNING A STRING, PUT THE METHOD INSIDE VIEW.PRINT BASIC TEXT()
-            EX. view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame()));
-    */
     private static void parseCommand(GameConsole game, GameState gameState, View view, Puzzle puzzle, Item item, Healing healing,
                                      Weapon weapon, Armor armor, Crate crate, Monster monster, Room room, Player player) {
         String inputCommand = view.inputCommand();
@@ -115,7 +105,6 @@ public class GameConsole {
         }
         else if(inputCommand.equals("check stats")) { // THIS FEATURE IS WORKING
             view.printBasicText(gameState.getPlayer().checkStatsPlayer(currentPlayer));
-            //view.printStatText(gameState.getPlayer().checkStatsPlayer(currentPlayer));
         }
         else if(inputCommand.equals("help")) { // THIS FEATURE IS WORKING
             view.printBasicText(parseHelpText());
@@ -133,19 +122,6 @@ public class GameConsole {
         else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") || // THIS FEATURE IS WORKING
                 inputCommand.equals("south") || inputCommand.equals("s") ||  inputCommand.equals("west") || inputCommand.equals("w")){
             room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand);
-
-            /*
-            10/30/22 MEETING: DAKOTA
-            We need a method that will allow for the player to move north, south, east, west.
-            It needs to show message:
-            The room name
-            Whether the room has been visited or not.
-            The room description
-
-
-            if player enters a room that is locked, message will say:
-            "Train wagon is locked; need a code to on unlock train wagon"
-             */
         }
         else if(inputCommand.equals("checkout room")){ // THIS FEATURE IS WORKING
             view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation, gameState.getItemsInGame()));
@@ -158,31 +134,8 @@ public class GameConsole {
             gameState.getPlayer().viewCode();
         }
         else if(inputCommand.equals("use code")){ // THIS FEATURE IS WORKING
-            /*
-            view.printBasicText(gameState.getPlayer().checkCodeInventory());
-            room.lockRoom(playerLocation);
-            /*
-            10/30/22 MEETING: SHIANNE
-            // NEED A METHOD FOR USE CODE
-            They will take the password to the train wagon and type it in.
-            if code is wrong, message will say:
-            "code is incorrect"
-            if passwords is correct, message will say:
-            "Code is correct. You may enter the train wagon"
-            set room's lock to unlock
-             */
         }
         else if(inputCommand.contains("store")){ // THIS FEATURE IS WORKING
-
-            /*
-            10/30/22 MEETING: SHIANNE
-            WE CHANGE IT TO TO HAVE THE INPUT SPILT
-
-            String[] StoreItem = inputCommand.split("(?i)store", 0);
-            if(StoreItem.length != 0){
-                item.storeItem(StoreItem[1]);
-            }
-             */
             item.storeItem(inputCommand, playerLocation, currentPlayer);
             puzzle.removeRewardsItem(playerLocation, inputCommand);
             crate.removeItemFromCrate(playerLocation,inputCommand,crate);
@@ -190,57 +143,30 @@ public class GameConsole {
         else if(inputCommand.contains("discard")){ // THIS FEATURE IS WORKING
             item.discard(inputCommand, playerLocation, currentPlayer);
         }
-        else if(inputCommand.contains("use")){
-            //weapon.useWeapon(currentPlayer, inputCommand, IDofMonsterInRoom);
+        else if(inputCommand.contains("use")){ // THIS FEATURE IS WORKING
             healing.useHealing(currentPlayer, inputCommand);
-            /*
-            10/30/22 MEETING: SHIANNE , CARLTON
-            I DON'T KNOW WHAT TO DO THE SET
-             */
         }
         else if(inputCommand.contains("examine")){ // THIS FEATURE IS WORKING
             view.printBasicText(crate.examineCrate(inputCommand));
         }
         else if(inputCommand.contains("unequip")){
             weapon.unequipWeapon(currentPlayer, inputCommand);
+            armor.unequipArmor(currentPlayer, inputCommand);
         }
         else if(inputCommand.contains("equip")){ // THIS FEATURE IS WORKING FOR WEAPONS
-            weapon.equipWeapon(currentPlayer, inputCommand, IDofMonsterInRoom);
-            //armor.equipArmor(currentPlayer, inputCommand);
-            /*
-            10/30/22 MEETING: CARLTON
-            I DON'T KNOW WHAT TO DO WITH THE SET
-             */
+            weapon.equipWeapon(currentPlayer, inputCommand);
+            armor.equipArmor(currentPlayer, inputCommand);
         }
         else if(inputCommand.equalsIgnoreCase("checkout puzzle")){ // THIS FEATURE IS WORKING
-            /*
-            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
-            Room playerLocation = gameState.getPlayer().getLocation();
-
-             */
             puzzle.inspectPuzzle(IDofPuzzleInRoom, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("solve puzzle")){ // THIS FEATURE IS WORKING
-            /*
-            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
-            Room playerLocation = gameState.getPlayer().getLocation();
-
-             */
             puzzle.solvePuzzle(IDofPuzzleInRoom, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("get hint")){ // THIS FEATURE IS WORKING
-            /*
-            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
-
-             */
             puzzle.hint(IDofPuzzleInRoom);
         }
         else if(inputCommand.contains("retry puzzle")){ // THIS FEATURE IS WORKING
-            /*
-            int IDofPuzzleInRoom = gameState.getPlayer().getLocation().getRoomPuzzle();
-            Room playerLocation = gameState.getPlayer().getLocation();
-
-             */
            puzzle.retryPuzzle(IDofPuzzleInRoom, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("exit puzzle")){ // THIS FEATURE IS WORKING
@@ -248,11 +174,11 @@ public class GameConsole {
         else if(inputCommand.equalsIgnoreCase("checkout monster")){ // THIS FEATURE IS WORKING
             view.printBasicText(monster.inspectMonster(IDofMonsterInRoom));
         }
-        else if(inputCommand.contains("attack monster")){
+        else if(inputCommand.contains("attack monster")){ // THIS FEATURE IS WORKING
             monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor, currentWeapon);
             monster.monsterDrop(room);
         }
-        else if(inputCommand.contains("parry monster")){
+        else if(inputCommand.contains("parry monster")){ // THIS FEATURE IS WORKING
             monster.parryMonster(IDofMonsterInRoom, currentWeapon);
         }
         else if(inputCommand.equals("heal")){

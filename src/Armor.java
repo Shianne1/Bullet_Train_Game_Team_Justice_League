@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Armor extends Item implements equipItemInterface {
+public class Armor extends Item  {
     private int armorMod;
     private ArrayList<Armor> armorInventory;
 
@@ -51,7 +51,6 @@ public class Armor extends Item implements equipItemInterface {
                 if (item.getItemName().equalsIgnoreCase("light-armor")) {
                     armorInventory.add((Armor) item);
                 }
-
                 if (item.getItemName().equalsIgnoreCase("medium-armor")) {
                     armorInventory.add((Armor) item);
                 }
@@ -70,36 +69,21 @@ public class Armor extends Item implements equipItemInterface {
             if(parts[1].equalsIgnoreCase(armor.getItemName())){
                 player.setEquippedArmor(armor);
                 System.out.println("Your " + armor.getItemName() + " will defend you by " + armor.getArmorMod());
+            }
+        }
+    }
+
+    //SHIANNE LESURE 11/8/2022
+    public void unequipArmor(Player player, String item){
+        String[] parts = item.split(" ");
+        for(Armor armor: armorInventory){
+            if(parts[1].equalsIgnoreCase(armor.getItemName())){
+                player.removeEquippedArmor();
+                System.out.println("You have unequipped " + armor.getItemDesc());
+                armorInventory.remove(armor);
                 break;
             }
-            break;
         }
     }
 
-
-
-
-    /**
-     * @Method: equip()
-     * @param //Player
-     * @Function: This method will equip the item calling the method to the player, while unequipping the player's current item
-     * @author(s): Carlton Napier
-     * @added: 10/31/2022
-     */
-    @Override
-    public void equip(Player player) {
-
-
-        /*
-        if the player has equipped armor, the equipped armor is added to the inventory,
-        the armor trying to be equipped is then set to the player
-        the armor trying to be equipped is then removed from the player's inventory
-         */
-
-        if (player.getEquippedArmor() != null)
-        {
-            player.removeEquippedArmor();
-        }
-            player.setEquippedArmor(this);
-    }
 }

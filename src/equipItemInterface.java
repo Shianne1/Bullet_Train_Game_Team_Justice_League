@@ -1,7 +1,7 @@
 /**
      @Interface: itemInterface()
      @Function: basic  interface used as a template for any similarities between actions that affect equip items
-     @implementedBy: Item, Armor, Weapon
+     @implementedBy: Item,
      @author(s) Carlton Napier
      @added 10/16/2022
   */

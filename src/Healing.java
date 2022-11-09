@@ -88,7 +88,6 @@ public class Healing extends Item implements itemInterface {
      */
     @Override
     public void use(Player player, String item) {
-        //String item = input.nextLine();
         String[] parts = item.split(" ");
         for(Item item1: items){
             itemObjectHeal = item1;
@@ -121,17 +120,14 @@ public class Healing extends Item implements itemInterface {
     }
 
     // SHIANNE LESURE 11/7/2022
-    // I AM STILL TRYING TO FIX THE STACK AMOUNT
     public void useHealing(Player player, String item){
         addingHealingItem(player);
         String[] parts = item.split(" ");
             for(Healing healing : healingInventory){
                 if(parts[1].equalsIgnoreCase(healing.getItemName())){
-                    //healing.setStackAmount(healing.getStackAmount() - 1);
                     System.out.println("This " + healing.getItemName() + " has added " + healing.getHealAmount() + " points to your health bar.");
                     int updateHealth = player.getCurrentHealth() + healing.getHealAmount();
                     player.setCurrentHealth(updateHealth);
-                    //System.out.println("You have " + healing.getStackAmount() + " use left.");
                     break;
                 }
             }

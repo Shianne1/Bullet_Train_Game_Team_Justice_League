@@ -86,6 +86,8 @@ public class Room implements Serializable {
 
     public int getRoomMonster() { return roomMonster; }
 
+    public void setRoomMonster(int roomMonster) { this.roomMonster = roomMonster; }
+
     public int getRoomPuzzle() { return roomPuzzle; }
 
     public void setRoomPuzzle(int roomPuzzle) { this.roomPuzzle = roomPuzzle; }

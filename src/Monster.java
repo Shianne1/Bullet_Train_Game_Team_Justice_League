@@ -21,8 +21,8 @@ public class Monster implements EntityInterface, Serializable {
     private int damage;
     private String itemDrop1;
     private String itemDrop2;
-    private double dropRate1;
-    private double dropRate2;
+    private int dropRate1;
+    private int dropRate2;
 
     // accessing the game console class
     GameConsole game = new GameConsole();
@@ -80,8 +80,8 @@ public class Monster implements EntityInterface, Serializable {
         this.damage = dam;
         this.itemDrop1 = item1;
         this.itemDrop2 = item2;
-        dropRate1 = prob1/100;
-        dropRate2 = prob2/100;
+        this.dropRate1 = prob1;
+        this.dropRate2 = prob2;
     }
 
 
@@ -104,9 +104,9 @@ public class Monster implements EntityInterface, Serializable {
 
     public int getDamage() { return damage; }
 
-    public double getDropRate1() { return dropRate1; }
+    public int getDropRate1() { return dropRate1; }
 
-    public double getDropRate2() { return dropRate2; }
+    public int getDropRate2() { return dropRate2; }
 
     public String getItemDrop1() {
         return itemDrop1;
@@ -126,24 +126,24 @@ public class Monster implements EntityInterface, Serializable {
      * @author: Dakota Smith
      * 10/19/2022
      */
-    public void attackMonster(Player player, int monsterLocation, Armor armor, Weapon weapon) {
+    public void attackMonster(Player player, int monsterLocation, Armor armor, Weapon weapon, Room current) {
         //creates delta health variable, sets to current player health, decreases variable by
         //monster damage, then sets player health to the difference
             for (Monster villains : enemy) {
                 if (monsterLocation == this.monsterId) {
-                    System.out.println("If you would like to use the " + weapon.getItemName() + " type: [use " + weapon.getItemName() + "]");
-                    String playerAnswer = input.nextLine();
-                    if(playerAnswer.equalsIgnoreCase("use " + weapon.getItemName())){
-                       // weapon.useWeapon(player, playerAnswer,this.monsterId, itemList);
-                        weapon.useWeapon1(player, weapon, playerAnswer);
-                        villains.setHealth(villains.getHealth() - weapon.getStrength());
-                    }
                     if (villains.getHealth() <= 0) {
                         System.out.println("You have killed the " + villains.getMonsterName());
                         player.setNumOfMonstersKilled(player.getNumOfMonstersKilled() + 1);
+                        monsterDrop(current, monsterLocation);
+                        current.setRoomMonster(-1);
                         break;
                     }
-                    // villains.setHealth(villains.getHealth() - weapon.getStrength());
+                    System.out.println("If you would like to use the " + weapon.getItemName() + " type: [use " + weapon.getItemName() + "]");
+                    String playerAnswer = input.nextLine();
+                    if(playerAnswer.equalsIgnoreCase("use " + weapon.getItemName())){
+                        weapon.useWeapon1(player, weapon, playerAnswer);
+                        villains.setHealth(villains.getHealth() - weapon.getStrength());
+                    }
                         System.out.println("\nMonster HP Life: " + villains.getHealth());
                         System.out.println(villains.getMonsterName() + " inflicted " + villains.getDamage() + " damage points onto you.");
                         if (player.getEquippedArmor() != null) {
@@ -196,31 +196,33 @@ public class Monster implements EntityInterface, Serializable {
      * @author: Dakota Smith
      * 10/25/2022
      */
-    public void monsterDrop(Room currentRoom) {
+    public void monsterDrop(Room currentRoom, int monsterLocation) {
         //creates empty temporary item, and generates random double 0.0 - 1.0
-        Item temp;
-        Random r = new Random();
-        double probability = r.nextDouble();
-        //if probability variable falls within 0 to the first drop rate of item, monster drops first possible item
-        if(probability <= this.dropRate1) {
-            for(Item a : items) {
-                temp = a;
-                String itemName = a.getItemName();
-                if(itemName.equals(this.itemDrop1)) {
-                    currentRoom.roomItemAdd(temp);
+        for(Monster monster : enemy){
+            if(monsterLocation == this.monsterId){
+                Random r = new Random();
+                int probability = r.nextInt(100) + 1;
+                if(probability <= monster.getDropRate1()){
+                    for(Item a : items){
+                        if(a.getItemName().equalsIgnoreCase(monster.getItemDrop1())){
+                            System.out.println("The enemy had drop " + a.getItemName());
+                            currentRoom.roomItemAdd(a);
+                            break;
+                        }
+                    }
+                }
+
+                if(probability <= monster.getDropRate2()){
+                    for(Item a : items){
+                        if(a.getItemName().equalsIgnoreCase(monster.getItemDrop2())){
+                            System.out.println("The enemy had drop " + a.getItemName());
+                            currentRoom.roomItemAdd(a);
+                            break;
+                        }
+                    }
                 }
             }
-        }
-        //if probability falls within bounds defined by the first drop rate number, and the sum of both drop rate
-        //variables, second item is dropped, otherwise no item is dropped
-        else if(probability > this.dropRate1 && probability <= (this.dropRate1 + this.dropRate2)) {
-            for(Item a : items) {
-                temp = a;
-                String itemName = a.getItemName();
-                if(itemName.equals(this.itemDrop2)) {
-                    currentRoom.roomItemAdd(temp);
-                }
-            }
+            break;
         }
     }
 

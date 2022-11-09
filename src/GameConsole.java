@@ -175,8 +175,7 @@ public class GameConsole {
             view.printBasicText(monster.inspectMonster(IDofMonsterInRoom));
         }
         else if(inputCommand.contains("attack monster")){ // THIS FEATURE IS WORKING
-            monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor, currentWeapon);
-            monster.monsterDrop(room);
+            monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor, currentWeapon, playerLocation);
         }
         else if(inputCommand.contains("parry monster")){ // THIS FEATURE IS WORKING
             monster.parryMonster(IDofMonsterInRoom, currentWeapon);

@@ -92,7 +92,6 @@ public class GameConsole {
         Player currentPlayer = gameState.getPlayer();
         Armor currentArmor = gameState.getPlayer().getEquippedArmor();
         Weapon currentWeapon = gameState.getPlayer().getEquippedWeapon();
-        monster.getHealth();
 
         if(inputCommand.equals("save game")) {
             saveGame(gameState, view);
@@ -117,6 +116,7 @@ public class GameConsole {
             view.printBasicText("\nYou are in " + gameState.getPlayer().getLocation().getRoomName());
         }
         else if(inputCommand.equals("check inventory")) { // THIS FEATURE IS WORKING
+            player.stackHealers(gameState.getItemsInGame());
             view.printInventory(gameState.getPlayer());
         }
         else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") || // THIS FEATURE IS WORKING
@@ -146,6 +146,7 @@ public class GameConsole {
             item.discard(inputCommand, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("use")){ // THIS FEATURE IS WORKING
+            healing.useHealing(currentPlayer, inputCommand);
         }
         else if(inputCommand.contains("examine")){ // THIS FEATURE IS WORKING
             view.printBasicText(crate.examineCrate(inputCommand));
@@ -180,9 +181,6 @@ public class GameConsole {
         }
         else if(inputCommand.contains("parry monster")){ // THIS FEATURE IS WORKING
             monster.parryMonster(IDofMonsterInRoom, currentWeapon);
-        }
-        else if(inputCommand.equals("heal")){
-            healing.useHealing(currentPlayer, inputCommand);
         }
         else if(inputCommand.equals("run")){ // THIS FEATURE IS WORKING
         }
@@ -349,6 +347,8 @@ public class GameConsole {
 
                 //writes the gameState object to the file
                 dataOutput.writeObject(gameState);
+                dataOutput.flush();
+                dataOutput.close();
             } catch (FileNotFoundException e) {
                 System.out.println("File failed to be created");
             } catch (IOException e) {

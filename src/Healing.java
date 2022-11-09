@@ -127,6 +127,8 @@ public class Healing extends Item implements itemInterface, Serializable {
             for(Healing healing : healingInventory){
                 if(parts[1].equalsIgnoreCase(healing.getItemName())){
                     System.out.println("This " + healing.getItemName() + " has added " + healing.getHealAmount() + " points to your health bar.");
+                    player.inventoryRemove(healing);
+
                     int updateHealth = player.getCurrentHealth() + healing.getHealAmount();
                     player.setCurrentHealth(updateHealth);
                     break;

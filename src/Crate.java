@@ -75,9 +75,6 @@ public class Crate {
      * 10/17/2022
      */
     public String examineCrate(String item) {
-        //creates null string
-       // String check = null;
-
         String[] parts = item.split(" ");
         String checkCrate = "";
             for(Crate temp : crates){

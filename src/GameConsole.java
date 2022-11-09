@@ -109,7 +109,7 @@ public class GameConsole {
             10/30/22 MEETING: DAKOTA
             NEED A METHOD FOR RUN
              */
-            player.flee(gameState.getRoomsInGame());
+
         }
 
 

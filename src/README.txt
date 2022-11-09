@@ -32,9 +32,70 @@ View.java
 
 [CLASSES:]
 
+PLAYER CLASS:
+This class will set up the Player Object that is needed for tracking player stats, location and inventory
+This Class contains:
+
+    private int numOfMonstersKilled
+    private int maxHealth
+    private int currentHealth
+    private String name
+    private Room location
+    private Weapon equippedWeapon
+    private Armor equippedArmor
+    private ArrayList<Item> inventory;
+    private ArrayList<String> codeInventory
+    private GameState checkpoint
+    boolean hasCheckPoint
+    Weapon defaultWeapon
+
+    -Constructor for Rooms with parameters being private variables
+    -Getter/Setters for private variables
+    -viewCode method will print out most recent code the player has acquired
+    -healHealth heals the health of player by set amount, capped to heal to, not beyond, max health
+    -checkStatsPlayer method returns formatted string with all relevant player stats
+    -takeDamage decreases current player health by set amount
+    -inventoryAdd method adds item to player inventory
+    -inventoryRemove method removes item from player inventory
+    -codeInventoryAdd adds codes to the inventory
+
+
+PUZZLE CLASS:
+This class will set up puzzle objects
+This class contains:
+    private int puzzleID;
+        private String puzzleName
+        private String puzzleQuestion
+        private String hint
+        private String answer
+        private int attempts
+        private String reward1
+        private String reward2
+        private String puzzleCode
+        GameConsole game
+        private ArrayList<Puzzle> puzzles
+        private ArrayList<Item> items
+        private ArrayList<Room> rooms
+        Item itemObject
+        Puzzle puzzleGame
+        Scanner input
+
+        -Constructor for Rooms with parameters being private variables
+        -Getter/Setters for private variables
+        -dropRewardsItem method will drop puzzle reward item/s into current room
+        -removeRewardItem method will remove puzzle reward item/s from current room
+        -addPuzzleCodes method will add codes that players get from puzzles to the player code inventory
+        -inspectPuzzle prints out the puzzle and asks player if they'd like to solve puzzle
+        -solvePuzzle takes in response from player as a puzzle answer, checks if answer is correct or if
+            player wishes to exit, if incorrect, that is communicated to player and attempts count is reducted
+        -hint method prints out hint for relevant puzzle
+        -retryPuzzle method will allow for the player to retry the puzzle if they have failed
+
+
 ROOM CLASS:
 This class will set up the room objects that is needed for navigating and calling other elements of game.
 This Class contains:
+
 	private int roomId
 	private String roomName
 	private String roomDesc
@@ -49,6 +110,8 @@ This Class contains:
 	private int south
 	private int west
 	private ArrayList<Item> roomItems
+    private ArrayList<Item> itemsInRoom
+    Scanner input
 
 	-Constructor for Rooms with parameters being private variables
 	-Getter/Setters for private variables
@@ -65,6 +128,7 @@ This Class contains:
 MONSTER CLASS:
 This class will set up the Monster objects that are needed for combat
 This Class contains:
+
 	private int monsterId
 	private String monsterName
 	private String monsterDesc
@@ -74,8 +138,14 @@ This Class contains:
 	private String itemDrop2
 	private double dropRate1
 	private double dropRate2
-	Constructor for Monsters with parameters being private variables
-	Getter/Setters for private Variables
+    GameConsole game
+    private ArrayList<Monster> enemy
+    private ArrayList<Item> items
+    private ArrayList<Room> roomItems
+    Scanner input
+
+	-Constructor for Monsters with parameters being private variables
+	-Getter/Setters for private Variables
 	-attackMonster which when called deals damage to player, updates player health, displays damage
 	    dealt and remaining player health
 	-parryMonster which generates random integer 1-100, if variable is greater than 50 the
@@ -87,8 +157,6 @@ This Class contains:
     -inspectMonster method will output description of monster
 
 
-
-
 ITEM CLASS:
 This class will be the basis for all item objects
 This Class contains:
@@ -96,13 +164,147 @@ This Class contains:
      private String itemName;
      private String itemDesc;
      private String itemText;
-     Constructor for items with parameters being private variables
-     Getter/Setters for private variables
+     GameConsole game
+     GameState gameConsole
+     private ArrayList<Item> items
+     private ArrayList<Room> roomItems
+     Item itemObject
+     Scanner input
+
+     -Constructor for items with parameters being private variables
+     -Getter/Setters for private variables
      -inspect method will output item description
-     -use lets the player use the item based on it's function
+     -use lets the player use the item based on its function
      -getFolderCode tells the player the folder code based on what folder is present
      -storeItem adds item to inventory and removes from room
      -discardItem removes item from inventory and adds to remove
+
+ARMOR CLASS:
+This class will be the basis for armor items
+This Class contains:
+
+    private int armorMod
+    private ArrayList<Armor> armorInventory
+    GameConsole game
+    private ArrayList<Item> items
+    private ArrayList<Room> roomItems
+
+    -Constructor for items with parameters being private variables
+    -Getter/Setters for private variables
+    -equip method will equip armor to player
+    -addingArmor method
+
+WEAPON CLASS:
+This class will be the basis for weapon items
+This Class Contains:
+    private int durability
+    private int strength
+    GameConsole game
+    private ArrayList<Item> items
+    private ArrayList<Room> roomItems
+    Scanner input
+    private ArrayList<Weapon> weaponsInventory
+    private ArrayList<Monster> enemy
+    Item itemObjectWeapon
+    Weapon weaponItem
+
+    -Constructor for items with parameters being private variables
+    -Getter/Setters for private variables
+    -useWeapon method allows player use of the weapon to fight monsters
+    -addingWeapon adds weapon to weapon inventory
+    -EquipWeapon method equips to player
+    -unequipWeapon method unequips weapon from player
+
+HEALING CLASS:
+This class will be the basis for healing items
+This Class Contains:
+    private int healAmount
+    private int stackAmount
+    GameConsole game
+    private ArrayList<Item> items
+    private ArrayList<Room> roomItems
+    private ArrayList<Healing> healingInventory
+    Scanner input
+    Item itemObjectHeal
+
+    -Constructor for items with parameters being private variables
+    -Getter/Setters for private variables
+    -addHealingItems methods adds healing item to healing item inventory
+    -useHealing method heals player and decreases item stack
+
+FOLDER CLASS:
+This Class will be the basis for folder items
+This Class contains:
+    -Constructor for folder item
+
+
+CRATE CLASS:
+This class will set up Crate objects
+This Class contains:
+    private String crateName
+    private String itemName
+    private int crateLocation
+    GameConsole game
+    private ArrayList<Crate> crates
+    private ArrayList<Item> items
+    private ArrayList<Room> roomItems
+
+    -Constructor for items with parameters being private variables
+    -Getter/Setters for private variables
+    -examineCrate method will report what item is in the crate
+    -removeItemFromCrate method will remove item from crate
+
+
+GAMECONSOLE CLASS:
+This Class contains the main method for the entire game, all major actions originate from GameConsole
+This Class Contains:
+    -main
+    -parseCommand method will parse commands, and run methods based on the command received by the view
+    -startGame Runs at execution, takes in command whether it is new game, load game or exit
+    -newGame will begin new game
+    -loadGame will load binary file of game
+    -saveGame saves game information to binary file
+    -endGame exits game, closing system.
+    -playerDeath runs when player has hit 0 HP
+    -Various Read methods which will read data in from .txt files
+
+
+GAMESTATE CLASS:
+This class is used as backend for game
+This class contains:
+    private Player player
+    private ArrayList<Item> itemsInGame
+    private ArrayList<Room> roomsInGame
+    private ArrayList<Puzzle> puzzlesInGame
+    private ArrayList<Monster> monstersInGame
+    private ArrayList<Crate> cratesInGame
+    boolean isRunning
+
+    -Constructor for GameState with parameters being private variables
+    -Getter/Setters for private variables
+    -setGameState methods allows for loading data from a different GameState
+        into another, used for loading the game
+
+
+View Class:
+This Class is used as a front end for game
+This Class contains:
+    Scanner userInput
+    GameConsole game
+
+    -printItemsText prints formatted string for inventory
+    -printStatsText prints out the stats of the player
+    -inputCommand basic call for the view to ask to input command
+    -printGameLoop code is for printing out the start of the game loop, while asking the player for an input
+    -setSaveNameText sets the text for the save game
+    -loadingGameText prints the text asking to load, asking the player to input the name for the data
+    -savingGameText code prints the text asking to save
+    -startOfGameText prints at the very start of the game, before heading into the loop,
+        and asks the player to choose how they want to start the game
+    -printBasicText basic printer, just to keep things tied to the view
+    -printExitMessage ran to print out when the game is preparing to exit
+    -printDeathMessage ran to tell the player they've died and will be returned to the checkpoint
+
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -113,7 +315,8 @@ README.txt
 Room.txt
 Puzzle.txt
 Monster.txt
-
+Map.txt
+Crate.txt
 
 [BINARY FILES:]
 

@@ -31,7 +31,7 @@ public class Room implements Serializable {
     private ArrayList<Item> roomItems;
     private ArrayList<Room> rooms;
     private ArrayList<Item> itemsInRoom;
-    Scanner input = new Scanner(System.in);
+    transient Scanner input = new Scanner(System.in);
 
     /*----------------------------------------------Room Constructors-------------------------------------------------*/
 

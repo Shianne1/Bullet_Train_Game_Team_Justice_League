@@ -35,7 +35,7 @@ public class Puzzle implements Serializable {
 
     Item itemObject;
     Puzzle puzzleGame;
-    Scanner input;
+    transient Scanner input;
 
 
     /*-----------------------------------------------Puzzle Constructors----------------------------------------------*/

@@ -2,22 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GameConsole {
-    // Our controller class can be in here or the player class
-    // We will be parsing all of our text files within this class
-
-    /*
-    Final game Due nov. 6th
-    Final source code will weigh the most for grading.
-
-    don't collaborate on the main branch
-    Make your own branch & communicate with the your team before you merge branches
-    "git clone" = "download" | "pull" = "update"
-    before pulling, save elsewhere in case of overwriting something important
-
-    If you feel like there is something you need to change when implementing the game.
-    Put within discord under Questions channel, and don't do it before you get everyone approval or at least my approval.
-     */
+public class GameConsole implements Serializable{
 
 
     /*----------------------------------------Where the main game is played-------------------------------------------*/
@@ -37,21 +22,6 @@ public class GameConsole {
         Monster monster = new Monster();
         Room room = new Room();
         Player player = new Player();
-
-        /*
-        ArrayList<Room> roomList = new ArrayList<>();
-        ArrayList<Monster> bestiary = new ArrayList<>();
-        ArrayList<Crate> crateList = new ArrayList<>();
-        ArrayList<Item> itemList = new ArrayList<>();
-
-
-        game.readRooms(roomList);
-        game.readMonsters(bestiary);
-        game.readCrates(crateList);
-        game.readItems(itemList, roomList);
-
-         */
-        //puzzle.practiceRun(); // test run
 
         // loop to start the game | while the gameState isn't running
         while (!gameState.isRunning)
@@ -251,10 +221,12 @@ public class GameConsole {
         readItems(itemList, roomList);
         readPuzzleTxt(puzzleList);
 
+        gameState.setPlayer(new Player(playerName, gameState));
         gameState.setRoomsInGame(roomList);
         gameState.setItemsInGame(itemList);
         gameState.setPuzzlesInGame(puzzleList);
         gameState.setMonstersInGame(bestiary);
+        gameState.setCratesInGame(crateList);
 
         gameState.setPlayer(new Player(playerName, gameState));
         gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(0));
@@ -319,6 +291,7 @@ public class GameConsole {
             // the current gameState is set to the loaded gameState, and set to run
             gameState.setGameState((GameState) dataInput.readObject());
             gameState.setRunning(true);
+            System.out.println("Your game has been loaded.");
         }
         //   -- if this file  doesn't exist, or the file searched for doesn't have the proper format, an exception is thrown
         catch (FileNotFoundException e) {
@@ -350,6 +323,7 @@ public class GameConsole {
                 dataOutput.writeObject(gameState);
                 dataOutput.flush();
                 dataOutput.close();
+                System.out.println("You game has been saved.");
             } catch (FileNotFoundException e) {
                 System.out.println("File failed to be created");
             } catch (IOException e) {

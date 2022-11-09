@@ -27,8 +27,6 @@ public class Item implements itemInterface, Serializable {
 
     Item itemObject;
 
-    Scanner input = new Scanner(System.in);
-
 
     /*--------------------------------------------Item Constructors---------------------------------------------------*/
 
@@ -167,7 +165,6 @@ public class Item implements itemInterface, Serializable {
      * @added: 10/29/2022
      */
     public void storeItem(String item, Room current, Player inventory){ // store item is the same as pick up item
-       // current.roomItemRemove(itemObject);
         String[] parts = item.split(" ");
         for(Item item1: items){
             itemObject = item1;

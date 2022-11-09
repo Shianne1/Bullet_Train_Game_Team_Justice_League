@@ -31,7 +31,7 @@ public class Monster implements EntityInterface, Serializable {
     private ArrayList<Item> items;
     private ArrayList<Room> roomItems;
 
-    Scanner input;
+    transient Scanner input;
 
 
     /*---------------------------------------------Monster Constructors-----------------------------------------------*/

@@ -11,7 +11,7 @@ public class Weapon extends Item implements itemInterface, Serializable {
 
     private ArrayList<Item> items;
     private ArrayList<Room> roomItems;
-    Scanner input;
+    transient Scanner input;
     // will access the player's inventory arraylist
     private ArrayList<Weapon> weaponsInventory;
     private ArrayList<Monster> enemy;

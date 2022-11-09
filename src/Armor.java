@@ -47,12 +47,11 @@ public class Armor extends Item implements equipItemInterface {
     /*-----------------------------------Armor Methods for implementing the game--------------------------------------*/
     // SHIANNE LESURE 11/7/2022
     public void addingArmor(Player player){
-        for(Item armorItem : items) {
             for (Item item : player.getInventory()) {
-                if (item.getItemName().equalsIgnoreCase(armorItem.getItemName())) {
+                if (item.getItemName().equalsIgnoreCase("light-armor")) {
                     armorInventory.add((Armor) item);
                 }
-                /*
+
                 if (item.getItemName().equalsIgnoreCase("medium-armor")) {
                     armorInventory.add((Armor) item);
                 }
@@ -60,8 +59,20 @@ public class Armor extends Item implements equipItemInterface {
                     armorInventory.add((Armor) item);
                 }
 
-                 */
             }
+    }
+
+    // SHIANNE LESURE 11/7/2022
+    public void equipArmor(Player player, String item){
+        addingArmor(player);
+        String[] parts = item.split(" ");
+        for(Armor armor: armorInventory){
+            if(parts[1].equalsIgnoreCase(armor.getItemName())){
+                player.setEquippedArmor(armor);
+                System.out.println("Your " + armor.getItemName() + " will defend you by " + armor.getArmorMod());
+                break;
+            }
+            break;
         }
     }
 

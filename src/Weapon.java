@@ -123,30 +123,43 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
             }
     }
 
-    // SHIANNE LESURE 11/7/2022
-    public void useWeapon(Player player, String item, int monsterLocation){
+    //SHIANNE LESURE 11/8/2022
+    public void useWeapon1(Player player, Weapon weapon, String item){
         String[] parts = item.split(" ");
-       for(Item item1 : player.getInventory()) {
-           for (Weapon weapon : weaponsInventory) {
-               for(Monster monster : enemy) {
-                   if(monsterLocation == monster.getMonsterId()) {
-                       if (parts[1].equalsIgnoreCase(weapon.getItemName())) {
-                           weapon.setDurability(weapon.getDurability() - 1);
-                           System.out.println("You inflicted " + weapon.getStrength() + " point damage onto the enemy.");
-                           monster.setHealth(monster.getHealth() - weapon.getStrength());
-                           System.out.println("You have " + weapon.getDurability() + " uses left.");
-                           if (weapon.getDurability() == 0) {
-                               System.out.println("You can no longer use this weapon");
-                               player.inventoryRemove(item1);
-                               break;
-                           }
-                           break;
-                       }
-                   }
-               }
-           }
-           break;
-       }
+        if (parts[1].equalsIgnoreCase(weapon.getItemName())) {
+            weapon.setDurability(weapon.getDurability() - 1);
+            System.out.println("You inflicted " + weapon.getStrength() + " point damage onto the enemy.");
+            System.out.println("You have " + weapon.getDurability() + " uses left.");
+            if (weapon.getDurability() == 0) {
+                System.out.println("You can no longer use this weapon");
+                player.inventoryRemove(weapon);
+            }
+        }
+    }
+
+    // SHIANNE LESURE 11/7/2022
+    public void useWeapon(Player player, String item, int monsterLocation, ArrayList<Item> itemArrayList){
+        addingWeapons(player);
+        String[] parts = item.split(" ");
+            for (Weapon weapon : weaponsInventory) {
+                for(Monster monster : enemy) {
+                    if(monsterLocation == monster.getMonsterId()) {
+                        if (parts[1].equalsIgnoreCase(weapon.getItemName())) {
+                            weapon.setDurability(weapon.getDurability() - 1);
+                            System.out.println("You inflicted " + weapon.getStrength() + " point damage onto the enemy.");
+                            System.out.println("You have " + weapon.getDurability() + " uses left.");
+                            if (weapon.getDurability() == 0) {
+                                System.out.println("You can no longer use this weapon");
+                                player.inventoryRemove(weapon);
+                                break;
+                            }
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+
     }
 
     // SHIANNE LESURE 11/7/2022
@@ -166,7 +179,8 @@ public class Weapon extends Item implements equipItemInterface, itemInterface {
                 }
 
                  */
-                player.inventoryRemove(weapon);
+
+               // player.inventoryRemove(weapon);
             }
         }
     }

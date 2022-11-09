@@ -126,20 +126,25 @@ public class Monster implements EntityInterface, Serializable {
      * @author: Dakota Smith
      * 10/19/2022
      */
-    public void attackMonster(Player player, int monsterLocation, Armor armor) {
+    public void attackMonster(Player player, int monsterLocation, Armor armor, Weapon weapon) {
         //creates delta health variable, sets to current player health, decreases variable by
         //monster damage, then sets player health to the difference
             for (Monster villains : enemy) {
                 if (monsterLocation == this.monsterId) {
-                    /*
-                    System.out.println("If you would like to use your weapon type: [use " + player.getEquippedWeapon().getItemName() + "]");
-                    String useItem = input.nextLine();
-                    if (useItem.equalsIgnoreCase("use " + player.getEquippedWeapon().getItemName())) {
-                        weapon.useWeapon(player, useItem, monsterLocation);
+                    System.out.println("If you would like to use the " + weapon.getItemName() + " type: [use " + weapon.getItemName() + "]");
+                    String playerAnswer = input.nextLine();
+                    if(playerAnswer.equalsIgnoreCase("use " + weapon.getItemName())){
+                       // weapon.useWeapon(player, playerAnswer,this.monsterId, itemList);
+                        weapon.useWeapon1(player, weapon, playerAnswer);
+                        villains.setHealth(villains.getHealth() - weapon.getStrength());
                     }
-
-                     */
-                        System.out.println("Monster HP Life: " + villains.getHealth());
+                    if (villains.getHealth() <= 0) {
+                        System.out.println("You have killed the " + villains.getMonsterName());
+                        player.setNumOfMonstersKilled(player.getNumOfMonstersKilled() + 1);
+                        break;
+                    }
+                    // villains.setHealth(villains.getHealth() - weapon.getStrength());
+                        System.out.println("\nMonster HP Life: " + villains.getHealth());
                         System.out.println(villains.getMonsterName() + " inflicted " + villains.getDamage() + " damage points onto you.");
                         if (player.getEquippedArmor() != null) {
                             int damageAfterArmor = villains.getDamage() - armor.getArmorMod();
@@ -148,40 +153,9 @@ public class Monster implements EntityInterface, Serializable {
                             player.setCurrentHealth(player.getCurrentHealth() - villains.getDamage());
                         }
                         System.out.println("Your current HP: " + player.getCurrentHealth());
-
-                        if (villains.getHealth() <= 0) {
-                            System.out.println("You have killed the " + villains.getMonsterName());
-                            player.setNumOfMonstersKilled(player.getNumOfMonstersKilled() + 1);
-                        }
-
-                    /*
-                    System.out.println("Monster HP Life: " + villains.getHealth());
-                    System.out.println(villains.getMonsterName() + " inflicted " + villains.getDamage() + " damage points onto you.");
-                    if (player.getEquippedArmor() != null) {
-                        int damageAfterArmor = villains.getDamage() - armor.getArmorMod();
-                        player.setCurrentHealth(player.getCurrentHealth() - damageAfterArmor);
-                    } else {
-                        player.setCurrentHealth(player.getCurrentHealth() - villains.getDamage());
-                    }
-                    System.out.println("Your current HP: " + player.getCurrentHealth());
-
-                    if (villains.getHealth() <= 0) {
-                        System.out.println("You have killed the " + villains.getMonsterName());
-                        player.setNumOfMonstersKilled(player.getNumOfMonstersKilled() + 1);
-                    }
-
-                     */
                     break;
                 }
             }
-        /*
-        int dHealth = player.getCurrentHealth();
-        dHealth = dHealth - damage;
-        player.setCurrentHealth(dHealth);
-        System.out.println("Monster Dealt: " + damage + " Damage.");
-        System.out.println("Current HP: " + player.getCurrentHealth());
-
-         */
     }
 
     /**
@@ -203,11 +177,13 @@ public class Monster implements EntityInterface, Serializable {
                     weapon.setStrength(weapon.getStrength() * 2);
                     villan.setHealth(villan.getHealth() - weapon.getStrength());
                     parry = true;
+                    break;
                 }
                 else {
                     System.out.println("You inflicted no damage.");
                 }
             }
+            break;
         }
         return parry;
     }

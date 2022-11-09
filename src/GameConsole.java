@@ -102,8 +102,9 @@ public class GameConsole {
         Player currentPlayer = gameState.getPlayer();
         Armor currentArmor = gameState.getPlayer().getEquippedArmor();
         Weapon currentWeapon = gameState.getPlayer().getEquippedWeapon();
+        monster.getHealth();
 
-        if(inputCommand.equals("save game")) { // THIS FEATURE IS WORKING
+        if(inputCommand.equals("save game")) {
             saveGame(gameState, view);
         }
         else if(inputCommand.equals("load game")) {
@@ -190,8 +191,8 @@ public class GameConsole {
             item.discard(inputCommand, playerLocation, currentPlayer);
         }
         else if(inputCommand.contains("use")){
-            weapon.useWeapon(currentPlayer, inputCommand, IDofMonsterInRoom);
-            //healing.useHealing(currentPlayer, inputCommand);
+            //weapon.useWeapon(currentPlayer, inputCommand, IDofMonsterInRoom);
+            healing.useHealing(currentPlayer, inputCommand);
             /*
             10/30/22 MEETING: SHIANNE , CARLTON
             I DON'T KNOW WHAT TO DO THE SET
@@ -248,7 +249,7 @@ public class GameConsole {
             view.printBasicText(monster.inspectMonster(IDofMonsterInRoom));
         }
         else if(inputCommand.contains("attack monster")){
-            monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor);
+            monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor, currentWeapon);
             monster.monsterDrop(room);
         }
         else if(inputCommand.contains("parry monster")){

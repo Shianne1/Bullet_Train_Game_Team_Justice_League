@@ -147,7 +147,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added 10/18/2022
      */
     public void removeEquippedWeapon() {
-        this.inventory.add(this.equippedWeapon);
+        //this.inventory.add(this.equippedWeapon);
         this.equippedWeapon = defaultWeapon; // I had to change this from null because I was getting an nuller exception
     }
 

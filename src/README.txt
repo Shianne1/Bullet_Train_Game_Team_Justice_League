@@ -50,9 +50,16 @@ This Class contains:
 	private int west
 	private ArrayList<Item> roomItems
 
-	Constructor for Rooms with parameters being private variables
-	Getter/Setters for private variables
-	inspectRoom method which constructs String output that details all notable features of room.
+	-Constructor for Rooms with parameters being private variables
+	-Getter/Setters for private variables
+	-inspectRoom method which constructs String output that details all notable features of room.
+    -folderList method will ensure that folders are in correct room.
+    -roomItemAdd will add dropped item to RoomItem Arraylist
+    -roomItemRemove will remove item from room item arraylist
+    -Direction method will facilitate movement through game, checks whether rooms are locked and facilitates checking
+        if rooms are locked and if you've been to that room before
+    -checkVisited method will check if room has been visited, and if so indicates that to the player.
+    -lockRoom handles asking player for room password
 
 
 MONSTER CLASS:
@@ -69,8 +76,33 @@ This Class contains:
 	private double dropRate2
 	Constructor for Monsters with parameters being private variables
 	Getter/Setters for private Variables
-	attackMonster which when called deals damage to player, updates player health, displays damage dealt and remaining player health
-	parryMonster which generates random integer 1-100, if variable is greater than 50 the parry boolean returns true and the monster's attack should then miss.
+	-attackMonster which when called deals damage to player, updates player health, displays damage
+	    dealt and remaining player health
+	-parryMonster which generates random integer 1-100, if variable is greater than 50 the
+	    parry boolean returns true and the monster's attack should then miss.
+    -monsterDrop method will determine and drop item in room when monster is defeated
+    -run method will kick player out of monster room when player health is 1/10 max player health
+    -healHealth heals monster
+    -takeDamage monster takes damage
+    -inspectMonster method will output description of monster
+
+
+
+
+ITEM CLASS:
+This class will be the basis for all item objects
+This Class contains:
+     private int itemId;
+     private String itemName;
+     private String itemDesc;
+     private String itemText;
+     Constructor for items with parameters being private variables
+     Getter/Setters for private variables
+     -inspect method will output item description
+     -use lets the player use the item based on it's function
+     -getFolderCode tells the player the folder code based on what folder is present
+     -storeItem adds item to inventory and removes from room
+     -discardItem removes item from inventory and adds to remove
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -228,12 +260,12 @@ BULLET TRAIN MAP:
 [Check map] - prints Map.txt
 
 [[Room COMMANDS:]]
-[Inspect room] - gives a description of the room and the items in it
+[Checkout room] - gives a description of the room and the items in it
 
 [[Puzzle COMMANDS:]]
 [Solve "puzzle name"] - lets the users solve the puzzle
 [Get hint] - gives the user a hint
-[Inspect puzzle] - gives a description of the puzzle
+[Checkout puzzle] - gives a description of the puzzle
 [Exit puzzle] - exits trying to attempt the puzzle
 [Retry "puzzle name"] - allows the player to retry the puzzle
 [Claim Prize] - lets the player claim the prize from the puzzle
@@ -241,7 +273,7 @@ BULLET TRAIN MAP:
 
 
 [[MONSTER/BATTLE COMMANDS:]]
-[Inspect "monster name"] - uses a turn to print the monster's description
+[Checkout "monster name"] - uses a turn to print the monster's description
 [Fight Monster] - lets the player take an initiative attack on a monster in the room
 [Attack Monster] - lets the player attack the monster in battle
 [Parry monster] - gives the player a chance for a double or nothing attack

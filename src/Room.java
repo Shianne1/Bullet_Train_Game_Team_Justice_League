@@ -187,7 +187,7 @@ public class Room implements Serializable {
      * @Method: folderList()
      * @param currentRoom
      * @param folder
-     * @Function: this method will add the folder to what room they are suppose to be in
+     * @Function: this method will add the folder to what room they are supposed to be in
      * @author(s): Shianne Lesure
      * @added: 11/5/2022
      */
@@ -375,7 +375,14 @@ public class Room implements Serializable {
         }
     }
 
-
+    /**
+     * @Method: checkVisited()
+     * @Function: Feeds into Direction(), used to check whether room is locked, and outputs different
+     * room text upon entry of room depending on if you've been there or not.
+     * Was formerly integrated as part of Direction(), but didn't work... this does.
+     * @author(s): Dakota Smith
+     * @added: 11/8/2022
+     */
     public void checkVisited()
     {
         if(this.isVisited) {

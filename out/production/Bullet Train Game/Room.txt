@@ -9,7 +9,7 @@ No Crates
 NULL
 1
 Station 1 Puzzle Room
-The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be puzzle.
+The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be a puzzle.
 2,3,4,0
 false
 No Crates
@@ -189,7 +189,7 @@ No Crates
 CHEMICALS
 21
 Station 5 Puzzle Room
-The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be  puzzle.
+The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be a puzzle.
 22,23,-1,20
 false
 -1

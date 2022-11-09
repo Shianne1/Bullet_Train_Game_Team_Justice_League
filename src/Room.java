@@ -64,7 +64,10 @@ public class Room implements Serializable {
         this.roomId = id;
         this.roomName = name;
         this.roomDesc = desc;
-        this.isVisited = false;
+        if(roomId == 0)
+            isVisited = true;
+        else
+            isVisited = false;
         this.isLocked = lock;
         this.crates = crates;
         this.roomPuzzle = puzzle;
@@ -258,7 +261,7 @@ public class Room implements Serializable {
      */
     public void Direction(Player player, ArrayList<Room> rooms, String cardinal) {
         Room current = player.getLocation();
-        boolean visitedRoom = player.getLocation().isVisited();
+        boolean visitedRoom = current.isVisited();
         Room checkLock = null;
         cardinal = cardinal.toLowerCase();
         int location;
@@ -285,14 +288,7 @@ public class Room implements Serializable {
                 }
                 else {
                     player.move(checkLock);
-                    if(visitedRoom == true) {
-                        System.out.println("You've Already Been Here.");
-                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                    }
-                    else {
-                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                        current.setVisited(true);
-                    }
+                    checkLock.checkVisited();
                 }
             }
         }
@@ -319,14 +315,7 @@ public class Room implements Serializable {
                 }
                 else {
                     player.move(checkLock);
-                    if(visitedRoom == true) {
-                        System.out.println("You've Already Been Here.");
-                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                    }
-                    else {
-                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                        current.setVisited(true);
-                    }
+                    checkLock.checkVisited();
                 }
             }
         }
@@ -353,20 +342,13 @@ public class Room implements Serializable {
                 }
                 else {
                     player.move(checkLock);
-                    if(visitedRoom == true) {
-                        System.out.println("You've Already Been Here.");
-                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                    }
-                    else {
-                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                        current.setVisited(true);
-                    }
+                    checkLock.checkVisited();
                 }
             }
         }
 
         //if all else fail then player is trying to move west
-        else {
+        else if(cardinal.equals("w") || cardinal.equals("west")){
             //checks if there is a room to the west.
             location = current.getWest();
             if(location == -1) {
@@ -387,16 +369,22 @@ public class Room implements Serializable {
                 }
                 else {
                     player.move(checkLock);
-                    if(visitedRoom == true) {
-                        System.out.println("You've Already Been Here.");
-                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                    }
-                    else {
-                        System.out.println(checkLock.getRoomName() + "\n" + checkLock.getRoomDesc());
-                        current.setVisited(true);
-                    }
+                    checkLock.checkVisited();
                 }
             }
+        }
+    }
+
+
+    public void checkVisited()
+    {
+        if(this.isVisited) {
+            System.out.println("You've Already Been Here.");
+            System.out.println(this.getRoomName() + "\n" + this.getRoomDesc());
+        }
+        else {
+            System.out.println(this.getRoomName() + "\n" + this.getRoomDesc());
+            this.setVisited(true);
         }
     }
 

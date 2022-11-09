@@ -103,6 +103,16 @@ public class GameConsole {
         Armor currentArmor = gameState.getPlayer().getEquippedArmor();
         Weapon currentWeapon = gameState.getPlayer().getEquippedWeapon();
 
+
+        if(room.getRoomMonster() > 0 && player.getCurrentHealth() <= (player.getMaxHealth()/10)){
+            /*
+            10/30/22 MEETING: DAKOTA
+            NEED A METHOD FOR RUN
+             */
+            player.flee(gameState.getRoomsInGame());
+        }
+
+
         if(inputCommand.equals("save game")) { // THIS FEATURE IS WORKING
             saveGame(gameState, view);
         }
@@ -132,7 +142,6 @@ public class GameConsole {
         else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") || // THIS FEATURE IS WORKING
                 inputCommand.equals("south") || inputCommand.equals("s") ||  inputCommand.equals("west") || inputCommand.equals("w")){
             room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand);
-
             /*
             10/30/22 MEETING: DAKOTA
             We need a method that will allow for the player to move north, south, east, west.
@@ -260,12 +269,7 @@ public class GameConsole {
             NEED A METHOD FOR HEAL
              */
         }
-        else if(inputCommand.equals("run")){
-            /*
-            10/30/22 MEETING: DAKOTA
-            NEED A METHOD FOR RUN
-             */
-        }
+
         else{
             System.out.println("Invalid command. Try again");
         }

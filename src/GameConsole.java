@@ -116,8 +116,9 @@ public class GameConsole {
             view.printBasicText("\nYou are in " + gameState.getPlayer().getLocation().getRoomName());
         }
         else if(inputCommand.equals("check inventory")) { // THIS FEATURE IS WORKING
-            player.stackHealers(gameState.getItemsInGame());
-            view.printInventory(gameState.getPlayer());
+           // player.stackHealers(currentPlayer,gameState.getItemsInGame());
+            view.printInventory(currentPlayer);
+            player.stackHealers(currentPlayer,gameState.getItemsInGame());
         }
         else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") || // THIS FEATURE IS WORKING
                 inputCommand.equals("south") || inputCommand.equals("s") ||  inputCommand.equals("west") || inputCommand.equals("w")){

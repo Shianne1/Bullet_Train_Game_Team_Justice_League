@@ -347,22 +347,16 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     public void codeInventoryAdd(String codes){ codeInventory.add(codes); }
 
 
-    public void stackHealers(ArrayList<Item> items){
-        for(Item healers : inventory){
-            if(!healers.getItemName().equalsIgnoreCase("bandage")){
-                inventoryAdd(healers);
-            }
-        }
-
-        if(!inventory.contains("bandage")){
-
-        }
+    // SHIANNE LESURE 11/9/2022
+    public void stackHealers(Player player, ArrayList<Item> items){
         for(Item healers : items){
-            if(healers.getItemName().equalsIgnoreCase("bandage")){
                 if(!inventory.contains("bandage")){
-
+                    if(healers.getItemName().equalsIgnoreCase("bandage")){
+                        player.inventoryAdd(healers);
+                        break;
+                    }
                 }
-            }
         }
     }
+
 }

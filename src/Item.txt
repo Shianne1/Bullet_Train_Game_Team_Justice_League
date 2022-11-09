@@ -42,7 +42,7 @@ Katana
 You find a katana that can dish out some damage
 Placeholder
 30
-100000
+15
 8
 Pistol
 You find a pistol that has 2 bullets. Use it wisely.

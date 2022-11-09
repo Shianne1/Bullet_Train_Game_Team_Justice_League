@@ -71,7 +71,7 @@ public class Crate {
      * @Method: examineCrate()
      * @param item
      * @Function: returns the item that is within the crate being examined
-     * @author(s) Dakota Smith
+     * @author(s) Dakota Smith, Shianne Lesure
      * 10/17/2022
      */
     public String examineCrate(String item) {
@@ -87,21 +87,10 @@ public class Crate {
                 }
             }
         return checkCrate;
-            /*
-        //goes through crate arraylist, finds relevant crate, outputs contents of crate
-        for(int i = 0; i < crates.size(); i++) {
-            Crate temp = crates.get(i);
-            if(item.contains(temp.getItemName())) {
-                check = this.getItemName();
-            }
-        }
-        return check;
-
-             */
     }
 
     // SHIANNE LESURE 11/8/2022
-    public void removeItemFromCrate(Room current, String item, Crate crate){ // ADD THE - TO ALL THE 2 WORDED ITEMS WITHIN ROOM & CRATE TEXTILE
+    public void removeItemFromCrate(Room current, String item){ // ADD THE - TO ALL THE 2 WORDED ITEMS WITHIN ROOM & CRATE TEXTILE
         String[] parts = item.split(" ");
             for (Crate temp : crates) {
                 if(current.getRoomId() == temp.getCrateLocation()) {

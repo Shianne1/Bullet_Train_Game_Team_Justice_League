@@ -121,12 +121,12 @@ public class GameConsole {
         }
         else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") || // THIS FEATURE IS WORKING
                 inputCommand.equals("south") || inputCommand.equals("s") ||  inputCommand.equals("west") || inputCommand.equals("w")){
-            room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand);
+            room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand, gameState.getItemsInGame());
         }
         else if(inputCommand.equals("checkout room")){ // THIS FEATURE IS WORKING
-            view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation, gameState.getItemsInGame()));
+            view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation));
         }
-        else if(inputCommand.contains("inspect")){
+        else if(inputCommand.contains("inspect")){ // THIS FEATURE IS WORKING
             view.printBasicText(item.inspect(inputCommand));
             item.getFolderCode(playerLocation, currentPlayer);
         }
@@ -134,11 +134,13 @@ public class GameConsole {
             gameState.getPlayer().viewCode();
         }
         else if(inputCommand.equals("use code")){ // THIS FEATURE IS WORKING
+            room.lockRoom(currentPlayer);
         }
         else if(inputCommand.contains("store")){ // THIS FEATURE IS WORKING
             item.storeItem(inputCommand, playerLocation, currentPlayer);
             puzzle.removeRewardsItem(playerLocation, inputCommand);
-            crate.removeItemFromCrate(playerLocation,inputCommand,crate);
+            crate.removeItemFromCrate(playerLocation,inputCommand);
+            room.removeMysteryFolder(playerLocation, inputCommand);
         }
         else if(inputCommand.contains("discard")){ // THIS FEATURE IS WORKING
             item.discard(inputCommand, playerLocation, currentPlayer);
@@ -149,7 +151,7 @@ public class GameConsole {
         else if(inputCommand.contains("examine")){ // THIS FEATURE IS WORKING
             view.printBasicText(crate.examineCrate(inputCommand));
         }
-        else if(inputCommand.contains("unequip")){
+        else if(inputCommand.contains("unequip")){ // THIS FEATURE IS WORKING
             weapon.unequipWeapon(currentPlayer, inputCommand);
             armor.unequipArmor(currentPlayer, inputCommand);
         }

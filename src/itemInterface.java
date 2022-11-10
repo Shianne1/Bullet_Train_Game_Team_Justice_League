@@ -2,7 +2,7 @@
      @Interface: itemInterface()
      @Function: basic interface used as a template for any similarities between actions that affect items
      @implementedBy: Item, Armor, Weapon
-     @author(s) Carlton Napier
+     @author(s) Carlton Napier, Shianne Lesure
      @added 10/16/2022
   */
 interface itemInterface {

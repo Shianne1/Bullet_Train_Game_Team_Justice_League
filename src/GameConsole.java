@@ -16,7 +16,6 @@ public class GameConsole implements Serializable{
         Healing healing = new Healing();
         Weapon weapon = new Weapon();
         Armor armor = new Armor();
-        //Folder folder = new Folder();
         Crate crate = new Crate();
         Puzzle puzzle = new Puzzle();
         Monster monster = new Monster();
@@ -33,18 +32,11 @@ public class GameConsole implements Serializable{
             if (gameState.getPlayer().getCurrentHealth() <= 0) {
                 playerDeath(gameState, view);
             }
-
-            // NEEDS A PROPER CODE FOR LOOPING THE GAME
-            // - WHAT GOES ON IN THE ROOM
-            // - ANY STORY DETAILS
-            // - ETC
-            // THIS IS A TEMP LOOP FOR TESTING
-
             view.printGameLoop(gameState);
             parseCommand(game, gameState, view, puzzle, item, healing, weapon, armor, crate, monster, room, player);
-
         }
     }
+
 
     /*--------------------------------GameConsole methods for implementing the game-----------------------------------*/
     /**
@@ -92,7 +84,7 @@ public class GameConsole implements Serializable{
         }
         else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") || // THIS FEATURE IS WORKING
                 inputCommand.equals("south") || inputCommand.equals("s") ||  inputCommand.equals("west") || inputCommand.equals("w")){
-            room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand, gameState.getItemsInGame());
+            room.Direction(currentPlayer, gameState.getRoomsInGame(), inputCommand);
         }
         else if(inputCommand.equals("checkout room")){ // THIS FEATURE IS WORKING
             view.printBasicText(gameState.getPlayer().getLocation().inspectRoom(gameState.getMonstersInGame(), gameState.getPuzzlesInGame(), playerLocation));
@@ -183,7 +175,6 @@ public class GameConsole implements Serializable{
             */
             newGame(gameState, view.setSaveNameText());
             view.printBasicText("\nYou are in " + gameState.getPlayer().getLocation().getRoomName() + "\n" + gameState.getPlayer().getLocation().getRoomDesc());
-
         }
         /*
         saying ["load game"] gets the view to ask the player for a name (this name is used to load an existing save file, if it exists)
@@ -231,46 +222,6 @@ public class GameConsole implements Serializable{
         gameState.setPlayer(new Player(playerName, gameState));
         gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(0));
 
-        //   -- objects from other methods used to parse the data files (currently empty but proper implementation in comments)
-        /*
-        ArrayList<Item> emptyItemList = new ArrayList<>();
-        ArrayList<Room> emptyRoomList = new ArrayList<>();
-        ArrayList<Puzzle> emptyPuzzleList = new ArrayList<>();
-        ArrayList<Monster> emptyMonsterList = new ArrayList<>();
-
-        gameState.setItemsInGame(emptyItemList);
-        gameState.setRoomsInGame(emptyRoomList);
-        gameState.setPuzzlesInGame(emptyPuzzleList);
-        gameState.setMonstersInGame(emptyMonsterList);
-
-        //     -- after objects are added to [gameState] a new instance of player is created using the name the player inputted and
-        //     an instance of newGame (now filled with data) as a default checkpoint for the player to return to on death
-        gameState.setPlayer(new Player(playerName, gameState));
-        gameState.setItemsInGame(parseItemData());
-        gameState.setRoomsInGame(parseRoomData());
-        gameState.setPuzzlesInGame(readPuzzleTxt(emptyPuzzleList));
-        gameState.setMonstersInGame(parseMonsterData());
-        gameState.setPlayer(new Player(playerName, gameState));
-        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(0));
-
-        /*
-        When the functions that can parse the files used to add the items/rooms/puzzle/monster data for the game are properly implemented:
-
-        //   -- objects from other methods used to parse the data files (currently empty but proper implementation in comments)
-        gameState.setItemsInGame(parseItemData(),);
-        gameState.setRoomsInGame(parseRoomData());
-        gameState.setPuzzlesInGame(parsePuzzleData());
-        gameState.setMonstersInGame(parseMonsterData());
-
-        //     -- after objects are added to [gameState] a new instance of player is created using the name the player inputted and
-        //     an instance of newGame (now filled with data) as a default checkpoint for the player to return to on death
-        gameState.setPlayer(new Player(playerName, gameState));
-
-        //  Player starts in train wagon 1 (assumed to be the first room in the arrayList)
-        gameState.getPlayer().setLocation(gameState.getRoomsInGame().get(0));
-        */
-
-        //    -- after newGame is properly filled with data, game is set to running to allow for a game loop to be maintained
         gameState.setRunning(true);
     }
 

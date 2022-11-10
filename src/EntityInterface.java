@@ -1,7 +1,7 @@
 /**
      @Interface: EntityInterface()
      @Function: basic interface used as a template for any similarities between actions that affect entities
-     @implementedBy: Player, Monster
+     @implementedBy: Player
      @author(s) Carlton Napier
      @added 10/16/2022
   */

@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author(s) Dakota Smith
  * @added 10/17/2022
  */
-public class Monster implements EntityInterface, Serializable {
+public class Monster implements  Serializable {
     private int monsterId;
     private String monsterName;
     private String monsterDesc;
@@ -121,10 +121,15 @@ public class Monster implements EntityInterface, Serializable {
     /**
      * @Method: attackMonster()
      * @param player
+     * @param armor
+     * @param current
+     * @param monsterLocation
+     * @param roomArrayList
+     * @param weapon
      * @Function: when called on, deals damage to player, updates player health and
      * displays damage dealt and current player health
-     * @author: Dakota Smith
-     * 10/19/2022
+     * @author: Dakota Smith, Shianne Lesure
+     * @added: 10/19/2022
      */
     public void attackMonster(Player player, int monsterLocation, Armor armor, Weapon weapon, Room current, ArrayList<Room> roomArrayList) {
         //creates delta health variable, sets to current player health, decreases variable by
@@ -169,9 +174,11 @@ public class Monster implements EntityInterface, Serializable {
 
     /**
      * @Method: parryMonster()
+     * @param monsterLocation
+     * @param weapon
      * @Function: when called on, determines whether player parries monster or not
-     * @author: Dakota Smith
-     * 10/19/2022
+     * @author: Dakota Smith, Shianne Lesure
+     * @added: 10/19/2022
      */
     public boolean parryMonster(int monsterLocation, Weapon weapon) {
         //generate random number 1-100
@@ -201,13 +208,12 @@ public class Monster implements EntityInterface, Serializable {
     /**
      * @Method: monsterDrop()
      * @param currentRoom
-     * @param
+     * @param monsterLocation
      * @Function: when called on, determines what item, if any, a monster drops into the room
      * @author: Dakota Smith
-     * 10/25/2022
+     * @added: 10/25/2022
      */
     public void monsterDrop(Room currentRoom, int monsterLocation) {
-        //creates empty temporary item, and generates random double 0.0 - 1.0
         for(Monster monster : enemy){
             if(monsterLocation == this.monsterId){
                 Random r = new Random();
@@ -241,11 +247,9 @@ public class Monster implements EntityInterface, Serializable {
      * @param player
      * @param roomList
      * @Function: when called on, moves player to previous room.
-     * @author: Dakota Smith
-     * 11/1/2022
+     * @author: Dakota Smith, Shianne Lesure
+     * @added: 11/1/2022
      */
-
-    // SHIANNE LESURE 11/9/2022 DAKOTA SMITH
     public void run(Player player, ArrayList<Room> roomList){
         if(player.getCurrentHealth() <= 20){
             Room newRoom;
@@ -281,16 +285,6 @@ public class Monster implements EntityInterface, Serializable {
                 }
             }
         }
-    }
-
-    @Override
-    public void healHealth(int healthModifier) {
-
-    }
-
-    @Override
-    public void takeDamage(int healthModifier) {
-
     }
 
     /**

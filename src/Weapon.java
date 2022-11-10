@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Weapon extends Item implements itemInterface, Serializable {
     private int durability; // the amount of uses the item has
     private int strength; // the amount of damage the weapon deals
@@ -20,7 +21,7 @@ public class Weapon extends Item implements itemInterface, Serializable {
     /*--------------------------------------------Weapon Constructors-------------------------------------------------*/
 
     /**
-     * @Function: This is a no - arg constructor that will access the item parse method and add the data into
+     * @Function: This is a no - arg constructor that will access the item & monster parse method and add the data into
      * their object arraylist
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
@@ -42,6 +43,18 @@ public class Weapon extends Item implements itemInterface, Serializable {
         input = new Scanner(System.in);
     }
 
+    /**
+     *
+     * @param name
+     * @param id
+     * @param itemDesc
+     * @param itemText
+     * @param durability
+     * @param strength
+     * @Function:
+     * @author(s): Dakota Smith
+     * @added: 10/20/2022
+     */
     public Weapon(String name, int id, String itemDesc, String itemText, int durability, int strength) {
         super(id, name, itemDesc, itemText);
         this.durability = durability;
@@ -64,9 +77,15 @@ public class Weapon extends Item implements itemInterface, Serializable {
 
     public void setStrength(int strength) { this.strength = strength; }
 
-    /*---------------------------------Weapon Methods for implementing the game---------------------------------------*/
 
-    //SHIANNE LESURE 11/7/2022
+    /*---------------------------------Weapon Methods for implementing the game---------------------------------------*/
+    /**
+     * @Method: addingWeapons()
+     * @param player
+     * @Function: this method will take the weapons items and add them to the weapons inventory
+     * @author(s): Shianne Lesure
+     * @added: 11/7/2022
+     */
     public void addingWeapons(Player player){
             for (Item item : player.getInventory()) {
                 if (item.getItemName().equalsIgnoreCase("knife")) {
@@ -84,7 +103,15 @@ public class Weapon extends Item implements itemInterface, Serializable {
             }
     }
 
-    //SHIANNE LESURE 11/8/2022
+    /**
+     * @Method: useWeapon1()
+     * @param player
+     * @param weapon
+     * @param item
+     * @Function: this method will allow for the player to use the weapons items from their inventory
+     * @author(s): Shianne Lesure
+     * @added: 11/8/2022
+     */
     public void useWeapon1(Player player, Weapon weapon, String item){
         String[] parts = item.split(" ");
         if (parts[1].equalsIgnoreCase(weapon.getItemName())) {
@@ -98,7 +125,14 @@ public class Weapon extends Item implements itemInterface, Serializable {
         }
     }
 
-    // SHIANNE LESURE 11/7/2022
+    /**
+     * @Method: equipWeapon()
+     * @param player
+     * @param item
+     * @Function: this method will allow for the player to equip a weapon into their hands
+     * @author(s): Shianne Lesure
+     * @added: 11/7/2022
+     */
     public void equipWeapon(Player player, String item){
         player.getInventory();
         addingWeapons(player);
@@ -111,7 +145,14 @@ public class Weapon extends Item implements itemInterface, Serializable {
         }
     }
 
-    // SHIANNE LESURE 11/7/2022
+    /**
+     * @Method: unequipWeapon()
+     * @param player
+     * @param item
+     * @Function: this method will unequip the weapon out of the player's hand
+     * @author(s): Shianne Lesure
+     * @added: 11/7/2022
+     */
     public void unequipWeapon(Player player, String item){
         String[] parts = item.split(" ");
         for(Weapon weapon: weaponsInventory){

@@ -34,7 +34,12 @@ public class Room implements Serializable {
     transient Scanner input = new Scanner(System.in);
 
     /*----------------------------------------------Room Constructors-------------------------------------------------*/
-
+    /**
+     * @Function: This is a no - arg constructor that will access room, and item's parse methods and add their data into
+     * their object arraylist.
+     * @author(s) Shianne Lesure
+     * @added 10/22/2022
+     */
     public Room(){
         this.roomItems = new ArrayList<>();
         rooms = new ArrayList<>();
@@ -42,8 +47,6 @@ public class Room implements Serializable {
         //GameConsole.readItems(itemsInRoom, rooms);
         itemsInRoom = new ArrayList<>();
     }
-
-
 
     /**
      * @param id
@@ -77,6 +80,7 @@ public class Room implements Serializable {
         connections = connection.split(",");
         this.directionals(connections);
     }
+
 
     /*-------------------------------------Getters & Setters for Room variables---------------------------------------*/
     public int getRoomId() { return roomId; }
@@ -124,6 +128,13 @@ public class Room implements Serializable {
     public ArrayList<Item> getRoomItems() { return roomItems; }
 
     /*-----------------------------------Room Methods for implementing the game---------------------------------------*/
+    /**
+     * @Method: directionals()
+     * @param dir
+     * @Function: Will parse the connections into north, east, south, & west
+     * @author(s): Dakota Smith
+     * @added: 10/18/2022
+     */
     public void directionals(String[] dir) {
         this.north = Integer.parseInt(dir[0]);
         this.east = Integer.parseInt(dir[1]);
@@ -151,7 +162,6 @@ public class Room implements Serializable {
         this.crates = roomLocation.getCrates();
         this.roomName = roomLocation.getRoomName();
         this.isLocked = roomLocation.isLocked();
-       // folderList(roomLocation, folder);
 
         if(this.isLocked == true){
             fullDesc += "Room is lock. Need password.";
@@ -185,7 +195,14 @@ public class Room implements Serializable {
         return fullDesc;
     }
 
-    // SHIANNE LESURE 11/9/2022
+    /**
+     * @Method: removeMysteryFolder()
+     * @param current
+     * @param folder
+     * @Function: This method will remove the folder from the mystery room
+     * @author(s): Shianne Lesure
+     * @added: 11/9/2022
+     */
     public void removeMysteryFolder(Room current, String folder){
         String[] folderParts = folder.split(" ");
         for(Item mystery : roomItems){
@@ -195,6 +212,7 @@ public class Room implements Serializable {
             }
         }
     }
+
     /**
      * @Method: folderList()
      * @param currentRoom
@@ -271,12 +289,11 @@ public class Room implements Serializable {
      * @author: Dakota Smith, Shianne Lesure
      * 10/31/2022
      */
-    public void Direction(Player player, ArrayList<Room> rooms, String cardinal,ArrayList<Item> folder ) {
+    public void Direction(Player player, ArrayList<Room> rooms, String cardinal) {
         Room current = player.getLocation();
         Room checkLock = null;
         cardinal = cardinal.toLowerCase();
         int location;
-        String playerAnswer = "";
         //checks if the inputted string is wanting to go north
         if(cardinal.equals("n") || cardinal.equals("north")) {
             //checks if there is a room to the north
@@ -362,8 +379,12 @@ public class Room implements Serializable {
         }
     }
 
-
-    // DAKOTA SMITH 11/8/2022
+    /**
+     * @Method: checkVisited()
+     * @Function: method will check if the room has been vistied or not
+     * @author(s): Shianne Lesure
+     * @added: 11/8/2022
+     */
     public void checkVisited() {
         if(this.isVisited) {
             System.out.println("You've Already Been Here.");
@@ -377,7 +398,6 @@ public class Room implements Serializable {
 
     /**
      * @Method: lockRoom()
-     * @param
      * @param player
      * @Function: this method will ask the player to use the code to unlock the room
      * @author(s): Shianne Lesure
@@ -394,7 +414,6 @@ public class Room implements Serializable {
         String password = input.next(); // takes player's input
         while(this.isLocked == true) {
             if (password.equalsIgnoreCase(this.roomCode)) { // if code is correct
-                //currentLockRoom.setLocked(false); // set room to be unlock
                 System.out.println("Room has been unlock.");
                 player.getLocation().setLocked(false);
                 System.out.println("\n" + this.roomName + "\n" + this.roomDesc);

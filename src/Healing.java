@@ -1,6 +1,5 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * @Object: Healing()
@@ -20,10 +19,6 @@ public class Healing extends Item implements itemInterface, Serializable {
     private ArrayList<Item> items;
     private ArrayList<Room> roomItems;
     private ArrayList<Healing> healingInventory;
-    Scanner input;
-
-    // will access the player's current health
-    Item itemObjectHeal;
 
 
     /*---------------------------------------------Healing Constructors-----------------------------------------------*/
@@ -82,30 +77,12 @@ public class Healing extends Item implements itemInterface, Serializable {
 
     /*--------------------------------Healing Methods for implementing the game---------------------------------------*/
     /**
-     * @Method: use()
-     * @Function: This method will allow the player use an item to heal their wounds and increase their health
+     * @Method: addingHealingItem()
+     * @param player
+     * @Function: this method will add the healing items to the heal inventory.
      * @author(s): Shianne Lesure
-     * @added: 10/29/2022
+     * @added: 11/7/2022
      */
-    @Override
-    public void use(Player player, String item) {
-        String[] parts = item.split(" ");
-        for(Item item1: items){
-            itemObjectHeal = item1;
-            if(parts[1].equalsIgnoreCase(super.getItemName())){ // if input contains the item name
-                this.setStackAmount(getStackAmount() - 1); // subtract 1 from the healing item stack
-
-                // add the healing points to the player's current health
-                player.setCurrentHealth(this.getHealAmount() + player.getCurrentHealth());
-
-                // print out to the player how much their current health has went up
-                System.out.println("You health has jumped up by " + this.getHealAmount());
-                break;
-            }
-        }
-    }
-
-    // SHIANNE LESURE 11/7/2022
     public void addingHealingItem(Player player){
         for(Item item : player.getInventory()){
             if(item.getItemName().equalsIgnoreCase("Bandage")){
@@ -120,7 +97,14 @@ public class Healing extends Item implements itemInterface, Serializable {
         }
     }
 
-    // SHIANNE LESURE 11/7/2022
+    /**
+     * @Method: useHealing()
+     * @param item
+     * @param player
+     * @Function: This method will allow the player use an item to heal their wounds and increase their health
+     * @author(s): Shianne Lesure
+     * @added: 11/7/2022
+     */
     public void useHealing(Player player, String item){
         addingHealingItem(player);
         String[] parts = item.split(" ");

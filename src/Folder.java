@@ -16,22 +16,6 @@ public class Folder extends Item implements Serializable {
 
     /*---------------------------------------------Folder Constructors------------------------------------------------*/
     /**
-     * @Function: This is a no - arg constructor that will access the item parse method and add the data into
-     * their object arraylist
-     * @author(s): Shianne Lesure
-     * @added: 10/29/2022
-     *
-    public Folder(){
-        // an arraylist that will hold the item's data
-        items = new ArrayList();
-        roomItems = new ArrayList();
-
-        // putting the items data into the item & room arraylist
-        game.readItems(items, roomItems);
-    }
-    */
-
-    /**
      * @param id
      * @param name
      * @param desc

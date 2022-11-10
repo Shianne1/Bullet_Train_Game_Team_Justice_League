@@ -49,10 +49,6 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         return inventory;
     }
 
-    public void setInventory(ArrayList<Item> inventory) {
-        this.inventory = inventory;
-    }
-
     private ArrayList<Item> inventory;
     private ArrayList<String> codeInventory;
 
@@ -64,7 +60,11 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
 
     /*---------------------------------------------Player Constructors------------------------------------------------*/
-    // empty constructor of player with default values
+    /**
+     * @Function: empty constructor of player with default values
+     * @author(s): Carlton Napier
+     * @added: 10/16/2022
+     */
     public Player() {
         this.name = "PlayerName";
         this.numOfMonstersKilled = 0;
@@ -77,8 +77,24 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
     }
 
-    // constructor for preexisting data
-    public Player(int maxHealth, int currentHealth, int numOfMonstersKilled, String name, Room location, Weapon equippedWeapon, Armor equippedArmor, ArrayList<Item> inventory, ArrayList<String> codeInventory, GameState checkpoint) {
+    /**
+     *
+     * @param maxHealth
+     * @param currentHealth
+     * @param numOfMonstersKilled
+     * @param name
+     * @param location
+     * @param equippedWeapon
+     * @param equippedArmor
+     * @param inventory
+     * @param codeInventory
+     * @param checkpoint
+     * @Function: constructor for preexisting data
+     * @author(s): Carlton Napier
+     * @added: 10/16/2022
+     */
+    public Player(int maxHealth, int currentHealth, int numOfMonstersKilled, String name, Room location, Weapon equippedWeapon,
+                  Armor equippedArmor, ArrayList<Item> inventory, ArrayList<String> codeInventory, GameState checkpoint) {
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
         this.numOfMonstersKilled = numOfMonstersKilled;
@@ -92,7 +108,14 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
     }
 
-    // constructor of player with starting stats, user inserted name, and a checkpoint of the start of the game, if they die before reaching one
+    /**
+     *
+     * @param name
+     * @param defaultCheckpoint
+     * @function: constructor of player with starting stats, user inserted name, and a checkpoint of the start of the game, if they die before reaching one
+     * @author(s): Carlton Napier
+     * @added: 10/16/2022
+     */
     public Player(String name, GameState defaultCheckpoint) {
         this.name = name;
         this.numOfMonstersKilled = 0;
@@ -117,6 +140,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
     public Weapon getEquippedWeapon() { return equippedWeapon; }
 
+
     /**
      * @Method: setEquippedArmor()
      * @Function: this code removes the equipped weapon from the player's inventory and puts it into the player's weapon slot
@@ -134,7 +158,6 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added 10/18/2022
      */
     public void removeEquippedWeapon() {
-        //this.inventory.add(this.equippedWeapon);
         this.equippedWeapon = defaultWeapon; // I had to change this from null because I was getting an nuller exception
     }
 
@@ -149,9 +172,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added 10/18/2022
      */
     public void setEquippedArmor(Armor equippedArmor) {
-        //this.inventory.remove(equippedArmor);
         this.equippedArmor = equippedArmor;
-        //this.maxHealth = playerInterface.maxHealth + this.equippedArmor.armorMod;
         this.currentHealth = this.currentHealth + this.equippedArmor.getArmorMod();
     }
 
@@ -162,11 +183,8 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added 10/18/2022
      */
     public void removeEquippedArmor() {
-       // this.inventory.add(this.equippedArmor);
         this.currentHealth = this.currentHealth - this.equippedArmor.getArmorMod();
         this.equippedArmor = null;
-        //this.maxHealth = playerInterface.maxHealth - equippedArmor.armorMod;
-        //this.currentHealth = this.currentHealth - this.equippedArmor.getArmorMod();
     }
 
     public GameState getCheckpoint() {
@@ -283,7 +301,6 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @author(s) Carlton Napier, Shianne Lesure
      * @added 10/18/2022
      */
-    // SHIANNE LESURE 11/7/2022
     public String checkStatsPlayer(Player player){
         player.getLocation().getRoomName();
         return "Name: " + player.getName() + "\n" +

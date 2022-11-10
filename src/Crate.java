@@ -24,6 +24,12 @@ public class Crate implements Serializable {
 
 
     /*----------------------------------------------Crate Constructors------------------------------------------------*/
+    /**
+     * @Function: This is a no - arg constructor that will access the item & crate parse method and add the data into
+     * their object arraylist
+     * @author(s): Shianne Lesure
+     * @added: 10/29/2022
+     */
     public Crate(){
         crates = new ArrayList<>();
         game.readCrates(crates);
@@ -87,7 +93,14 @@ public class Crate implements Serializable {
         return checkCrate;
     }
 
-    // SHIANNE LESURE 11/8/2022
+    /**
+     * @Method: removeItemFromCrate()
+     * @param current
+     * @param item
+     * @FUnction: this method will remove the items from the crates
+     * @author(s): Shianne Lesure
+     * @added: 11/8/2022
+     */
     public void removeItemFromCrate(Room current, String item){ // ADD THE - TO ALL THE 2 WORDED ITEMS WITHIN ROOM & CRATE TEXTILE
         String[] parts = item.split(" ");
             for (Crate temp : crates) {

@@ -11,9 +11,12 @@ public class Armor extends Item implements Serializable {
     private ArrayList<Room> roomItems;
 
 
-
     /*---------------------------------------------Armor Constructor--------------------------------------------------*/
-    // SHIANNE LESURE 11/7/2022
+    /**
+     * @Function: this a no - arg constructor
+     * @author(s): Shianne Lesure
+     * @added: 11/7/2022
+     */
     public Armor(){
        armorInventory = new ArrayList<>();
 
@@ -46,7 +49,13 @@ public class Armor extends Item implements Serializable {
 
 
     /*-----------------------------------Armor Methods for implementing the game--------------------------------------*/
-    // SHIANNE LESURE 11/7/2022
+    /**
+     * @Method: addingArmor()
+     * @param player
+     * @Function: this method will take the armor items and place them into the armor's inventory
+     * @author(s): Shianne Lesure
+     * @added: 11/7/2022
+     */
     public void addingArmor(Player player){
             for (Item item : player.getInventory()) {
                 if (item.getItemName().equalsIgnoreCase("light-armor")) {
@@ -62,7 +71,14 @@ public class Armor extends Item implements Serializable {
             }
     }
 
-    // SHIANNE LESURE 11/7/2022
+    /**
+     * @Method: equipArmor()
+     * @param player
+     * @param item
+     * @Function: this method will equip the armor onto the player's body
+     * @author(s): Shianne Lesure
+     * @added: 11/7/2022
+     */
     public void equipArmor(Player player, String item){
         addingArmor(player);
         String[] parts = item.split(" ");
@@ -74,7 +90,14 @@ public class Armor extends Item implements Serializable {
         }
     }
 
-    //SHIANNE LESURE 11/8/2022
+    /**
+     * @Method: unequipArmor()
+     * @param player
+     * @param item
+     * @Function: this method will unequip the armor off the player's body
+     * @author(s): Shianne Lesure
+     * @added: 11/8/2022
+     */
     public void unequipArmor(Player player, String item){
         String[] parts = item.split(" ");
         for(Armor armor: armorInventory){
@@ -86,5 +109,4 @@ public class Armor extends Item implements Serializable {
             }
         }
     }
-
 }

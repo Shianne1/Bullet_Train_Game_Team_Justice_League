@@ -19,6 +19,19 @@ public class GameState implements Serializable {
 
 
     /*----------------------------------------------GameState Constructors--------------------------------------------*/
+
+    /**
+     *
+     * @param player
+     * @param itemsInGame
+     * @param roomsInGame
+     * @param puzzlesInGame
+     * @param monstersInGame
+     * @param cratesInGame
+     * @Function: constructor for preexisting data
+     * @author(s): Carlton
+     * @added: 10/16/2022
+     */
     public GameState(Player player, ArrayList<Item> itemsInGame, ArrayList<Room> roomsInGame,
                      ArrayList<Puzzle> puzzlesInGame, ArrayList<Monster> monstersInGame, ArrayList<Crate> cratesInGame) {
         this.player = player;
@@ -70,7 +83,7 @@ public class GameState implements Serializable {
      * @param loadedGame
      * @Function: allows for loading data from a different GameState into another, used for loading the game
      * @author(s): Carlton Napier
-     * @added: ?
+     * @added: 10/16/2022
      */
     public void setGameState(GameState loadedGame) {
         this.player = loadedGame.player;

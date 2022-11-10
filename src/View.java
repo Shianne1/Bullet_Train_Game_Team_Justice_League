@@ -1,7 +1,4 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
-
-//Note: Any additions by Carlton Napier (me) are subject to change for better fits and changes to code
 
 public class View {
 
@@ -20,7 +17,6 @@ public class View {
         System.out.println((player.checkInventory()));
         System.out.println("\n" + player.checkCodeInventory());
     }
-
 
     /**
      * @Method: printStatText()
@@ -53,14 +49,7 @@ public class View {
      */
     public void printGameLoop(GameState gameState) {
         System.out.println("");
-        // NEEDS A PROPER CODE FOR LOOPING THE GAME
-        // - WHAT GOES ON IN THE ROOM/room description
-        // - ANY STORY DETAILS
-        // - ETC
-        // THIS IS A TEMP LOOP FOR TESTING
-        // example: System.out.println(gameSate.player.location.getDescription(); inputCommand();
     }
-
 
     /**
      * @Method: setSaveNameText()
@@ -72,7 +61,6 @@ public class View {
         System.out.println("What name would you like for your save file?");
         return inputCommand();
     }
-
 
     /**
      * @Method: loadingGameText()
@@ -141,5 +129,4 @@ public class View {
     public void printDeathMessage() {
         System.out.println("It seems you have died, you will now be returned to your last check point");
     }
-
 }

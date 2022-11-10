@@ -11,10 +11,6 @@ import java.util.Scanner;
  * @added 10/17/2022
  */
 public class Puzzle implements Serializable {
-    /*
-    Look at pg. 7, 8, 9, 17, 18, 22
-     */
-
     private int puzzleID;
     private String puzzleName;
     private String puzzleQuestion;
@@ -39,7 +35,6 @@ public class Puzzle implements Serializable {
 
 
     /*-----------------------------------------------Puzzle Constructors----------------------------------------------*/
-
     /**
      * @Function: This is a no - arg constructor that will access the puzzle, room, and item's parse methods and add their data into
      * their object arraylist.
@@ -73,7 +68,7 @@ public class Puzzle implements Serializable {
      * @param puzzleCode
      * @Function: constructor for pre existing data from the puzzle text file
      * @author(s) Shianne Lesure
-     * 10/17/2022
+     * @added: 10/17/2022
      */
     public Puzzle(int puzzleID, String puzzleName, String puzzleQuestion, String hint, String answer, int attempts, String reward1, String reward2, String puzzleCode) {
         this.puzzleID = puzzleID;

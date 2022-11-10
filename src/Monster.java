@@ -243,6 +243,24 @@ public class Monster implements  Serializable {
     }
 
     /**
+     * @Method: removeMonsterItem()
+     * @param current
+     * @param item
+     * @Function: will remove items from monster room
+     * @author(s): Shianne Lesure
+     * @added: 11/9/2022
+     */
+    public void removeMonsterItem(Room current, String item){
+        String[] parts = item.split(" ");
+        for(Item item1 : items){
+            if(parts[1].equalsIgnoreCase(item1.getItemName())){
+                current.roomItemRemove(item1);
+                break;
+            }
+        }
+    }
+
+    /**
      * @Method: run()
      * @param player
      * @param roomList

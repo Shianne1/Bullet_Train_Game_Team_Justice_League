@@ -102,6 +102,7 @@ public class GameConsole implements Serializable{
             puzzle.removeRewardsItem(playerLocation, inputCommand);
             crate.removeItemFromCrate(playerLocation,inputCommand);
             room.removeMysteryFolder(playerLocation, inputCommand);
+            monster.removeMonsterItem(playerLocation, inputCommand);
         }
         else if(inputCommand.contains("discard")){ // THIS FEATURE IS WORKING
             item.discard(inputCommand, playerLocation, currentPlayer);

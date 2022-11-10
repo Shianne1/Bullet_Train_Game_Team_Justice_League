@@ -56,9 +56,8 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
     boolean hasCheckPoint;
 
-    Weapon defaultWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", -1, 5);
-
-
+    Weapon defaultWeapon = new Weapon("Fist", 0, "Your fists", "lets you punch enemies", 300, 5);
+    Armor defaultArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
     /*---------------------------------------------Player Constructors------------------------------------------------*/
     /**
      * @Function: empty constructor of player with default values
@@ -71,7 +70,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.maxHealth = 300;
         this.currentHealth = 100;
         this.equippedWeapon = defaultWeapon; // durability/uses set to -1 since a fist will never break
-        this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
+        this.equippedArmor = defaultArmor;
         this.inventory = new ArrayList<>();
         this.codeInventory = new ArrayList<>();
 
@@ -122,7 +121,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
         this.maxHealth = 300;
         this.currentHealth = 100;
         this.equippedWeapon = defaultWeapon; // durability/uses set to -1 since a fist will never break
-        this.equippedArmor = new Armor("Clothes", 0, "Your clothes", "basic clothes that provide no protection", 0);
+        this.equippedArmor = defaultArmor;
         this.inventory = new ArrayList<>();
         this.codeInventory = new ArrayList<>();
         this.checkpoint = defaultCheckpoint;

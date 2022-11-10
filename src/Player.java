@@ -25,7 +25,7 @@ interface playerInterface {
      * @author(s) Carlton Napier
      * @added 10/16/2022
      */
-    String checkInventory();
+    String checkInventory(Player player, ArrayList<Item> items);
 
     /**
      * @Object: checkCodeInventory
@@ -229,15 +229,26 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added 10/18/2022
      */
     @Override
-    public String checkInventory() {
+    public String checkInventory(Player player, ArrayList<Item> items ) {
         if (!inventory.isEmpty()) {
             String inventoryList = "The current items in your inventory are: ";
             for (Item item : inventory) {
-                inventoryList += "[" + item.getItemName() + "] ";
+                if(!inventory.contains("bandage")){
+                    inventoryList += "[" + item.getItemName() + "] ";
+                }
             }
             return inventoryList;
-        } else {
-            return "There are no items in your inventory";
+        }
+        else {
+            for(Item healers : items){
+                if(!inventory.contains("bandage")){
+                    if(healers.getItemName().equalsIgnoreCase("bandage")){
+                        player.inventoryAdd(healers);
+                        break;
+                    }
+                }
+            }
+            return "You only have a bandage within your inventory";
         }
     }
 
@@ -349,18 +360,4 @@ public class Player implements playerInterface, EntityInterface, Serializable {
      * @added: 11/3/2022
      */
     public void codeInventoryAdd(String codes){ codeInventory.add(codes); }
-
-
-    // SHIANNE LESURE 11/9/2022
-    public void stackHealers(Player player, ArrayList<Item> items){
-        for(Item healers : items){
-                if(!inventory.contains("bandage")){
-                    if(healers.getItemName().equalsIgnoreCase("bandage")){
-                        player.inventoryAdd(healers);
-                        break;
-                    }
-                }
-        }
-    }
-
 }

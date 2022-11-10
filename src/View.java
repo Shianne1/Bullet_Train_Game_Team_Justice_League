@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class View {
@@ -13,8 +14,8 @@ public class View {
      * @author(s) Carlton Napier
      * @added 10/16/2022
      */
-    public void printInventory(Player player) {
-        System.out.println((player.checkInventory()));
+    public void printInventory(Player player, ArrayList<Item> items) {
+        System.out.println((player.checkInventory(player, items)));
         System.out.println("\n" + player.checkCodeInventory());
     }
 

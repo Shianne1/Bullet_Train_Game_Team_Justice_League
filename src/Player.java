@@ -225,7 +225,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     /**
      * @Method: checkInventory()
      * @Function: this code returns a formatted string of the player's inventory that will be printed by the view
-     * @author(s) Carlton Napier
+     * @author(s) Carlton Napier, Shianne Lesure
      * @added 10/18/2022
      */
     @Override

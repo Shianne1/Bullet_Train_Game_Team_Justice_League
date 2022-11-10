@@ -295,15 +295,23 @@ public class Monster implements  Serializable {
      * @author(s): Shianne Lesure
      * @added: 10/29/2022
      */
-    public String inspectMonster(int monsterLocationID ){
-        String monsterDescription = "";
+    public void inspectMonster(int monsterLocationID, Player player, Armor armor ){
+
         for(Monster monster1: enemy){
             if(monsterLocationID == this.monsterId){
-                monsterDescription = monster1.getMonsterDesc(); // will add description to the string
+                System.out.println(monster1.getMonsterDesc() + "\n");// will add description to the string
+                System.out.println("\nMonster HP Life: " + monster1.getHealth());
+                System.out.println(monster1.getMonsterName() + " inflicted " + monster1.getDamage() + " damage points onto you.");
+                if (player.getEquippedArmor() != null) {
+                    int damageAfterArmor = monster1.getDamage() - armor.getArmorMod();
+                    player.setCurrentHealth(player.getCurrentHealth() - damageAfterArmor);
+                } else {
+                    player.setCurrentHealth(player.getCurrentHealth() - monster1.getDamage());
+                }
+                System.out.println("Your current HP: " + player.getCurrentHealth());
                 break;
             }
         }
-        return monsterDescription; // return the string
     }
 }
 

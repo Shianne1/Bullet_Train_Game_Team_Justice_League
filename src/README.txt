@@ -486,6 +486,7 @@ Lists out the items within the player's inventory
 [check stats]
 Lists out the player's currents stats (health, ammo, number of monsters killed, etc)
 [check map]
+will print out the map and show the location of player
 
 
 ROOM:
@@ -504,8 +505,6 @@ Provides the player with the name and question of the puzzle
 While the player is trying to solve the puzzle, this allows the player to exit the puzzle
 [Retry "puzzle name"]
 Lets the player retry the puzzle
-[Claim Prize]
-Allows the player to add the award from the puzzle into their inventory
 
 
 MONSTER:

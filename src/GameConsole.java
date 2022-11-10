@@ -135,7 +135,7 @@ public class GameConsole implements Serializable{
         else if(inputCommand.contains("exit puzzle")){ // THIS FEATURE IS WORKING
         }
         else if(inputCommand.equalsIgnoreCase("checkout monster")){ // THIS FEATURE IS WORKING
-            view.printBasicText(monster.inspectMonster(IDofMonsterInRoom));
+            monster.inspectMonster(IDofMonsterInRoom, currentPlayer, currentArmor);
         }
         else if(inputCommand.contains("attack monster")){ // THIS FEATURE IS WORKING
             monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor, currentWeapon, playerLocation, gameState.getRoomsInGame());

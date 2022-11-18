@@ -22,9 +22,9 @@ R0801
 Trains
 A train goes (    -    ) !
 Chuga - Chuga
-Choo - Choo
+Choo-Choo
 3
-Light armor
+Light-armor
 Bandage
 1R41N5
 
@@ -34,7 +34,7 @@ If the train is moving at a rate of 5mph, how long will it take to cover miles?
 Divide 20 by 5
 4
 3
-Heavy armor
+Heavy-armor
 Bandage
 40U7
 
@@ -44,7 +44,7 @@ What was the name of your second blade item? [Dagger]  [Kitchen Knife]  [Katana]
 No hint
 Katana
 3
-Medium armor
+Medium-armor
 Bandage
 5W07D
 

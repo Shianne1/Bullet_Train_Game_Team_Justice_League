@@ -418,6 +418,7 @@ public class Room implements Serializable {
                 player.getLocation().setLocked(false);
                 System.out.println("\n" + this.roomName + "\n" + this.roomDesc);
                 folderList(player.getLocation());
+                player.getLocation().setVisited(true);
                 break;
             } else {
                 System.out.println("Wrong password.");

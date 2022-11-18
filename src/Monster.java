@@ -135,7 +135,7 @@ public class Monster implements  Serializable {
         //creates delta health variable, sets to current player health, decreases variable by
         //monster damage, then sets player health to the difference
             for (Monster villains : enemy) {
-                if (monsterLocation == this.monsterId) {
+                if (monsterLocation == villains.getMonsterId()) {
                     if(player.getCurrentHealth() <= 20){
                         System.out.println("If you would like to run type: [run]");
                         String running = input.nextLine();
@@ -158,14 +158,15 @@ public class Monster implements  Serializable {
                         weapon.useWeapon1(player, weapon, playerAnswer);
                         villains.setHealth(villains.getHealth() - weapon.getStrength());
                     }
-                        System.out.println("\nMonster HP Life: " + villains.getHealth());
-                        System.out.println(villains.getMonsterName() + " inflicted " + villains.getDamage() + " damage points onto you.");
-                        if (player.getEquippedArmor() != null) {
-                            int damageAfterArmor = villains.getDamage() - armor.getArmorMod();
+                        int damageAfterArmor = villains.getDamage() - armor.getArmorMod();
+                        if(damageAfterArmor > 0){
                             player.setCurrentHealth(player.getCurrentHealth() - damageAfterArmor);
-                        } else {
+                        }
+                        else {
                             player.setCurrentHealth(player.getCurrentHealth() - villains.getDamage());
                         }
+                        System.out.println("\nMonster HP Life: " + villains.getHealth());
+                        System.out.println(villains.getMonsterName() + " inflicted " + villains.getDamage() + " damage points onto you.");
                         System.out.println("Your current HP: " + player.getCurrentHealth());
                     break;
                 }
@@ -185,7 +186,7 @@ public class Monster implements  Serializable {
         //if number is greater than 50, the monster is parried
         boolean parry = false;
         for(Monster villan : enemy) {
-            if(monsterLocation == this.monsterId) {
+            if(monsterLocation == villan.getMonsterId()) {
                 Random r = new Random();
                 int randomInt = r.nextInt(100) + 1;
                 if (randomInt > 50) {
@@ -199,7 +200,6 @@ public class Monster implements  Serializable {
                     System.out.println("You inflicted no damage.");
                 }
             }
-            break;
         }
         return parry;
     }
@@ -215,7 +215,7 @@ public class Monster implements  Serializable {
      */
     public void monsterDrop(Room currentRoom, int monsterLocation) {
         for(Monster monster : enemy){
-            if(monsterLocation == this.monsterId){
+            if(monsterLocation == monster.getMonsterId()){
                 Random r = new Random();
                 int probability = r.nextInt(100) + 1;
                 if(probability <= monster.getDropRate1()){
@@ -238,7 +238,6 @@ public class Monster implements  Serializable {
                     }
                 }
             }
-            break;
         }
     }
 
@@ -314,15 +313,16 @@ public class Monster implements  Serializable {
      * @added: 10/29/2022
      */
     public void inspectMonster(int monsterLocationID, Player player, Armor armor ){
-
         for(Monster monster1: enemy){
-            if(monsterLocationID == this.monsterId){
+            if(monsterLocationID == monster1.getMonsterId()){
                 System.out.println(monster1.getMonsterDesc() + "\n");// will add description to the string
                 System.out.println("\nMonster HP Life: " + monster1.getHealth());
                 System.out.println(monster1.getMonsterName() + " inflicted " + monster1.getDamage() + " damage points onto you.");
                 if (player.getEquippedArmor() != null) {
                     int damageAfterArmor = monster1.getDamage() - armor.getArmorMod();
-                    player.setCurrentHealth(player.getCurrentHealth() - damageAfterArmor);
+                    if(damageAfterArmor > 0){
+                        player.setCurrentHealth(player.getCurrentHealth() - damageAfterArmor);
+                    }
                 } else {
                     player.setCurrentHealth(player.getCurrentHealth() - monster1.getDamage());
                 }

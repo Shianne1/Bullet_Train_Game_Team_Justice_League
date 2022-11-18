@@ -173,7 +173,10 @@ public class GameConsole implements Serializable{
                to make a new instance of the game
             */
             newGame(gameState, view.setSaveNameText());
-            view.printBasicText("\nYou are in " + gameState.getPlayer().getLocation().getRoomName() + "\n" + gameState.getPlayer().getLocation().getRoomDesc());
+            view.printBasicText("\n\nSTARTER STATS\n" + gameState.getPlayer().checkStatsPlayer(gameState.getPlayer()));
+            view.printBasicText("\nSTARTER INVENTORY");
+            view.printInventory( gameState.getPlayer(), gameState.getItemsInGame());
+            view.printBasicText("\n\nSTARTER LOCATION\nYou are in " + gameState.getPlayer().getLocation().getRoomName() + "\n" + gameState.getPlayer().getLocation().getRoomDesc());
         }
         /*
         saying ["load game"] gets the view to ask the player for a name (this name is used to load an existing save file, if it exists)

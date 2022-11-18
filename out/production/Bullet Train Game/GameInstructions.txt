@@ -1,5 +1,19 @@
 
-               **** WELCOME TO THE BULLET TRAIN GAME ! ****
+      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+      ||||||||         ||||||||||||         ||||||||||         |||||||||\                  \\
+      ||||||||         ||||||||||||         ||||||||||         ||||||||||\                  \\
+      ||||||||         ||||||||||||         ||||||||||         |||||||||||\                  \\
+      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\\\\\\\\\\\\\\\\\
+      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\\\\\\\\\\\\\\\\\\
+      ||                                                                                        \\
+      |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+||--------------------------------------------------------------------------------------------------------||
+||--------------------------------- WELCOME TO THE BULLET TRAIN GAME ! -----------------------------------||
+||--------------------------------------------------------------------------------------------------------||
+         [____]           [____]           [____]             [____]            [____]          [____]
+         [____]           [____]           [____]             [____]            [____]          [____]
+
+
 “Welcome to the Bullet Train! You, as an assassin have been assigned a task to
 swindle a briefcase and any other intel from the world’s most lethal mafia gang leader.
 This train will stop at every station and present a mystery or puzzle that you need
@@ -11,17 +25,16 @@ upcoming challenges. Be sure to consume a good deal of bandages as the mafia gan
 are not going to be easy to battle and their leader is not going to be happy to see
 you trying to get your hands on the briefcase. Good Luck!”
 
-                                  GOAL:
+                                    [GOAL]
 The player will need to complete all mysteries throughout the stations to be
 able to access the final boss and then defeat the boss and win.
 
-                               HOW TO PLAY:
-The player will start at station 1 to begin and must
-head to the door that leads out to the station that corresponds to the wagon they’re in.
-The player must clear all rooms at the station to be able to go to the next train wagon. The
-mysteries are simply just paper file item that players will find in a room that allow
-them to progress into the next room. The files include information that pertains to the
-mafia gang leader and their evil plans.
+                                 [HOW TO PLAY]
+The player will start at station 1 to begin and must head to the door that leads out to
+the station that corresponds to the wagon they’re in. The player must clear all rooms at the
+station to be able to go to the next train wagon. The mysteries are simply just paper file
+item that players will find in a room that allow them to progress into the next room.
+The files include information that pertains to the mafia gang leader and their evil plans.
 
 The player will have a general inventory with all the items they have,
 weapons, armor, and healing items. The player can have as many healing items as
@@ -29,8 +42,8 @@ possible they want with no limit. When using a healing item, it will -1 from the
 stack, stacks cannot go under 0. For weapons, once the katana is obtained it will
 replace the knife in their inventory, pistol and rifle are their own object and can both
 exist. For armor, the armor will be equipped and change the player’s stats, once
-equipped will disappear from the player’s inventory.
-The player will have a code inventory that record all the codes they have collect.
+equipped will disappear from the player’s inventory. The player will have a code inventory
+that record all the codes they have collect.
 
 The fight will start with the player choosing to use equip weapon to attack monster, then
 the monster can attack back. Player can have the chance to parry a monster that can

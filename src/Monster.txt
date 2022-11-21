@@ -2,7 +2,7 @@
 Dog
 Low Rank Mafia Pet
 30
-20
+30
 Bandage
 Syringe
 50
@@ -11,7 +11,7 @@ Syringe
 Tiger
 High Rank Mafia Pet
 50
-30
+50
 Bandage
 Syringe
 50
@@ -20,7 +20,7 @@ Syringe
 GoodFella
 Low Rank Mafia Member
 75
-40
+75
 Bandage
 Syringe
 60
@@ -29,7 +29,7 @@ Syringe
 Goombah
 Senior Rank Mafia Member
 100
-60
+100
 Syringe
 Med Kit
 50
@@ -38,7 +38,7 @@ Med Kit
 Scrap
 Robot Mafia Member
 40
-10
+40
 Bandage
 Syringe
 60
@@ -47,7 +47,7 @@ Syringe
 Spark
 Robotic Mafia Pet
 60
-20
+60
 Bandage
 Syringe
 40
@@ -56,7 +56,7 @@ Syringe
 Mr.Big
 The Big Boss
 150
-80
+150
 suitcase
 N/A
 100

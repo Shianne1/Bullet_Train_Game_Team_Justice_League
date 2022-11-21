@@ -141,6 +141,7 @@ public class Weapon extends Item implements itemInterface, Serializable {
             if(parts[1].equalsIgnoreCase(weapon.getItemName())){
                 player.setEquippedWeapon(weapon);
                 System.out.println("You have equipped " + weapon.getItemName());
+                break;
             }
         }
     }

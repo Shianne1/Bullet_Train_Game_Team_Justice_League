@@ -86,6 +86,7 @@ public class Armor extends Item implements Serializable {
             if(parts[1].equalsIgnoreCase(armor.getItemName())){
                 player.setEquippedArmor(armor);
                 System.out.println("Your " + armor.getItemName() + " will defend you by " + armor.getArmorMod());
+                break;
             }
         }
     }

@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class GameConsole implements Serializable{
 
+    public static final String ANSI_YELLOW = "\u001b[33;1m";
+    public static final String ANSI_RED = "\033[0;31m";
+    public static final String ANSI_RESET= "\u001B[0m";
 
     /*----------------------------------------Where the main game is played-------------------------------------------*/
     public static void main(String[] args) {
@@ -78,6 +81,7 @@ public class GameConsole implements Serializable{
             view.printBasicText("\nYou are in " + gameState.getPlayer().getLocation().getRoomName());
         }
         else if(inputCommand.equals("check inventory")) { // THIS FEATURE IS WORKING
+            //player.removeWeaponsAndArmor(currentPlayer);
             view.printInventory(currentPlayer, gameState.getItemsInGame());
         }
         else if(inputCommand.equals("north") || inputCommand.equals("n") || inputCommand.equals("east") || inputCommand.equals("e") || // THIS FEATURE IS WORKING
@@ -139,7 +143,7 @@ public class GameConsole implements Serializable{
             monster.inspectMonster(IDofMonsterInRoom, currentPlayer, currentArmor);
         }
         else if(inputCommand.contains("attack monster")){ // THIS FEATURE IS WORKING
-            monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor, currentWeapon, playerLocation, gameState.getRoomsInGame());
+            monster.attackMonster(currentPlayer, IDofMonsterInRoom,currentArmor, currentWeapon, playerLocation, gameState.getRoomsInGame(), gameState, view);
         }
         else if(inputCommand.contains("parry monster")){ // THIS FEATURE IS WORKING
             monster.parryMonster(IDofMonsterInRoom, currentWeapon);
@@ -147,9 +151,8 @@ public class GameConsole implements Serializable{
         else if(inputCommand.equals("run")){ // THIS FEATURE IS WORKING
         }
         else{
-            System.out.println("Invalid command. Try again");
+            System.out.println(ANSI_RED + "Invalid command. Try again" + ANSI_RESET);
         }
-
     }
 
     /**
@@ -173,10 +176,10 @@ public class GameConsole implements Serializable{
                to make a new instance of the game
             */
             newGame(gameState, view.setSaveNameText());
-            view.printBasicText("\n\nSTARTER STATS\n" + gameState.getPlayer().checkStatsPlayer(gameState.getPlayer()));
+            view.printBasicText(ANSI_YELLOW + "\n\nSTARTER STATS\n" + gameState.getPlayer().checkStatsPlayer(gameState.getPlayer()));
             view.printBasicText("\nSTARTER INVENTORY");
             view.printInventory( gameState.getPlayer(), gameState.getItemsInGame());
-            view.printBasicText("\n\nSTARTER LOCATION\nYou are in " + gameState.getPlayer().getLocation().getRoomName() + "\n" + gameState.getPlayer().getLocation().getRoomDesc());
+            view.printBasicText("\n\nSTARTER LOCATION\nYou are in " + gameState.getPlayer().getLocation().getRoomName() + "\n" + gameState.getPlayer().getLocation().getRoomDesc() + ANSI_RESET);
         }
         /*
         saying ["load game"] gets the view to ask the player for a name (this name is used to load an existing save file, if it exists)

@@ -171,14 +171,14 @@ public class Item implements itemInterface, Serializable {
             if(parts[1].equalsIgnoreCase(itemObject.getItemName())){
                 inventory.inventoryAdd(itemObject);
                 current.roomItemRemove(itemObject);
-                if(item.contains("Katana")){ // if player adds katana to their inventory
-                    discard("Knife", current, inventory); // remove knife from inventory
+                if(parts[1].equalsIgnoreCase("Katana")){ // if player adds katana to their inventory
+                    discard("Discard Knife", current, inventory); // remove knife from inventory
                 }
-                else if(item.contains("medium armor")){ // if player adds medium armor to their inventory
-                    discard("Light Armor", current, inventory); // remove light armor from inventory
+                else if(parts[1].equalsIgnoreCase("Medium-Armor")){ // if player adds medium armor to their inventory
+                    discard("Discard Light-Armor", current, inventory); // remove light armor from inventory
                 }
-                else if(item.contains("heavy armor")){ // if player add heavy armor to their inventory
-                    discard("Medium Armor",current, inventory ); // remove medium armor from inventory
+                else if(parts[1].equalsIgnoreCase("Heavy-Armor")){ // if player add heavy armor to their inventory
+                    discard("Discard Medium-Armor",current, inventory ); // remove medium armor from inventory
                 }
                 System.out.println(item1.getItemName() + " has been added to the inventory.");
                 break;

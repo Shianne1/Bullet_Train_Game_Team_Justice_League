@@ -33,6 +33,9 @@ public class Monster implements  Serializable {
 
     transient Scanner input;
 
+    public static final String ANSI_YELLOW = "\u001b[33;1m";
+    public static final String ANSI_RESET= "\u001B[0m";
+
 
     /*---------------------------------------------Monster Constructors-----------------------------------------------*/
     /**
@@ -131,7 +134,7 @@ public class Monster implements  Serializable {
      * @author: Dakota Smith, Shianne Lesure
      * @added: 10/19/2022
      */
-    public void attackMonster(Player player, int monsterLocation, Armor armor, Weapon weapon, Room current, ArrayList<Room> roomArrayList) {
+    public void attackMonster(Player player, int monsterLocation, Armor armor, Weapon weapon, Room current, ArrayList<Room> roomArrayList, GameState gameState, View view) {
         //creates delta health variable, sets to current player health, decreases variable by
         //monster damage, then sets player health to the difference
             for (Monster villains : enemy) {
@@ -146,8 +149,14 @@ public class Monster implements  Serializable {
                         }
                     }
                     if (villains.getHealth() <= 0) {
-                        System.out.println("You have killed the " + villains.getMonsterName());
                         player.setNumOfMonstersKilled(player.getNumOfMonstersKilled() + 1);
+                        if(villains.getMonsterName().equalsIgnoreCase("Mr.Big")){
+                            System.out.println(ANSI_YELLOW + "CONGRATULATIONS ASSASSIN! YOU HAVE TO DEFEATED MR. BIG AND COLLECTED THE SUITCASE!");
+                            System.out.println("GAME OVER" + ANSI_RESET);
+                            GameConsole.endGame(gameState,view);
+                            break;
+                        }
+                        System.out.println("You have killed the " + villains.getMonsterName());
                         monsterDrop(current, monsterLocation);
                         current.setRoomMonster(-1);
                         break;
@@ -163,7 +172,9 @@ public class Monster implements  Serializable {
                             player.setCurrentHealth(player.getCurrentHealth() - damageAfterArmor);
                         }
                         else {
-                            player.setCurrentHealth(player.getCurrentHealth() - villains.getDamage());
+                            if(armor.getArmorMod() == 0) {
+                                player.setCurrentHealth(player.getCurrentHealth() - villains.getDamage());
+                            }
                         }
                         System.out.println("\nMonster HP Life: " + villains.getHealth());
                         System.out.println(villains.getMonsterName() + " inflicted " + villains.getDamage() + " damage points onto you.");
@@ -227,7 +238,6 @@ public class Monster implements  Serializable {
                         }
                     }
                 }
-
                 if(probability <= monster.getDropRate2()){
                     for(Item a : items){
                         if(a.getItemName().equalsIgnoreCase(monster.getItemDrop2())){

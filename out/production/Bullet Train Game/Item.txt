@@ -47,14 +47,14 @@ Placeholder
 Pistol
 You find a pistol that has 2 bullets. Use it wisely.
 placeholder
-20
 2
+20
 9
 Rifle
 You find a rifle that looks like it can be used 5 times. It looks like it can deal a lot of damage.
 placeholder
-50
 5
+50
 10
 Folder-1
 You Inspect the folder and conclude that the mafia boss needs MONEY

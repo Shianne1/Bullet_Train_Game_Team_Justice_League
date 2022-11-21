@@ -51,6 +51,7 @@ public class Player implements playerInterface, EntityInterface, Serializable {
 
     private ArrayList<Item> inventory;
     private ArrayList<String> codeInventory;
+    private ArrayList <Item> removeItems = new ArrayList();
 
     private GameState checkpoint;
 
@@ -222,6 +223,51 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     public void move(Room nextRoom) { this.location = nextRoom; }
 
     /**
+     * @Method: removeWeaponsAndArmor()
+     * @Function: Will remove the certain items from the inventory which will allow for only one sword and armor at a time.
+     * @author(s) Shianne Lesure
+     * @added 11/18/2022
+     */
+    public void removeWeaponsAndArmor(){
+        removeItems.clear();
+        for(Item item : inventory){
+            if(item.getItemName().equalsIgnoreCase("Katana")){
+                for(Item removeWeapon : inventory){
+                    if(removeWeapon.getItemName().equalsIgnoreCase("Knife")){
+                        System.out.println("Knife was remove from inventory. If you want knife into inventory, you need to remove katana.");
+                        removeItems.add(removeWeapon);
+                    }
+                }
+            }
+            if(item.getItemName().equalsIgnoreCase("Medium-Armor")){
+                for(Item removeWeapon : inventory){
+                    if(removeWeapon.getItemName().equalsIgnoreCase("Light-Armor")){
+                        System.out.println("Light-Armor was remove from inventory. If you want Light-Armor into inventory, you need to remove Medium-Armor.");
+                        removeItems.add(removeWeapon);
+                    }
+                    if(removeWeapon.getItemName().equalsIgnoreCase("Heavy-Armor")){
+                        System.out.println("Heavy-Armor was remove from inventory. If you want Heavy-Armor into inventory, you need to remove Medium-Armor.");
+                        removeItems.add(removeWeapon);
+                    }
+                }
+            }
+            if(item.getItemName().equalsIgnoreCase("Heavy-Armor")){
+                for(Item removeWeapon : inventory){
+                    if(removeWeapon.getItemName().equalsIgnoreCase("Light-Armor")){
+                        System.out.println("Light-Armor was remove from inventory. If you want Light-Armor into inventory, you need to remove Heavy-Armor.");
+                        removeItems.add(removeWeapon);
+                    }
+                    if(removeWeapon.getItemName().equalsIgnoreCase("Medium-Armor")){
+                        System.out.println("Medium-Armor was remove from inventory. If you want Medium-Armor into inventory, you need to remove Heavy-Armor.");
+                        removeItems.add(removeWeapon);
+                    }
+                }
+            }
+        }
+        inventory.removeAll(removeItems);
+    }
+
+    /**
      * @Method: checkInventory()
      * @Function: this code returns a formatted string of the player's inventory that will be printed by the view
      * @author(s) Carlton Napier, Shianne Lesure
@@ -230,24 +276,23 @@ public class Player implements playerInterface, EntityInterface, Serializable {
     @Override
     public String checkInventory(Player player, ArrayList<Item> items ) {
         if (!inventory.isEmpty()) {
+            removeWeaponsAndArmor();
             String inventoryList = "The current items in your inventory are: ";
             for (Item item : inventory) {
-                if(!inventory.contains("bandage")){
-                    inventoryList += "[" + item.getItemName() + "] ";
-                }
+                inventoryList += "[" + item.getItemName() + "] ";
             }
             return inventoryList;
         }
         else {
             for(Item healers : items){
                 if(!inventory.contains("bandage")){
-                    if(healers.getItemName().equalsIgnoreCase("bandage")){
+                    if(healers.getItemName().equalsIgnoreCase("Bandage")){
                         player.inventoryAdd(healers);
                         break;
                     }
                 }
             }
-            return "You only have a bandage within your inventory";
+            return "You only have a Bandage within your inventory";
         }
     }
 

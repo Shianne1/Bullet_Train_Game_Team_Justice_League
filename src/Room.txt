@@ -186,7 +186,7 @@ true
 No Crates
 -1
 -1
-CHEMICALS
+WEAPONS
 21
 Station 5 Puzzle Room
 The train came to a stop and arrived at a dark and gloomy station. While haunting, you spot what seems to be  puzzle.
